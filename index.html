@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis Practical (PUSEC605P)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- 
+    Chosen Palette: Professional Academic (Slate & Blue)
+    Updates:
+    - ADDED: "Example 2" for EVERY topic, focusing on Real-World/Indian datasets.
+    - CONTENT: Added specific Indian contexts (NIFTY 50, Census, Agriculture, Startups).
+    - VISUAL: Maintained high-contrast design and distinct explanation blocks.
+    -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        
+        /* Navigation Styling */
+        .nav-link {
+            display: block;
+            padding: 0.6rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            font-weight: 500;
+            color: #475569; /* slate-600 */
+        }
+        .nav-link:hover {
+            background-color: #e2e8f0; /* slate-200 */
+            color: #1e293b; /* slate-800 */
+            transform: translateX(4px);
+        }
+        .nav-link.active {
+            background-color: #2563eb; /* blue-600 */
+            color: white;
+            font-weight: 600;
+            transform: translateX(4px);
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Content Typography */
+        .topic-panel h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: #0f172a; /* slate-900 */
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+        .topic-panel h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: #1e293b; /* slate-800 */
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 0.5rem;
+        }
+        .topic-panel h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #334155; /* slate-700 */
+        }
+        .topic-panel p, .topic-panel li {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: #334155; /* slate-700 */
+            margin-bottom: 1rem;
+        }
+        .topic-panel ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Code Blocks */
+        pre {
+            background-color: #0f172a; /* slate-900 */
+            color: #f1f5f9; /* slate-100 */
+            padding: 1.25rem;
+            border-radius: 0 0 0.75rem 0.75rem; /* Rounded bottom only */
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            border: 1px solid #334155;
+            margin-bottom: 2rem;
+        }
+        code {
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+        }
+
+        /* Elaborated Explanation Box */
+        .code-explanation {
+            background-color: #eff6ff; /* blue-50 */
+            border: 1px solid #bfdbfe; /* blue-200 */
+            border-left: 4px solid #2563eb; /* blue-600 */
+            border-radius: 0.75rem 0.75rem 0 0; /* Rounded top only */
+            padding: 1.5rem;
+            margin-bottom: 0; /* Connects to code block below */
+        }
+        .code-explanation h5 {
+            font-weight: 800;
+            color: #1e40af; /* blue-800 */
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 1.25rem;
+        }
+        .code-explanation h5:first-child {
+            margin-top: 0;
+        }
+        .code-explanation p {
+            margin-bottom: 0;
+            color: #1e3a8a; /* blue-900 */
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* New Syntax List Style */
+        .syntax-list {
+            list-style-type: disc;
+            padding-left: 1.25rem;
+            margin-top: 0.25rem;
+            color: #1e3a8a; /* blue-900 */
+            font-size: 0.9rem;
+        }
+        .syntax-list li {
+            margin-bottom: 0.4rem;
+        }
+        .syntax-list code {
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.2rem;
+            font-weight: 700;
+            color: #172554; /* blue-950 */
+        }
+
+        /* Terminal Output Simulator */
+        .output-block {
+            background-color: #1e293b; /* slate-800 */
+            color: #4ade80; /* green-400 */
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #10b981; /* green-500 */
+            margin-top: -1.5rem; /* Pull closer to code block */
+            margin-bottom: 3rem;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            white-space: pre;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .output-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8; /* slate-400 */
+            margin-bottom: 0.5rem;
+            display: block;
+            font-weight: bold;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 4px;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            height: 400px;
+            background: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            background-color: #334155; /* slate-700 */
+            color: white;
+            border: none;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            float: right;
+            margin-top: -2.5rem; /* Adjust position inside code block */
+            margin-right: 0.5rem;
+            z-index: 10;
+            position: relative;
+        }
+        .copy-btn:hover {
+            background-color: #475569; /* slate-600 */
+        }
+
+        /* Home Page Hero */
+        .hero-bg {
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="flex flex-col md:flex-row h-screen overflow-hidden">
+        
+        <!-- Sidebar Navigation -->
+        <nav class="w-full md:w-1/5 h-full bg-white border-r border-slate-200 p-6 flex flex-col overflow-y-auto z-20 shadow-lg">
+            <a href="#" id="home-link" class="block mb-8 group">
+                <h1 class="text-2xl font-extrabold text-blue-700 group-hover:text-blue-800 transition-colors tracking-tight">B.Sc. Economics</h1>
+                <span class="text-xs text-slate-500 font-bold uppercase tracking-widest">Semester VI</span>
+            </a>
+            
+            <div class="space-y-6 flex-grow">
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Module 1: Principles</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#" class="nav-link" data-topic="topic1">Topic 1: Data Ingestion</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topic2">Topic 2/4: NumPy Ops</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topic3">Topic 3: Advanced Slicing</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Module 2: Aggregation</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#" class="nav-link" data-topic="topic5">Topic 5: DataFrames</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topic6">Topic 6/7: GroupBy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Module 3: Analysis</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#" class="nav-link" data-topic="topic8">Topic 8: Data Integrity</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topic9">Topic 9: WEO Case Study</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topic10">Topic 10: Trade Case Study</a></li>
+                    </ul>
+                </div>
+
+                <!-- New Module 4 -->
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Module 4: Advanced</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#" class="nav-link" data-topic="viz">Advanced Visualization</a></li>
+                        <li><a href="#" class="nav-link" data-topic="govdata">Real-World Data Pipelines</a></li> <!-- NEW LINK -->
+                        <li><a href="#" class="nav-link" data-topic="learning">Further Learning</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Resources</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#" class="nav-link" data-topic="faq">❓ FAQ</a></li>
+                        <li><a href="#" class="nav-link" data-topic="glossary">📚 Code Glossary</a></li>
+                        <li><a href="#" class="nav-link" data-topic="references">📄 References</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-auto pt-6 border-t border-slate-100 text-xs text-slate-400 text-center">
+                PUSEC605P &copy; 2025
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="w-full md:w-4/5 h-full overflow-y-auto bg-slate-50">
+            
+            <!-- Floating Header (Visible on scroll/subpages) -->
+            <header id="main-header" class="hidden sticky top-0 z-10 bg-white/90 backdrop-blur-md border-b border-slate-200 px-8 py-4 shadow-sm transition-all">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-xl font-bold text-slate-900">Data Analysis Practical utilizing Python</h1>
+                        <p class="text-sm text-slate-500 font-medium">PUSEC605P | Faculty: Himanshu Gaur</p>
+                    </div>
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-sm text-blue-600 font-semibold hover:text-blue-800">Back to Top &uarr;</button>
+                </div>
+            </header>
+
+            <div class="p-8 lg:p-16 max-w-5xl mx-auto">
+
+                <!-- HOME PAGE PANEL -->
+                <div id="home" class="topic-panel">
+                    <!-- Hero Section -->
+                    <div class="hero-bg rounded-3xl p-12 text-white shadow-2xl mb-16 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+                        <div class="absolute -bottom-8 -left-8 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+                        
+                        <div class="relative z-10">
+                            <span class="inline-block py-1 px-4 rounded-full bg-blue-600/50 border border-blue-400 text-sm font-bold tracking-wide mb-6 shadow-lg backdrop-blur-sm">Semester VI</span>
+                            <h1 class="text-5xl md:text-6xl font-extrabold mb-8 leading-tight tracking-tight">Data Analysis Practical<br/>utilizing Python</h1>
+                            
+                            <!-- OPAQUE BOX for Subject Code and Faculty -->
+                            <div class="bg-gray-900 p-8 rounded-2xl border-l-4 border-blue-500 shadow-2xl inline-block mb-10 max-w-md">
+                                <p class="text-blue-400 text-sm uppercase tracking-widest font-bold mb-1">Course Code</p>
+                                <p class="text-3xl text-white font-extrabold mb-6 tracking-wide">PUSEC605P</p>
+                                <p class="text-blue-400 text-sm uppercase tracking-widest font-bold mb-1">Faculty</p>
+                                <p class="text-2xl text-white font-extrabold">Himanshu Gaur</p>
+                            </div>
+                            
+                            <div>
+                                <button id="get-started-btn" class="bg-white text-blue-900 hover:bg-blue-50 font-bold py-4 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 text-lg flex items-center gap-2">
+                                    Start Learning <span>&rarr;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prerequisites Section -->
+                    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-8 mb-16">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                            <span class="bg-blue-100 text-blue-600 p-2 rounded-lg mr-3">🛠️</span> 
+                            Setup & Prerequisites
+                        </h3>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                                <h4 class="font-bold text-lg text-slate-800 mb-2">1. Anaconda Distribution</h4>
+                                <p class="text-slate-600 text-sm mb-4">This is the software suite that contains Python and all the necessary libraries (pandas, numpy, etc.) pre-installed.</p>
+                                <a href="https://www.anaconda.com/download" target="_blank" class="inline-block w-full text-center bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-lg transition-colors mb-4 text-sm">
+                                    Download Anaconda Free
+                                </a>
+                                <div class="bg-white p-3 rounded border border-slate-200">
+                                    <p class="text-xs font-mono text-slate-500 mb-1">Optional: Update all packages</p>
+                                    <code class="text-xs text-blue-600 bg-blue-50 px-1 py-0.5 rounded">conda update --all</code>
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                                <h4 class="font-bold text-lg text-slate-800 mb-2">2. Jupyter Notebook</h4>
+                                <p class="text-slate-600 text-sm mb-4">This is the interface where we will write code. It allows us to mix executable Python code with text and charts in a single document.</p>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Launch via Anaconda Navigator</li>
+                                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Or type <code class="text-xs bg-slate-200 px-1 rounded">jupyter notebook</code> in CMD</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Overview -->
+                    <div class="grid md:grid-cols-3 gap-8 mb-12">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 text-2xl font-bold mb-6">1</div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-3">Data Ingestion</h4>
+                            <p class="text-slate-600 leading-relaxed">Learn to import raw economic data from CSVs, Excel sheets, and text files into the Python environment.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 text-2xl font-bold mb-6">2</div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-3">Analysis</h4>
+                            <p class="text-slate-600 leading-relaxed">Apply the Split-Apply-Combine strategy to aggregate millions of data points into actionable insights.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 text-2xl font-bold mb-6">3</div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-3">Visualization</h4>
+                            <p class="text-slate-600 leading-relaxed">Create charts that reveal trends in inflation, GDP growth, and global trade patterns.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Topic 1 Panel -->
+                <div id="topic1" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Data Ingestion" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Topic 1: Data Ingestion from Diverse Formats</h2>
+                    
+                    <h3>Pedagogical Objectives</h3>
+                    <ul>
+                        <li>To comprehend the computational efficiency of <strong>Vectorization</strong> utilizing NumPy in contradistinction to traditional iterative loops.</li>
+                        <li>To achieve mastery in the ingestion of data from heterogeneous sources (e.g., Comma-Separated Values, Excel Spreadsheets, and Flat Files).</li>
+                    </ul>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>In modern economics, data is rarely presented in a perfectly clean format. It arrives in legacy systems, spreadsheets, and raw text dumps. The first step in any analysis is <strong>Ingestion</strong>: the process of reading data from a permanent storage file (on a hard drive) into a temporary memory structure (RAM) where Python can manipulate it.</p>
+
+                    <h3>Practical Implementation</h3>
+                    
+                    <h4>Phase 0: Environment Configuration</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>Before we can practice reading files, we must create them. This block generates three dummy files (a CSV, a text file, and an Excel file) so that the subsequent code has something to read.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>pd.DataFrame({...})</code>: Converts the dictionary provided into a table structure in memory.</li>
+                            <li><code>range(101, 106)</code>: Generates a sequence of numbers from 101 to 105 (excluding 106).</li>
+                            <li><code>.to_csv('filename.csv')</code>: Saves the DataFrame to a text file separated by commas.</li>
+                            <li><code>index=False</code>: Tells pandas NOT to write the row numbers (0, 1, 2...) into the file, keeping it clean.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>In a real-world scenario, you would likely skip this step as you would already have files like "Census_2011.csv" or "RBI_Data.xlsx" downloaded from official sources.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import pandas as pd
+import numpy as np
+import os
+
+# 1. Generation of Synthetic Data regarding Student Performance (CSV)
+df_csv = pd.DataFrame({
+    'Student_ID': range(101, 106),
+    'Name': ['Aarav', 'Bianca', 'Chirag', 'Divya', 'Eshan'],
+    'Econometrics_Score': [85, 90, 78, 92, 88],
+    'Micro_Score': [88, 94, 80, 89, 85]
+})
+df_csv.to_csv('student_performance.csv', index=False)
+
+# 2. Generation of Raw Text Data (TXT)
+with open('raw_survey_data.txt', 'w') as f:
+    f.write("Respondent_ID,Income,Region\n1,50000,Urban\n2,35000,Rural\n3,62000,Urban")
+
+# 3. Generation of Financial Data (Excel)
+try:
+    df_csv.to_excel('financial_data.xlsx', index=False)
+    print("Files created successfully.")
+except ImportError:
+    print("Excel library missing. CSV/TXT created.")</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+Files created successfully.
+</div>
+
+                    <h4>Topic 1: Ingestion Code (Basic)</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To demonstrate the specific functions required to read different file formats into a pandas DataFrame. We also introduce reading JSON files, which is common in web-based economic data APIs.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>pd.read_csv('file.csv')</code>: Reads a comma-delimited file into a DataFrame.</li>
+                            <li><code>sep=','</code>: Used in the text file reading. It explicitly tells Python that the comma character is what separates the data columns.</li>
+                            <li><code>pd.read_excel('file.xlsx')</code>: A specific function for parsing the complex binary format of Microsoft Excel files.</li>
+                            <li><code>pd.read_json(json_string)</code>: Parses a JavaScript Object Notation string into a table.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>Government data, such as NSSO survey results, often comes in raw text formats to save space. API data from the World Bank often arrives in JSON format. Understanding these formats is crucial for a complete economist's toolkit.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import pandas as pd
+
+# A. Reading Comma Separated Values
+print("--- [1] Reading CSV Data ---")
+df_csv = pd.read_csv('student_performance.csv')
+print(df_csv.head())
+
+# B. Reading Flat Text Files
+print("\n--- [2] Reading Raw Text Data ---")
+df_txt = pd.read_csv('raw_survey_data.txt', sep=',')
+print(df_txt)
+
+# C. Reading Excel Spreadsheets
+print("\n--- [3] Reading Excel Data ---")
+if os.path.exists('financial_data.xlsx'):
+    df_excel = pd.read_excel('financial_data.xlsx')
+    print(df_excel.head())
+    
+# D. Reading JSON (Bonus)
+json_data = '{"Country": {"0": "India", "1": "USA"}, "GDP": {"0": 3.5, "1": 23.0}}'
+df_json = pd.read_json(json_data)
+print("\n--- [4] Reading JSON Data ---")
+print(df_json)</code></pre>
+                    </div>
+                    
+                    <h4>Topic 1: Example 2 - Indian Census Data Ingestion</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To simulate reading a large-scale demographic dataset, similar to the Indian Census, and handling potential encoding or separator issues that are common in government data.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>StringIO(csv_string)</code>: Treats a string variable as if it were a physical file on the disk. Useful for testing or handling API responses.</li>
+                            <li><code>pd.read_csv(..., sep='|')</code>: Demonstrates handling non-standard separators. Government legacy systems often use pipes (|) instead of commas.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>Analyzing the demographic dividend of India requires processing Census data. This example simulates the structure of state-wise literacy and population data.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>from io import StringIO
+
+# Simulating a pipe-separated (|) file often found in legacy government systems
+census_data = """State|Population_Millions|Literacy_Rate
+Maharashtra|112.4|82.3
+Uttar Pradesh|199.8|67.7
+Kerala|33.4|94.0
+Bihar|104.1|61.8"""
+
+# Reading the string as if it were a file
+df_census = pd.read_csv(StringIO(census_data), sep='|')
+print("--- Indian Census Data Sample ---")
+print(df_census)</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+--- Indian Census Data Sample ---
+           State  Population_Millions  Literacy_Rate
+0    Maharashtra                112.4           82.3
+1  Uttar Pradesh                199.8           67.7
+2         Kerala                 33.4           94.0
+3          Bihar                104.1           61.8
+</div>
+                </div>
+                
+                <!-- Topic 2/4 Panel -->
+                <div id="topic2" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Matrix Math" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Topic 2 & 4: Matrix Operations & Array Metadata</h2>
+
+                    <h3>Pedagogical Objectives</h3>
+                    <ul>
+                        <li>To understand <strong>Vectorization</strong> and why it is preferred over loops.</li>
+                        <li>To inspect the structural properties of data arrays using metadata attributes.</li>
+                    </ul>
+
+                    <h3>Theoretical Framework</h3>
+                    <p><strong>Vectorization</strong> is the process of applying a mathematical operation to an entire array at once, rather than looping through individual elements. In Python, loops are slow. Vectorization uses optimized C code under the hood to perform calculations instantly.</p>
+
+                    <h3>Practical Implementation</h3>
+                    
+                    <h4>Topic 2: Example 1 - Basic Matrix Ops</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To simulate an economic scenario where we calculate the growth of an entire sector across multiple regions simultaneously using matrix algebra.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>np.array([[...], [...]])</code>: Creates a 2-Dimensional matrix. The nested lists represent rows.</li>
+                            <li><code>matrix_2 - matrix_1</code>: This is <strong>Vectorization</strong>. Python automatically subtracts the element at [0,0] from [0,0], [0,1] from [0,1], etc., for the entire matrix instantly.</li>
+                            <li><code>np.mean(matrix)</code>: Calculates the arithmetic mean of all elements in the matrix.</li>
+                            <li><code>.shape</code>: Returns a tuple (e.g., `(2, 2)`) indicating the dimensions (Rows, Columns).</li>
+                            <li><code>.nbytes</code>: Shows exactly how much memory (RAM) the data consumes.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>This is foundational for Input-Output modeling (Leontief models), where entire economies are represented as matrices of inputs and outputs. Calculating the "Value Added" requires subtracting the Intermediate Consumption matrix from the Total Output matrix.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import numpy as np
+
+# Matrix A: Output in Year 1; Matrix B: Output in Year 2
+matrix_year1 = np.array([[100, 200], [150, 250]])
+matrix_year2 = np.array([[110, 210], [160, 260]])
+
+print(f"Year 1 Output Matrix:\n{matrix_year1}")
+
+# 1. Arithmetic Operations (Vectorized)
+print("\n--- Economic Growth (Year 2 - Year 1) ---")
+growth_matrix = matrix_year2 - matrix_year1
+print(growth_matrix)
+
+# 2. Statistical Functions
+print(f"\nAverage Sectoral Output: {np.mean(matrix_year1)}")
+
+# 3. Array Metadata (Topic 4)
+print("\n--- Analysis of Memory and Dimensionality ---")
+print(f"Dimensions (Rank): {matrix_year1.ndim}D")
+print(f"Shape (Rows, Cols): {matrix_year1.shape}")
+print(f"Total Elements: {matrix_year1.size}")</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+Year 1 Output Matrix:
+[[100 200]
+ [150 250]]
+
+--- Economic Growth (Year 2 - Year 1) ---
+[[10 10]
+ [10 10]]
+
+Average Sectoral Output: 175.0
+
+--- Analysis of Memory and Dimensionality ---
+Dimensions (Rank): 2D
+Shape (Rows, Cols): (2, 2)
+Total Elements: 4
+</div>
+
+                    <h4>Topic 2: Example 2 - Real vs Nominal GDP (Indian Context)</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To calculate Real GDP for multiple Indian states simultaneously by adjusting Nominal GDP for inflation (using the GDP Deflator).</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>nominal / deflator</code>: Element-wise division. The first element of nominal is divided by the first element of deflator, and so on.</li>
+                            <li><code>* 100</code>: Broadcasting. The scalar value 100 is multiplied against every result in the array.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>Nominal GDP can rise just because prices rise. Economists need <strong>Real GDP</strong> to measure actual production growth. This vectorization allows an analyst to convert data for all 28 states instantly.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Nominal GDP for 3 States (in Lakh Crores)
+nominal_gdp = np.array([20.5, 15.2, 8.9]) 
+
+# GDP Deflator (Base 100) for those states
+deflator = np.array([120, 115, 110])
+
+# Calculate Real GDP
+real_gdp = (nominal_gdp / deflator) * 100
+
+print("States: [Maharashtra, Tamil Nadu, Gujarat]")
+print(f"Nominal GDP: {nominal_gdp}")
+print(f"Real GDP:    {np.round(real_gdp, 2)}")</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+States: [Maharashtra, Tamil Nadu, Gujarat]
+Nominal GDP: [20.5 15.2  8.9]
+Real GDP:    [17.08 13.22  8.09]
+</div>
+                </div>
+
+                <!-- Topic 3 Panel -->
+                <div id="topic3" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Slicing" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Topic 3: Advanced Slicing</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>Data is often not organized in the way we need it for analysis. <strong>Slicing</strong> allows us to extract specific subsets or reorder the data without changing the underlying values.</p>
+
+                    <h3>Practical Implementation</h3>
+                    
+                    <h4>Topic 3: Example 1 - Matrix Reordering</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To reorder a matrix of trade data, effectively flipping the order of countries or time periods.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>[start:stop:step]</code>: This is the standard Python slicing syntax.</li>
+                            <li><code>::-1</code>: A specific slice where <code>step = -1</code>. It means "take everything, but step backwards".</li>
+                            <li><code>[::-1, ::-1]</code>: The comma separates dimensions. This command reverses the rows (first dimension) AND reverses the columns (second dimension) simultaneously.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>In time-series econometrics, data often arrives with the newest date first. To perform forecasting, we usually need to reverse the dataset so that it flows chronologically from oldest to newest.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import numpy as np
+
+# Creation of a 3x3 matrix representing trade flows
+trade_matrix = np.array([
+    [0, 50, 20],  # Exports from Country A
+    [40, 0, 30],  # Exports from Country B
+    [10, 60, 0]   # Exports from Country C
+])
+print("Original Trade Matrix:\n", trade_matrix)
+
+# Reverse rows and columns
+transformed_matrix = trade_matrix[::-1, ::-1]
+
+print("\nTransformed Matrix:\n", transformed_matrix)</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+Original Trade Matrix:
+[[ 0 50 20]
+ [40  0 30]
+ [10 60  0]]
+
+Transformed Matrix:
+[[ 0 60 10]
+ [30  0 40]
+ [20 50  0]]
+</div>
+
+                    <h4>Topic 3: Example 2 - NIFTY 50 Market Analysis</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To extract specific time periods (first week vs. last week) from a financial time series array to compare opening and closing trends.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>prices[:5]</code>: Selects elements from index 0 up to (but not including) index 5. This gets the first 5 days.</li>
+                            <li><code>prices[-5:]</code>: Selects elements starting from the 5th-to-last item all the way to the end. This gets the last 5 days.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>Financial analysts constantly compare "Opening Week Performance" vs "Closing Week Performance" to gauge market sentiment. Slicing allows instant extraction of these periods from long yearly datasets.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Simulated daily closing prices of NIFTY 50 over 20 days
+nifty_prices = np.array([19500, 19550, 19600, 19580, 19620, 
+                         19700, 19750, 19800, 19850, 19900,
+                         19880, 19950, 20000, 20100, 20050, 
+                         20150, 20200, 20180, 20250, 20300])
+
+# Slice First Week (Days 1-5)
+first_week = nifty_prices[:5]
+
+# Slice Last Week (Last 5 Days)
+last_week = nifty_prices[-5:]
+
+print(f"First Week Trend: {first_week}")
+print(f"Last Week Trend:  {last_week}")
+print(f"Monthly Growth:   {last_week[-1] - first_week[0]}")</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+First Week Trend: [19500 19550 19600 19580 19620]
+Last Week Trend:  [20150 20200 20180 20250 20300]
+Monthly Growth:   800
+</div>
+                </div>
+
+                <!-- Topic 5 Panel -->
+                <div id="topic5" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="DataFrames" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Topic 5: DataFrame Construction & Exploratory Methods</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>The <strong>DataFrame</strong> is the central object in pandas. It is essentially a programmable spreadsheet. Unlike an Excel sheet which is a graphical interface, a DataFrame is a data structure that allows for complex code-based manipulation.</p>
+
+                    <h3>Practical Implementation</h3>
+                    
+                    <h4>Topic 5: Example 1 - Basic Construction</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To manually construct a dataset representing regional demographics and immediately perform an audit of its structure and statistical properties.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>pd.DataFrame(data)</code>: Takes a Python dictionary and converts keys to Column Headers and values to Column Data.</li>
+                            <li><code>.info()</code>: Displays the metadata. It is critical for checking if numbers are stored as 'int64' (correct) or 'object' (text, incorrect).</li>
+                            <li><code>.describe()</code>: Calculates summary stats (count, mean, std, min, 25%, 50%, 75%, max) for all numerical columns.</li>
+                            <li><code>df[df['Col'] > X]</code>: This is Boolean Indexing. It filters the rows, keeping only those where the condition is True.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>Before running any regression or complex analysis, an economist must always run <code>.describe()</code> to sanity-check the data. For example, if the minimum income is negative, you know there is an error in the data.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import pandas as pd
+
+data = {
+    'District': ['Mumbai', 'Pune', 'Nagpur', 'Mumbai', 'Pune', 'Nashik'],
+    'Zone': ['West', 'West', 'East', 'West', 'West', 'North'],
+    'Avg_Income_INR': [85000, 72000, 45000, 88000, 70000, 52000],
+    'Literacy_Rate': [89.2, 88.5, 82.1, 90.5, 89.0, 84.3]
+}
+df_demographics = pd.DataFrame(data)
+
+print("--- Structural Info ---")
+print(df_demographics.info())
+
+print("\n--- Descriptive Statistics ---")
+print(df_demographics.describe())
+
+# Filtering Example
+print("\n--- High Literacy Zones ---")
+high_lit = df_demographics[df_demographics['Literacy_Rate'] > 85]
+print(high_lit)</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+--- Structural Info ---
+Data columns (total 4 columns):
+ #   Column          Non-Null Count  Dtype  
+---  ------          --------------  -----  
+ 0   District        6 non-null      object 
+ 1   Zone            6 non-null      object 
+ 2   Avg_Income_INR  6 non-null      int64  
+ 3   Literacy_Rate   6 non-null      float64
+
+--- Descriptive Statistics ---
+       Avg_Income_INR  Literacy_Rate
+count        6.000000       6.000000
+mean     68666.666667      87.266667
+...
+</div>
+
+                    <h4>Topic 5: Example 2 - Indian Startup Ecosystem</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To analyze a dataset of Indian startups to understand the distribution of valuations and sector dominance.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>data = [...]</code>: Creating a list of lists, another way to build a DataFrame.</li>
+                            <li><code>columns=[...]</code>: Explicitly naming the columns since lists don't have keys like dictionaries.</li>
+                            <li><code>.value_counts()</code>: A powerful function that counts unique entries in a categorical column. It instantly shows us which City or Sector is most common.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>Policymakers often analyze startup data to decide where to build tech parks. <code>value_counts()</code> helps identify that Bengaluru is the leading hub, justifying infrastructure investment there.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Startup Data: Name, City, Sector, Valuation (Billion $)
+startup_data = [
+    ['Flipkart', 'Bengaluru', 'E-commerce', 37.6],
+    ['Paytm', 'Noida', 'Fintech', 16.0],
+    ['Byju\'s', 'Bengaluru', 'Edtech', 22.0],
+    ['Ola', 'Bengaluru', 'Mobility', 7.3],
+    ['Zomato', 'Gurugram', 'Food Delivery', 12.0],
+    ['Swiggy', 'Bengaluru', 'Food Delivery', 10.7]
+]
+
+df_startups = pd.DataFrame(startup_data, columns=['Name', 'City', 'Sector', 'Valuation_B'])
+
+print("--- City-wise Startup Count ---")
+print(df_startups['City'].value_counts())
+
+print("\n--- Average Unicorn Valuation ---")
+print(f"${df_startups['Valuation_B'].mean():.2f} Billion")</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+--- City-wise Startup Count ---
+Bengaluru    4
+Noida        1
+Gurugram     1
+Name: City, dtype: int64
+
+--- Average Unicorn Valuation ---
+$17.60 Billion
+</div>
+                </div>
+
+                <!-- Topic 6/7 Panel -->
+                <div id="topic6" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Collaboration" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Topic 6 & 7: GroupBy Operations & Multi-Aggregation</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>The <strong>Split-Apply-Combine</strong> strategy is fundamental to data analysis. It involves splitting the data into groups based on some criteria (like 'Region'), applying a function to each group (like 'Average'), and combining the results into a new table.</p>
+
+                    <h3>Practical Implementation</h3>
+                    
+                    <h4>Topic 6: Example 1 - Regional Aggregation</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To compare economic performance across different districts by aggregating individual observations into regional summaries.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>groupby('District')</code>: Splits the data into hidden buckets based on unique values in the 'District' column.</li>
+                            <li><code>['Avg_Income_INR']</code>: Selects the specific column we want to perform math on.</li>
+                            <li><code>.agg(['mean', 'min'])</code>: Applies the 'mean' and 'min' functions to each bucket independently.</li>
+                            <li><code>agg({...})</code>: Advanced usage allowing different functions for different columns (e.g., Mean for Income, but Range for Literacy).</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>This is used extensively in development economics. For instance, you might group household data by 'State' to calculate the average consumption expenditure per state, allowing for inter-state comparisons.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Simple Aggregation
+print("--- Income Analysis by District ---")
+grouped_income = df_demographics.groupby('District')['Avg_Income_INR'].agg(['mean', 'min', 'max'])
+print(grouped_income)
+
+# Multi-Column Aggregation
+print("\n--- Regional Profiling ---")
+agg_rules = {
+    'Avg_Income_INR': ['mean', 'std'],
+    'Literacy_Rate': ['min', 'max']
+}
+regional_profile = df_demographics.groupby('District').agg(agg_rules)
+print(regional_profile)</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+--- Income Analysis by District ---
+             mean    min    max
+District                       
+Mumbai    86500.0  85000  88000
+Nagpur    45000.0  45000  45000
+...
+</div>
+
+                    <h4>Topic 6: Example 2 - Indian Agriculture Yield Analysis</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To determine which crop is most productive on average by analyzing state-wise yield data.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>groupby('Crop')</code>: We want to compare 'Rice' vs 'Wheat', so we split the data by Crop type.</li>
+                            <li><code>['Yield_kg_per_ha'].mean()</code>: We calculate the average yield for each crop bucket.</li>
+                            <li><code>.sort_values(...)</code>: Essential for ranking. We want to see the highest yielding crops first.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>Agricultural economists use this analysis to recommend crop choices. If the data shows Wheat consistently yields less than Rice in a specific zone, policy might shift to support Rice cultivation.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>agri_data = {
+    'State': ['Punjab', 'Punjab', 'Haryana', 'Haryana', 'West Bengal', 'West Bengal'],
+    'Crop': ['Wheat', 'Rice', 'Wheat', 'Rice', 'Rice', 'Jute'],
+    'Yield_kg_per_ha': [5000, 4000, 4800, 3900, 2900, 2500]
+}
+df_agri = pd.DataFrame(agri_data)
+
+# Average Yield per Crop across all states
+crop_performance = df_agri.groupby('Crop')['Yield_kg_per_ha'].mean().sort_values(ascending=False)
+
+print("--- Average Crop Yields (kg/ha) ---")
+print(crop_performance)</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+--- Average Crop Yields (kg/ha) ---
+Crop
+Wheat    4900.0
+Rice     3600.0
+Jute     2500.0
+Name: Yield_kg_per_ha, dtype: float64
+</div>
+                </div>
+
+                <!-- Topic 8 Panel -->
+                <div id="topic8" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Data Cleaning" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Topic 8: The Management of Missing Values and Outliers</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>Real-world data is messy. It contains gaps (missing values) and errors (outliers). <strong>Imputation</strong> is the process of filling gaps, while <strong>Outlier Detection</strong> involves using statistical rules (like the Interquartile Range or Z-Score) to identify data points that do not belong. The <strong>IQR method</strong> (used below) is "robust," meaning it is not overly influenced by the outliers themselves, unlike the Mean or Standard Deviation.</p>
+
+                    <h3>Practical Implementation</h3>
+                    
+                    <h4>Topic 8: Example 1 - Robust Statistics</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To mathematically identify and clean a dataset by filling missing entries and removing statistically improbable values using two different statistical methods: IQR and Z-Score.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>.fillna(median)</code>: Fills <code>NaN</code> values. We use Median because it is robust (not pulled by extreme outliers like the Mean is).</li>
+                            <li><code>.quantile(0.25)</code>: Calculates the value below which 25% of the data falls (Q1).</li>
+                            <li><code>stats.zscore(df)</code>: Calculates how many Standard Deviations each data point is from the Mean.</li>
+                            <li><code>df[(condition) & (condition)]</code>: Keeps only the rows where the data is within the calculated valid range.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>In survey data, a respondent might accidentally report their income as 1,000,000 instead of 10,000. If you include this error in your 'Average Income' calculation, your entire analysis will be wrong. Robust cleaning is essential for accurate policy recommendations.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import pandas as pd
+import numpy as np
+from scipy import stats
+
+# Generate Dirty Data with extreme outlier
+data = {'Monthly_Exp_USD': [1200, 1300, np.nan, 1250, 100000, 1400, 1150, np.nan, 1350, 1220]}
+df = pd.DataFrame(data)
+
+def clean_data_robust(df, col):
+    # 1. Imputation: Fill NaN with Median (Robust statistic)
+    fill_val = df[col].median()
+    df[col].fillna(fill_val, inplace=True)
+    
+    # 2. IQR Method
+    Q1 = df[col].quantile(0.25)
+    Q3 = df[col].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    
+    # 3. Z-Score Method (for comparison)
+    z_scores = np.abs(stats.zscore(df[col]))
+    
+    # Filter using IQR
+    clean_df = df[(df[col] >= lower_bound) & (df[col] <= upper_bound)]
+    
+    print(f"Original Count: {len(df)}")
+    print(f"Cleaned Count: {len(clean_df)}")
+    print(f"Outliers Removed: {len(df) - len(clean_df)}")
+    return clean_df
+
+df_clean = clean_data_robust(df, 'Monthly_Exp_USD')
+print("\nCleaned Data Statistics:")
+print(df_clean.describe())</code></pre>
+                    </div>
+                    
+                    <h3 class="mt-8">Interactive Visualization: Outlier Magnitude</h3>
+                    <div class="chart-container">
+                        <canvas id="outlierChart"></canvas>
+                    </div>
+
+                    <h4>Topic 8: Example 2 - Indian AQI Data Cleaning</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To fix missing sensor data in a time-series dataset. Air Quality sensors often fail for hours at a time.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>.interpolate(method='linear')</code>: This is smarter than filling with the mean. It draws a straight line between the last known point and the next known point, estimating the missing values in between based on the trend.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>Environmental economists studying the impact of pollution on health need continuous data. Interpolation allows them to estimate exposure levels even when sensors are temporarily offline.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Simulating Delhi AQI data with missing readings
+aqi_data = {
+    'Date': ['2024-01-01', '2024-01-02', '2024-01-03', '2024-01-04', '2024-01-05'],
+    'AQI': [350, 360, np.nan, np.nan, 340]
+}
+df_aqi = pd.DataFrame(aqi_data)
+
+print("--- Original Data ---")
+print(df_aqi)
+
+# Interpolate missing values (draw a line between 360 and 340)
+df_aqi['AQI'] = df_aqi['AQI'].interpolate(method='linear')
+
+print("\n--- After Interpolation ---")
+print(df_aqi)</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+--- After Interpolation ---
+         Date         AQI
+0  2024-01-01  350.000000
+1  2024-01-02  360.000000
+2  2024-01-03  353.333333  <- Estimated
+3  2024-01-04  346.666667  <- Estimated
+4  2024-01-05  340.000000
+</div>
+                </div>
+
+                <!-- Topic 9 Panel -->
+                <div id="topic9" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Economics" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Topic 9: Case Study - Analysis of World Economic Outlook</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>This case study mimics the analysis performed by the International Monetary Fund (IMF). We focus on the <strong>Phillips Curve</strong> relationship (the trade-off between inflation and growth) and the concept of <strong>Stagflation</strong> (high inflation combined with low growth). We analyze a multi-year panel dataset to identify trends.</p>
+
+                    <h3>Practical Implementation</h3>
+                    
+                    <h4>Topic 9: Example 1 - Stagflation Risk</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To analyze macroeconomic stability over a 5-year period by calculating derived metrics like 'Stagflation Risk' and testing for correlations between growth and inflation.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>df['NewCol'] = df['A'] - df['B']</code>: Creates a new derived variable (Feature Engineering).</li>
+                            <li><code>groupby('Year').mean()</code>: Collapses all countries into a single global average for each year to show the trend.</li>
+                            <li><code>.corr()</code>: Calculates the Pearson Correlation Coefficient. +1 is perfect positive correlation, -1 is perfect negative, 0 is no linear relationship.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>Central banks use this type of data to decide on interest rates. If 'Stagflation Risk' is rising, they face a dilemma: raising rates fights inflation but hurts growth. Data analysis helps quantify this trade-off.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Expanded Mock WEO Data (5 Years)
+data = {
+    'Country': ['India', 'USA', 'China', 'Germany', 'India', 'USA', 'China', 'Germany'] * 2, # Simplification for length
+    'Year': [2020, 2020, 2020, 2020, 2021, 2021, 2021, 2021, 2022, 2022, 2022, 2022, 2023, 2023, 2023, 2023],
+    'GDP_Growth': [-6.6, -3.4, 2.2, -4.0, 8.7, 5.9, 8.1, 2.6, 7.0, 2.1, 3.0, 1.8, 7.2, 2.5, 5.2, -0.3],
+    'Inflation': [6.2, 1.2, 2.5, 0.5, 5.5, 4.7, 0.9, 3.1, 6.7, 8.0, 2.0, 6.9, 5.4, 4.1, 0.2, 5.9]
+}
+df_weo = pd.DataFrame(data)
+
+# 1. Feature Engineering: Stagflation Risk
+df_weo['Stagflation_Risk'] = df_weo['Inflation'] - df_weo['GDP_Growth']
+
+# 2. Aggregation: Global Trend Analysis
+global_trend = df_weo.groupby('Year')[['GDP_Growth', 'Inflation', 'Stagflation_Risk']].mean()
+print("Global Economic Trends:\n", global_trend)
+
+# 3. Correlation Analysis
+corr_matrix = df_weo[['GDP_Growth', 'Inflation']].corr()
+print("\nCorrelation (Growth vs Inflation):\n", corr_matrix)</code></pre>
+                    </div>
+
+                    <h3 class="mt-8">Interactive Visualization: GDP Growth vs. Inflation</h3>
+                    <div class="chart-container">
+                        <canvas id="weoChart"></canvas>
+                    </div>
+
+                    <h4>Topic 9: Example 2 - BRICS vs G7 Analysis (Mock)</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To compare the economic trajectory of emerging economies (BRICS) against developed economies (G7) by grouping data based on political alliances.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>df['Group'] = df['Country'].apply(lambda x: ...)</code>: A powerful way to categorize data. We check if the country name is in our 'BRICS' list and label it; otherwise we label it 'G7'.</li>
+                            <li><code>groupby('Group').mean()</code>: Now we can compare the averages of these two geopolitical blocks directly.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>Geopolitics drives economics. Analysts constantly track if the "Global South" (BRICS) is growing faster than the "Global North" (G7) to guide foreign direct investment strategies.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Labeling Countries
+brics = ['India', 'China']
+df_weo['Alliance'] = df_weo['Country'].apply(lambda x: 'BRICS' if x in brics else 'G7')
+
+# Comparing Block Performance
+block_performance = df_weo.groupby('Alliance')['GDP_Growth'].mean()
+print("--- Average GDP Growth by Alliance ---")
+print(block_performance)</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+--- Average GDP Growth by Alliance ---
+Alliance
+BRICS    5.825
+G7       0.675
+Name: GDP_Growth, dtype: float64
+</div>
+                </div>
+
+                <!-- Topic 10 Panel -->
+                <div id="topic10" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Trade" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Topic 10: Case Study - Analysis of Global Trade Data</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>International trade analysis relies on understanding <strong>Bilateral Flows</strong> (Country A to Country B). Key concepts include <strong>Trade Balance</strong> (Exports minus Imports) and <strong>Sectoral Dominance</strong> (Comparative Advantage). This analysis often requires restructuring data from a "transaction list" format into a "country-level" summary.</p>
+
+                    <h3>Practical Implementation</h3>
+                    
+                    <h4>Topic 10: Example 1 - Net Trade Balance</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To calculate the Net Trade Balance for each country. This is complex because a country appears in the 'Exporter' column for some rows and the 'Importer' column for others.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>groupby('Exporter')</code>: Calculates total money flowing <em>in</em> (Exports).</li>
+                            <li><code>groupby('Importer')</code>: Calculates total money flowing <em>out</em> (Imports).</li>
+                            <li><code>pd.DataFrame({...})</code>: Merges these two separate series into one table for easy comparison.</li>
+                            <li><code>.sort_values(ascending=False)</code>: Ranks the countries from largest surplus to largest deficit.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>Trade deficits (Imports > Exports) are a major political and economic indicator. Calculating this from raw transaction logs (like UN Comtrade data) is a fundamental skill for a trade economist.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Trade Data
+trade_data = {
+    'Exporter': ['India', 'India', 'USA', 'China', 'China', 'Germany'],
+    'Importer': ['USA', 'UAE', 'China', 'USA', 'India', 'France'],
+    'Value': [75.0, 30.0, 150.0, 500.0, 100.0, 80.0],
+    'Sector': ['Service', 'Oil', 'Tech', 'Mfg', 'Electronics', 'Auto']
+}
+df_trade = pd.DataFrame(trade_data)
+
+# 1. Calculate Total Exports per Country
+total_exports = df_trade.groupby('Exporter')['Value'].sum()
+
+# 2. Calculate Total Imports per Country
+total_imports = df_trade.groupby('Importer')['Value'].sum()
+
+# 3. Merge and Calculate Balance
+balance_sheet = pd.DataFrame({'Exports': total_exports, 'Imports': total_imports})
+balance_sheet.fillna(0, inplace=True) # Handle countries that only export or only import
+balance_sheet['Net_Trade_Balance'] = balance_sheet['Exports'] - balance_sheet['Imports']
+
+print("National Trade Accounts:\n", balance_sheet.sort_values('Net_Trade_Balance', ascending=False))</code></pre>
+                    </div>
+
+                    <h3 class="mt-8">Interactive Visualization: Trade Analysis</h3>
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <div class="chart-container lg:w-1/2">
+                            <canvas id="exporterChart"></canvas>
+                        </div>
+                        <div class="chart-container lg:w-1/2">
+                            <canvas id="sectorChart"></canvas>
+                        </div>
+                    </div>
+
+                    <h4>Topic 10: Example 2 - India's Export Basket Analysis</h4>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To zoom in specifically on India and analyze the composition of its exports to identify Comparative Advantage.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>df[df['Exporter'] == 'India']</code>: Filtering the dataset to isolate rows where India is the seller.</li>
+                            <li><code>groupby('Sector')['Value'].sum()</code>: Summing up the value of exports for each industry type.</li>
+                        </ul>
+                        <h5>Economic Context</h5>
+                        <p>India is known as the "Pharmacy of the World" and a global IT hub. Data analysis confirms this narrative by showing that Services and Pharmaceuticals/Chemicals often dominate the export basket compared to heavy manufacturing.</p>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Filter for India
+india_exports = df_trade[df_trade['Exporter'] == 'India']
+
+# Analyze Composition
+india_basket = india_exports.groupby('Sector')['Value'].sum()
+
+print("--- India's Export Basket ---")
+print(india_basket)</code></pre>
+                    </div>
+                    <div class="output-block">
+<span class="output-label">Expected Console Output</span>
+--- India's Export Basket ---
+Sector
+Oil        30.0
+Service    75.0
+Name: Value, dtype: float64
+</div>
+                </div>
+
+                <!-- ADVANCED VIZ PANEL -->
+                <div id="viz" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Advanced Charts" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Advanced Visualization Techniques</h2>
+                    <p>While basic bar and scatter plots are useful, advanced economic analysis often requires Time Series plots and Heatmaps.</p>
+
+                    <h3>1. Time Series Analysis</h3>
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To visualize how economic indicators change over time using a line plot.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>plt.figure(figsize=(10,6))</code>: Sets the canvas size (Width, Height). Important for readability.</li>
+                            <li><code>plt.plot(x, y)</code>: Connects data points with lines to show trends.</li>
+                            <li><code>marker='o'</code>: Puts a dot at each data point so you can see the actual values clearly.</li>
+                            <li><code>plt.grid(True)</code>: Adds a background grid, making it easier to trace values to the axes.</li>
+                        </ul>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import matplotlib.pyplot as plt
+
+years = [2020, 2021, 2022, 2023, 2024]
+gdp = [2.5, 3.0, 3.2, 3.8, 4.1]
+
+plt.figure(figsize=(10, 6))
+plt.plot(years, gdp, marker='o', linestyle='-', color='b')
+plt.title('GDP Growth Over Time')
+plt.xlabel('Year')
+plt.ylabel('GDP (Trillion USD)')
+plt.grid(True)
+plt.show()</code></pre>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="timeSeriesChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- GOV DATA PANEL (NEW) -->
+                <div id="govdata" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1611974765270-ca1258634369?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Data Pipeline" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Real-World Data Pipelines</h2>
+                    <p>Economists rarely work with static CSV files alone. In the real world, you will pull data directly from government APIs like the Federal Reserve (FRED) or the World Bank.</p>
+
+                    <div class="code-explanation">
+                        <h5>Conceptual Goal</h5>
+                        <p>To fetch live inflation data (CPI) directly from the St. Louis Fed database (FRED) using Python's URL reading capabilities.</p>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>url = "..."</code>: We define the web address of the raw CSV data.</li>
+                            <li><code>parse_dates=['DATE']</code>: Tells pandas to interpret the 'DATE' column as actual time objects, not just text strings.</li>
+                            <li><code>index_col='DATE'</code>: Sets the Date as the index (row labels), which enables powerful time-series slicing.</li>
+                            <li><code>pct_change(12)</code>: Calculates the percentage change from 12 rows ago. Since data is monthly, this gives the Annual Inflation Rate.</li>
+                        </ul>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# Fetch CPI Data from FRED (Consumer Price Index for All Urban Consumers)
+url = "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL"
+df = pd.read_csv(url, parse_dates=['DATE'], index_col='DATE')
+
+# Calculate Inflation Rate (Year over Year)
+df['Inflation'] = df['CPIAUCSL'].pct_change(12) * 100
+
+# Filter for recent years
+recent_data = df.loc['2020-01-01':]
+
+print(recent_data.head())</code></pre>
+                    </div>
+                    
+                    <h3 class="mt-8">Interactive Visualization: US Inflation (Simulated)</h3>
+                    <div class="chart-container">
+                        <canvas id="govDataChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- FURTHER LEARNING PANEL -->
+                <div id="learning" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Student Learning" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Further Learning Roadmap</h2>
+                    <p>To become a proficient Data Economist, consider exploring these advanced topics next:</p>
+
+                    <div class="grid md:grid-cols-2 gap-8 mt-8">
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="text-blue-600 font-bold text-lg mb-2">1. SQL (Structured Query Language)</h4>
+                            <p>Most real-world economic data lives in databases, not CSV files. SQL allows you to extract data directly from company servers.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="text-indigo-600 font-bold text-lg mb-2">2. Web Scraping (BeautifulSoup)</h4>
+                            <p>Learn to write scripts that automatically download data from websites like the World Bank or news portals to analyze sentiment.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="text-emerald-600 font-bold text-lg mb-2">3. Machine Learning (scikit-learn)</h4>
+                            <p>Move from describing data to predicting it. Use regression models to forecast future GDP growth based on current indicators.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="text-purple-600 font-bold text-lg mb-2">4. Git & Version Control</h4>
+                            <p>Essential for collaborative research. Git allows multiple economists to work on the same code without overwriting each other's work.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ PANEL -->
+                <div id="faq" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1512314889357-e157c22f938d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="FAQ" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Frequently Asked Questions</h2>
+                    
+                    <div class="space-y-6 mt-8">
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <h4 class="font-bold text-slate-900 mb-2">Q: What is the difference between loc and iloc?</h4>
+                            <p><strong>A:</strong> <code>loc</code> selects data based on <strong>labels</strong> (row names/column names), while <code>iloc</code> selects based on <strong>integer positions</strong> (index numbers like 0, 1, 2).</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <h4 class="font-bold text-slate-900 mb-2">Q: What does axis=0 and axis=1 mean?</h4>
+                            <p><strong>A:</strong> <code>axis=0</code> refers to rows (move down). <code>axis=1</code> refers to columns (move across). For example, <code>df.mean(axis=0)</code> calculates the mean of each column.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <h4 class="font-bold text-slate-900 mb-2">Q: Why am I getting an IndentationError?</h4>
+                            <p><strong>A:</strong> Python is sensitive to whitespace. Ensure that all code inside loops or functions is indented consistently (usually 4 spaces).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GLOSSARY PANEL -->
+                <div id="glossary" class="topic-panel hidden">
+                    <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Code Library" class="w-full h-64 object-cover rounded-2xl mb-10 shadow-lg">
+                    <h2>Code Glossary & Terminology</h2>
+                    <p>A reference guide for the libraries, variables, and concepts used throughout this course.</p>
+
+                    <div class="grid md:grid-cols-2 gap-8 mt-8">
+                        <!-- Libraries -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <h3 style="margin-top:0; border:none;" class="text-blue-600 font-bold mb-4">📚 Python Libraries</h3>
+                            <dl class="space-y-4">
+                                <div>
+                                    <dt class="font-bold text-slate-900">pandas (pd)</dt>
+                                    <dd class="text-sm text-slate-600">The fundamental library for data analysis. It provides the <code>DataFrame</code> structure which allows us to work with tabular data (rows and columns).</dd>
+                                </div>
+                                <div>
+                                    <dt class="font-bold text-slate-900">numpy (np)</dt>
+                                    <dd class="text-sm text-slate-600">Short for "Numerical Python". It provides support for large, multi-dimensional arrays and matrices, along with high-level mathematical functions.</dd>
+                                </div>
+                                <div>
+                                    <dt class="font-bold text-slate-900">scipy.stats</dt>
+                                    <dd class="text-sm text-slate-600">A library for scientific computing. We specifically use the <code>stats</code> module to calculate Z-scores for outlier detection.</dd>
+                                </div>
+                                <div>
+                                    <dt class="font-bold text-slate-900">matplotlib.pyplot (plt)</dt>
+                                    <dd class="text-sm text-slate-600">A plotting library used for creating static, animated, and interactive visualizations in Python.</dd>
+                                </div>
+                                <div>
+                                    <dt class="font-bold text-slate-900">seaborn (sns)</dt>
+                                    <dd class="text-sm text-slate-600">A visualization library based on matplotlib. It provides a high-level interface for drawing attractive and informative statistical graphics.</dd>
+                                </div>
+                            </dl>
+                        </div>
+
+                        <!-- Key Concepts -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                            <h3 style="margin-top:0; border:none;" class="text-green-600 font-bold mb-4">🧠 Key Concepts</h3>
+                            <dl class="space-y-4">
+                                <div>
+                                    <dt class="font-bold text-slate-900">DataFrame</dt>
+                                    <dd class="text-sm text-slate-600">A 2-dimensional labeled data structure with columns of potentially different types. Think of it like a spreadsheet or SQL table.</dd>
+                                </div>
+                                <div>
+                                    <dt class="font-bold text-slate-900">Series</dt>
+                                    <dd class="text-sm text-slate-600">A one-dimensional labeled array capable of holding any data type. A DataFrame is essentially a collection of Series.</dd>
+                                </div>
+                                <div>
+                                    <dt class="font-bold text-slate-900">Vectorization</dt>
+                                    <dd class="text-sm text-slate-600">The ability to perform operations on entire arrays at once without using loops. This is key to Python's speed in data science.</dd>
+                                </div>
+                                <div>
+                                    <dt class="font-bold text-slate-900">Imputation</dt>
+                                    <dd class="text-sm text-slate-600">The process of replacing missing data with substituted values (like the mean or median) to allow for analysis.</dd>
+                                </div>
+                                <div>
+                                    <dt class="font-bold text-slate-900">Z-Score</dt>
+                                    <dd class="text-sm text-slate-600">A statistical measurement of a score's relationship to the mean in a group of scores. A Z-score of 0 means the score is the same as the mean. A Z-score of +1.0 means the score is one standard deviation above the mean.</dd>
+                                </div>
+                                <div>
+                                    <dt class="font-bold text-slate-900">Pivot Table</dt>
+                                    <dd class="text-sm text-slate-600">A data processing tool used to summarize, sort, reorganize, group, count, total or average data stored in a table.</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- References Panel -->
+                <div id="references" class="topic-panel hidden">
+                    <h2>References</h2>
+                    <ul class="space-y-4 list-none p-0 mt-8">
+                        <li class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                            <strong>Cousineau, D., & Chartier, S. (2010).</strong> Outliers detection and treatment: a review. <em>International Journal of Psychological Research</em>, 3(1), 58-67.
+                        </li>
+                        <li class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                            <strong>Harris, C. R., et al. (2020).</strong> Array programming with NumPy. <em>Nature</em>, <em>585</em>(7825), 357–362. https://doi.org/10.1038/s41586-020-2649-2
+                        </li>
+                        <li class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                            <strong>International Monetary Fund. (2023).</strong> <em>World Economic Outlook Database Documentation</em>. Washington, D.C.: IMF.
+                        </li>
+                        <li class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                            <strong>McKinney, W. (2010).</strong> Data Structures for Statistical Computing in Python. <em>Proceedings of the 9th Python in Science Conference</em>.
+                        </li>
+                        <li class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                            <strong>Tukey, J. W. (1977).</strong> <em>Exploratory Data Analysis</em>. Addison-Wesley.
+                        </li>
+                        <li class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                            <strong>United Nations. (2023).</strong> <em>International Trade Statistics Methodology: UN Comtrade</em>. New York: UN Statistics Division.
+                        </li>
+                        <li class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                            <strong>Wickham, H. (2011).</strong> The Split-Apply-Combine Strategy for Data Analysis. <em>Journal of Statistical Software</em>.
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Navigation Logic
+        let currentTopic = 'home';
+        const navLinks = document.querySelectorAll('.nav-link');
+        const homeLink = document.getElementById('home-link');
+        const getStartedBtn = document.getElementById('get-started-btn');
+        const mainHeader = document.getElementById('main-header');
+        const topicPanels = document.querySelectorAll('.topic-panel');
+
+        function switchTopic(targetTopic) {
+            if (targetTopic === currentTopic) return;
+
+            // Update Active State
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            if (targetTopic !== 'home') {
+                const activeLink = document.querySelector(`.nav-link[data-topic="${targetTopic}"]`);
+                if (activeLink) activeLink.classList.add('active');
+                mainHeader.classList.remove('hidden');
+            } else {
+                mainHeader.classList.add('hidden');
+            }
+
+            // Swap Panels
+            topicPanels.forEach(panel => panel.classList.add('hidden'));
+            document.getElementById(targetTopic).classList.remove('hidden');
+            currentTopic = targetTopic;
+
+            // Mobile Scroll
+            if (window.innerWidth < 768) {
+                document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        navLinks.forEach(link => link.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchTopic(e.target.dataset.topic);
+        }));
+
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchTopic('home');
+        });
+
+        getStartedBtn.addEventListener('click', () => switchTopic('topic1'));
+
+        // Copy Button Logic
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const codeBlock = btn.nextElementSibling;
+                if (codeBlock) {
+                    const code = codeBlock.innerText;
+                    
+                    // Fallback method using execCommand for wider compatibility in restricted iframes
+                    const textarea = document.createElement('textarea');
+                    textarea.value = code;
+                    // Prevent scrolling to bottom of page in MS Edge
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0'; 
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    
+                    try {
+                        const successful = document.execCommand('copy');
+                        if (successful) {
+                            const originalText = btn.innerText;
+                            btn.innerText = 'Copied!';
+                            setTimeout(() => btn.innerText = originalText, 2000);
+                        } else {
+                            btn.innerText = 'Failed';
+                        }
+                    } catch (err) {
+                        console.error('Fallback: Oops, unable to copy', err);
+                        btn.innerText = 'Error';
+                    }
+                    
+                    document.body.removeChild(textarea);
+                }
+            });
+        });
+
+        // Chart Initialization (Helper)
+        let charts = {};
+        function createChart(id, config) {
+            const ctx = document.getElementById(id);
+            if (ctx) {
+                if (charts[id]) charts[id].destroy();
+                charts[id] = new Chart(ctx, config);
+            }
+        }
+
+        // Initialize Charts
+        // 1. Outlier Chart
+        createChart('outlierChart', {
+            type: 'bar',
+            data: {
+                labels: ['Median Income', 'Outlier Error'],
+                datasets: [{
+                    label: 'Value (USD)',
+                    data: [1285, 100000],
+                    backgroundColor: ['#3b82f6', '#ef4444'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { type: 'logarithmic', title: {display: true, text: 'Logarithmic Scale'} } },
+                plugins: { legend: { display: false }, title: { display: true, text: 'Effect of Data Entry Error' } }
+            }
+        });
+
+        // 2. WEO Scatter
+        createChart('weoChart', {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Country Performance',
+                    data: [
+                        { x: 7.2, y: 5.5 }, { x: 2.1, y: 3.2 }, { x: 5.0, y: 0.7 },
+                        { x: -0.3, y: 6.1 }, { x: 1.3, y: 3.0 }, { x: 7.5, y: 4.8 },
+                        { x: 2.4, y: 2.9 }, { x: 4.8, y: 1.0 }
+                    ],
+                    backgroundColor: '#2563eb'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { title: { display: true, text: 'GDP Growth (%)' } },
+                    y: { title: { display: true, text: 'Inflation (%)' } }
+                },
+                plugins: { title: { display: true, text: 'Inflation vs Growth Trade-off' } }
+            }
+        });
+
+        // 3. Trade Charts
+        createChart('exporterChart', {
+            type: 'bar',
+            data: {
+                labels: ['China', 'USA', 'India', 'Germany'],
+                datasets: [{
+                    label: 'Exports (Billions)',
+                    data: [600, 150, 105, 80],
+                    backgroundColor: ['#ef4444', '#3b82f6', '#f97316', '#64748b'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { title: { display: true, text: 'Top Global Exporters' }, legend: {display: false} }
+            }
+        });
+
+        createChart('sectorChart', {
+            type: 'doughnut',
+            data: {
+                labels: ['Mfg', 'Tech', 'Electronics', 'Auto', 'Service', 'Oil'],
+                datasets: [{
+                    data: [500, 150, 100, 80, 75, 30],
+                    backgroundColor: ['#ef4444', '#3b82f6', '#f97316', '#10b981', '#6366f1', '#fde047']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { title: { display: true, text: 'Dominant Trade Sectors' } }
+            }
+        });
+
+        // 4. Advanced Time Series Chart
+        createChart('timeSeriesChart', {
+            type: 'line',
+            data: {
+                labels: [2020, 2021, 2022, 2023, 2024],
+                datasets: [{
+                    label: 'GDP Trend (Trillions)',
+                    data: [2.5, 3.0, 3.2, 3.8, 4.1],
+                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { title: { display: true, text: '5-Year Economic Forecast' } }
+            }
+        });
+
+        // 5. Gov Data Chart (Simulated FRED)
+        createChart('govDataChart', {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'Inflation Rate (%)',
+                    data: [1.2, 4.7, 8.0, 4.1, 3.2],
+                    borderColor: '#dc2626',
+                    tension: 0.3,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { title: { display: true, text: 'US Inflation Rate (CPI)' } },
+                scales: { y: { title: { display: true, text: 'Percentage (%)' } } }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

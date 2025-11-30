@@ -11,10 +11,9 @@
     <!-- 
     Faculty: Himanshu Gaur
     Updates: 
-    - FIXED Topic 10 Chart: Now a Stacked Bar Chart to match the Pivot Table code.
-    - UPDATED Topic 9 Image: New stock market visualization image.
-    - ELABORATED Resources: Expanded FAQ, Glossary, and Free Learning Resources.
-    - ADDED FreeCodeCamp & Book recommendations.
+    - ADDED: "Next Topic" Navigation Buttons at the bottom of every section.
+    - UPDATED: Kendrick Section now uses a static image instead of the Getty embed.
+    - MAINTAINED: All previous theory, code, and visualizations.
     -->
 
     <style>
@@ -257,6 +256,28 @@
         }
         details > summary::-webkit-details-marker {
             display: none;
+        }
+
+        /* Next Button Styling */
+        .next-btn-container {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .next-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2563eb;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .next-btn:hover {
+            color: #1e3a8a;
+            transform: translateX(4px);
         }
 
         /* Mobile Sidebar Toggle */
@@ -519,6 +540,10 @@ print(df_json)</code></pre>
                         <h5>🚀 Topic 1 Challenge</h5>
                         <p class="text-sm">Try creating a CSV file named <code>my_data.csv</code> with headers "Date,Price" and values "2023-01-01,500". Then read it back using <code>pd.read_csv('my_data.csv')</code>.</p>
                     </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('topic2')" class="next-btn">Next: Topic 2 &rarr;</button>
+                    </div>
                 </div>
 
                 <!-- Topic 2 -->
@@ -583,6 +608,10 @@ print(f"High Income Segments: {high_earners}")</code></pre>
                         <h5>🚀 Topic 2 Challenge</h5>
                         <p class="text-sm">Create two arrays: <code>Year1_Rev = np.array([100, 200])</code> and <code>Year2_Rev = np.array([110, 250])</code>. Calculate the percentage growth array: <code>((Year2 - Year1) / Year1) * 100</code>.</p>
                     </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('topic3')" class="next-btn">Next: Topic 3 &rarr;</button>
+                    </div>
                 </div>
 
                 <!-- Topic 3 -->
@@ -624,6 +653,10 @@ Net Growth: 1000.0</div>
                         <h5>🚀 Topic 3 Challenge</h5>
                         <p class="text-sm">Given an array of 12 months: <code>months = np.arange(1, 13)</code>. Extract the second quarter (April, May, June) using slicing logic <code>months[3:6]</code>.</p>
                     </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('topic4')" class="next-btn">Next: Topic 4 &rarr;</button>
+                    </div>
                 </div>
 
                 <!-- Topic 4 -->
@@ -663,6 +696,10 @@ Optimised Memory: 48 bytes</div>
                     <div class="practice-box">
                         <h5>🚀 Topic 4 Challenge</h5>
                         <p class="text-sm">Create a 1D array of 12 elements using <code>np.arange(12)</code>. Then use <code>.reshape(3, 4)</code> to change it into a 3-row, 4-column matrix. Print its new shape.</p>
+                    </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('topic5')" class="next-btn">Next: Topic 5 &rarr;</button>
                     </div>
                 </div>
 
@@ -723,6 +760,10 @@ max      37.600000
                         <h5>🚀 Topic 5 Challenge</h5>
                         <p class="text-sm">Add a new column called 'Valuation_INR' by multiplying 'Valuation_B' by 83. Then use <code>.head()</code> to view the result.</p>
                     </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('topic6')" class="next-btn">Next: Topic 6 &rarr;</button>
+                    </div>
                 </div>
 
                 <!-- Topic 6 -->
@@ -771,6 +812,10 @@ Name: Yield_Kg_Ha, dtype: float64</div>
                         <h5>🚀 Topic 6 Challenge</h5>
                         <p class="text-sm">Group the data by 'State' instead of 'Crop' and calculate the <code>sum()</code> of Yield to see which state produces more total food in this sample.</p>
                     </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('topic7')" class="next-btn">Next: Topic 7 &rarr;</button>
+                    </div>
                 </div>
 
                 <!-- Topic 7 -->
@@ -818,6 +863,10 @@ Pune      71000.0        89</div>
                         <h5>🚀 Topic 7 Challenge</h5>
                         <p class="text-sm">Modify the rules dictionary to calculate the <code>'std'</code> (Standard Deviation) of Income. This measures inequality within the district.</p>
                     </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('merging')" class="next-btn">Next: Topic 7b &rarr;</button>
+                    </div>
                 </div>
 
                 <!-- Topic 7b: Merging -->
@@ -863,6 +912,10 @@ print(df_merged)</code></pre>
                     <div class="practice-box">
                         <h5>🚀 Topic 7b Challenge</h5>
                         <p class="text-sm">Change <code>how='inner'</code> to <code>how='outer'</code>. Observe how NaN values appear for countries that don't have a match.</p>
+                    </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('topic8')" class="next-btn">Next: Topic 8 &rarr;</button>
                     </div>
                 </div>
 
@@ -929,6 +982,10 @@ print(df_messy)</code></pre>
                     <div class="practice-box">
                         <h5>🚀 Topic 8 Challenge</h5>
                         <p class="text-sm">Filter out rows where AQI is negative (impossible values). Use logic: <code>df[df['AQI'] >= 0]</code>.</p>
+                    </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('topic9')" class="next-btn">Next: Topic 9 &rarr;</button>
                     </div>
                 </div>
 
@@ -998,6 +1055,10 @@ print(df_gdp)</code></pre>
                     <div class="chart-container">
                         <canvas id="weoChart"></canvas>
                     </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('topic10')" class="next-btn">Next: Topic 10 &rarr;</button>
+                    </div>
                 </div>
 
                 <!-- Topic 10 -->
@@ -1050,6 +1111,10 @@ India         50    200</div>
                     <div class="chart-container">
                         <canvas id="tradeChart"></canvas>
                     </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('viz')" class="next-btn">Next: Adv Viz &rarr;</button>
+                    </div>
                 </div>
 
                 <!-- Advanced Viz -->
@@ -1080,11 +1145,19 @@ plt.show()</code></pre>
                     <div class="chart-container">
                         <canvas id="timeSeriesChart"></canvas>
                     </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('kendrick')" class="next-btn">Next: Data Storytelling &rarr;</button>
+                    </div>
                 </div>
                 
                 <!-- NEW: Kendrick Lamar Section -->
                 <div id="kendrick" class="topic-panel hidden">
-                    <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?auto=format&fit=crop&w=1200&q=80" alt="Vinyl Record" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
+                    <!-- Replaced Getty Images Embed with a static image -->
+                    <div class="mb-8 flex justify-center">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80" alt="Music Concert Stage" class="w-full h-64 object-cover rounded-2xl mb-8 shadow-sm">
+                    </div>
+
                     <h2>Data Storytelling: The Structure of Narrative</h2>
                     
                     <div class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-8">
@@ -1195,6 +1268,10 @@ print(df_reverse[['Track', 'Narrative_Arc']].head())</code></pre>
                         <h5>🚀 Storytelling Challenge</h5>
                         <p class="text-sm">Create a list of 5 major life events in chronological order. Reverse them using slicing to see if it tells a "Benjamin Button" style story.</p>
                     </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('govdata')" class="next-btn">Next: Pipelines &rarr;</button>
+                    </div>
                 </div>
                 
                 <!-- Gov Data -->
@@ -1233,6 +1310,10 @@ DATE
                     <div class="practice-box">
                         <h5>🚀 Pipeline Challenge</h5>
                         <p class="text-sm">If you can't reach the URL, try creating a dummy dictionary with Date and CPI keys and convert it to a DataFrame manually.</p>
+                    </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('learning')" class="next-btn">Next: Learning Roadmap &rarr;</button>
                     </div>
                 </div>
 
@@ -1278,6 +1359,10 @@ DATE
                             <p class="text-sm text-slate-600 mb-2">"Python for Data Analysis" by Wes McKinney (Creator of Pandas). The definitive guide.</p>
                             <a href="https://wesmckinney.com/book/" target="_blank" class="text-xs font-mono bg-gray-100 text-gray-800 p-1 rounded hover:bg-gray-200 transition-colors">Resource: Read Online</a>
                         </div>
+                    </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('faq')" class="next-btn">Next: FAQ &rarr;</button>
                     </div>
                 </div>
 
@@ -1343,6 +1428,10 @@ DATE
                             <p class="mt-2 text-sm text-slate-600">You can drop them using <code>dropna()</code> or fill them using <code>fillna()</code> (with a mean, median, or zero). Advanced methods include interpolation (Topic 8).</p>
                         </details>
                     </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('glossary')" class="next-btn">Next: Glossary &rarr;</button>
+                    </div>
                 </div>
                 
                 <!-- Resources: Glossary -->
@@ -1382,6 +1471,10 @@ DATE
                             <h4 class="font-bold text-slate-900">Correlation</h4>
                             <p class="text-sm text-slate-600">A statistical measure that expresses the extent to which two variables are linearly related (meaning they change together at a constant rate).</p>
                         </div>
+                    </div>
+
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('references')" class="next-btn">Next: References &rarr;</button>
                     </div>
                 </div>
 
@@ -1434,7 +1527,8 @@ DATE
         closeMenuBtn.addEventListener('click', toggleMenu);
         overlay.addEventListener('click', toggleMenu);
 
-        function switchTopic(targetTopic) {
+        // Make switchTopic globally available
+        window.switchTopic = function(targetTopic) {
             if (targetTopic === currentTopic) return;
 
             // Update Active State

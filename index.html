@@ -75,36 +75,73 @@
 
     <style>
         :root {
+            /* Glass UI Variables */
             --bg-body: #f8fafc;
-            --bg-panel: #ffffff;
-            --bg-sidebar: #ffffff;
+            /* Fallback */
+            --bg-glass: rgba(255, 255, 255, 0.7);
+            --bg-glass-panel: rgba(255, 255, 255, 0.6);
+            --border-glass: rgba(255, 255, 255, 0.4);
+            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+
             --text-primary: #1e293b;
             --text-secondary: #475569;
             --text-heading: #0f172a;
-            --border-color: #e2e8f0;
-            --code-bg: #0f172a;
+            --border-color: rgba(226, 232, 240, 0.6);
+            --code-bg: rgba(15, 23, 42, 0.95);
             --code-text: #f1f5f9;
             --accent-color: #2563eb;
             --accent-hover: #1d4ed8;
             --chart-text: #64748b;
-            --chart-grid: #e2e8f0;
+            --chart-grid: rgba(226, 232, 240, 0.6);
         }
 
-        /* AMOLED Dark Mode */
+        /* AMOLED Dark Mode / Glass Dark */
         .dark {
-            --bg-body: #000000 !important;
-            --bg-panel: #0a0a0a !important;
-            --bg-sidebar: #000000 !important;
-            --text-primary: #e2e8f0 !important;
-            --text-secondary: #94a3b8 !important;
-            --text-heading: #f8fafc !important;
-            --border-color: #333333 !important;
-            --code-bg: #111111 !important;
-            --code-text: #e2e8f0 !important;
-            --accent-color: #3b82f6 !important;
-            --accent-hover: #60a5fa !important;
-            --chart-text: #94a3b8 !important;
-            --chart-grid: #333333 !important;
+            --bg-body: #000000;
+            /* Fallback */
+            --bg-glass: rgba(10, 10, 10, 0.7);
+            --bg-glass-panel: rgba(20, 20, 20, 0.6);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-heading: #f8fafc;
+            --border-color: rgba(51, 51, 51, 0.6);
+            --code-bg: rgba(17, 17, 17, 0.95);
+            --code-text: #e2e8f0;
+            --accent-color: #3b82f6;
+            --accent-hover: #60a5fa;
+            --chart-text: #94a3b8;
+            --chart-grid: rgba(51, 51, 51, 0.6);
+        }
+
+        /* Global Background Mesh */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.1) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.1) 0, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(34, 197, 94, 0.1) 0, transparent 50%);
+            background-color: #f8fafc;
+            transition: background-color 0.4s ease;
+        }
+
+        .dark body::before {
+            background:
+                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.15) 0, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.15) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.15) 0, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(34, 197, 94, 0.15) 0, transparent 50%);
+            background-color: #020617;
+            /* Deep slate/black */
         }
 
         /* Consolidated Text Color Overrides */
@@ -186,25 +223,32 @@
             /* Slate 400 */
         }
 
+        /* Glass Panel Styles - iOS Style */
         .bg-white,
-        .bg-slate-50 {
-            background-color: var(--bg-panel) !important;
-        }
-
-        .border-slate-200,
-        .border-slate-100 {
-            border-color: var(--border-color) !important;
+        .bg-slate-50,
+        .bg-slate-100 {
+            background-color: var(--bg-glass-panel) !important;
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border: 1px solid var(--border-glass) !important;
+            box-shadow: var(--shadow-glass);
         }
 
         .dark .bg-white,
         .dark .bg-slate-50,
         .dark .bg-slate-100 {
-            background-color: var(--bg-panel) !important;
+            background-color: var(--bg-glass-panel) !important;
+            border: 1px solid var(--border-glass) !important;
+        }
+
+        .border-slate-200,
+        .border-slate-100 {
+            border-color: var(--border-glass) !important;
         }
 
         .dark .border-slate-200,
         .dark .border-slate-100 {
-            border-color: var(--border-color) !important;
+            border-color: var(--border-glass) !important;
         }
 
         /* Ensure buttons are always visible */
@@ -251,9 +295,41 @@
             stroke: var(--text-primary) !important;
         }
 
+        .dark .bg-slate-950 {
+            background-color: var(--bg-glass-panel) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass) !important;
+        }
+
         /* Mobile theme toggle */
         #mobile-theme-toggle {
             color: var(--text-primary) !important;
+        }
+
+        /* Sidebar Transition */
+        #sidebar {
+            transition: transform 0.3s ease, width 0.3s ease;
+        }
+
+        body.sidebar-collapsed #sidebar {
+            transform: translateX(-100%);
+        }
+
+        @media (min-width: 768px) {
+            body.sidebar-collapsed #sidebar {
+                transform: translateX(-100%);
+                width: 0;
+            }
+
+            body.sidebar-collapsed main {
+                margin-left: 0;
+                max-width: 100%;
+            }
+
+            main {
+                transition: margin-left 0.3s ease, max-width 0.3s ease;
+            }
         }
 
         #mobile-theme-toggle svg {
@@ -661,9 +737,11 @@
             padding-top: 1.5rem;
             border-top: 1px solid var(--border-color);
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            width: 100%;
         }
 
+        .prev-btn,
         .next-btn {
             display: flex;
             align-items: center;
@@ -675,11 +753,121 @@
             cursor: pointer;
             background: none;
             border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
         }
 
+        .prev-btn:hover,
         .next-btn:hover {
-            color: var(--accent-hover);
-            transform: translateX(4px);
+            background-color: rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Progress Bar - Apple Glass UI */
+        .progress-pill-container {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            /* iOS Light Mode Glass */
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            /* Ensure it's fully hidden from screen readers/clicks when opacity is 0 */
+        }
+
+        .dark .progress-pill-container {
+            /* iOS Dark Mode Glass */
+            background: rgba(30, 30, 30, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .progress-pill-container.visible {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            bottom: 2.5rem;
+        }
+
+        .prog-btn {
+            background: rgba(0, 0, 0, 0.05);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-color);
+        }
+
+        .dark .prog-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .prog-btn:hover {
+            background: rgba(0, 0, 0, 0.1);
+            transform: scale(1.1);
+        }
+
+        .dark .prog-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .prog-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .progress-text {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-color);
+            white-space: nowrap;
+        }
+
+        .progress-track {
+            width: 150px;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .dark .progress-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            border-radius: 999px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* Dark Mode Toggle */
@@ -725,33 +913,44 @@
 
     <!-- Mobile Header -->
     <div
-        class="md:hidden bg-white dark:bg-slate-950 p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center sticky top-0 z-40">
-        <a href="#" onclick="switchTopic('home'); return false;"
-            class="font-bold text-blue-600 dark:text-blue-400 text-lg hover:text-blue-800 dark:hover:text-blue-300">Data
-            Analysis</a>
+        class="md:hidden fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <button id="mobile-menu-btn" class="text-slate-600 dark:text-slate-400 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+            <a href="#" onclick="switchTopic('home')"
+                class="font-bold text-blue-600 dark:text-blue-400 text-lg hover:text-blue-800 dark:hover:text-blue-300">Data
+                Analysis</a>
+        </div>
         <div class="flex items-center gap-2">
-            <div class="text-sm text-slate-600 dark:text-slate-400">Faculty: <strong>Himanshu Gaur</strong></div>
+            <div class="text-sm text-slate-600 dark:text-slate-400"><strong>Himanshu Gaur</strong></div>
             <button id="mobile-theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
                 <svg class="w-5 h-5 sun-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
                     </path>
                 </svg>
-                <svg class="w-5 h-5 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
                     </path>
                 </svg>
             </button>
-            <button id="menu-btn" class="text-slate-700 dark:text-slate-300 focus:outline-none"
-                style="color: var(--text-primary);">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-                    </path>
-                </svg>
             </button>
         </div>
     </div>
+
+    <!-- Desktop Sidebar Toggle Button (Floating) -->
+    <button id="sidebar-toggle-btn"
+        class="hidden md:flex fixed top-4 left-4 z-[100] p-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-lg shadow-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all hover:scale-105"
+        aria-label="Toggle Sidebar">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
 
     <div class="flex flex-col md:flex-row h-screen overflow-hidden">
 
@@ -760,7 +959,7 @@
 
         <!-- Sidebar Navigation -->
         <nav id="sidebar"
-            class="w-64 md:w-1/5 h-full bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 p-6 flex flex-col overflow-y-auto z-50 shadow-lg md:static md:translate-x-0">
+            class="w-64 md:w-1/5 h-full bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 px-6 pb-6 pt-16 flex flex-col overflow-y-auto z-50 shadow-lg md:static md:translate-x-0">
             <div class="flex justify-between items-center mb-8">
                 <a href="#" id="home-link" class="block group">
                     <h1
@@ -831,11 +1030,31 @@
                         <li><a href="#" class="nav-link" data-topic="references">📄 References</a></li>
                     </ul>
                 </div>
+
             </div>
 
             <div
-                class="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 text-center">
-                &copy; 2025 Himanshu Gaur
+                class="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 flex flex-col items-center gap-2">
+                <span>&copy; 2025 Himanshu Gaur</span>
+                <div class="flex items-center gap-3">
+                    <a href="https://github.com/oghimanshu" target="_blank"
+                        class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+                        aria-label="GitHub">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/thisishimanshu" target="_blank"
+                        class="text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        aria-label="LinkedIn">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                    </a>
+                </div>
             </div>
         </nav>
 
@@ -849,7 +1068,7 @@
                     <div class="cursor-pointer" onclick="switchTopic('home')">
                         <h1 class="text-lg md:text-xl font-bold text-slate-900 dark:text-slate-50">Data Analysis with
                             Python</h1>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium">Faculty: Himanshu Gaur</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium">Himanshu Gaur</p>
                     </div>
                     <div class="flex items-center gap-4">
                         <button id="desktop-theme-toggle"
@@ -904,12 +1123,22 @@
                                 style="color: var(--text-primary);">
                                 <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight tracking-tight"
                                     style="color: var(--text-heading);">Data Analysis with Python</h1>
-                                <p class="text-lg mb-6" style="color: var(--text-secondary);">Faculty: <span
-                                        class="font-bold" style="color: var(--text-heading);">Himanshu Gaur</span></p>
+                                <p class="text-lg mb-6" style="color: var(--text-secondary);"><span class="font-bold"
+                                        style="color: var(--text-heading);">Himanshu Gaur</span></p>
                                 <button id="get-started-btn"
                                     class="w-full bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-600 font-bold py-3 px-6 rounded-xl shadow-lg transition-all text-center">
                                     Start Learning &rarr;
                                 </button>
+                                <a href="https://github.com/oghimanshu/Data-Analysis-with-Python" target="_blank"
+                                    class="mt-4 w-full flex items-center justify-center gap-2 bg-slate-800 dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 font-bold py-3 px-6 rounded-xl shadow-lg transition-all text-center border border-slate-700 dark:border-slate-600 group">
+                                    <svg class="w-5 h-5 text-slate-400 group-hover:text-white transition-colors"
+                                        fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    View on GitHub
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1091,7 +1320,22 @@ print(df_json)</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('topic2')" class="next-btn">Next: Topic 2 &rarr;</button>
+                        <button onclick="switchTopic('home')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Home
+                        </button>
+                        <button onclick="switchTopic('topic2')" class="next-btn">
+                            Next: Topic 2
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1174,7 +1418,22 @@ print(f"High Income Segments: {high_earners}")</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('topic3')" class="next-btn">Next: Topic 3 &rarr;</button>
+                        <button onclick="switchTopic('topic1')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Topic 1
+                        </button>
+                        <button onclick="switchTopic('topic3')" class="next-btn">
+                            Next: Topic 3
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1228,7 +1487,22 @@ print(f"Net Growth: {np.round(prices[-1] - prices[0], 0)}")</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('topic4')" class="next-btn">Next: Topic 4 &rarr;</button>
+                        <button onclick="switchTopic('topic2')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Topic 2
+                        </button>
+                        <button onclick="switchTopic('topic4')" class="next-btn">
+                            Next: Topic 4
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1281,7 +1555,22 @@ print(f"Optimised Memory: {data_optimized.nbytes} bytes")</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('topic5')" class="next-btn">Next: Topic 5 &rarr;</button>
+                        <button onclick="switchTopic('topic3')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Topic 3
+                        </button>
+                        <button onclick="switchTopic('topic5')" class="next-btn">
+                            Next: Topic 5
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1353,7 +1642,22 @@ print(df[df['Valuation_B'] > 15.0])</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('topic6')" class="next-btn">Next: Topic 6 &rarr;</button>
+                        <button onclick="switchTopic('topic4')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Topic 4
+                        </button>
+                        <button onclick="switchTopic('topic6')" class="next-btn">
+                            Next: Topic 6
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1412,7 +1716,22 @@ print(df.groupby('Crop')['Yield_Kg_Ha'].mean())</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('topic7')" class="next-btn">Next: Topic 7 &rarr;</button>
+                        <button onclick="switchTopic('topic5')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Topic 5
+                        </button>
+                        <button onclick="switchTopic('topic7')" class="next-btn">
+                            Next: Topic 7
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1470,7 +1789,22 @@ print(df.groupby('District').agg(rules))</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('merging')" class="next-btn">Next: Topic 7b &rarr;</button>
+                        <button onclick="switchTopic('topic6')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Topic 6
+                        </button>
+                        <button onclick="switchTopic('merging')" class="next-btn">
+                            Next: Topic 7b
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1527,7 +1861,22 @@ print(df_merged)</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('topic8')" class="next-btn">Next: Topic 8 &rarr;</button>
+                        <button onclick="switchTopic('topic7')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Topic 7
+                        </button>
+                        <button onclick="switchTopic('topic8')" class="next-btn">
+                            Next: Topic 8
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1606,7 +1955,22 @@ print(df_messy)</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('topic9')" class="next-btn">Next: Topic 9 &rarr;</button>
+                        <button onclick="switchTopic('merging')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Topic 7b
+                        </button>
+                        <button onclick="switchTopic('topic9')" class="next-btn">
+                            Next: Topic 9
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1686,7 +2050,22 @@ print(df_gdp)</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('topic10')" class="next-btn">Next: Topic 10 &rarr;</button>
+                        <button onclick="switchTopic('topic8')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Topic 8
+                        </button>
+                        <button onclick="switchTopic('topic10')" class="next-btn">
+                            Next: Topic 10
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1748,7 +2127,22 @@ print(matrix)</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('viz')" class="next-btn">Next: Adv Viz &rarr;</button>
+                        <button onclick="switchTopic('topic9')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Topic 9
+                        </button>
+                        <button onclick="switchTopic('viz')" class="next-btn">
+                            Next: Adv Viz
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1786,8 +2180,22 @@ plt.show()</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('kendrick')" class="next-btn">Next: Data Storytelling
-                            &rarr;</button>
+                        <button onclick="switchTopic('topic10')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Topic 10
+                        </button>
+                        <button onclick="switchTopic('kendrick')" class="next-btn">
+                            Next: Data Storytelling
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -1944,7 +2352,22 @@ print(df_reverse[['Track', 'Narrative_Arc']].head())</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('grammy')" class="next-btn">Next: Grammy Capstone &rarr;</button>
+                        <button onclick="switchTopic('viz')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Adv Viz
+                        </button>
+                        <button onclick="switchTopic('grammy')" class="next-btn">
+                            Next: Grammy Capstone
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -2066,7 +2489,22 @@ print(df.sort_values('Legend_Index', ascending=False).head(3))</code></pre>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('govdata')" class="next-btn">Next: Pipelines &rarr;</button>
+                        <button onclick="switchTopic('kendrick')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Data Storytelling
+                        </button>
+                        <button onclick="switchTopic('govdata')" class="next-btn">
+                            Next: Pipelines
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -2113,13 +2551,27 @@ except:
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('learning')" class="next-btn">Next: Learning Roadmap
-                            &rarr;</button>
+                        <button onclick="switchTopic('grammy')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Grammy Capstone
+                        </button>
+                        <button onclick="switchTopic('learning')" class="next-btn">
+                            Next: Further Learning
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Learning -->
-                <div id="learning" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                <!-- Learning Roadmap -->
+                <div id="roadmap" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
                     <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
                         alt="Further Learning" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
                     <h2>Further Learning Roadmap</h2>
@@ -2198,7 +2650,22 @@ except:
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('faq')" class="next-btn">Next: FAQ &rarr;</button>
+                        <button onclick="switchTopic('learning')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Further Learning
+                        </button>
+                        <button onclick="switchTopic('faq')" class="next-btn">
+                            Next: FAQ
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -2295,10 +2762,252 @@ except:
                                 zero). Advanced methods include interpolation (Topic 8).
                             </p>
                         </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What makes Python popular for data science?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">It has clean syntax, strong
+                                library support, active community, and works well with machine learning frameworks.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What are the essential Python libraries for data science?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">NumPy, Pandas, Matplotlib,
+                                Seaborn, Scikit-learn, SciPy, Statsmodels, and frameworks like TensorFlow or PyTorch.
+                            </p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is the difference between a list, tuple, and NumPy array?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Lists are general purpose, tuples
+                                are immutable, and NumPy arrays support vectorized numerical computation.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is vectorization in NumPy?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Executing operations on entire
+                                arrays without explicit Python loops.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: Why do data scientists prefer Pandas DataFrame?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Structured tabular storage, easy
+                                filtering, group operations, merging, and fast I/O.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: How do you handle missing values in Pandas?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Using functions like isna(),
+                                dropna(), fillna(), or imputing values with averages or model based techniques.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is the difference between loc and iloc?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">loc uses labels. iloc uses
+                                integer positions.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is broadcasting in NumPy?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Automatic expansion of smaller
+                                arrays to match the shape of larger arrays during element wise operations.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is EDA?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Exploratory data analysis
+                                involving summary statistics, visualizations, and pattern detection.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: How do you remove outliers?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Methods include z scores, IQR
+                                method, domain rules, or model based anomaly detection.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What are the different types of data in Python?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Numeric, string, boolean, list,
+                                tuple, dictionary, set, and custom objects.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: How do you read CSV files in Python?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Using pd.read_csv("file.csv")
+                                from Pandas.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is the difference between NumPy and Pandas?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">NumPy focuses on numerical
+                                arrays. Pandas is built on top of NumPy and adds labeled tabular data structures.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is a lambda function?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Small anonymous function defined
+                                with lambda for inline operations.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: How do you merge or join DataFrames?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Using merge, join, or concat in
+                                Pandas depending on the structure.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is a virtual environment in Python?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">An isolated environment
+                                containing its own Python version and packages.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is feature scaling and why is it important?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Transforming variables to similar
+                                ranges for better model stability. Techniques include normalization and standardization.
+                            </p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is the purpose of train_test_split?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">To divide data into training and
+                                testing sets for unbiased model evaluation.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is the difference between supervised and unsupervised learning?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Supervised learning uses labeled
+                                data. Unsupervised learning finds hidden structure in unlabeled data.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: How do you evaluate a machine learning model in Python?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Using metrics like accuracy,
+                                precision, recall, RMSE, or R² through Scikit-learn.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is overfitting and how can Python help prevent it?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">When a model memorizes instead of
+                                generalizing. Techniques include cross validation, regularization, and dropout.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What are Python generators used for?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Creating iterators that produce
+                                items lazily, useful for large datasets.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is a confusion matrix?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">A table showing true and
+                                predicted classifications to understand model performance.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: How do you visualize data in Python?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Using libraries like Matplotlib,
+                                Seaborn, or Plotly for plots such as histograms, scatter plots, heatmaps.</p>
+                        </details>
+                        <details
+                            class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                            <summary class="font-bold cursor-pointer flex justify-between">
+                                Q: What is pickling in Python?
+                                <span class="text-blue-500 dark:text-blue-400">+</span>
+                            </summary>
+                            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Serializing objects using pickle
+                                so that models or structures can be saved and loaded later.</p>
+                        </details>
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('glossary')" class="next-btn">Next: Glossary &rarr;</button>
+                        <button onclick="switchTopic('roadmap')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Roadmap
+                        </button>
+                        <button onclick="switchTopic('glossary')" class="next-btn">
+                            Next: Glossary
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -2344,7 +3053,6 @@ except:
                             <p class="text-sm text-slate-600 dark:text-slate-300">Calling multiple methods sequentially
                                 on the same object in a single line of code (e.g.,
                                 <code>df.groupby().mean().sort_values()</code>).
-                            </p>
                         </div>
                         <div
                             class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
@@ -2363,7 +3071,22 @@ except:
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('references')" class="next-btn">Next: References &rarr;</button>
+                        <button onclick="switchTopic('faq')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: FAQ
+                        </button>
+                        <button onclick="switchTopic('references')" class="next-btn">
+                            Next: References
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -2375,7 +3098,9 @@ except:
                     <ul class="space-y-4 mt-6">
                         <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
                             <strong>McKinney, W. (2010).</strong> Data Structures for Statistical Computing in Python.
-                            <em>Proceedings of the 9th Python in Science Conference</em>.
+                            <em>Proceedings of the 9th Python in Science Conference</em>. <a
+                                href="https://doi.org/10.25080/Majora-92bf1922-00a" target="_blank"
+                                class="text-blue-600 underline">https://doi.org/10.25080/Majora-92bf1922-00a</a>
                         </li>
                         <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
                             <strong>Harris, C. R., et al. (2020).</strong> Array programming with NumPy.
@@ -2391,472 +3116,954 @@ except:
                         </li>
                         <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
                             <strong>VanderPlas, J. (2016).</strong> <em>Python Data Science Handbook: Essential Tools
-                                for Working with Data</em>. O'Reilly Media.
+                                for Working with Data</em>. O'Reilly Media. <a
+                                href="https://jakevdp.github.io/PythonDataScienceHandbook/" target="_blank"
+                                class="text-blue-600 underline">https://jakevdp.github.io/PythonDataScienceHandbook/</a>
+                        </li>
+                        <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
+                            <strong>Pedregosa, F., et al. (2011).</strong> Scikit-learn: Machine Learning in Python.
+                            <em>Journal of Machine Learning Research</em>, 12(Oct), 2825–2830. <a
+                                href="https://www.jmlr.org/papers/volume12/pedregosa11a/pedregosa11a.pdf"
+                                target="_blank"
+                                class="text-blue-600 underline">https://www.jmlr.org/papers/volume12/pedregosa11a/pedregosa11a.pdf</a>
+                        </li>
+                        <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
+                            <strong>Hunter, J. D. (2007).</strong> Matplotlib: A 2D graphics environment.
+                            <em>Computing in Science & Engineering</em>, 9(3), 90–95. <a
+                                href="https://doi.org/10.1109/MCSE.2007.55" target="_blank"
+                                class="text-blue-600 underline">https://doi.org/10.1109/MCSE.2007.55</a>
+                        </li>
+                        <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
+                            <strong>Waskom, M. L. (2021).</strong> seaborn: statistical data visualization.
+                            <em>Journal of Open Source Software</em>, 6(60), 3021. <a
+                                href="https://doi.org/10.21105/joss.03021" target="_blank"
+                                class="text-blue-600 underline">https://doi.org/10.21105/joss.03021</a>
+                        </li>
+                        <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
+                            <strong>Géron, A. (2022).</strong> <em>Hands-On Machine Learning with Scikit-Learn, Keras,
+                                and
+                                TensorFlow</em> (3rd ed.). O'Reilly Media. <a
+                                href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781098125967/"
+                                target="_blank"
+                                class="text-blue-600 underline">https://www.oreilly.com/library/view/hands-on-machine-learning/9781098125967/</a>
+                        </li>
+                        <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
+                            <strong>Van Rossum, G., & Drake, F. L. (2009).</strong> <em>Python 3 Reference Manual</em>.
+                            CreateSpace. <a href="https://docs.python.org/3/reference/" target="_blank"
+                                class="text-blue-600 underline">https://docs.python.org/3/reference/</a>
                         </li>
                     </ul>
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('glossary')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Glossary
+                        </button>
+                        <button onclick="switchTopic('home')" class="next-btn">
+                            Next: Home
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
+                <!-- Resources: Further Learning -->
+                <div id="learning" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1513258496098-882605922721?auto=format&fit=crop&w=1200&q=80"
+                        alt="Further Learning" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
+                    <h2>Further Learning Resources</h2>
+                    <p class="mb-6 text-slate-600 dark:text-slate-300">A curated list of courses and resources to
+                        continue
+                        your data science journey.</p>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-slate-600 dark:text-slate-300">
+                            <thead
+                                class="text-xs text-slate-700 uppercase bg-slate-50 dark:bg-slate-800 dark:text-slate-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 rounded-tl-lg">Course/Resource</th>
+                                    <th scope="col" class="px-6 py-3">Description</th>
+                                    <th scope="col" class="px-6 py-3">Strengths / Use Case</th>
+                                    <th scope="col" class="px-6 py-3">Link (Paid)</th>
+                                    <th scope="col" class="px-6 py-3 rounded-tr-lg">Link (Free/Audit)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Python for Data
+                                        Science, AI & Development (IBM, Coursera)</td>
+                                    <td class="px-6 py-4">Python fundamentals + data manipulation + data I/O +
+                                        introduction
+                                        to data-science workflows</td>
+                                    <td class="px-6 py-4">Good structured path from Python basics to data-handling +
+                                        analysis + ML prep</td>
+                                    <td class="px-6 py-4">(Coursera paid cert) <a
+                                            href="https://www.coursera.org/learn/python-for-applied-data-science-ai"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/learn/python-for-applied-data-science-ai</a>
+                                    </td>
+                                    <td class="px-6 py-4">Free audit available <a
+                                            href="https://www.coursera.org/learn/python-for-applied-data-science-ai"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/learn/python-for-applied-data-science-ai</a>
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Data Analysis with
+                                        Python (IBM, Coursera)</td>
+                                    <td class="px-6 py-4">Data cleaning, manipulation, CSV/SQL I/O, exploratory data
+                                        analysis, basic statistics & regression models</td>
+                                    <td class="px-6 py-4">Solid for bridging from DataFrame/CSV work to analysis +
+                                        simple
+                                        modeling + real-world dataset handling</td>
+                                    <td class="px-6 py-4">Paid certificate <a
+                                            href="https://www.coursera.org/learn/data-analysis-with-python"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/learn/data-analysis-with-python</a>
+                                    </td>
+                                    <td class="px-6 py-4">Free audit available <a
+                                            href="https://www.coursera.org/learn/data-analysis-with-python"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/learn/data-analysis-with-python</a>
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Statistics with
+                                        Python
+                                        Specialization (University of Michigan, Coursera)</td>
+                                    <td class="px-6 py-4">Probability, hypothesis testing, statistical inference,
+                                        modeling,
+                                        data visualization with Python</td>
+                                    <td class="px-6 py-4">Important if you want strong foundation in
+                                        statistics/inference
+                                        before ML or advanced modeling</td>
+                                    <td class="px-6 py-4">Paid certificate <a
+                                            href="https://www.coursera.org/specializations/statistics-with-python"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/specializations/statistics-with-python</a>
+                                    </td>
+                                    <td class="px-6 py-4">Free audit available on Coursera</td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Machine Learning
+                                        with
+                                        Python (IBM, Coursera)</td>
+                                    <td class="px-6 py-4">Supervised/unsupervised learning using Python and
+                                        scikit-learn:
+                                        regression, classification, clustering, evaluation, pipelines</td>
+                                    <td class="px-6 py-4">Core for moving into predictive modeling, ML experiments and
+                                        real-world tasks</td>
+                                    <td class="px-6 py-4">Paid certificate <a
+                                            href="https://www.coursera.org/learn/machine-learning-with-python"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/learn/machine-learning-with-python</a>
+                                    </td>
+                                    <td class="px-6 py-4">Free audit available often with Coursera trial</td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Python for Data
+                                        Science
+                                        and Machine Learning Bootcamp (Udemy)</td>
+                                    <td class="px-6 py-4">Data manipulation, visualization, and ML workflows with
+                                        Python,
+                                        hands-on dataset projects</td>
+                                    <td class="px-6 py-4">Good practical, project-based course to bridge data handling
+                                        and
+                                        ML without heavy theory overhead</td>
+                                    <td class="px-6 py-4">Paid course <a
+                                            href="https://www.udemy.com/course/python-for-data-science-and-machine-learning-bootcamp/"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.udemy.com/course/python-for-data-science-and-machine-learning-bootcamp/</a>
+                                    </td>
+                                    <td class="px-6 py-4">Udemy occasionally offers discounts (not free)</td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">freeCodeCamp — Data
+                                        Analysis with Python</td>
+                                    <td class="px-6 py-4">Data wrangling with Pandas/NumPy, CSV/JSON handling,
+                                        visualization, exploratory analysis</td>
+                                    <td class="px-6 py-4">Good free starting point if you want self-paced practice with
+                                        no
+                                        cost barrier</td>
+                                    <td class="px-6 py-4">—</td>
+                                    <td class="px-6 py-4">Always free <a
+                                            href="https://www.freecodecamp.org/learn/data-analysis-with-python"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.freecodecamp.org/learn/data-analysis-with-python</a>
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Kaggle Learn
+                                        Courses
+                                        (Python / Data Cleaning / Machine Learning / Feature Engineering)</td>
+                                    <td class="px-6 py-4">Short hands-on modules: data cleaning, ML basics, feature
+                                        engineering, real-world dataset practice</td>
+                                    <td class="px-6 py-4">Excellent for applying your learning on real messy data and
+                                        building portfolio + practical skillset</td>
+                                    <td class="px-6 py-4">—</td>
+                                    <td class="px-6 py-4">Free (on-demand + certificate) <a
+                                            href="https://www.kaggle.com/learn" target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.kaggle.com/learn</a>
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Data Engineering in
+                                        Python Track (DataCamp)</td>
+                                    <td class="px-6 py-4">Focus on building data pipelines, automation, data I/O,
+                                        handling
+                                        larger datasets, and engineering workflows</td>
+                                    <td class="px-6 py-4">Useful if you want to move beyond analysis to
+                                        pipeline/data-engineering side — important for realistic data workloads</td>
+                                    <td class="px-6 py-4">Paid subscription <a
+                                            href="https://www.datacamp.com/tracks/data-engineer-in-python"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.datacamp.com/tracks/data-engineer-in-python</a>
+                                    </td>
+                                    <td class="px-6 py-4">Limited free access/trial on DataCamp</td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Get Started with
+                                        Python
+                                        for Data Science (Codecademy)</td>
+                                    <td class="px-6 py-4">Python fundamentals focused on data workflows and dataset
+                                        manipulation</td>
+                                    <td class="px-6 py-4">Good for bridging Python basics to data-science workflows
+                                        especially if you want interactive beginner-friendly learning</td>
+                                    <td class="px-6 py-4">Paid (or subscription) via Codecademy <a
+                                            href="https://www.codecademy.com/learn/getting-started-with-python-for-data-science"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.codecademy.com/learn/getting-started-with-python-for-data-science</a>
+                                    </td>
+                                    <td class="px-6 py-4">Free-trial / limited free tiers <a
+                                            href="https://www.codecademy.com/learn/getting-started-with-python-for-data-science"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.codecademy.com/learn/getting-started-with-python-for-data-science</a>
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Course “Python for
+                                        Data
+                                        Science” (IIT Madras / NPTEL)</td>
+                                    <td class="px-6 py-4">Python applied to data science problems; helpful for Indian
+                                        students or those wanting structured academic-style course</td>
+                                    <td class="px-6 py-4">Institutional setting; helps understand data-science with
+                                        local
+                                        context or emphasis on fundamentals</td>
+                                    <td class="px-6 py-4">Usually free / open access via NPTEL <a
+                                            href="https://onlinecourses.nptel.ac.in/noc25_cs104/preview" target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://onlinecourses.nptel.ac.in/noc25_cs104/preview</a>
+                                    </td>
+                                    <td class="px-6 py-4">Free to view/learn (certificate optional)</td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">General Python
+                                        Programming Courses (for better scripting, data I/O, custom pipelines)</td>
+                                    <td class="px-6 py-4">Full programming fundamentals: data structures, control flow,
+                                        file
+                                        I/O, scripting — valuable for writing custom data pipelines or handling raw data
+                                    </td>
+                                    <td class="px-6 py-4">Useful to level up coding skills if you plan to go beyond
+                                        library-based analysis / build custom data tools; often recommended before
+                                        advanced
+                                        data-science courses</td>
+                                    <td class="px-6 py-4">Varies — e.g. edX, Coursera courses; some paid certs</td>
+                                    <td class="px-6 py-4">Many free / audit-available options via platforms like
+                                        Coursera/edX</td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Introduction to
+                                        Data
+                                        Science” (Harvard Online / edX)</td>
+                                    <td class="px-6 py-4">Covers Python in data science, basics of ML, data
+                                        manipulation/visualization, foundational data-science workflows</td>
+                                    <td class="px-6 py-4">Good academic-style overview: for learners wanting structured
+                                        and
+                                        rigorous context before diving deep</td>
+                                    <td class="px-6 py-4">Paid certificate track via edX/Harvard</td>
+                                    <td class="px-6 py-4">Free audit/self-study version often available</td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Data Science with
+                                        Python” (MyGreatLearning, 2025 update)</td>
+                                    <td class="px-6 py-4">Basic to intermediate data-science concepts with Python:
+                                        statistics, data analysis, maybe ML depending on modules</td>
+                                    <td class="px-6 py-4">Good free resource for learners in India or globally who
+                                        prefer
+                                        self-paced learning with no cost barrier</td>
+                                    <td class="px-6 py-4">—</td>
+                                    <td class="px-6 py-4">Free (with optional paid certificate) <a
+                                            href="https://www.mygreatlearning.com/academy/learn-for-free/courses/data-science-with-python"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.mygreatlearning.com/academy/learn-for-free/courses/data-science-with-python</a>
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Simplilearn — Data
+                                        Science with Python Course</td>
+                                    <td class="px-6 py-4">Applied data-science tools and techniques in Python, possibly
+                                        with
+                                        coaching and structured curriculum</td>
+                                    <td class="px-6 py-4">Useful for learners who want guided/live-session teaching
+                                        rather
+                                        than purely self-paced online courses</td>
+                                    <td class="px-6 py-4">Paid via Simplilearn <a
+                                            href="https://www.simplilearn.com/in/data-science-with-python-course"
+                                            target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.simplilearn.com/in/data-science-with-python-course</a>
+                                    </td>
+                                    <td class="px-6 py-4">Sometimes there may be free previews or trial options</td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Dataquest —
+                                        Project-based Python & Data Science Paths</td>
+                                    <td class="px-6 py-4">Real-world data tasks, Python + SQL + Excel/data-engineering +
+                                        ML
+                                        paths with project emphasis</td>
+                                    <td class="px-6 py-4">Good for learning by doing realistic tasks: often closer to
+                                        real
+                                        job tasks rather than toy datasets</td>
+                                    <td class="px-6 py-4">Paid subscription via Dataquest <a
+                                            href="https://www.dataquest.io/" target="_blank"
+                                            class="text-blue-600 hover:underline break-all">https://www.dataquest.io/</a>
+                                    </td>
+                                    <td class="px-6 py-4">Some initial free content or trial options depending on plan
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Machine Learning &
+                                        AI
+                                        Python” (via Harvard-offered course)</td>
+                                    <td class="px-6 py-4">Python + ML basics + data science workflows + hands-on
+                                        datasets,
+                                        using common libraries like pandas, sklearn, etc.</td>
+                                    <td class="px-6 py-4">Good if you want to get from data-analysis to ML models in an
+                                        academic-style format</td>
+                                    <td class="px-6 py-4">Paid enrollment or certificate track via Harvard Online / edX
+                                    </td>
+                                    <td class="px-6 py-4">Free audit / self-study often possible</td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">General “Best
+                                        Python
+                                        Courses” list (freeCodeCamp article)</td>
+                                    <td class="px-6 py-4">Many courses covering from Python basics to data science and
+                                        machine-learning recommended collectively; useful for picking based on interest
+                                        or
+                                        gap</td>
+                                    <td class="px-6 py-4">Helpful if you want to assess multiple options and choose
+                                        based on
+                                        your prior knowledge and what you want to learn next</td>
+                                    <td class="px-6 py-4">Varies by course (free or paid depending)</td>
+                                    <td class="px-6 py-4">Many listed are free or have free tiers per article</td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Top-10 Data
+                                        Science
+                                        Courses 2025” list (ClassCentral)</td>
+                                    <td class="px-6 py-4">Aggregates many good courses across platforms and difficulty
+                                        levels; useful for comparing offerings</td>
+                                    <td class="px-6 py-4">Good for planning a learning path depending on your skill
+                                        level,
+                                        time availability, and budget</td>
+                                    <td class="px-6 py-4">Varies per course in the list</td>
+                                    <td class="px-6 py-4">Many have free audit / free versions per course description
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Data Science /
+                                        Data
+                                        Engineering Combo” via DataCamp or Dataquest</td>
+                                    <td class="px-6 py-4">Combines data-wrangling, pipelines, I/O, ML basics — bridging
+                                        data
+                                        science and data engineering</td>
+                                    <td class="px-6 py-4">Useful if you want to handle large data, build pipelines, and
+                                        operate at scale rather than just small/clean datasets</td>
+                                    <td class="px-6 py-4">Paid subscription / paid track</td>
+                                    <td class="px-6 py-4">Some have trial or limited free content</td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Applied ML + Data
+                                        Analysis + Visualization Courses” (various)</td>
+                                    <td class="px-6 py-4">Combine data-cleaning, EDA, statistical analysis,
+                                        plotting/visualization, and basic modeling — good for end-to-end projects</td>
+                                    <td class="px-6 py-4">Good to build holistic project workflows from raw data to
+                                        insight
+                                        to model to report/visualization</td>
+                                    <td class="px-6 py-4">Varies by course (Coursera, edX, bootcamps, etc.)</td>
+                                    <td class="px-6 py-4">Varies: some paid, some free/audit — check individual course
+                                        pages
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="next-btn-container">
+                        <button onclick="switchTopic('govdata')" class="prev-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Prev: Pipelines
+                        </button>
+                        <button onclick="switchTopic('roadmap')" class="next-btn">
+                            Next: Roadmap
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
         </main>
-    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Robust initialisation: avoid null addEventListener errors
-            let currentTopic = 'home';
-            const charts = [];
-            const navLinks = document.querySelectorAll('.nav-link') || [];
-            const homeLink = document.getElementById('home-link');
-            const getStartedBtn = document.getElementById('get-started-btn');
-            const mainHeader = document.getElementById('main-header');
-            const topicPanels = document.querySelectorAll('.topic-panel') || [];
-            const menuBtn = document.getElementById('menu-btn');
-            const closeMenuBtn = document.getElementById('close-menu');
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            const backToTopBtn = document.getElementById('back-to-top');
-            const mainContent = document.getElementById('main-content');
-            const desktopThemeToggle = document.getElementById('desktop-theme-toggle');
-            const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        <div id="progress-pill" class="progress-pill-container">
+            <button id="prog-prev" class="prog-btn" aria-label="Previous Topic">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
 
-            // Initialise theme from localStorage (persistence)
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.documentElement.classList.add('dark');
-                document.body.classList.add('dark');
-                document.querySelectorAll('.moon-icon').forEach(icon => icon.classList.add('hidden'));
-                document.querySelectorAll('.sun-icon').forEach(icon => icon.classList.remove('hidden'));
-            } else {
-                document.documentElement.classList.remove('dark');
-                document.body.classList.remove('dark');
-                document.querySelectorAll('.sun-icon').forEach(icon => icon.classList.add('hidden'));
-                document.querySelectorAll('.moon-icon').forEach(icon => icon.classList.remove('hidden'));
-            }
+            <div class="progress-content">
+                <span id="progress-text" class="progress-text">Topic 1 of 15</span>
+                <div class="progress-track">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
 
-            // Helper to update Chart theme colours based on CSS vars
-            function updateChartTheme() {
-                const isDark = document.body.classList.contains('dark');
-                const textColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-text').trim() || (isDark ? '#94a3b8' : '#64748b');
-                const gridColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-grid').trim() || (isDark ? '#333333' : '#e2e8f0');
-                Chart.defaults.color = textColor;
-                Chart.defaults.borderColor = gridColor;
-                charts.forEach(c => {
-                    try {
-                        if (c && c.options && c.options.scales) {
-                            if (c.options.scales.x) {
-                                c.options.scales.x.ticks = c.options.scales.x.ticks || {};
-                                c.options.scales.x.ticks.color = textColor;
-                                c.options.scales.x.grid = c.options.scales.x.grid || {};
-                                c.options.scales.x.grid.color = gridColor;
-                            }
-                            if (c.options.scales.y) {
-                                c.options.scales.y.ticks = c.options.scales.y.ticks || {};
-                                c.options.scales.y.ticks.color = textColor;
-                                c.options.scales.y.grid = c.options.scales.y.grid || {};
-                                c.options.scales.y.grid.color = gridColor;
-                            }
-                        }
-                        c.update();
-                    } catch (e) { /* non-fatal */ }
-                });
-            }
+            <button id="prog-next" class="prog-btn" aria-label="Next Topic">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
 
-            // Dark mode toggle with persistence and AMOLED pure black
-            function toggleDarkMode() {
-                // Toggle on both html and body so CSS variables defined on .dark are inherited correctly
-                document.documentElement.classList.toggle('dark');
-                document.body.classList.toggle('dark');
-                const isDark = document.documentElement.classList.contains('dark') || document.body.classList.contains('dark');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-                document.querySelectorAll('.moon-icon').forEach(icon => icon.classList.toggle('hidden', isDark));
-                document.querySelectorAll('.sun-icon').forEach(icon => icon.classList.toggle('hidden', !isDark));
-                updateChartTheme();
-            }
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Robust initialisation: avoid null addEventListener errors
+                let currentTopic = 'home';
+                const charts = [];
+                const navLinks = document.querySelectorAll('.nav-link') || [];
+                const homeLink = document.getElementById('home-link');
+                const getStartedBtn = document.getElementById('get-started-btn');
+                const mainHeader = document.getElementById('main-header');
+                const topicPanels = document.querySelectorAll('.topic-panel') || [];
+                const menuBtn = document.getElementById('menu-btn');
+                // Sidebar Toggle Logic
+                const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+                const body = document.body;
 
-            if (desktopThemeToggle) desktopThemeToggle.addEventListener('click', toggleDarkMode);
-            if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleDarkMode);
-            const homeThemeToggle = document.getElementById('home-theme-toggle');
-            if (homeThemeToggle) homeThemeToggle.addEventListener('click', toggleDarkMode);
-
-            // Mobile menu safely
-            function toggleMenu() {
-                if (!sidebar || !overlay) return;
-                sidebar.classList.toggle('open');
-                overlay.classList.toggle('open');
-                overlay.classList.toggle('hidden');
-            }
-            if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
-            if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMenu);
-            if (overlay) overlay.addEventListener('click', toggleMenu);
-
-            // Make switchTopic available, with smooth snapping behaviour
-            window.switchTopic = function (targetTopic) {
-                if (!targetTopic || targetTopic === currentTopic) return;
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                if (targetTopic !== 'home') {
-                    const activeLink = document.querySelector(`.nav-link[data-topic="${targetTopic}"]`);
-                    if (activeLink) activeLink.classList.add('active');
-                    if (mainHeader) mainHeader.classList.remove('hidden');
-                } else {
-                    if (mainHeader) mainHeader.classList.add('hidden');
-                }
-                topicPanels.forEach(panel => panel.classList.add('hidden'));
-                const el = document.getElementById(targetTopic);
-                if (el) {
-                    el.classList.remove('hidden');
-                    // snap main content to top of the revealed panel
-                    if (mainContent) {
-                        // Ensure the panel is visible then scroll
-                        setTimeout(() => mainContent.scrollTo({ top: 0, behavior: 'smooth' }), 50);
-                    }
-                }
-                currentTopic = targetTopic;
-                if (sidebar && sidebar.classList.contains('open')) toggleMenu();
-            }
-
-            // Safe event wiring for nav links and buttons
-            navLinks.forEach(link => {
-                if (!link) return;
-                link.addEventListener('click', (e) => { e.preventDefault(); const t = link.dataset.topic; if (t) window.switchTopic(t); });
-            });
-            if (homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); window.switchTopic('home'); });
-            if (getStartedBtn) getStartedBtn.addEventListener('click', () => window.switchTopic('topic1'));
-            if (backToTopBtn) backToTopBtn.addEventListener('click', () => { if (mainContent) mainContent.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-            // Copy buttons (modern + fallback)
-            document.querySelectorAll('.copy-btn').forEach(btn => {
-                // accessibility
-                btn.setAttribute('aria-label', 'Copy code to clipboard');
-                btn.setAttribute('role', 'button');
-                btn.addEventListener('click', () => {
-                    const pre = btn.nextElementSibling;
-                    if (!pre) return;
-                    const code = pre.innerText;
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
-                        navigator.clipboard.writeText(code).then(() => {
-                            const original = btn.innerText;
-                            btn.innerText = 'Copied!';
-                            setTimeout(() => btn.innerText = original, 1500);
-                        }).catch(() => { });
-                    } else {
-                        const ta = document.createElement('textarea'); ta.value = code; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) { } document.body.removeChild(ta);
-                    }
-                });
-            });
-
-            // Chart helper: create only if canvas exists and push to charts[]
-            function createChartIfCanvas(id, config) {
-                const el = document.getElementById(id);
-                if (!el) return null;
-                const ctx = el.getContext ? el.getContext('2d') : null;
-                if (!ctx) return null;
-                try { const c = new Chart(ctx, config); charts.push(c); return c; } catch (e) { console.error('Chart error', id, e); return null; }
-            }
-
-            // Apply theme to charts
-            updateChartTheme();
-
-            // Initial chart creations (safe)
-            createChartIfCanvas('weoChart', {
-                type: 'scatter',
-                data: { datasets: [{ label: 'Countries (2023)', data: [{ x: 7.2, y: 5.4 }, { x: 2.1, y: 3.2 }, { x: 5.2, y: 0.2 }, { x: -0.3, y: 6.1 }], backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--accent-color') || '#2563eb' }] },
-                options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: 'GDP Growth (%)' } }, y: { title: { display: true, text: 'Inflation (%)' } } }, plugins: { title: { display: true, text: 'Phillips Curve Analysis' } } }
-            });
-
-            createChartIfCanvas('tradeChart', {
-                type: 'bar', data: { labels: ['China', 'India'], datasets: [{ label: 'Pharma', data: [20, 50], backgroundColor: '#ef4444' }, { label: 'Tech', data: [500, 200], backgroundColor: '#3b82f6' }] },
-                options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Value (Billions)' } } }, plugins: { title: { display: true, text: 'Trade Matrix: Sectoral Composition' } } }
-            });
-
-            createChartIfCanvas('timeSeriesChart', {
-                type: 'line', data: { labels: ['2020', '2021', '2022', '2023'], datasets: [{ label: 'GDP (Trillion USD)', data: [2.5, 3.0, 3.2, 3.7], borderColor: '#4f46e5', tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false }
-            });
-
-            createChartIfCanvas('kendrickChart', {
-                type: 'line', data: { labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], datasets: [{ label: 'Forward (Wickedness)', data: [null, null, 50, 70, 50, 56, 40, 56, 46, 56, 55, 38, 42, null], borderColor: '#2563eb', tension: 0.4, fill: false }, { label: 'Reverse (Weakness)', data: [null, null, 33, 48, 38, 58, 68, 56, 56, 56, 73, 53, 48, null], borderColor: '#dc2626', tension: 0.4, fill: false }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Narrative Arc Analysis: Rolling Avg Sentiment' }, tooltip: { mode: 'index', intersect: false } }, scales: { y: { title: { display: true, text: 'Aggression Score (Smoothed)' }, min: 0, max: 100 } } }
-            });
-
-            createChartIfCanvas('grammyChart', {
-                type: 'bubble', data: { datasets: [{ label: 'Pop (Taylor, Adele)', data: [{ x: 50, y: 85, r: 14 }, { x: 25, y: 80, r: 16 }, { x: 22, y: 78, r: 3 }], backgroundColor: 'rgba(236,72,153,0.7)', borderColor: 'rgba(236,72,153,1)' }, { label: 'R&B / Hip-Hop (Bey, Kendrick)', data: [{ x: 35, y: 88, r: 32 }, { x: 20, y: 94, r: 17 }], backgroundColor: 'rgba(59,130,246,0.7)', borderColor: 'rgba(59,130,246,1)' }, { label: 'Alt (Billie)', data: [{ x: 28, y: 86, r: 9 }], backgroundColor: 'rgba(16,185,129,0.7)', borderColor: 'rgba(16,185,129,1)' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Commercial Success vs Critical Acclaim (Size = Wins)' }, tooltip: { callbacks: { label: function (context) { return context.dataset.label + ': Streams ' + context.raw.x + 'B, Score ' + context.raw.y; } } } }, scales: { x: { title: { display: true, text: 'Global Streams (Billions)' }, min: 10, max: 60 }, y: { title: { display: true, text: 'Metacritic Score' }, min: 70, max: 100 } } }
-            });
-
-            // Additional Grammy Capstone charts (safely created)
-            createChartIfCanvas('grammyEvolutionChart', {
-                type: 'line',
-                data: {
-                    labels: [2018, 2019, 2020, 2021, 2022],
-                    datasets: [
-                        { label: 'Pop', data: [30, 35, 40, 45, 50], backgroundColor: 'rgba(236,72,153,0.4)', borderColor: 'rgba(236,72,153,1)', fill: true, stack: 'streams' },
-                        { label: 'R&B', data: [20, 22, 24, 26, 28], backgroundColor: 'rgba(59,130,246,0.4)', borderColor: 'rgba(59,130,246,1)', fill: true, stack: 'streams' },
-                        { label: 'Hip-Hop', data: [15, 18, 22, 25, 27], backgroundColor: 'rgba(99,102,241,0.4)', borderColor: 'rgba(99,102,241,1)', fill: true, stack: 'streams' },
-                        { label: 'Alt', data: [8, 10, 12, 14, 16], backgroundColor: 'rgba(16,185,129,0.4)', borderColor: 'rgba(16,185,129,1)', fill: true, stack: 'streams' }
-                    ]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Streams Evolution by Genre (Stacked Area)' } }, scales: { y: { stacked: true, title: { display: true, text: 'Streams (Relative Units)' } }, x: { title: { display: true, text: 'Year' } } } }
-            });
-
-            createChartIfCanvas('grammyScatterChart', {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Artist Win Efficiency (wins per B streams)',
-                        data: [
-                            { x: 35, y: (32 / 35) * 100, r: 8, artist: 'Beyoncé' },
-                            { x: 50, y: (14 / 50) * 100, r: 6, artist: 'Taylor Swift' },
-                            { x: 20, y: (17 / 20) * 100, r: 7, artist: 'Kendrick Lamar' },
-                            { x: 25, y: (16 / 25) * 100, r: 6, artist: 'Adele' },
-                            { x: 28, y: (9 / 28) * 100, r: 4, artist: 'Billie Eilish' },
-                            { x: 22, y: (3 / 22) * 100, r: 2, artist: 'Harry Styles' }
-                        ],
-                        backgroundColor: ['rgba(236,72,153,0.9)', 'rgba(59,130,246,0.9)', 'rgba(99,102,241,0.9)', 'rgba(249,115,22,0.9)', 'rgba(16,185,129,0.9)', 'rgba(94,234,212,0.9)']
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Win Efficiency: Grammy Wins per Billion Streams' }, tooltip: { callbacks: { label: function (ctx) { const r = ctx.raw; return `${r.artist || ''}: ${r.x}B streams — Efficiency ${(r.y).toFixed(2)} (wins per 100B)`; } } } }, scales: { x: { title: { display: true, text: 'Global Streams (Billions)' } }, y: { title: { display: true, text: 'Wins per 100B (scaled)' } } } }
-            });
-
-            createChartIfCanvas('grammyBig4Chart', {
-                type: 'bar',
-                data: { labels: ['Beyoncé', 'Taylor Swift', 'Kendrick Lamar', 'Adele', 'Billie Eilish', 'Harry Styles'], datasets: [{ label: 'Big 4 Wins', data: [4, 2, 3, 3, 1, 0], backgroundColor: ['#2563eb', '#ec4899', '#6366f1', '#f97316', '#10b981', '#06b6d4'] }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Big 4 Dominance (Sample Counts)' } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Wins' } } } }
-            });
-
-            createChartIfCanvas('grammyPolarChart', {
-                type: 'polarArea',
-                data: { labels: ['Pop', 'R&B', 'Hip-Hop', 'Alt'], datasets: [{ data: [45, 25, 20, 10], backgroundColor: ['rgba(236,72,153,0.85)', 'rgba(59,130,246,0.85)', 'rgba(99,102,241,0.85)', 'rgba(16,185,129,0.85)'] }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Genre Share (Polar Area)' } } }
-            });
-
-            // --- Grammy CSV parsing and live update functions ---
-            function getChartById(id) {
-                const el = document.getElementById(id);
-                if (!el) return null;
-                if (typeof Chart !== 'undefined' && Chart.getChart) {
-                    try { return Chart.getChart(el) || null; } catch (e) { /* ignore */ }
-                }
-                // fallback search in charts[]
-                for (const c of charts) {
-                    try { if (c && c.canvas && c.canvas.id === id) return c; } catch (e) { }
-                }
-                return null;
-            }
-
-            function setGrammyLog(msg, isError) {
-                const log = document.getElementById('grammyUploadLog');
-                if (!log) return;
-                log.innerText = msg;
-                log.style.color = isError ? '#dc2626' : ''; // red for errors
-            }
-
-            function parseGrammyCSV(file) {
-                if (!file) { setGrammyLog('No file selected.', true); return; }
-                setGrammyLog('Parsing file — this may take a moment...');
-                if (window.Papa && Papa.parse) {
-                    Papa.parse(file, {
-                        header: true,
-                        dynamicTyping: true,
-                        skipEmptyLines: true,
-                        complete: function (results) {
-                            if (!results || !results.data || !results.data.length) {
-                                setGrammyLog('No records found in the CSV.', true);
-                                return;
-                            }
-                            setGrammyLog('Parsed ' + results.data.length + ' rows. Processing...');
-                            try { processGrammyData(results.data); setGrammyLog('Charts updated from uploaded CSV.'); } catch (e) { console.error(e); setGrammyLog('Error processing CSV: ' + (e.message || e), true); }
-                        },
-                        error: function (err) { setGrammyLog('Parsing error: ' + err.message, true); }
+                if (sidebarToggleBtn) {
+                    sidebarToggleBtn.addEventListener('click', () => {
+                        body.classList.toggle('sidebar-collapsed');
                     });
+                }
+
+                // Mobile Menu Logic
+                const closeMenuBtn = document.getElementById('close-menu');
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('overlay');
+                const backToTopBtn = document.getElementById('back-to-top');
+                const mainContent = document.getElementById('main-content');
+                const desktopThemeToggle = document.getElementById('desktop-theme-toggle');
+                const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
+                // Initialise theme from localStorage (persistence)
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    document.body.classList.add('dark');
+                    document.querySelectorAll('.moon-icon').forEach(icon => icon.classList.add('hidden'));
+                    document.querySelectorAll('.sun-icon').forEach(icon => icon.classList.remove('hidden'));
                 } else {
-                    setGrammyLog('CSV parser (PapaParse) not loaded.', true);
-                }
-            }
-
-            function processGrammyData(rows) {
-                if (!Array.isArray(rows) || rows.length === 0) throw new Error('Empty data');
-                const sample = rows[0];
-                const keys = Object.keys(sample).map(k => k.trim());
-                const lower = k => k && k.toLowerCase();
-
-                // Heuristic column detection
-                const yearKey = keys.find(k => /year|award_?year|award_year/i.test(k)) || keys.find(k => /date/i.test(k));
-                const categoryKey = keys.find(k => /category|award/i.test(k));
-                const artistKey = keys.find(k => /artist|performer|name/i.test(k));
-                const winnerKey = keys.find(k => /winner|result|is_winner|won/i.test(k));
-                const genreKey = keys.find(k => /genre/i.test(k));
-
-                // Build normalized rows
-                const normalized = rows.map(r => {
-                    const year = yearKey ? (r[yearKey] || r[yearKey.trim()]) : undefined;
-                    const category = categoryKey ? (r[categoryKey] || r[categoryKey.trim()]) : undefined;
-                    const artist = artistKey ? (r[artistKey] || r[artistKey.trim()]) : undefined;
-                    const genre = genreKey ? (r[genreKey] || r[genreKey.trim()]) : undefined;
-                    const winnerRaw = winnerKey ? (r[winnerKey] || r[winnerKey.trim()]) : undefined;
-                    const isWinner = (winnerRaw === true) || (String(winnerRaw).toLowerCase().indexOf('win') !== -1) || (String(winnerRaw).toLowerCase().indexOf('winner') !== -1) || (String(winnerRaw).toLowerCase().indexOf('yes') !== -1) || (String(winnerRaw).trim() === '1');
-                    return { year: year, category: category, artist: artist, genre: genre, winner: !!isWinner };
-                });
-
-                // 1) Genre / Category share (for polar chart)
-                const genreCounts = {};
-                normalized.forEach(r => {
-                    const g = r.genre || r.category || 'Unknown';
-                    genreCounts[g] = (genreCounts[g] || 0) + 1;
-                });
-                const polarLabels = Object.keys(genreCounts).slice(0, 8);
-                const polarData = polarLabels.map(l => genreCounts[l]);
-
-                const polarChart = getChartById('grammyPolarChart');
-                if (polarChart) {
-                    polarChart.data.labels = polarLabels;
-                    polarChart.data.datasets = [{ data: polarData, backgroundColor: polarLabels.map((_, i) => polarChart.data.datasets && polarChart.data.datasets[0] && polarChart.data.datasets[0].backgroundColor ? polarChart.data.datasets[0].backgroundColor[i % polarChart.data.datasets[0].backgroundColor.length] : ['#ec4899', '#3b82f6', '#6366f1', '#10b981'][i % 4]) }];
-                    try { polarChart.update(); } catch (e) {/*non-fatal*/ }
+                    document.documentElement.classList.remove('dark');
+                    document.body.classList.remove('dark');
+                    document.querySelectorAll('.sun-icon').forEach(icon => icon.classList.add('hidden'));
+                    document.querySelectorAll('.moon-icon').forEach(icon => icon.classList.remove('hidden'));
                 }
 
-                // 2) Evolution by year and genre (stacked area)
-                const byYearGenre = {};
-                normalized.forEach(r => {
-                    const y = Number(r.year) || (new Date(r.year || '').getFullYear()) || 'Unknown';
-                    const g = r.genre || r.category || 'Unknown';
-                    byYearGenre[y] = byYearGenre[y] || {};
-                    byYearGenre[y][g] = (byYearGenre[y][g] || 0) + 1;
-                });
-                const years = Object.keys(byYearGenre).filter(y => y !== 'Unknown').map(y => Number(y)).sort((a, b) => a - b);
-                const genreSet = new Set();
-                years.forEach(y => { Object.keys(byYearGenre[y]).forEach(g => genreSet.add(g)); });
-                const genres = Array.from(genreSet).slice(0, 6);
-                const evolutionDatasets = genres.map((g, idx) => ({ label: g, data: years.map(y => byYearGenre[y][g] || 0), backgroundColor: `hsla(${(idx * 60) % 360},70%,60%,0.35)`, borderColor: `hsl(${(idx * 60) % 360},70%,45%)`, fill: true, stack: 'streams' }));
-                const evoChart = getChartById('grammyEvolutionChart');
-                if (evoChart) {
-                    evoChart.data.labels = years.map(String);
-                    evoChart.data.datasets = evolutionDatasets;
-                    try { evoChart.update(); } catch (e) { }
+                // Helper to update Chart theme colours based on CSS vars
+                function updateChartTheme() {
+                    const isDark = document.body.classList.contains('dark');
+                    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-text').trim() || (isDark ? '#94a3b8' : '#64748b');
+                    const gridColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-grid').trim() || (isDark ? '#333333' : '#e2e8f0');
+                    Chart.defaults.color = textColor;
+                    Chart.defaults.borderColor = gridColor;
+                    charts.forEach(c => {
+                        try {
+                            if (c && c.options && c.options.scales) {
+                                if (c.options.scales.x) {
+                                    c.options.scales.x.ticks = c.options.scales.x.ticks || {};
+                                    c.options.scales.x.ticks.color = textColor;
+                                    c.options.scales.x.grid = c.options.scales.x.grid || {};
+                                    c.options.scales.x.grid.color = gridColor;
+                                }
+                                if (c.options.scales.y) {
+                                    c.options.scales.y.ticks = c.options.scales.y.ticks || {};
+                                    c.options.scales.y.ticks.color = textColor;
+                                    c.options.scales.y.grid = c.options.scales.y.grid || {};
+                                    c.options.scales.y.grid.color = gridColor;
+                                }
+                            }
+                            c.update();
+                        } catch (e) { /* non-fatal */ }
+                    });
                 }
 
-                // 3) Win efficiency scatter (wins per nominations or wins per year-normalised)
-                const artistStats = {};
-                normalized.forEach(r => {
-                    const a = r.artist || 'Unknown Artist';
-                    artistStats[a] = artistStats[a] || { wins: 0, noms: 0 };
-                    artistStats[a].noms += 1;
-                    if (r.winner) artistStats[a].wins += 1;
-                });
-                const scatterPoints = Object.keys(artistStats).slice(0, 50).map((a, i) => {
-                    const s = artistStats[a];
-                    const efficiency = s.noms ? (s.wins / s.noms) * 100 : 0; // wins per 100 nominations
-                    return { x: Math.max(1, Math.round(s.noms / 2)), y: efficiency, r: Math.min(40, Math.max(4, s.wins * 3)), artist: a };
-                });
-                const scatterChart = getChartById('grammyScatterChart');
-                if (scatterChart) {
-                    scatterChart.data.datasets = [{ label: 'Win Efficiency (wins per 100 nominations)', data: scatterPoints, backgroundColor: scatterChart.data.datasets && scatterChart.data.datasets[0] && scatterChart.data.datasets[0].backgroundColor || 'rgba(59,130,246,0.9)' }];
-                    try { scatterChart.update(); } catch (e) { }
+                // Dark mode toggle with persistence and AMOLED pure black
+                function toggleDarkMode() {
+                    // Toggle on both html and body so CSS variables defined on .dark are inherited correctly
+                    document.documentElement.classList.toggle('dark');
+                    document.body.classList.toggle('dark');
+                    const isDark = document.documentElement.classList.contains('dark') || document.body.classList.contains('dark');
+                    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                    document.querySelectorAll('.moon-icon').forEach(icon => icon.classList.toggle('hidden', isDark));
+                    document.querySelectorAll('.sun-icon').forEach(icon => icon.classList.toggle('hidden', !isDark));
+                    updateChartTheme();
                 }
 
-                // 4) Big 4 counts per artist (sample) — filter categories
-                const big4 = ['Record of the Year', 'Album of the Year', 'Song of the Year', 'Best New Artist'];
-                const big4Counts = {};
-                normalized.forEach(r => {
-                    const cat = (r.category || '').toString();
-                    if (big4.some(b => cat.toLowerCase().indexOf(b.toLowerCase()) !== -1)) {
-                        const a = r.artist || 'Unknown';
-                        big4Counts[a] = (big4Counts[a] || 0) + (r.winner ? 1 : 0);
+                if (desktopThemeToggle) desktopThemeToggle.addEventListener('click', toggleDarkMode);
+                if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleDarkMode);
+                const homeThemeToggle = document.getElementById('home-theme-toggle');
+                if (homeThemeToggle) homeThemeToggle.addEventListener('click', toggleDarkMode);
+
+                // Mobile menu safely
+                function toggleMenu() {
+                    if (!sidebar || !overlay) return;
+                    sidebar.classList.toggle('open');
+                    overlay.classList.toggle('open');
+                    overlay.classList.toggle('hidden');
+                }
+                if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+                if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMenu);
+                if (overlay) overlay.addEventListener('click', toggleMenu);
+
+                const progressPill = document.getElementById('progress-pill');
+                const progressText = document.getElementById('progress-text');
+                const progressFill = document.getElementById('progress-fill');
+
+                // Ordered list of topics for progress tracking
+                const progressTopics = [
+                    'topic1', 'topic2', 'topic3', 'topic4',
+                    'topic5', 'topic6', 'merging',
+                    'topic8', 'topic9', 'topic10',
+                    'viz', 'kendrick', 'grammy', 'govdata', 'roadmap'
+                ];
+
+                // Make switchTopic available, with smooth snapping behaviour
+                window.switchTopic = function (targetTopic) {
+                    if (!targetTopic || targetTopic === currentTopic) return;
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    if (targetTopic !== 'home') {
+                        const activeLink = document.querySelector(`.nav-link[data-topic="${targetTopic}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                            // Scroll sidebar to keep active link in view
+                            activeLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        if (mainHeader) mainHeader.classList.remove('hidden');
+                    } else {
+                        if (mainHeader) mainHeader.classList.add('hidden');
                     }
-                });
-                const big4Labels = Object.keys(big4Counts).slice(0, 6);
-                const big4Data = big4Labels.map(l => big4Counts[l] || 0);
-                const big4Chart = getChartById('grammyBig4Chart');
-                if (big4Chart) {
-                    big4Chart.data.labels = big4Labels.length ? big4Labels : big4Chart.data.labels;
-                    big4Chart.data.datasets = [{ label: 'Big 4 Wins', data: big4Data.length ? big4Data : big4Chart.data.datasets && big4Chart.data.datasets[0] && big4Chart.data.datasets[0].data || big4Chart.data.datasets[0].data, backgroundColor: big4Chart.data.datasets && big4Chart.data.datasets[0] && big4Chart.data.datasets[0].backgroundColor }];
-                    try { big4Chart.update(); } catch (e) { }
+                    topicPanels.forEach(panel => panel.classList.add('hidden'));
+                    const el = document.getElementById(targetTopic);
+                    if (el) {
+                        el.classList.remove('hidden');
+                        // snap main content to top of the revealed panel
+                        if (mainContent) {
+                            // Ensure the panel is visible then scroll
+                            setTimeout(() => mainContent.scrollTo({ top: 0, behavior: 'smooth' }), 50);
+                        }
+                    }
+                    currentTopic = targetTopic;
+                    if (sidebar && sidebar.classList.contains('open')) toggleMenu();
+
+                    // Update Progress Bar
+                    const topicIndex = progressTopics.indexOf(targetTopic);
+                    if (topicIndex !== -1) {
+                        progressPill.classList.add('visible');
+                        const currentStep = topicIndex + 1;
+                        const totalSteps = progressTopics.length;
+                        const percent = (currentStep / totalSteps) * 100;
+
+                        progressText.textContent = `Topic ${currentStep} of ${totalSteps}`;
+                        progressFill.style.width = `${percent}%`;
+                    } else {
+                        // Hide if not a main topic (e.g. home, faq, glossary)
+                        progressPill.classList.remove('visible');
+                    }
                 }
-            }
 
-            // Wire file input
-            const grammyInput = document.getElementById('grammyDatasetInput');
-            if (grammyInput) {
-                grammyInput.addEventListener('change', (ev) => {
-                    const f = ev.target.files && ev.target.files[0];
-                    parseGrammyCSV(f);
+                // Safe event wiring for nav links and buttons
+                navLinks.forEach(link => {
+                    if (!link) return;
+                    link.addEventListener('click', (e) => { e.preventDefault(); const t = link.dataset.topic; if (t) window.switchTopic(t); });
                 });
-            }
+                if (homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); window.switchTopic('home'); });
+                if (getStartedBtn) getStartedBtn.addEventListener('click', () => window.switchTopic('topic1'));
+                if (backToTopBtn) backToTopBtn.addEventListener('click', () => { if (mainContent) mainContent.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-            // Simple slideshow for Kendrick section (automated)
-            /*
-            (function setupKendrickSlideshow() {
-                const kendrickEl = document.getElementById('kendrick');
-                if (!kendrickEl) return;
-                const container = kendrickEl.querySelector('.mb-8.flex');
-                if (!container) return;
-                container.innerHTML = `\n      <div id="kendrick-slideshow" class="w-full relative">\n        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80" alt="Music Concert Stage" class="kendrick-slide w-full h-64 object-cover rounded-2xl mb-8 shadow-sm" />\n        <img src="https://images.unsplash.com/photo-1509099836639-18ba0c5b6d4c?auto=format&fit=crop&w=1200&q=80" alt="Crowd" class="kendrick-slide hidden w-full h-64 object-cover rounded-2xl mb-8 shadow-sm" />\n        <img src="https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=1200&q=80" alt="Stage Lights" class="kendrick-slide hidden w-full h-64 object-cover rounded-2xl mb-8 shadow-sm" />\n      </div>\n    `;
-                const slides = container.querySelectorAll('.kendrick-slide');
-                let idx = 0;
-                setInterval(() => { slides[idx].classList.add('hidden'); idx = (idx + 1) % slides.length; slides[idx].classList.remove('hidden'); }, 4000);
-            })();
-            */
+                // Copy buttons (modern + fallback)
+                document.querySelectorAll('.copy-btn').forEach(btn => {
+                    // accessibility
+                    btn.setAttribute('aria-label', 'Copy code to clipboard');
+                    btn.setAttribute('role', 'button');
+                    btn.addEventListener('click', () => {
+                        const pre = btn.nextElementSibling;
+                        if (!pre) return;
+                        const code = pre.innerText;
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(code).then(() => {
+                                const original = btn.innerText;
+                                btn.innerText = 'Copied!';
+                                setTimeout(() => btn.innerText = original, 1500);
+                            }).catch(() => { });
+                        } else {
+                            const ta = document.createElement('textarea'); ta.value = code; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) { } document.body.removeChild(ta);
+                        }
+                    });
+                });
 
-            // Ensure initial theme applied to charts
-            updateChartTheme();
+                // Chart helper: create only if canvas exists and push to charts[]
+                function createChartIfCanvas(id, config) {
+                    const el = document.getElementById(id);
+                    if (!el) return null;
+                    const ctx = el.getContext ? el.getContext('2d') : null;
+                    if (!ctx) return null;
+                    try { const c = new Chart(ctx, config); charts.push(c); return c; } catch (e) { console.error('Chart error', id, e); return null; }
+                }
 
-            // Attempt to fetch server-provided Grammy payload (if a local server is running)
-            (function tryFetchGrammyPayload() {
-                const endpoint = '/api/grammy';
-                // Only attempt when window.fetch is available
-                if (!window.fetch) return;
-                fetch(endpoint, { cache: 'no-store' }).then(r => {
-                    if (!r.ok) throw new Error('No server payload');
-                    return r.json();
-                }).then(payload => {
-                    if (!payload) return;
-                    setGrammyLog('Loaded live payload from /api/grammy');
-                    try {
-                        applyGrammyPayload(payload);
-                        setTimeout(() => setGrammyLog('Charts updated from server payload.'), 120);
-                    } catch (e) { setGrammyLog('Error applying server payload: ' + (e.message || e), true); }
-                }).catch(() => { setGrammyLog('Server not detected. Using pre-loaded sample data.'); });
-            })();
+                // Apply theme to charts
+                updateChartTheme();
 
-            // Apply a server-side precomputed payload into existing charts
-            function applyGrammyPayload(payload) {
-                if (!payload) return;
-                try {
-                    // Polar
+                // Initial chart creations (safe)
+                createChartIfCanvas('weoChart', {
+                    type: 'scatter',
+                    data: { datasets: [{ label: 'Countries (2023)', data: [{ x: 7.2, y: 5.4 }, { x: 2.1, y: 3.2 }, { x: 5.2, y: 0.2 }, { x: -0.3, y: 6.1 }], backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--accent-color') || '#2563eb' }] },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: 'GDP Growth (%)' } }, y: { title: { display: true, text: 'Inflation (%)' } } }, plugins: { title: { display: true, text: 'Phillips Curve Analysis' } } }
+                });
+
+                createChartIfCanvas('tradeChart', {
+                    type: 'bar', data: { labels: ['China', 'India'], datasets: [{ label: 'Pharma', data: [20, 50], backgroundColor: '#ef4444' }, { label: 'Tech', data: [500, 200], backgroundColor: '#3b82f6' }] },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Value (Billions)' } } }, plugins: { title: { display: true, text: 'Trade Matrix: Sectoral Composition' } } }
+                });
+
+                createChartIfCanvas('timeSeriesChart', {
+                    type: 'line', data: { labels: ['2020', '2021', '2022', '2023'], datasets: [{ label: 'GDP (Trillion USD)', data: [2.5, 3.0, 3.2, 3.7], borderColor: '#4f46e5', tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false }
+                });
+
+                createChartIfCanvas('kendrickChart', {
+                    type: 'line', data: { labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], datasets: [{ label: 'Forward (Wickedness)', data: [null, null, 50, 70, 50, 56, 40, 56, 46, 56, 55, 38, 42, null], borderColor: '#2563eb', tension: 0.4, fill: false }, { label: 'Reverse (Weakness)', data: [null, null, 33, 48, 38, 58, 68, 56, 56, 56, 73, 53, 48, null], borderColor: '#dc2626', tension: 0.4, fill: false }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Narrative Arc Analysis: Rolling Avg Sentiment' }, tooltip: { mode: 'index', intersect: false } }, scales: { y: { title: { display: true, text: 'Aggression Score (Smoothed)' }, min: 0, max: 100 } } }
+                });
+
+                createChartIfCanvas('grammyChart', {
+                    type: 'bubble', data: { datasets: [{ label: 'Pop (Taylor, Adele)', data: [{ x: 50, y: 85, r: 14 }, { x: 25, y: 80, r: 16 }, { x: 22, y: 78, r: 3 }], backgroundColor: 'rgba(236,72,153,0.7)', borderColor: 'rgba(236,72,153,1)' }, { label: 'R&B / Hip-Hop (Bey, Kendrick)', data: [{ x: 35, y: 88, r: 32 }, { x: 20, y: 94, r: 17 }], backgroundColor: 'rgba(59,130,246,0.7)', borderColor: 'rgba(59,130,246,1)' }, { label: 'Alt (Billie)', data: [{ x: 28, y: 86, r: 9 }], backgroundColor: 'rgba(16,185,129,0.7)', borderColor: 'rgba(16,185,129,1)' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Commercial Success vs Critical Acclaim (Size = Wins)' }, tooltip: { callbacks: { label: function (context) { return context.dataset.label + ': Streams ' + context.raw.x + 'B, Score ' + context.raw.y; } } } }, scales: { x: { title: { display: true, text: 'Global Streams (Billions)' }, min: 10, max: 60 }, y: { title: { display: true, text: 'Metacritic Score' }, min: 70, max: 100 } } }
+                });
+
+                // Additional Grammy Capstone charts (safely created)
+                createChartIfCanvas('grammyEvolutionChart', {
+                    type: 'line',
+                    data: {
+                        labels: [2018, 2019, 2020, 2021, 2022],
+                        datasets: [
+                            { label: 'Pop', data: [30, 35, 40, 45, 50], backgroundColor: 'rgba(236,72,153,0.4)', borderColor: 'rgba(236,72,153,1)', fill: true, stack: 'streams' },
+                            { label: 'R&B', data: [20, 22, 24, 26, 28], backgroundColor: 'rgba(59,130,246,0.4)', borderColor: 'rgba(59,130,246,1)', fill: true, stack: 'streams' },
+                            { label: 'Hip-Hop', data: [15, 18, 22, 25, 27], backgroundColor: 'rgba(99,102,241,0.4)', borderColor: 'rgba(99,102,241,1)', fill: true, stack: 'streams' },
+                            { label: 'Alt', data: [8, 10, 12, 14, 16], backgroundColor: 'rgba(16,185,129,0.4)', borderColor: 'rgba(16,185,129,1)', fill: true, stack: 'streams' }
+                        ]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Streams Evolution by Genre (Stacked Area)' } }, scales: { y: { stacked: true, title: { display: true, text: 'Streams (Relative Units)' } }, x: { title: { display: true, text: 'Year' } } } }
+                });
+
+                createChartIfCanvas('grammyScatterChart', {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            label: 'Artist Win Efficiency (wins per B streams)',
+                            data: [
+                                { x: 35, y: (32 / 35) * 100, r: 8, artist: 'Beyoncé' },
+                                { x: 50, y: (14 / 50) * 100, r: 6, artist: 'Taylor Swift' },
+                                { x: 20, y: (17 / 20) * 100, r: 7, artist: 'Kendrick Lamar' },
+                                { x: 25, y: (16 / 25) * 100, r: 6, artist: 'Adele' },
+                                { x: 28, y: (9 / 28) * 100, r: 4, artist: 'Billie Eilish' },
+                                { x: 22, y: (3 / 22) * 100, r: 2, artist: 'Harry Styles' }
+                            ],
+                            backgroundColor: ['rgba(236,72,153,0.9)', 'rgba(59,130,246,0.9)', 'rgba(99,102,241,0.9)', 'rgba(249,115,22,0.9)', 'rgba(16,185,129,0.9)', 'rgba(94,234,212,0.9)']
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Win Efficiency: Grammy Wins per Billion Streams' }, tooltip: { callbacks: { label: function (ctx) { const r = ctx.raw; return `${r.artist || ''}: ${r.x}B streams — Efficiency ${(r.y).toFixed(2)} (wins per 100B)`; } } } }, scales: { x: { title: { display: true, text: 'Global Streams (Billions)' } }, y: { title: { display: true, text: 'Wins per 100B (scaled)' } } } }
+                });
+
+                createChartIfCanvas('grammyBig4Chart', {
+                    type: 'bar',
+                    data: { labels: ['Beyoncé', 'Taylor Swift', 'Kendrick Lamar', 'Adele', 'Billie Eilish', 'Harry Styles'], datasets: [{ label: 'Big 4 Wins', data: [4, 2, 3, 3, 1, 0], backgroundColor: ['#2563eb', '#ec4899', '#6366f1', '#f97316', '#10b981', '#06b6d4'] }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Big 4 Dominance (Sample Counts)' } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Wins' } } } }
+                });
+
+                createChartIfCanvas('grammyPolarChart', {
+                    type: 'polarArea',
+                    data: { labels: ['Pop', 'R&B', 'Hip-Hop', 'Alt'], datasets: [{ data: [45, 25, 20, 10], backgroundColor: ['rgba(236,72,153,0.85)', 'rgba(59,130,246,0.85)', 'rgba(99,102,241,0.85)', 'rgba(16,185,129,0.85)'] }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Genre Share (Polar Area)' } } }
+                });
+
+                // --- Grammy CSV parsing and live update functions ---
+                function getChartById(id) {
+                    const el = document.getElementById(id);
+                    if (!el) return null;
+                    if (typeof Chart !== 'undefined' && Chart.getChart) {
+                        try { return Chart.getChart(el) || null; } catch (e) { /* ignore */ }
+                    }
+                    // fallback search in charts[]
+                    for (const c of charts) {
+                        try { if (c && c.canvas && c.canvas.id === id) return c; } catch (e) { }
+                    }
+                    return null;
+                }
+
+                function setGrammyLog(msg, isError) {
+                    const log = document.getElementById('grammyUploadLog');
+                    if (!log) return;
+                    log.innerText = msg;
+                    log.style.color = isError ? '#dc2626' : ''; // red for errors
+                }
+
+                function parseGrammyCSV(file) {
+                    if (!file) { setGrammyLog('No file selected.', true); return; }
+                    setGrammyLog('Parsing file — this may take a moment...');
+                    if (window.Papa && Papa.parse) {
+                        Papa.parse(file, {
+                            header: true,
+                            dynamicTyping: true,
+                            skipEmptyLines: true,
+                            complete: function (results) {
+                                if (!results || !results.data || !results.data.length) {
+                                    setGrammyLog('No records found in the CSV.', true);
+                                    return;
+                                }
+                                setGrammyLog('Parsed ' + results.data.length + ' rows. Processing...');
+                                try { processGrammyData(results.data); setGrammyLog('Charts updated from uploaded CSV.'); } catch (e) { console.error(e); setGrammyLog('Error processing CSV: ' + (e.message || e), true); }
+                            },
+                            error: function (err) { setGrammyLog('Parsing error: ' + err.message, true); }
+                        });
+                    } else {
+                        setGrammyLog('CSV parser (PapaParse) not loaded.', true);
+                    }
+                }
+
+                function processGrammyData(rows) {
+                    if (!Array.isArray(rows) || rows.length === 0) throw new Error('Empty data');
+                    const sample = rows[0];
+                    const keys = Object.keys(sample).map(k => k.trim());
+                    const lower = k => k && k.toLowerCase();
+
+                    // Heuristic column detection
+                    const yearKey = keys.find(k => /year|award_?year|award_year/i.test(k)) || keys.find(k => /date/i.test(k));
+                    const categoryKey = keys.find(k => /category|award/i.test(k));
+                    const artistKey = keys.find(k => /artist|performer|name/i.test(k));
+                    const winnerKey = keys.find(k => /winner|result|is_winner|won/i.test(k));
+                    const genreKey = keys.find(k => /genre/i.test(k));
+
+                    // Build normalized rows
+                    const normalized = rows.map(r => {
+                        const year = yearKey ? (r[yearKey] || r[yearKey.trim()]) : undefined;
+                        const category = categoryKey ? (r[categoryKey] || r[categoryKey.trim()]) : undefined;
+                        const artist = artistKey ? (r[artistKey] || r[artistKey.trim()]) : undefined;
+                        const genre = genreKey ? (r[genreKey] || r[genreKey.trim()]) : undefined;
+                        const winnerRaw = winnerKey ? (r[winnerKey] || r[winnerKey.trim()]) : undefined;
+                        const isWinner = (winnerRaw === true) || (String(winnerRaw).toLowerCase().indexOf('win') !== -1) || (String(winnerRaw).toLowerCase().indexOf('winner') !== -1) || (String(winnerRaw).toLowerCase().indexOf('yes') !== -1) || (String(winnerRaw).trim() === '1');
+                        return { year: year, category: category, artist: artist, genre: genre, winner: !!isWinner };
+                    });
+
+                    // 1) Genre / Category share (for polar chart)
+                    const genreCounts = {};
+                    normalized.forEach(r => {
+                        const g = r.genre || r.category || 'Unknown';
+                        genreCounts[g] = (genreCounts[g] || 0) + 1;
+                    });
+                    const polarLabels = Object.keys(genreCounts).slice(0, 8);
+                    const polarData = polarLabels.map(l => genreCounts[l]);
+
                     const polarChart = getChartById('grammyPolarChart');
-                    if (polarChart && payload.polar) {
-                        polarChart.data.labels = payload.polar.labels || polarChart.data.labels;
-                        polarChart.data.datasets = [{ data: payload.polar.data || [], backgroundColor: polarChart.data.datasets && polarChart.data.datasets[0] && polarChart.data.datasets[0].backgroundColor || ['#ec4899', '#3b82f6', '#6366f1', '#10b981'] }];
-                        polarChart.update();
+                    if (polarChart) {
+                        polarChart.data.labels = polarLabels;
+                        polarChart.data.datasets = [{ data: polarData, backgroundColor: polarLabels.map((_, i) => polarChart.data.datasets && polarChart.data.datasets[0] && polarChart.data.datasets[0].backgroundColor ? polarChart.data.datasets[0].backgroundColor[i % polarChart.data.datasets[0].backgroundColor.length] : ['#ec4899', '#3b82f6', '#6366f1', '#10b981'][i % 4]) }];
+                        try { polarChart.update(); } catch (e) {/*non-fatal*/ }
                     }
 
-                    // Evolution
+                    // 2) Evolution by year and genre (stacked area)
+                    const byYearGenre = {};
+                    normalized.forEach(r => {
+                        const y = Number(r.year) || (new Date(r.year || '').getFullYear()) || 'Unknown';
+                        const g = r.genre || r.category || 'Unknown';
+                        byYearGenre[y] = byYearGenre[y] || {};
+                        byYearGenre[y][g] = (byYearGenre[y][g] || 0) + 1;
+                    });
+                    const years = Object.keys(byYearGenre).filter(y => y !== 'Unknown').map(y => Number(y)).sort((a, b) => a - b);
+                    const genreSet = new Set();
+                    years.forEach(y => { Object.keys(byYearGenre[y]).forEach(g => genreSet.add(g)); });
+                    const genres = Array.from(genreSet).slice(0, 6);
+                    const evolutionDatasets = genres.map((g, idx) => ({ label: g, data: years.map(y => byYearGenre[y][g] || 0), backgroundColor: `hsla(${(idx * 60) % 360},70%,60%,0.35)`, borderColor: `hsl(${(idx * 60) % 360},70%,45%)`, fill: true, stack: 'streams' }));
                     const evoChart = getChartById('grammyEvolutionChart');
-                    if (evoChart && payload.evolution) {
-                        evoChart.data.labels = payload.evolution.labels || evoChart.data.labels;
-                        evoChart.data.datasets = payload.evolution.datasets || evoChart.data.datasets;
-                        evoChart.update();
+                    if (evoChart) {
+                        evoChart.data.labels = years.map(String);
+                        evoChart.data.datasets = evolutionDatasets;
+                        try { evoChart.update(); } catch (e) { }
                     }
 
-                    // Scatter
-                    const sChart = getChartById('grammyScatterChart');
-                    if (sChart && payload.scatter) {
-                        sChart.data.datasets = payload.scatter.datasets || sChart.data.datasets;
-                        sChart.update();
+                    // 3) Win efficiency scatter (wins per nominations or wins per year-normalised)
+                    const artistStats = {};
+                    normalized.forEach(r => {
+                        const a = r.artist || 'Unknown Artist';
+                        artistStats[a] = artistStats[a] || { wins: 0, noms: 0 };
+                        artistStats[a].noms += 1;
+                        if (r.winner) artistStats[a].wins += 1;
+                    });
+                    const scatterPoints = Object.keys(artistStats).slice(0, 50).map((a, i) => {
+                        const s = artistStats[a];
+                        const efficiency = s.noms ? (s.wins / s.noms) * 100 : 0; // wins per 100 nominations
+                        return { x: Math.max(1, Math.round(s.noms / 2)), y: efficiency, r: Math.min(40, Math.max(4, s.wins * 3)), artist: a };
+                    });
+                    const scatterChart = getChartById('grammyScatterChart');
+                    if (scatterChart) {
+                        scatterChart.data.datasets = [{ label: 'Win Efficiency (wins per 100 nominations)', data: scatterPoints, backgroundColor: scatterChart.data.datasets && scatterChart.data.datasets[0] && scatterChart.data.datasets[0].backgroundColor || 'rgba(59,130,246,0.9)' }];
+                        try { scatterChart.update(); } catch (e) { }
                     }
 
-                    // Big4
-                    const bChart = getChartById('grammyBig4Chart');
-                    if (bChart && payload.big4) {
-                        bChart.data.labels = payload.big4.labels && payload.big4.labels.length ? payload.big4.labels : bChart.data.labels;
-                        bChart.data.datasets = [{ label: 'Big 4 Wins', data: payload.big4.data || bChart.data.datasets[0].data, backgroundColor: bChart.data.datasets && bChart.data.datasets[0] && bChart.data.datasets[0].backgroundColor }];
-                        bChart.update();
+                    // 4) Big 4 counts per artist (sample) — filter categories
+                    const big4 = ['Record of the Year', 'Album of the Year', 'Song of the Year', 'Best New Artist'];
+                    const big4Counts = {};
+                    normalized.forEach(r => {
+                        const cat = (r.category || '').toString();
+                        if (big4.some(b => cat.toLowerCase().indexOf(b.toLowerCase()) !== -1)) {
+                            const a = r.artist || 'Unknown';
+                            big4Counts[a] = (big4Counts[a] || 0) + (r.winner ? 1 : 0);
+                        }
+                    });
+                    const big4Labels = Object.keys(big4Counts).slice(0, 6);
+                    const big4Data = big4Labels.map(l => big4Counts[l] || 0);
+                    const big4Chart = getChartById('grammyBig4Chart');
+                    if (big4Chart) {
+                        big4Chart.data.labels = big4Labels.length ? big4Labels : big4Chart.data.labels;
+                        big4Chart.data.datasets = [{ label: 'Big 4 Wins', data: big4Data.length ? big4Data : big4Chart.data.datasets && big4Chart.data.datasets[0] && big4Chart.data.datasets[0].data || big4Chart.data.datasets[0].data, backgroundColor: big4Chart.data.datasets && big4Chart.data.datasets[0] && big4Chart.data.datasets[0].backgroundColor }];
+                        try { big4Chart.update(); } catch (e) { }
                     }
-                } catch (e) { console.error('applyGrammyPayload error', e); throw e; }
-            }
+                }
 
-        });
-    </script>
+                // Wire file input
+                const grammyInput = document.getElementById('grammyDatasetInput');
+                if (grammyInput) {
+                    grammyInput.addEventListener('change', (ev) => {
+                        const f = ev.target.files && ev.target.files[0];
+                        parseGrammyCSV(f);
+                    });
+                }
 
-    <!-- Debug Version Tag -->
-    <div class="fixed bottom-0 right-0 bg-red-500 text-white p-2 text-xs z-50">
-        Version: v1.0 (Iframe Fix Applied)
-    </div>
+                // Simple slideshow for Kendrick section (automated)
+                /*
+                (function setupKendrickSlideshow() {
+                    const kendrickEl = document.getElementById('kendrick');
+                    if (!kendrickEl) return;
+                    const container = kendrickEl.querySelector('.mb-8.flex');
+                    if (!container) return;
+                    container.innerHTML = `\n      <div id="kendrick-slideshow" class="w-full relative">\n        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80" alt="Music Concert Stage" class="kendrick-slide w-full h-64 object-cover rounded-2xl mb-8 shadow-sm" />\n        <img src="https://images.unsplash.com/photo-1509099836639-18ba0c5b6d4c?auto=format&fit=crop&w=1200&q=80" alt="Crowd" class="kendrick-slide hidden w-full h-64 object-cover rounded-2xl mb-8 shadow-sm" />\n        <img src="https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=1200&q=80" alt="Stage Lights" class="kendrick-slide hidden w-full h-64 object-cover rounded-2xl mb-8 shadow-sm" />\n      </div>\n    `;
+                    const slides = container.querySelectorAll('.kendrick-slide');
+                    let idx = 0;
+                    setInterval(() => { slides[idx].classList.add('hidden'); idx = (idx + 1) % slides.length; slides[idx].classList.remove('hidden'); }, 4000);
+                })();
+                */
+
+                // Ensure initial theme applied to charts
+                updateChartTheme();
+
+                // Attempt to fetch server-provided Grammy payload (if a local server is running)
+                (function tryFetchGrammyPayload() {
+                    const endpoint = '/api/grammy';
+                    // Only attempt when window.fetch is available
+                    if (!window.fetch) return;
+                    fetch(endpoint, { cache: 'no-store' }).then(r => {
+                        if (!r.ok) throw new Error('No server payload');
+                        return r.json();
+                    }).then(payload => {
+                        if (!payload) return;
+                        setGrammyLog('Loaded live payload from /api/grammy');
+                        try {
+                            applyGrammyPayload(payload);
+                            setTimeout(() => setGrammyLog('Charts updated from server payload.'), 120);
+                        } catch (e) { setGrammyLog('Error applying server payload: ' + (e.message || e), true); }
+                    }).catch(() => { setGrammyLog('Server not detected. Using pre-loaded sample data.'); });
+                })();
+
+                // Apply a server-side precomputed payload into existing charts
+                function applyGrammyPayload(payload) {
+                    if (!payload) return;
+                    try {
+                        // Polar
+                        const polarChart = getChartById('grammyPolarChart');
+                        if (polarChart && payload.polar) {
+                            polarChart.data.labels = payload.polar.labels || polarChart.data.labels;
+                            polarChart.data.datasets = [{ data: payload.polar.data || [], backgroundColor: polarChart.data.datasets && polarChart.data.datasets[0] && polarChart.data.datasets[0].backgroundColor || ['#ec4899', '#3b82f6', '#6366f1', '#10b981'] }];
+                            polarChart.update();
+                        }
+
+                        // Evolution
+                        const evoChart = getChartById('grammyEvolutionChart');
+                        if (evoChart && payload.evolution) {
+                            evoChart.data.labels = payload.evolution.labels || evoChart.data.labels;
+                            evoChart.data.datasets = payload.evolution.datasets || evoChart.data.datasets;
+                            evoChart.update();
+                        }
+
+                        // Scatter
+                        const sChart = getChartById('grammyScatterChart');
+                        if (sChart && payload.scatter) {
+                            sChart.data.datasets = payload.scatter.datasets || sChart.data.datasets;
+                            sChart.update();
+                        }
+
+                        // Big4
+                        const bChart = getChartById('grammyBig4Chart');
+                        if (bChart && payload.big4) {
+                            bChart.data.labels = payload.big4.labels && payload.big4.labels.length ? payload.big4.labels : bChart.data.labels;
+                            bChart.data.datasets = [{ label: 'Big 4 Wins', data: payload.big4.data || bChart.data.datasets[0].data, backgroundColor: bChart.data.datasets && bChart.data.datasets[0] && bChart.data.datasets[0].backgroundColor }];
+                            bChart.update();
+                        }
+                    } catch (e) { console.error('applyGrammyPayload error', e); throw e; }
+                }
+
+            });
+        </script>
+
+
 </body>
 
 </html>

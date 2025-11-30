@@ -11,9 +11,9 @@
     <!-- 
     Faculty: Himanshu Gaur
     Updates: 
-    - ADDED: "Next Topic" Navigation Buttons at the bottom of every section.
-    - UPDATED: Kendrick Section now uses a static image instead of the Getty embed.
-    - MAINTAINED: All previous theory, code, and visualizations.
+    - FIXED: "Next Topic" now reliably scrolls to the very top (removed 'smooth' behavior for instant jump).
+    - IMPROVED: Mobile Header Title is now clickable -> Goes to Home.
+    - IMPROVED: Floating Header Title is now clickable -> Goes to Home.
     -->
 
     <style>
@@ -304,7 +304,7 @@
 
     <!-- Mobile Header -->
     <div class="md:hidden bg-white p-4 border-b border-slate-200 flex justify-between items-center sticky top-0 z-40">
-        <span class="font-bold text-blue-700">Data Analysis</span>
+        <a href="#" onclick="switchTopic('home'); return false;" class="font-bold text-blue-700 text-lg">Data Analysis</a>
         <button id="menu-btn" class="text-slate-700 focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
@@ -388,7 +388,7 @@
             <!-- Floating Header -->
             <header id="main-header" class="hidden sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 px-8 py-4 shadow-sm transition-all">
                 <div class="flex justify-between items-center">
-                    <div>
+                    <div class="cursor-pointer" onclick="switchTopic('home')">
                         <h1 class="text-lg md:text-xl font-bold text-slate-900">Data Analysis with Python</h1>
                         <p class="text-sm text-slate-500 font-medium">Faculty: Himanshu Gaur</p>
                     </div>
@@ -1547,7 +1547,8 @@ DATE
             currentTopic = targetTopic;
 
             // Scroll to top
-            mainContent.scrollTo({top: 0, behavior: 'smooth'});
+            mainContent.scrollTo({top: 0, behavior: 'auto'});
+            mainContent.scrollTop = 0; // Force immediate scroll to top
 
             // Close mobile menu if open
             if(sidebar.classList.contains('open')) toggleMenu();

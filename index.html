@@ -3671,6 +3671,8 @@ except:
                 const progressPill = document.getElementById('progress-pill');
                 const progressText = document.getElementById('progress-text');
                 const progressFill = document.getElementById('progress-fill');
+                const progPrev = document.getElementById('prog-prev');
+                const progNext = document.getElementById('prog-next');
 
                 // Ordered list of topics for progress tracking
                 const progressTopics = [
@@ -3718,10 +3720,33 @@ except:
 
                         progressText.textContent = `Topic ${currentStep} of ${totalSteps}`;
                         progressFill.style.width = `${percent}%`;
+
+                        // Update buttons state
+                        if (progPrev) progPrev.disabled = topicIndex === 0;
+                        if (progNext) progNext.disabled = topicIndex === totalSteps - 1;
                     } else {
                         // Hide if not a main topic (e.g. home, faq, glossary)
                         progressPill.classList.remove('visible');
                     }
+                }
+
+                // Progress Bar Button Listeners
+                if (progPrev) {
+                    progPrev.addEventListener('click', () => {
+                        const currentIndex = progressTopics.indexOf(currentTopic);
+                        if (currentIndex > 0) {
+                            window.switchTopic(progressTopics[currentIndex - 1]);
+                        }
+                    });
+                }
+
+                if (progNext) {
+                    progNext.addEventListener('click', () => {
+                        const currentIndex = progressTopics.indexOf(currentTopic);
+                        if (currentIndex !== -1 && currentIndex < progressTopics.length - 1) {
+                            window.switchTopic(progressTopics[currentIndex + 1]);
+                        }
+                    });
                 }
 
                 // Safe event wiring for nav links and buttons

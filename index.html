@@ -3750,10 +3750,10 @@ except:
                     updateChartTheme();
                 }
 
-                if (desktopThemeToggle) desktopThemeToggle.addEventListener('click', toggleDarkMode);
-                if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleDarkMode);
-                const homeThemeToggle = document.getElementById('home-theme-toggle');
-                if (homeThemeToggle) homeThemeToggle.addEventListener('click', toggleDarkMode);
+                // Attach to all theme toggles (desktop, mobile, sidebar, etc.)
+                document.querySelectorAll('.theme-toggle').forEach(btn => {
+                    btn.addEventListener('click', toggleDarkMode);
+                });
 
                 // Mobile menu safely
                 function toggleMenu() {

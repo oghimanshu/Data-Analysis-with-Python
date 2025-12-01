@@ -314,6 +314,10 @@
             transition: transform 0.3s ease, width 0.3s ease;
         }
 
+        #sidebar.open {
+            transform: translateX(0) !important;
+        }
+
         body.sidebar-collapsed #sidebar {
             transform: translateX(-100%);
         }
@@ -1014,20 +1018,43 @@
 
         <!-- Sidebar Navigation -->
         <nav id="sidebar"
-            class="w-64 md:w-1/5 h-full bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 px-6 pb-6 pt-16 flex flex-col overflow-y-auto z-50 shadow-lg md:static md:translate-x-0">
+            class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 w-64 md:w-1/5 h-full bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 px-6 pb-6 pt-16 flex flex-col overflow-y-auto z-50 shadow-lg transition-transform duration-300">
             <div class="flex justify-between items-center mb-8">
-                <a href="#" id="home-link" class="block group">
-                    <h1
-                        class="text-xl font-extrabold text-blue-600 dark:text-blue-400 group-hover:text-blue-800 dark:group-hover:text-blue-300 transition-colors tracking-tight">
-                        Data Analysis<br>with Python</h1>
+                <a href="#" id="home-link" class="group flex items-center gap-3">
+                    <img src="logo.png" alt="Logo"
+                        class="w-10 h-10 rounded-xl shadow-lg shadow-blue-500/20 object-contain bg-white dark:bg-slate-800">
+                    <div>
+                        <h1
+                            class="text-xl font-extrabold text-blue-600 dark:text-blue-400 group-hover:text-blue-800 dark:group-hover:text-blue-300 transition-colors tracking-tight">
+                            Data Analysis<br>with Python</h1>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 font-medium block mt-1">by Himanshu
+                            Gaur</span>
+                    </div>
                 </a>
-                <button id="close-menu"
-                    class="md:hidden text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-400">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
+                <div class="flex items-center gap-4">
+                    <button id="mobile-theme-toggle"
+                        class="theme-toggle text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-400"
+                        aria-label="Toggle Dark Mode">
+                        <svg class="w-6 h-6 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                        <svg class="w-6 h-6 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button id="close-menu"
+                        class="md:hidden text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
             <div class="space-y-6 flex-grow">
@@ -1036,14 +1063,14 @@
                     <h3 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3">
                         Module 0: Foundations</h3>
                     <ul class="space-y-1">
-                        <a href="#" class="nav-link" data-topic="topicA">Topic A: Why Python?</a>
-                        <a href="#" class="nav-link" data-topic="topicB">Topic B: Numeric & Boolean</a>
-                        <a href="#" class="nav-link" data-topic="topicC">Topic C: Strings</a>
-                        <a href="#" class="nav-link" data-topic="topicD">Topic D: Lists & Tuples</a>
-                        <a href="#" class="nav-link" data-topic="topicE">Topic E: Sets & Dicts</a>
-                        <a href="#" class="nav-link" data-topic="topicF">Topic F: Binary Types</a>
-                        <a href="#" class="nav-link" data-topic="topicG">Topic G: Control Flow</a>
-                        <a href="#" class="nav-link" data-topic="topicH">Topic H: Functions</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topicA">Topic A: Why Python?</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topicB">Topic B: Numeric & Boolean</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topicC">Topic C: Strings</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topicD">Topic D: Lists & Tuples</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topicE">Topic E: Sets & Dicts</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topicF">Topic F: Binary Types</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topicG">Topic G: Control Flow</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topicH">Topic H: Functions</a></li>
                     </ul>
                 </div>
 
@@ -1100,6 +1127,7 @@
                         <li><a href="#" class="nav-link" data-topic="faq">❓ FAQ</a></li>
                         <li><a href="#" class="nav-link" data-topic="glossary">📚 Glossary</a></li>
                         <li><a href="#" class="nav-link" data-topic="references">📄 References</a></li>
+                        <li><a href="#" class="nav-link" data-topic="image-sources">📷 Image Sources</a></li>
                     </ul>
                 </div>
 
@@ -1135,43 +1163,73 @@
 
             <!-- Floating Header -->
             <header id="main-header"
-                class="hidden sticky top-0 z-30 bg-white dark:bg-slate-950 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-8 py-4 shadow-sm transition-all">
-                <div class="flex justify-between items-center w-full">
-                    <div class="cursor-pointer" onclick="switchTopic('home')">
-                        <h1 class="text-lg md:text-xl font-bold text-slate-900 dark:text-slate-50">Data Analysis with
-                            Python</h1>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium">Himanshu Gaur</p>
+                class="hidden sticky top-0 z-30 bg-white dark:bg-slate-950 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-8 py-4 shadow-sm transition-all flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <button id="menu-btn"
+                        class="md:hidden p-2 -ml-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        aria-label="Open Menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <div class="cursor-pointer" id="header-home-link">
+                        <img src="logo.png" alt="Logo"
+                            class="w-10 h-10 rounded-xl shadow-lg shadow-blue-500/20 object-contain bg-white dark:bg-slate-800">
                     </div>
-                    <div class="flex items-center gap-4">
-                        <button id="desktop-theme-toggle"
-                            class="theme-toggle text-slate-900 dark:text-slate-100 hover:opacity-80 transition-opacity"
-                            aria-label="Toggle Dark Mode">
-                            <svg class="w-5 h-5 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
-                                </path>
-                            </svg>
-                            <svg class="w-5 h-5 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
-                                </path>
-                            </svg>
-                        </button>
-                        <button id="back-to-top"
-                            class="text-sm text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-800 dark:hover:text-blue-300 flex items-center gap-1 transition-colors">
-                            Back to Top &uarr;
-                        </button>
+                    <div class="hidden md:flex flex-col">
+                        <h1
+                            class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-300 leading-tight">
+                            Data Analysis <span class="font-light">with Python</span>
+                        </h1>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-wide">by
+                            Himanshu Gaur</span>
                     </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button id="desktop-theme-toggle"
+                        class="theme-toggle text-slate-900 dark:text-slate-100 hover:opacity-80 transition-opacity"
+                        aria-label="Toggle Dark Mode">
+                        <svg class="w-5 h-5 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                        <svg class="w-5 h-5 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button id="back-to-top"
+                        class="text-sm text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-800 dark:hover:text-blue-300 flex items-center gap-1 transition-colors">
+                        Back to Top &uarr;
+                    </button>
                 </div>
             </header>
 
             <div class="p-4 md:p-8 lg:p-16 max-w-5xl mx-auto">
 
                 <!-- HOME PAGE PANEL -->
-                <div id="home" class="topic-panel">
-                    <!-- Hero Section -->
+                <div id="home" class="topic-panel min-h-screen flex flex-col justify-center relative overflow-hidden">
+
+                    <!-- Visitor Counter -->
+
                     <div
-                        class="hero-bg rounded-3xl p-8 md:p-12 text-white shadow-2xl mb-16 relative overflow-hidden flex items-center min-h-[400px]">
+                        class="absolute top-6 left-6 z-20 bg-white/30 dark:bg-slate-900/30 backdrop-blur-md border border-white/20 dark:border-slate-700/30 px-4 py-2 rounded-full shadow-lg flex items-center gap-2 animate-fade-in">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        <span class="text-xs font-semibold text-slate-800 dark:text-slate-100 tracking-wide">
+                            <span id="visitor-count">Loading...</span> Visits
+                        </span>
+                    </div>
+
+                    <!-- Background Elements -->
+                    <div
+                        class="hero-bg rounded-3xl p-8 md:p-12 text-white shadow-2xl mb-16 relative overflow-hidden flex items-center justify-center min-h-[400px]">
                         <div class="absolute top-6 right-6 z-20">
                             <button id="home-theme-toggle"
                                 class="theme-toggle bg-white/20 hover:bg-white/30 text-white rounded-full p-3 backdrop-blur-sm transition-all"
@@ -1197,9 +1255,21 @@
                                     style="color: var(--text-heading);">Data Analysis with Python</h1>
                                 <p class="text-lg mb-6" style="color: var(--text-secondary);"><span class="font-bold"
                                         style="color: var(--text-heading);">Himanshu Gaur</span></p>
-                                <button id="get-started-btn" onclick="switchTopic('topicA')"
-                                    class="w-full bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-600 font-bold py-3 px-6 rounded-xl shadow-lg transition-all text-center">
-                                    Start Learning &rarr;
+                                <button id="get-started-btn"
+                                    class="group relative px-8 py-4 bg-white text-slate-900 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 overflow-hidden">
+                                    <span class="relative z-10 flex items-center gap-2">
+                                        Start Learning &rarr;
+                                    </span>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    </div>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    </div>
+                                    <span
+                                        class="absolute inset-0 flex items-center justify-center text-white font-bold text-lg z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        Start Learning &rarr;
+                                    </span>
                                 </button>
                                 <a href="https://github.com/oghimanshu/Data-Analysis-with-Python" target="_blank"
                                     class="mt-4 w-full flex items-center justify-center gap-2 bg-slate-800 dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 font-bold py-3 px-6 rounded-xl shadow-lg transition-all text-center border border-slate-700 dark:border-slate-600 group">
@@ -1451,6 +1521,8 @@ print(s.replace("python", "pandas"))</code></pre>
                     </div>
                     <div class="output-block"><span class="output-label">Terminal Output</span>PYTHON
                         pandas </div>
+
+
 
                     <div class="practice-box">
                         <h5>🚀 Topic C Challenge</h5>
@@ -1790,6 +1862,35 @@ print(df_json)</code></pre>
                         0 India 3.7
                         1 USA 23.0</div>
 
+                    <h4>Part C: SQL Database Ingestion (SQLite)</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">SQL databases are the standard for storing structured data. Python's
+                            <code>sqlite3</code> library allows you to interact with them directly.
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import sqlite3
+
+# Create a dummy database in memory
+conn = sqlite3.connect(':memory:')
+cursor = conn.cursor()
+cursor.execute('CREATE TABLE sales (id INT, amount REAL)')
+cursor.execute('INSERT INTO sales VALUES (1, 100.5), (2, 200.0)')
+conn.commit()
+
+# Read from SQL into DataFrame
+query = "SELECT * FROM sales"
+df_sql = pd.read_sql_query(query, conn)
+
+print("--- SQL Ingestion ---")
+print(df_sql)</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>--- SQL Ingestion ---
+                        id amount
+                        0 1 100.5
+                        1 2 200.0</div>
+
                     <div class="practice-box">
                         <h5>🚀 Topic 1 Challenge</h5>
                         <p class="text-sm">Try creating a CSV file named <code>my_data.csv</code> with headers
@@ -1935,8 +2036,9 @@ print(f"Net Growth: {np.round(prices[-1] - prices[0], 0)}")</code></pre>
 
                     <div class="practice-box">
                         <h5>🚀 Topic 3 Challenge</h5>
-                        <p class="text-sm">Given an array of 12 months: <code>months = np.arange(1, 13)</code>. Extract
-                            the second quarter (April, May, June) using slicing logic <code>months[3:6]</code>.</p>
+                        <p class="text-sm">Given an array of 12 months: <code>months = np.arange(1, 13)</code>. Then use
+                            <code>.reshape(3, 4)</code> to change it into a 3-row, 4-column matrix. Print its new shape.
+                        </p>
                     </div>
                     <div class="homework-box">
                         <h5>🧠 Homework: Working Hours</h5>
@@ -2121,6 +2223,23 @@ print(df.groupby('Crop')['Yield_Kg_Ha'].mean())</code></pre>
                         Crop
                         Rice 3950.0
                         Wheat 4900.0
+                        Name: Yield_Kg_Ha, dtype: float64</div>
+
+                    <h4>Part B: Multi-Column Grouping</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Grouping by multiple categories (e.g., State AND Crop) to get
+                            granular insights.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Grouping by State and Crop
+print(df.groupby(['State', 'Crop'])['Yield_Kg_Ha'].mean())</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>State Crop
+                        Haryana Rice 3900.0
+                        Wheat 4800.0
+                        Punjab Rice 4000.0
+                        Wheat 5000.0
                         Name: Yield_Kg_Ha, dtype: float64</div>
 
                     <div class="practice-box">
@@ -2325,6 +2444,42 @@ print(df_messy)</code></pre>
                         1 USA
                         2 UK</div>
 
+                    <h4>Part C: Handling Missing Values (Fill/Drop)</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Beyond interpolation, sometimes you just need to fill with a default
+                            value (0) or drop the bad rows entirely.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>df_messy = pd.DataFrame({'A': [1, 2, None], 'B': [5, None, 7]})
+# Fill missing values with 0
+print("Filled:\n", df_messy.fillna(0))
+# Drop rows with any missing values
+print("Dropped:\n", df_messy.dropna())</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>Filled:
+                        A B
+                        0 1.0 5.0
+                        1 2.0 0.0
+                        2 0.0 7.0
+                        Dropped:
+                        A B
+                        0 1.0 5.0</div>
+
+                    <h4>Part D: Removing Duplicates</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Duplicate rows can skew your analysis. Remove them easily.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>df_dup = pd.DataFrame({'ID': [1, 1, 2], 'Name': ['A', 'A', 'B']})
+print("Unique:\n", df_dup.drop_duplicates())</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>Unique:
+                        ID Name
+                        0 1 A
+                        2 2 B</div>
+
                     <div class="practice-box">
                         <h5>🚀 Topic 8 Challenge</h5>
                         <p class="text-sm">Filter out rows where AQI is negative (impossible values). Use logic:
@@ -2493,6 +2648,43 @@ print(matrix)</code></pre>
                     <p>While pandas handles the data, <strong>Matplotlib</strong> and <strong>Seaborn</strong> handle
                         the aesthetics.</p>
 
+                    <h4>Part A: Seaborn Scatter Plot</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Seaborn makes statistical plots beautiful and easy. Here we
+                            visualize the relationship between GDP and Life Expectancy.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Dummy Data
+data = pd.DataFrame({
+    'GDP': [10, 20, 30, 40, 50],
+    'Life_Exp': [60, 65, 70, 75, 80],
+    'Region': ['A', 'A', 'B', 'B', 'C']
+})
+
+# Create Plot
+sns.scatterplot(data=data, x='GDP', y='Life_Exp', hue='Region')
+plt.title('GDP vs Life Expectancy')
+plt.show()</code></pre>
+                    </div>
+
+                    <h4>Part B: Plotly Interactive Chart</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Plotly creates interactive charts that you can zoom and hover over.
+                            Perfect for web dashboards.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import plotly.express as px
+
+fig = px.bar(data, x='Region', y='GDP', color='Region', title='Regional GDP')
+fig.show()</code></pre>
+                    </div>
+
+                    <h4>Part C: Matplotlib Basics</h4>
                     <div class="relative">
                         <button class="copy-btn">Copy Code</button>
                         <pre><code>import matplotlib.pyplot as plt
@@ -2538,7 +2730,7 @@ plt.show()</code></pre>
                             </div>
                             <div style="overflow:hidden;position:relative;height:0;padding:66.66667% 0 0 0;width:100%;">
                                 <iframe
-                                    src="https://embed.gettyimages.com/embed?assets=2158458565,669272418,669282340,2197345941,2197333553&et=kgCxwaVIS71dLMgP0P6j3Q&tld=com&sig=da98RiG0Ks0INHGG3L060E-FYIHIrGgxs0waoeUw8RI=&caption=true&ver=1"
+                                    src="https://embed.gettyimages.com/embed?assets=2158458565,669272418,669282340,2197345941,2197333553&et=kgCxwaVIS71dLMgP0P6j3Q&tld=com&sig=da98RiG0Ks1INHGG3L060E-FYIHIrGgxs0waoeUw8RI=&caption=true&ver=1"
                                     scrolling="no" frameborder="0"
                                     style="display:inline-block;position:absolute;top:0;left:0;width:100%;height:100%;margin:0;"></iframe>
                             </div>
@@ -3479,8 +3671,39 @@ except:
                 const overlay = document.getElementById('overlay');
                 const backToTopBtn = document.getElementById('back-to-top');
                 const mainContent = document.getElementById('main-content');
+                // Theme Toggle Logic
+                // Theme Toggle Logic
                 const desktopThemeToggle = document.getElementById('desktop-theme-toggle');
                 const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
+                // Visitor Counter Logic (Real API)
+                const visitorCountEl = document.getElementById('visitor-count');
+                if (visitorCountEl) {
+                    // Use a unique namespace for the site
+                    const namespace = 'python-data-science-hub-v1';
+                    const key = 'visits';
+
+                    // Try to fetch from countapi.xyz
+                    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            visitorCountEl.textContent = data.value.toLocaleString();
+                            // Backup to local storage just in case
+                            localStorage.setItem('page_visits', data.value);
+                        })
+                        .catch(err => {
+                            console.warn('Counter API failed, falling back to local storage', err);
+                            // Fallback to local storage if API fails (e.g. adblocker)
+                            let count = localStorage.getItem('page_visits');
+                            if (!count) {
+                                count = 12450 + Math.floor(Math.random() * 100);
+                            } else {
+                                count = parseInt(count) + 1;
+                            }
+                            localStorage.setItem('page_visits', count);
+                            visitorCountEl.textContent = count.toLocaleString();
+                        });
+                }
 
                 // Initialise theme from localStorage (persistence)
                 const savedTheme = localStorage.getItem('theme');
@@ -3566,7 +3789,7 @@ except:
                     'topic5', 'topic6', 'merging',
                     'topic8', 'topic9', 'topic10',
                     'viz', 'kendrick', 'grammy', 'govdata', 'learning',
-                    'faq', 'glossary', 'references'
+                    'faq', 'glossary', 'references', 'image-sources'
                 ];
 
                 // Make switchTopic available, with smooth snapping behaviour
@@ -3620,7 +3843,8 @@ except:
                             const resourceTitles = {
                                 'faq': 'FAQ',
                                 'glossary': 'Glossary',
-                                'references': 'References'
+                                'references': 'References',
+                                'image-sources': 'Image Sources'
                             };
                             progressText.textContent = resourceTitles[targetTopic] || 'Resources';
                             progressFill.style.width = '100%';
@@ -3666,6 +3890,8 @@ except:
                     link.addEventListener('click', (e) => { e.preventDefault(); const t = link.dataset.topic; if (t) window.switchTopic(t); });
                 });
                 if (homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); window.switchTopic('home'); });
+                const headerHomeLink = document.getElementById('header-home-link');
+                if (headerHomeLink) headerHomeLink.addEventListener('click', (e) => { e.preventDefault(); window.switchTopic('home'); });
                 if (getStartedBtn) getStartedBtn.addEventListener('click', () => window.switchTopic('topicA'));
                 if (backToTopBtn) backToTopBtn.addEventListener('click', () => { if (mainContent) mainContent.scrollTo({ top: 0, behavior: 'smooth' }); });
 

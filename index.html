@@ -1031,6 +1031,22 @@
             </div>
 
             <div class="space-y-6 flex-grow">
+                <!-- Module 0 -->
+                <div>
+                    <h3 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3">
+                        Module 0: Foundations</h3>
+                    <ul class="space-y-1">
+                        <a href="#" class="nav-link" data-topic="topicA">Topic A: Why Python?</a>
+                        <a href="#" class="nav-link" data-topic="topicB">Topic B: Numeric & Boolean</a>
+                        <a href="#" class="nav-link" data-topic="topicC">Topic C: Strings</a>
+                        <a href="#" class="nav-link" data-topic="topicD">Topic D: Lists & Tuples</a>
+                        <a href="#" class="nav-link" data-topic="topicE">Topic E: Sets & Dicts</a>
+                        <a href="#" class="nav-link" data-topic="topicF">Topic F: Binary Types</a>
+                        <a href="#" class="nav-link" data-topic="topicG">Topic G: Control Flow</a>
+                        <a href="#" class="nav-link" data-topic="topicH">Topic H: Functions</a></li>
+                    </ul>
+                </div>
+
                 <div>
                     <h3 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3">
                         Module 1: Principles</h3>
@@ -1181,7 +1197,7 @@
                                     style="color: var(--text-heading);">Data Analysis with Python</h1>
                                 <p class="text-lg mb-6" style="color: var(--text-secondary);"><span class="font-bold"
                                         style="color: var(--text-heading);">Himanshu Gaur</span></p>
-                                <button id="get-started-btn"
+                                <button id="get-started-btn" onclick="switchTopic('topicA')"
                                     class="w-full bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-600 font-bold py-3 px-6 rounded-xl shadow-lg transition-all text-center">
                                     Start Learning &rarr;
                                 </button>
@@ -1277,6 +1293,413 @@
                             <p class="text-sm" style="color: var(--text-secondary);">Create complex charts for GDP,
                                 Inflation, and Global Trade.</p>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Topic A -->
+                <div id="topicA" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=1200&q=80"
+                        alt="Why Python" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
+                    <h2 class="text-slate-900 dark:text-slate-50">Topic A: Why Python for Data Science?</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>Python has become the <em>lingua franca</em> of data science. But why? It's not just hype. Python
+                        offers a unique combination of <strong>readability</strong> (it reads like English), a massive
+                        ecosystem of <strong>libraries</strong> (Pandas, NumPy, Scikit-Learn), and a vibrant
+                        <strong>community</strong>.
+                    </p>
+
+                    <h3>Code Implementation</h3>
+
+                    <h4>Part A: Readability</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Compare Python to other languages. It's clean and concise.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Python: Simple and Readable
+users = ["Alice", "Bob"]
+for user in users:
+    print(f"Hello, {user}")</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>Hello, Alice
+                        Hello, Bob</div>
+
+                    <h4>Part B: The Power of Libraries</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">You don't need to reinvent the wheel. Import powerful tools with one
+                            line.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import math
+print(math.pi)</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>3.141592653589793</div>
+
+                    <div class="practice-box">
+                        <h5>🚀 Topic A Challenge</h5>
+                        <p class="text-sm">Print "Python is awesome!" using the <code>print()</code> function.</p>
+                    </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Research</h5>
+                        <p class="text-sm">Find one popular Python library used for Machine Learning and write down its
+                            name.</p>
+                    </div>
+                </div>
+
+                <!-- Topic B -->
+                <div id="topicB" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80"
+                        alt="Numbers" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
+                    <h2 class="text-slate-900 dark:text-slate-50">Topic B: Numeric & Boolean Types</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>Python supports integers, floating-point numbers, and complex numbers. Booleans represent truth
+                        values. These are the fundamental building blocks of data.</p>
+
+                    <h3>Code Implementation</h3>
+
+                    <h4>Part A: Numeric Types</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Python handles large numbers automatically. Complex numbers use
+                            <code>j</code> for the imaginary part.
+                        </div>
+                        <ul class="syntax-list">
+                            <li><code>int</code>: Whole numbers (e.g., 10, -5).</li>
+                            <li><code>float</code>: Decimal numbers (e.g., 3.14, -0.01).</li>
+                            <li><code>complex</code>: Real + Imaginary (e.g., 3+4j).</li>
+                        </ul>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>x = 10        # int
+y = 3.14      # float
+z = 2 + 3j    # complex
+
+print(f"Type of x: {type(x)}")
+print(f"Type of z: {type(z)}")
+print(f"Real part of z: {z.real}")</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>Type of x: <class 'int'>
+                            Type of z: <class 'complex'>
+                                Real part of z: 2.0</div>
+
+                    <h4>Part B: Booleans</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Booleans are the result of comparisons. They are essential for
+                            logic.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>is_active = True
+is_admin = False
+print(10 > 5)</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>True</div>
+
+                    <div class="practice-box">
+                        <h5>🚀 Topic B Challenge</h5>
+                        <p class="text-sm">Create a complex number <code>c = 5 + 7j</code>. Print its imaginary part.
+                        </p>
+                    </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Boolean Logic</h5>
+                        <p class="text-sm">Check if <code>100</code> is equal to <code>10**2</code> using the
+                            <code>==</code> operator and print the result.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Topic C -->
+                <div id="topicC" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=1200&q=80"
+                        alt="Text" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
+                    <h2 class="text-slate-900 dark:text-slate-50">Topic C: Text Sequence Type (Strings)</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>Strings are immutable sequences of Unicode characters. Text processing is central to data
+                        analysis (e.g., cleaning names, parsing logs).</p>
+
+                    <h3>Code Implementation</h3>
+
+                    <h4>Part A: Slicing & Indexing</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Access parts of a string using <code>[start:end]</code>. Negative
+                            indices count from the end.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>text = "Data Science"
+print(text[0])      # First char
+print(text[-1])     # Last char
+print(text[0:4])    # First 4 chars</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>D
+                        e
+                        Data</div>
+
+                    <h4>Part B: String Methods</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Strings have built-in methods for transformation.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>s = "  python  "
+print(s.strip().upper())
+print(s.replace("python", "pandas"))</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>PYTHON
+                        pandas </div>
+
+                    <div class="practice-box">
+                        <h5>🚀 Topic C Challenge</h5>
+                        <p class="text-sm">Given <code>word = "Analysis"</code>, print the last 3 characters using
+                            negative indexing.</p>
+                    </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: String Formatting</h5>
+                        <p class="text-sm">Use an f-string to print "The value of pi is approx 3.14" given
+                            <code>pi = 3.14159</code> (round to 2 decimals).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Topic D -->
+                <div id="topicD" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&w=1200&q=80"
+                        alt="Lists" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
+                    <h2 class="text-slate-900 dark:text-slate-50">Topic D: Sequence Types (List & Tuple)</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p><strong>Lists</strong> are mutable (changeable) sequences. <strong>Tuples</strong> are immutable
+                        (unchangeable). Use lists for data that changes, tuples for fixed data.</p>
+
+                    <h3>Code Implementation</h3>
+
+                    <h4>Part A: Lists (Mutable)</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">You can add, remove, or change items in a list.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>nums = [1, 2, 3]
+nums[0] = 100    # Change
+nums.append(4)   # Add
+print(nums)</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>[100, 2, 3, 4]</div>
+
+                    <h4>Part B: Tuples (Immutable)</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Tuples use parentheses <code>()</code>. They are faster and safer
+                            for constant data.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>coords = (10, 20)
+# coords[0] = 5  # This would cause an error!
+print(coords[0])</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>10</div>
+
+                    <div class="practice-box">
+                        <h5>🚀 Topic D Challenge</h5>
+                        <p class="text-sm">Create a tuple with 3 numbers. Try to change the first number and observe the
+                            error (mentally or in a local notebook).</p>
+                    </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: List Slicing</h5>
+                        <p class="text-sm">Given <code>data = [10, 20, 30, 40, 50]</code>, create a new list containing
+                            only <code>[20, 30, 40]</code> using slicing.</p>
+                    </div>
+                </div>
+
+                <!-- Topic E -->
+                <div id="topicE" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=1200&q=80"
+                        alt="Sets and Dicts" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
+                    <h2 class="text-slate-900 dark:text-slate-50">Topic E: Set & Mapping Types</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p><strong>Sets</strong> are unordered collections of unique items (no duplicates).
+                        <strong>Dictionaries</strong> (Mappings) store data in key-value pairs.
+                        <strong>Frozensets</strong> are immutable sets.
+                    </p>
+
+                    <h3>Code Implementation</h3>
+
+                    <h4>Part A: Sets & Frozensets</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Sets are great for removing duplicates. Frozensets cannot be changed
+                            after creation.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Set (Mutable)
+unique_ids = {101, 102, 101}
+print(unique_ids)  # Duplicates removed
+
+# Frozenset (Immutable)
+const_set = frozenset([1, 2, 3])
+# const_set.add(4)  # Error!</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>{101, 102}</div>
+
+                    <h4>Part B: Dictionaries (Mappings)</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english">Dictionaries map a unique key to a value.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>user = {"name": "Eve", "role": "Admin"}
+print(user["name"])
+user["role"] = "User"  # Update
+print(user)</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>Eve
+                        {'name': 'Eve', 'role': 'User'}</div>
+
+                    <div class="practice-box">
+                        <h5>🚀 Topic E Challenge</h5>
+                        <p class="text-sm">Create a set from the list <code>[1, 2, 2, 3, 3, 3]</code> and print it to
+                            see duplicates vanish.</p>
+                    </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Dictionary Keys</h5>
+                        <p class="text-sm">Create a dictionary where keys are country names and values are capitals.
+                            Print the capital of "France".</p>
+                    </div>
+                </div>
+
+                <!-- Topic F -->
+                <div id="topicF" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80"
+                        alt="Binary" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
+                    <h2 class="text-slate-900 dark:text-slate-50">Topic F: Binary Types</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>Computers think in 0s and 1s. <strong>Bytes</strong> and <strong>Bytearrays</strong> let you work
+                        with raw binary data (like images or network packets). <strong>Memoryview</strong> allows
+                        accessing memory without copying.</p>
+
+                    <h3>Code Implementation</h3>
+
+                    <h4>Part A: Bytes & Bytearray</h4>
+                    <div class="code-explanation">
+                        <div class="simple-english"><code>bytes</code> is immutable. <code>bytearray</code> is mutable.
+                            They store integers 0-255.</div>
+                    </div>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code># Bytes (Immutable)
+b_data = b"Hello"
+print(b_data[0])  # ASCII for 'H' is 72
+
+# Bytearray (Mutable)
+ba = bytearray(b"Hello")
+ba[0] = 87  # Change 'H' to 'W' (ASCII 87)
+print(ba)</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>72
+                        bytearray(b'Wello')</div>
+
+                    <div class="practice-box">
+                        <h5>🚀 Topic F Challenge</h5>
+                        <p class="text-sm">Create a <code>bytearray</code> of size 5 filled with zeros. Print it.</p>
+                    </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: ASCII Conversion</h5>
+                        <p class="text-sm">Convert the string "Python" to bytes using <code>.encode('utf-8')</code> and
+                            print the result.</p>
+                    </div>
+                </div>
+
+                <!-- Topic G -->
+                <div id="topicG" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80"
+                        alt="Logic" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
+                    <h2 class="text-slate-900 dark:text-slate-50">Topic G: Control Flow (Logic & Loops)</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p>Code doesn't always run in a straight line. <strong>Control Flow</strong> allows your program to
+                        make decisions (<code>if/else</code>) and repeat tasks (<code>loops</code>).</p>
+
+                    <h3>Code Implementation</h3>
+
+                    <h4>Part A: Making Decisions</h4>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>score = 85
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+else:
+    print("C")</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>B</div>
+
+                    <h4>Part B: Loops</h4>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>for i in range(3):
+    print(f"Count {i}")</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>Count 0
+                        Count 1
+                        Count 2</div>
+
+                    <div class="practice-box">
+                        <h5>🚀 Topic G Challenge</h5>
+                        <p class="text-sm">Write a loop that prints "Hello" 3 times.</p>
+                    </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: While Loop</h5>
+                        <p class="text-sm">Create a variable <code>x = 5</code>. Write a <code>while</code> loop that
+                            prints <code>x</code> and subtracts 1 until <code>x</code> is 0.</p>
+                    </div>
+                </div>
+
+                <!-- Topic H -->
+                <div id="topicH" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=1200&q=80"
+                        alt="Functions" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
+                    <h2 class="text-slate-900 dark:text-slate-50">Topic H: Functions & Libraries</h2>
+
+                    <h3>Theoretical Framework</h3>
+                    <p><strong>Functions</strong> let you save code and reuse it later. <strong>Libraries</strong> are
+                        collections of functions written by others.</p>
+
+                    <h3>Code Implementation</h3>
+
+                    <h4>Part A: Functions</h4>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Coder"))</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>Hello, Coder!</div>
+
+                    <h4>Part B: Libraries</h4>
+                    <div class="relative">
+                        <button class="copy-btn">Copy Code</button>
+                        <pre><code>import math
+print(math.sqrt(25))</code></pre>
+                    </div>
+                    <div class="output-block"><span class="output-label">Terminal Output</span>5.0</div>
+
+                    <div class="practice-box">
+                        <h5>🚀 Topic H Challenge</h5>
+                        <p class="text-sm">Write a function <code>add(a, b)</code> that returns the sum of two numbers.
+                        </p>
+                    </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Datetime</h5>
+                        <p class="text-sm">Import the <code>datetime</code> library and print the current date and time.
+                        </p>
                     </div>
                 </div>
 
@@ -2828,6 +3251,15 @@ except:
                     <h2>References (APA 7)</h2>
                     <ul class="space-y-4 mt-6">
                         <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
+                            <strong>Python Software Foundation. (2023).</strong> <em>Python 3.12.0 Documentation</em>.
+                            Retrieved from <a href="https://docs.python.org/3/" target="_blank"
+                                class="text-blue-600 underline">https://docs.python.org/3/</a>
+                        </li>
+                        <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
+                            <strong>Van Rossum, G., & Drake, F. L. (2009).</strong> <em>Python 3 Reference Manual</em>.
+                            CreateSpace.
+                        </li>
+                        <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
                             <strong>McKinney, W. (2010).</strong> Data Structures for Statistical Computing in Python.
                             <em>Proceedings of the 9th Python in Science Conference</em>. <a
                                 href="https://doi.org/10.25080/Majora-92bf1922-00a" target="_blank"
@@ -3129,6 +3561,7 @@ except:
 
                 // Ordered list of topics for progress tracking
                 const progressTopics = [
+                    'topicA', 'topicB', 'topicC', 'topicD', 'topicE', 'topicF', 'topicG', 'topicH',
                     'topic1', 'topic2', 'topic3', 'topic4',
                     'topic5', 'topic6', 'merging',
                     'topic8', 'topic9', 'topic10',
@@ -3174,7 +3607,8 @@ except:
                         progressPill.classList.add('visible');
 
                         // Define main topics count (excluding resources)
-                        const mainTopicCount = 15; // topic1..topic10, viz, kendrick, grammy, govdata, learning
+                        // Define main topics count (excluding resources)
+                        const mainTopicCount = 23; // topicA..topicH + topic1..topic10, viz, kendrick, grammy, govdata, learning
 
                         if (topicIndex < mainTopicCount) {
                             const currentStep = topicIndex + 1;
@@ -3211,6 +3645,8 @@ except:
                         const currentIndex = progressTopics.indexOf(currentTopic);
                         if (currentIndex > 0) {
                             window.switchTopic(progressTopics[currentIndex - 1]);
+                        } else if (currentIndex === 0) {
+                            window.switchTopic('home');
                         }
                     });
                 }
@@ -3230,7 +3666,7 @@ except:
                     link.addEventListener('click', (e) => { e.preventDefault(); const t = link.dataset.topic; if (t) window.switchTopic(t); });
                 });
                 if (homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); window.switchTopic('home'); });
-                if (getStartedBtn) getStartedBtn.addEventListener('click', () => window.switchTopic('topic1'));
+                if (getStartedBtn) getStartedBtn.addEventListener('click', () => window.switchTopic('topicA'));
                 if (backToTopBtn) backToTopBtn.addEventListener('click', () => { if (mainContent) mainContent.scrollTo({ top: 0, behavior: 'smooth' }); });
 
                 // Copy buttons (modern + fallback)

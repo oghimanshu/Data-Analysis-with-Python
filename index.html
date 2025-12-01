@@ -1127,7 +1127,7 @@
                         <li><a href="#" class="nav-link" data-topic="faq">❓ FAQ</a></li>
                         <li><a href="#" class="nav-link" data-topic="glossary">📚 Glossary</a></li>
                         <li><a href="#" class="nav-link" data-topic="references">📄 References</a></li>
-                        <li><a href="#" class="nav-link" data-topic="image-sources">📷 Image Sources</a></li>
+
                     </ul>
                 </div>
 
@@ -3618,6 +3618,8 @@ except:
                     </div>
 
                 </div>
+
+
             </div>
         </main>
 
@@ -3789,7 +3791,7 @@ except:
                     'topic5', 'topic6', 'merging',
                     'topic8', 'topic9', 'topic10',
                     'viz', 'kendrick', 'grammy', 'govdata', 'learning',
-                    'faq', 'glossary', 'references', 'image-sources'
+                    'faq', 'glossary', 'references'
                 ];
 
                 // Make switchTopic available, with smooth snapping behaviour
@@ -3843,8 +3845,7 @@ except:
                             const resourceTitles = {
                                 'faq': 'FAQ',
                                 'glossary': 'Glossary',
-                                'references': 'References',
-                                'image-sources': 'Image Sources'
+                                'references': 'References'
                             };
                             progressText.textContent = resourceTitles[targetTopic] || 'Resources';
                             progressFill.style.width = '100%';

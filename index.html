@@ -489,7 +489,7 @@
 
         /* Content Typography */
         .topic-panel h2 {
-            font-size: 2.25rem;
+            font-size: 1.75rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
             color: var(--text-heading) !important;
@@ -497,6 +497,12 @@
             line-height: 1.2;
             visibility: visible !important;
             opacity: 1 !important;
+        }
+
+        @media (min-width: 768px) {
+            .topic-panel h2 {
+                font-size: 2.25rem;
+            }
         }
 
         .topic-panel h3 {
@@ -628,6 +634,30 @@
             color: var(--text-primary);
         }
 
+        /* Homework Box */
+        .homework-box {
+            background-color: rgba(124, 58, 237, 0.1);
+            /* Violet tint */
+            border: 1px dashed #7c3aed;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .homework-box h5 {
+            color: #7c3aed;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .homework-box p {
+            color: var(--text-primary);
+        }
+
         /* New Syntax List Style */
         .syntax-list {
             list-style-type: disc;
@@ -658,7 +688,7 @@
             padding: 1rem;
             border-radius: 0.5rem;
             border-left: 4px solid #10b981;
-            margin-top: -1.5rem;
+            margin-top: 1rem;
             margin-bottom: 3rem;
             font-size: 0.8rem;
             overflow-x: auto;
@@ -683,12 +713,18 @@
             position: relative;
             width: 100%;
             margin: 2rem auto;
-            height: 400px;
+            height: 300px;
             background: var(--bg-panel);
             padding: 1rem;
             border-radius: 1rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
         }
 
         /* Copy Button */
@@ -766,7 +802,7 @@
         /* Progress Bar - Apple Glass UI */
         .progress-pill-container {
             position: fixed;
-            bottom: 2rem;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
             /* iOS Light Mode Glass - More Translucent */
@@ -774,18 +810,31 @@
             backdrop-filter: saturate(180%) blur(30px);
             -webkit-backdrop-filter: saturate(180%) blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 0.75rem 1.5rem;
+            padding: 0.5rem 1rem;
             border-radius: 9999px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
             z-index: 100;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
             transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
             opacity: 0;
             pointer-events: none;
             visibility: hidden;
-            /* Ensure it's fully hidden from screen readers/clicks when opacity is 0 */
+            width: 90%;
+            max-width: 350px;
+            justify-content: space-between;
+        }
+
+        @media (min-width: 768px) {
+            .progress-pill-container {
+                bottom: 2rem;
+                padding: 0.75rem 1.5rem;
+                gap: 1rem;
+                width: auto;
+                max-width: none;
+                justify-content: center;
+            }
         }
 
         .dark .progress-pill-container {
@@ -915,7 +964,7 @@
     <div
         class="md:hidden fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between">
         <div class="flex items-center gap-3">
-            <button id="mobile-menu-btn" class="text-slate-600 dark:text-slate-400 focus:outline-none">
+            <button id="menu-btn" class="text-slate-600 dark:text-slate-400 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
                     </path>
@@ -939,7 +988,7 @@
                     </path>
                 </svg>
             </button>
-            </button>
+
         </div>
     </div>
 
@@ -1014,7 +1063,8 @@
                         Module 4: Advanced</h3>
                     <ul class="space-y-1">
                         <li><a href="#" class="nav-link" data-topic="viz">Advanced Visualisation</a></li>
-                        <li><a href="#" class="nav-link" data-topic="kendrick">Data Storytelling: Kendrick</a></li>
+                        <li><a href="#" class="nav-link" data-topic="kendrick">Decoding the Narrative: A Kendrick Lamar
+                                Study</a></li>
                         <li><a href="#" class="nav-link" data-topic="grammy">Capstone: Grammy Analytics</a></li>
                         <li><a href="#" class="nav-link" data-topic="govdata">Real-World Pipelines</a></li>
                         <li><a href="#" class="nav-link" data-topic="learning">Further Learning</a></li>
@@ -1093,7 +1143,7 @@
                 </div>
             </header>
 
-            <div class="p-6 md:p-8 lg:p-16 max-w-5xl mx-auto">
+            <div class="p-4 md:p-8 lg:p-16 max-w-5xl mx-auto">
 
                 <!-- HOME PAGE PANEL -->
                 <div id="home" class="topic-panel">
@@ -1318,6 +1368,11 @@ print(df_json)</code></pre>
                             <code>pd.read_csv('my_data.csv')</code>.
                         </p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: JSON Ingestion</h5>
+                        <p class="text-sm">Create a raw JSON string representing a list of 3 books (Title, Author,
+                            Price). Use <code>json.loads()</code> to parse it and then convert it into a DataFrame.</p>
+                    </div>
 
                     <div class="next-btn-container">
                         <button onclick="switchTopic('home')" class="prev-btn">
@@ -1416,6 +1471,11 @@ print(f"High Income Segments: {high_earners}")</code></pre>
                             <code>((Year2 - Year1) / Year1) * 100</code>.
                         </p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Discount Logic</h5>
+                        <p class="text-sm">Create an array of 10 product prices. Apply a 10% discount to all prices
+                            greater than 100 using boolean masking (<code>prices[prices > 100] *= 0.9</code>).</p>
+                    </div>
 
                     <div class="next-btn-container">
                         <button onclick="switchTopic('topic1')" class="prev-btn">
@@ -1485,6 +1545,11 @@ print(f"Net Growth: {np.round(prices[-1] - prices[0], 0)}")</code></pre>
                         <p class="text-sm">Given an array of 12 months: <code>months = np.arange(1, 13)</code>. Extract
                             the second quarter (April, May, June) using slicing logic <code>months[3:6]</code>.</p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Working Hours</h5>
+                        <p class="text-sm">Create an array representing 24 hours of the day (0-23). Slice it to extract
+                            only the "Working Hours" (9 AM to 5 PM).</p>
+                    </div>
 
                     <div class="next-btn-container">
                         <button onclick="switchTopic('topic2')" class="prev-btn">
@@ -1551,6 +1616,12 @@ print(f"Optimised Memory: {data_optimized.nbytes} bytes")</code></pre>
                         <h5>🚀 Topic 4 Challenge</h5>
                         <p class="text-sm">Create a 1D array of 12 elements using <code>np.arange(12)</code>. Then use
                             <code>.reshape(3, 4)</code> to change it into a 3-row, 4-column matrix. Print its new shape.
+                        </p>
+                    </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Memory Optimization</h5>
+                        <p class="text-sm">Create a <code>float64</code> array of 1 million elements. Check its
+                            <code>.nbytes</code>. Convert it to <code>float16</code> and calculate the memory saved.
                         </p>
                     </div>
 
@@ -1640,6 +1711,11 @@ print(df[df['Valuation_B'] > 15.0])</code></pre>
                         <p class="text-sm">Add a new column called 'Valuation_INR' by multiplying 'Valuation_B' by 83.
                             Then use <code>.head()</code> to view the result.</p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Pass/Fail Logic</h5>
+                        <p class="text-sm">Create a DataFrame of 5 students with 'Marks'. Add a new column 'Status'
+                            which is 'Pass' if Marks > 40, else 'Fail'. (Hint: Use <code>np.where</code>).</p>
+                    </div>
 
                     <div class="next-btn-container">
                         <button onclick="switchTopic('topic4')" class="prev-btn">
@@ -1714,6 +1790,11 @@ print(df.groupby('Crop')['Yield_Kg_Ha'].mean())</code></pre>
                             <code>sum()</code> of Yield to see which state produces more total food in this sample.
                         </p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Multi-Level Grouping</h5>
+                        <p class="text-sm">Create a Sales dataset with columns 'Region', 'Product', and 'Sales'. Group
+                            by BOTH 'Region' and 'Product' to find the total sales for each product in each region.</p>
+                    </div>
 
                     <div class="next-btn-container">
                         <button onclick="switchTopic('topic5')" class="prev-btn">
@@ -1787,6 +1868,12 @@ print(df.groupby('District').agg(rules))</code></pre>
                         <p class="text-sm">Modify the rules dictionary to calculate the <code>'std'</code> (Standard
                             Deviation) of Income. This measures inequality within the district.</p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Weather Aggregation</h5>
+                        <p class="text-sm">Create a weather dataset with 'City' and 'Temp'. Use <code>.agg()</code> to
+                            find both the <code>min</code> and <code>max</code> temperature for each city
+                            simultaneously.</p>
+                    </div>
 
                     <div class="next-btn-container">
                         <button onclick="switchTopic('topic6')" class="prev-btn">
@@ -1858,6 +1945,12 @@ print(df_merged)</code></pre>
                         <h5>🚀 Topic 7b Challenge</h5>
                         <p class="text-sm">Change <code>how='inner'</code> to <code>how='outer'</code>. Observe how NaN
                             values appear for countries that don't have a match.</p>
+                    </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Left Join Audit</h5>
+                        <p class="text-sm">Perform a <code>left</code> join between an 'Employees' table and a
+                            'Departments' table. Identify which employees have a <code>NaN</code> department (meaning
+                            they are unassigned).</p>
                     </div>
 
                     <div class="next-btn-container">
@@ -1953,6 +2046,11 @@ print(df_messy)</code></pre>
                             <code>df[df['AQI'] >= 0]</code>.
                         </p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Duplicate Removal</h5>
+                        <p class="text-sm">Create a DataFrame with 3 duplicate rows. Use <code>.drop_duplicates()</code>
+                            to clean it, and verify the count before and after.</p>
+                    </div>
 
                     <div class="next-btn-container">
                         <button onclick="switchTopic('merging')" class="prev-btn">
@@ -2044,6 +2142,11 @@ print(df_gdp)</code></pre>
                         <p class="text-sm">Change the rolling window to 2 (`window=2`) to see a more sensitive moving
                             average.</p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Volatility Analysis</h5>
+                        <p class="text-sm">Calculate a 7-day rolling <code>std()</code> (Standard Deviation) on a stock
+                            price array. This is a common way to measure market volatility.</p>
+                    </div>
 
                     <div class="chart-container">
                         <canvas id="weoChart"></canvas>
@@ -2121,6 +2224,11 @@ print(matrix)</code></pre>
                         <p class="text-sm">Filter the original DataFrame for 'Sector' == 'Tech' before creating the
                             Pivot Table.</p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Pivot Counts</h5>
+                        <p class="text-sm">Create a Pivot Table that shows the <code>count</code> of sales transactions
+                            per 'Region' and 'Product' (instead of sum). This tells you the volume of activity.</p>
+                    </div>
 
                     <div class="chart-container">
                         <canvas id="tradeChart"></canvas>
@@ -2174,6 +2282,11 @@ plt.show()</code></pre>
                             <code>linestyle='--'</code> to <code>linestyle='-'</code> (solid line).
                         </p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Bar Chart Customization</h5>
+                        <p class="text-sm">Create a bar chart showing the sales of 5 different products. Label the
+                            X-axis "Product" and the Y-axis "Revenue ($)". Add a title "Q1 Performance".</p>
+                    </div>
 
                     <div class="chart-container">
                         <canvas id="timeSeriesChart"></canvas>
@@ -2189,7 +2302,7 @@ plt.show()</code></pre>
                             Prev: Topic 10
                         </button>
                         <button onclick="switchTopic('kendrick')" class="next-btn">
-                            Next: Data Storytelling
+                            Next: Decoding the Narrative: A Kendrick Lamar Study
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -2213,13 +2326,13 @@ plt.show()</code></pre>
                             <div style="overflow:hidden;position:relative;height:0;padding:66.66667% 0 0 0;width:100%;">
                                 <iframe
                                     src="https://embed.gettyimages.com/embed?assets=2158458565,669272418,669282340,2197345941,2197333553&et=kgCxwaVIS71dLMgP0P6j3Q&tld=com&sig=da98RiG0Ks0INHGG3L060E-FYIHIrGgxs0waoeUw8RI=&caption=true&ver=1"
-                                    scrolling="no" frameborder="0" width="594" height="396"
+                                    scrolling="no" frameborder="0"
                                     style="display:inline-block;position:absolute;top:0;left:0;width:100%;height:100%;margin:0;"></iframe>
                             </div>
                         </div>
                     </div>
 
-                    <h2>Data Storytelling: The Structure of Narrative</h2>
+                    <h2>Decoding the Narrative: A Kendrick Lamar Study</h2>
 
                     <div
                         class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-600 dark:border-blue-500 p-6 rounded-r-lg mb-8">
@@ -2349,6 +2462,11 @@ print(df_reverse[['Track', 'Narrative_Arc']].head())</code></pre>
                         <h5>🚀 Storytelling Challenge</h5>
                         <p class="text-sm">Create a list of 5 major life events in chronological order. Reverse them
                             using slicing to see if it tells a "Benjamin Button" style story.</p>
+                    </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Audio Filtering</h5>
+                        <p class="text-sm">Imagine a dataset of tracks with 'Loudness_dB' and 'BPM'. Filter for tracks
+                            that are both "Loud" (> -5dB) AND "Fast" (> 120 BPM) to find the high-energy bangers.</p>
                     </div>
 
                     <div class="next-btn-container">
@@ -2487,6 +2605,13 @@ print(df.sort_values('Legend_Index', ascending=False).head(3))</code></pre>
                         <p class="text-sm">Modify the 'Legend_Index' formula to weigh Commercial Success (Streams)
                             higher (e.g., 0.8) than Wins. How does the ranking change?</p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: The Underrated Index</h5>
+                        <p class="text-sm">Create a new metric:
+                            <code>Underrated_Index = (Metacritic_Score * 2) / (Streams + 1)</code>. Find the artist with
+                            the highest score (High quality, low popularity).
+                        </p>
+                    </div>
 
                     <div class="next-btn-container">
                         <button onclick="switchTopic('kendrick')" class="prev-btn">
@@ -2495,7 +2620,7 @@ print(df.sort_values('Legend_Index', ascending=False).head(3))</code></pre>
                                 stroke-linejoin="round">
                                 <path d="M19 12H5M12 19l-7-7 7-7" />
                             </svg>
-                            Prev: Data Storytelling
+                            Prev: Decoding the Narrative: A Kendrick Lamar Study
                         </button>
                         <button onclick="switchTopic('govdata')" class="next-btn">
                             Next: Pipelines
@@ -2549,6 +2674,11 @@ except:
                         <p class="text-sm">If you can't reach the URL, try creating a dummy dictionary with Date and CPI
                             keys and convert it to a DataFrame manually.</p>
                     </div>
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Fetching GDP</h5>
+                        <p class="text-sm">Modify the FRED fetcher to pull "GDP" data instead of CPI. (Hint: Search for
+                            the GDP Series ID on the FRED website, it is usually just 'GDP').</p>
+                    </div>
 
                     <div class="next-btn-container">
                         <button onclick="switchTopic('grammy')" class="prev-btn">
@@ -2561,105 +2691,6 @@ except:
                         </button>
                         <button onclick="switchTopic('learning')" class="next-btn">
                             Next: Further Learning
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Learning Roadmap -->
-                <div id="roadmap" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
-                        alt="Further Learning" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
-                    <h2>Further Learning Roadmap</h2>
-                    <p>You have mastered the basics of DataFrames. The next steps involve storage, advanced statistics,
-                        and prediction.</p>
-
-                    <div class="grid md:grid-cols-2 gap-6 mt-6">
-                        <div
-                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                            <h4 class="text-blue-600 dark:text-blue-400 font-bold mb-2">1. SQL (Structured Query
-                                Language)</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">CSV files are for small data.
-                                Real companies use SQL databases. Learn <code>SELECT * FROM table</code> logic.</p>
-                            <a href="https://sqlzoo.net/" target="_blank"
-                                class="text-xs font-mono bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 p-1 rounded hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors">Resource:
-                                SQLZoo</a>
-                        </div>
-                        <div
-                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                            <h4 class="text-indigo-600 dark:text-indigo-400 font-bold mb-2">2. Machine Learning
-                                (Scikit-Learn)</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Move from "What happened?" to
-                                "What will happen?". Learn Linear Regression for GDP forecasting.</p>
-                            <a href="https://www.kaggle.com/learn" target="_blank"
-                                class="text-xs font-mono bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 p-1 rounded hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors">Resource:
-                                Kaggle Learn</a>
-                        </div>
-                        <div
-                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                            <h4 class="text-emerald-600 dark:text-emerald-400 font-bold mb-2">3. Econometrics
-                                (Statsmodels)</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">For rigorous statistical testing
-                                (P-values, R-squared) specifically for economics research.</p>
-                            <a href="https://www.statsmodels.org/stable/index.html" target="_blank"
-                                class="text-xs font-mono bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 p-1 rounded hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors">Resource:
-                                Statsmodels Docs</a>
-                        </div>
-                        <div
-                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                            <h4 class="text-amber-600 dark:text-amber-400 font-bold mb-2">4. Geospatial Analysis
-                                (Geopandas)</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Plotting economic data on maps
-                                (Choropleths). Essential for regional development studies.</p>
-                            <a href="https://geopandas.org/" target="_blank"
-                                class="text-xs font-mono bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 p-1 rounded hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-colors">Resource:
-                                Geopandas.org</a>
-                        </div>
-                        <div
-                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                            <h4 class="text-purple-600 dark:text-purple-400 font-bold mb-2">5. FreeCodeCamp Data
-                                Analysis</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">A comprehensive, free
-                                certification course for data analysis with Python.</p>
-                            <a href="https://www.freecodecamp.org/learn/data-analysis-with-python/" target="_blank"
-                                class="text-xs font-mono bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 p-1 rounded hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors">Resource:
-                                FreeCodeCamp</a>
-                        </div>
-                        <div
-                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                            <h4 class="text-red-600 dark:text-red-400 font-bold mb-2">6. Coursera (Audit Mode)</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Access high-quality courses from
-                                top universities for free by selecting the "Audit" option.</p>
-                            <a href="https://www.coursera.org/" target="_blank"
-                                class="text-xs font-mono bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors">Resource:
-                                Coursera</a>
-                        </div>
-                        <div
-                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                            <h4 class="text-gray-800 dark:text-gray-300 font-bold mb-2">7. Book Recommendation</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">"Python for Data Analysis" by Wes
-                                McKinney (Creator of Pandas). The definitive guide.</p>
-                            <a href="https://wesmckinney.com/book/" target="_blank"
-                                class="text-xs font-mono bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Resource:
-                                Read Online</a>
-                        </div>
-                    </div>
-
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('learning')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Further Learning
-                        </button>
-                        <button onclick="switchTopic('faq')" class="next-btn">
-                            Next: FAQ
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -2992,13 +3023,13 @@ except:
                     </div>
 
                     <div class="next-btn-container">
-                        <button onclick="switchTopic('roadmap')" class="prev-btn">
+                        <button onclick="switchTopic('learning')" class="prev-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
                                 <path d="M19 12H5M12 19l-7-7 7-7" />
                             </svg>
-                            Prev: Roadmap
+                            Prev: Further Learning
                         </button>
                         <button onclick="switchTopic('glossary')" class="next-btn">
                             Next: Glossary
@@ -3174,355 +3205,112 @@ except:
                 </div>
 
                 <!-- Resources: Further Learning -->
+
                 <div id="learning" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
                     <img src="https://images.unsplash.com/photo-1513258496098-882605922721?auto=format&fit=crop&w=1200&q=80"
                         alt="Further Learning" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
                     <h2>Further Learning Resources</h2>
                     <p class="mb-6 text-slate-600 dark:text-slate-300">A curated list of courses and resources to
-                        continue
-                        your data science journey.</p>
+                        continue your data science journey.</p>
 
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left text-slate-600 dark:text-slate-300">
-                            <thead
-                                class="text-xs text-slate-700 uppercase bg-slate-50 dark:bg-slate-800 dark:text-slate-400">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 rounded-tl-lg">Course/Resource</th>
-                                    <th scope="col" class="px-6 py-3">Description</th>
-                                    <th scope="col" class="px-6 py-3">Strengths / Use Case</th>
-                                    <th scope="col" class="px-6 py-3">Link (Paid)</th>
-                                    <th scope="col" class="px-6 py-3 rounded-tr-lg">Link (Free/Audit)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Python for Data
-                                        Science, AI & Development (IBM, Coursera)</td>
-                                    <td class="px-6 py-4">Python fundamentals + data manipulation + data I/O +
-                                        introduction
-                                        to data-science workflows</td>
-                                    <td class="px-6 py-4">Good structured path from Python basics to data-handling +
-                                        analysis + ML prep</td>
-                                    <td class="px-6 py-4">(Coursera paid cert) <a
-                                            href="https://www.coursera.org/learn/python-for-applied-data-science-ai"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/learn/python-for-applied-data-science-ai</a>
-                                    </td>
-                                    <td class="px-6 py-4">Free audit available <a
-                                            href="https://www.coursera.org/learn/python-for-applied-data-science-ai"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/learn/python-for-applied-data-science-ai</a>
-                                    </td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Data Analysis with
-                                        Python (IBM, Coursera)</td>
-                                    <td class="px-6 py-4">Data cleaning, manipulation, CSV/SQL I/O, exploratory data
-                                        analysis, basic statistics & regression models</td>
-                                    <td class="px-6 py-4">Solid for bridging from DataFrame/CSV work to analysis +
-                                        simple
-                                        modeling + real-world dataset handling</td>
-                                    <td class="px-6 py-4">Paid certificate <a
-                                            href="https://www.coursera.org/learn/data-analysis-with-python"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/learn/data-analysis-with-python</a>
-                                    </td>
-                                    <td class="px-6 py-4">Free audit available <a
-                                            href="https://www.coursera.org/learn/data-analysis-with-python"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/learn/data-analysis-with-python</a>
-                                    </td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Statistics with
-                                        Python
-                                        Specialization (University of Michigan, Coursera)</td>
-                                    <td class="px-6 py-4">Probability, hypothesis testing, statistical inference,
-                                        modeling,
-                                        data visualization with Python</td>
-                                    <td class="px-6 py-4">Important if you want strong foundation in
-                                        statistics/inference
-                                        before ML or advanced modeling</td>
-                                    <td class="px-6 py-4">Paid certificate <a
-                                            href="https://www.coursera.org/specializations/statistics-with-python"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/specializations/statistics-with-python</a>
-                                    </td>
-                                    <td class="px-6 py-4">Free audit available on Coursera</td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Machine Learning
-                                        with
-                                        Python (IBM, Coursera)</td>
-                                    <td class="px-6 py-4">Supervised/unsupervised learning using Python and
-                                        scikit-learn:
-                                        regression, classification, clustering, evaluation, pipelines</td>
-                                    <td class="px-6 py-4">Core for moving into predictive modeling, ML experiments and
-                                        real-world tasks</td>
-                                    <td class="px-6 py-4">Paid certificate <a
-                                            href="https://www.coursera.org/learn/machine-learning-with-python"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.coursera.org/learn/machine-learning-with-python</a>
-                                    </td>
-                                    <td class="px-6 py-4">Free audit available often with Coursera trial</td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Python for Data
-                                        Science
-                                        and Machine Learning Bootcamp (Udemy)</td>
-                                    <td class="px-6 py-4">Data manipulation, visualization, and ML workflows with
-                                        Python,
-                                        hands-on dataset projects</td>
-                                    <td class="px-6 py-4">Good practical, project-based course to bridge data handling
-                                        and
-                                        ML without heavy theory overhead</td>
-                                    <td class="px-6 py-4">Paid course <a
-                                            href="https://www.udemy.com/course/python-for-data-science-and-machine-learning-bootcamp/"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.udemy.com/course/python-for-data-science-and-machine-learning-bootcamp/</a>
-                                    </td>
-                                    <td class="px-6 py-4">Udemy occasionally offers discounts (not free)</td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">freeCodeCamp — Data
-                                        Analysis with Python</td>
-                                    <td class="px-6 py-4">Data wrangling with Pandas/NumPy, CSV/JSON handling,
-                                        visualization, exploratory analysis</td>
-                                    <td class="px-6 py-4">Good free starting point if you want self-paced practice with
-                                        no
-                                        cost barrier</td>
-                                    <td class="px-6 py-4">—</td>
-                                    <td class="px-6 py-4">Always free <a
-                                            href="https://www.freecodecamp.org/learn/data-analysis-with-python"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.freecodecamp.org/learn/data-analysis-with-python</a>
-                                    </td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Kaggle Learn
-                                        Courses
-                                        (Python / Data Cleaning / Machine Learning / Feature Engineering)</td>
-                                    <td class="px-6 py-4">Short hands-on modules: data cleaning, ML basics, feature
-                                        engineering, real-world dataset practice</td>
-                                    <td class="px-6 py-4">Excellent for applying your learning on real messy data and
-                                        building portfolio + practical skillset</td>
-                                    <td class="px-6 py-4">—</td>
-                                    <td class="px-6 py-4">Free (on-demand + certificate) <a
-                                            href="https://www.kaggle.com/learn" target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.kaggle.com/learn</a>
-                                    </td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Data Engineering in
-                                        Python Track (DataCamp)</td>
-                                    <td class="px-6 py-4">Focus on building data pipelines, automation, data I/O,
-                                        handling
-                                        larger datasets, and engineering workflows</td>
-                                    <td class="px-6 py-4">Useful if you want to move beyond analysis to
-                                        pipeline/data-engineering side — important for realistic data workloads</td>
-                                    <td class="px-6 py-4">Paid subscription <a
-                                            href="https://www.datacamp.com/tracks/data-engineer-in-python"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.datacamp.com/tracks/data-engineer-in-python</a>
-                                    </td>
-                                    <td class="px-6 py-4">Limited free access/trial on DataCamp</td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Get Started with
-                                        Python
-                                        for Data Science (Codecademy)</td>
-                                    <td class="px-6 py-4">Python fundamentals focused on data workflows and dataset
-                                        manipulation</td>
-                                    <td class="px-6 py-4">Good for bridging Python basics to data-science workflows
-                                        especially if you want interactive beginner-friendly learning</td>
-                                    <td class="px-6 py-4">Paid (or subscription) via Codecademy <a
-                                            href="https://www.codecademy.com/learn/getting-started-with-python-for-data-science"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.codecademy.com/learn/getting-started-with-python-for-data-science</a>
-                                    </td>
-                                    <td class="px-6 py-4">Free-trial / limited free tiers <a
-                                            href="https://www.codecademy.com/learn/getting-started-with-python-for-data-science"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.codecademy.com/learn/getting-started-with-python-for-data-science</a>
-                                    </td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Course “Python for
-                                        Data
-                                        Science” (IIT Madras / NPTEL)</td>
-                                    <td class="px-6 py-4">Python applied to data science problems; helpful for Indian
-                                        students or those wanting structured academic-style course</td>
-                                    <td class="px-6 py-4">Institutional setting; helps understand data-science with
-                                        local
-                                        context or emphasis on fundamentals</td>
-                                    <td class="px-6 py-4">Usually free / open access via NPTEL <a
-                                            href="https://onlinecourses.nptel.ac.in/noc25_cs104/preview" target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://onlinecourses.nptel.ac.in/noc25_cs104/preview</a>
-                                    </td>
-                                    <td class="px-6 py-4">Free to view/learn (certificate optional)</td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">General Python
-                                        Programming Courses (for better scripting, data I/O, custom pipelines)</td>
-                                    <td class="px-6 py-4">Full programming fundamentals: data structures, control flow,
-                                        file
-                                        I/O, scripting — valuable for writing custom data pipelines or handling raw data
-                                    </td>
-                                    <td class="px-6 py-4">Useful to level up coding skills if you plan to go beyond
-                                        library-based analysis / build custom data tools; often recommended before
-                                        advanced
-                                        data-science courses</td>
-                                    <td class="px-6 py-4">Varies — e.g. edX, Coursera courses; some paid certs</td>
-                                    <td class="px-6 py-4">Many free / audit-available options via platforms like
-                                        Coursera/edX</td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Introduction to
-                                        Data
-                                        Science” (Harvard Online / edX)</td>
-                                    <td class="px-6 py-4">Covers Python in data science, basics of ML, data
-                                        manipulation/visualization, foundational data-science workflows</td>
-                                    <td class="px-6 py-4">Good academic-style overview: for learners wanting structured
-                                        and
-                                        rigorous context before diving deep</td>
-                                    <td class="px-6 py-4">Paid certificate track via edX/Harvard</td>
-                                    <td class="px-6 py-4">Free audit/self-study version often available</td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Data Science with
-                                        Python” (MyGreatLearning, 2025 update)</td>
-                                    <td class="px-6 py-4">Basic to intermediate data-science concepts with Python:
-                                        statistics, data analysis, maybe ML depending on modules</td>
-                                    <td class="px-6 py-4">Good free resource for learners in India or globally who
-                                        prefer
-                                        self-paced learning with no cost barrier</td>
-                                    <td class="px-6 py-4">—</td>
-                                    <td class="px-6 py-4">Free (with optional paid certificate) <a
-                                            href="https://www.mygreatlearning.com/academy/learn-for-free/courses/data-science-with-python"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.mygreatlearning.com/academy/learn-for-free/courses/data-science-with-python</a>
-                                    </td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Simplilearn — Data
-                                        Science with Python Course</td>
-                                    <td class="px-6 py-4">Applied data-science tools and techniques in Python, possibly
-                                        with
-                                        coaching and structured curriculum</td>
-                                    <td class="px-6 py-4">Useful for learners who want guided/live-session teaching
-                                        rather
-                                        than purely self-paced online courses</td>
-                                    <td class="px-6 py-4">Paid via Simplilearn <a
-                                            href="https://www.simplilearn.com/in/data-science-with-python-course"
-                                            target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.simplilearn.com/in/data-science-with-python-course</a>
-                                    </td>
-                                    <td class="px-6 py-4">Sometimes there may be free previews or trial options</td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Dataquest —
-                                        Project-based Python & Data Science Paths</td>
-                                    <td class="px-6 py-4">Real-world data tasks, Python + SQL + Excel/data-engineering +
-                                        ML
-                                        paths with project emphasis</td>
-                                    <td class="px-6 py-4">Good for learning by doing realistic tasks: often closer to
-                                        real
-                                        job tasks rather than toy datasets</td>
-                                    <td class="px-6 py-4">Paid subscription via Dataquest <a
-                                            href="https://www.dataquest.io/" target="_blank"
-                                            class="text-blue-600 hover:underline break-all">https://www.dataquest.io/</a>
-                                    </td>
-                                    <td class="px-6 py-4">Some initial free content or trial options depending on plan
-                                    </td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Machine Learning &
-                                        AI
-                                        Python” (via Harvard-offered course)</td>
-                                    <td class="px-6 py-4">Python + ML basics + data science workflows + hands-on
-                                        datasets,
-                                        using common libraries like pandas, sklearn, etc.</td>
-                                    <td class="px-6 py-4">Good if you want to get from data-analysis to ML models in an
-                                        academic-style format</td>
-                                    <td class="px-6 py-4">Paid enrollment or certificate track via Harvard Online / edX
-                                    </td>
-                                    <td class="px-6 py-4">Free audit / self-study often possible</td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">General “Best
-                                        Python
-                                        Courses” list (freeCodeCamp article)</td>
-                                    <td class="px-6 py-4">Many courses covering from Python basics to data science and
-                                        machine-learning recommended collectively; useful for picking based on interest
-                                        or
-                                        gap</td>
-                                    <td class="px-6 py-4">Helpful if you want to assess multiple options and choose
-                                        based on
-                                        your prior knowledge and what you want to learn next</td>
-                                    <td class="px-6 py-4">Varies by course (free or paid depending)</td>
-                                    <td class="px-6 py-4">Many listed are free or have free tiers per article</td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Top-10 Data
-                                        Science
-                                        Courses 2025” list (ClassCentral)</td>
-                                    <td class="px-6 py-4">Aggregates many good courses across platforms and difficulty
-                                        levels; useful for comparing offerings</td>
-                                    <td class="px-6 py-4">Good for planning a learning path depending on your skill
-                                        level,
-                                        time availability, and budget</td>
-                                    <td class="px-6 py-4">Varies per course in the list</td>
-                                    <td class="px-6 py-4">Many have free audit / free versions per course description
-                                    </td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Data Science /
-                                        Data
-                                        Engineering Combo” via DataCamp or Dataquest</td>
-                                    <td class="px-6 py-4">Combines data-wrangling, pipelines, I/O, ML basics — bridging
-                                        data
-                                        science and data engineering</td>
-                                    <td class="px-6 py-4">Useful if you want to handle large data, build pipelines, and
-                                        operate at scale rather than just small/clean datasets</td>
-                                    <td class="px-6 py-4">Paid subscription / paid track</td>
-                                    <td class="px-6 py-4">Some have trial or limited free content</td>
-                                </tr>
-                                <tr
-                                    class="bg-white border-b dark:bg-slate-900 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">“Applied ML + Data
-                                        Analysis + Visualization Courses” (various)</td>
-                                    <td class="px-6 py-4">Combine data-cleaning, EDA, statistical analysis,
-                                        plotting/visualization, and basic modeling — good for end-to-end projects</td>
-                                    <td class="px-6 py-4">Good to build holistic project workflows from raw data to
-                                        insight
-                                        to model to report/visualization</td>
-                                    <td class="px-6 py-4">Varies by course (Coursera, edX, bootcamps, etc.)</td>
-                                    <td class="px-6 py-4">Varies: some paid, some free/audit — check individual course
-                                        pages
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="grid md:grid-cols-2 gap-6 mt-6">
+                        <!-- Card 1: SQL -->
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                            <h4 class="text-blue-600 dark:text-blue-400 font-bold mb-2">SQL (Structured Query Language)
+                            </h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">CSV files are for small data.
+                                Real companies use SQL databases. Learn <code>SELECT * FROM table</code> logic.</p>
+                            <a href="https://sqlzoo.net/" target="_blank"
+                                class="text-xs font-mono bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 p-1 rounded hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors">Resource:
+                                SQLZoo</a>
+                        </div>
+
+                        <!-- Card 2: Machine Learning -->
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                            <h4 class="text-indigo-600 dark:text-indigo-400 font-bold mb-2">Machine Learning
+                                (Scikit-Learn)</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Move from "What happened?" to
+                                "What will happen?". Learn Linear Regression for GDP forecasting.</p>
+                            <a href="https://www.kaggle.com/learn" target="_blank"
+                                class="text-xs font-mono bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 p-1 rounded hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors">Resource:
+                                Kaggle Learn</a>
+                        </div>
+
+                        <!-- Card 3: Econometrics -->
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                            <h4 class="text-emerald-600 dark:text-emerald-400 font-bold mb-2">Econometrics (Statsmodels)
+                            </h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">For rigorous statistical testing
+                                (P-values, R-squared) specifically for economics research.</p>
+                            <a href="https://www.statsmodels.org/stable/index.html" target="_blank"
+                                class="text-xs font-mono bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 p-1 rounded hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors">Resource:
+                                Statsmodels Docs</a>
+                        </div>
+
+                        <!-- Card 4: Geospatial -->
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                            <h4 class="text-amber-600 dark:text-amber-400 font-bold mb-2">Geospatial Analysis
+                                (Geopandas)</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Plotting economic data on maps
+                                (Choropleths). Essential for regional development studies.</p>
+                            <a href="https://geopandas.org/" target="_blank"
+                                class="text-xs font-mono bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 p-1 rounded hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-colors">Resource:
+                                Geopandas.org</a>
+                        </div>
+
+                        <!-- Card 5: IBM Python for Data Science -->
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                            <h4 class="text-slate-800 dark:text-slate-200 font-bold mb-2">Python for Data Science (IBM)
+                            </h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Python fundamentals + data
+                                manipulation + data I/O. Good structured path from basics to analysis.</p>
+                            <a href="https://www.coursera.org/learn/python-for-applied-data-science-ai" target="_blank"
+                                class="text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Resource:
+                                Coursera (Audit Free)</a>
+                        </div>
+
+                        <!-- Card 6: UMich Statistics -->
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                            <h4 class="text-slate-800 dark:text-slate-200 font-bold mb-2">Statistics with Python (UMich)
+                            </h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Probability, hypothesis testing,
+                                and inference. Important for strong statistical foundation.</p>
+                            <a href="https://www.coursera.org/specializations/statistics-with-python" target="_blank"
+                                class="text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Resource:
+                                Coursera (Audit Free)</a>
+                        </div>
+
+                        <!-- Card 7: FreeCodeCamp -->
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                            <h4 class="text-purple-600 dark:text-purple-400 font-bold mb-2">FreeCodeCamp Data Analysis
+                            </h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Data wrangling with Pandas/NumPy,
+                                visualization. Good free starting point for self-paced practice.</p>
+                            <a href="https://www.freecodecamp.org/learn/data-analysis-with-python" target="_blank"
+                                class="text-xs font-mono bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 p-1 rounded hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors">Resource:
+                                FreeCodeCamp</a>
+                        </div>
+
+                        <!-- Card 8: Book -->
+                        <div
+                            class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                            <h4 class="text-gray-800 dark:text-gray-300 font-bold mb-2">Book: Python for Data Analysis
+                            </h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">By Wes McKinney (Creator of
+                                Pandas). The definitive guide for deep understanding.</p>
+                            <a href="https://wesmckinney.com/book/" target="_blank"
+                                class="text-xs font-mono bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Resource:
+                                Read Online</a>
+                        </div>
                     </div>
+
                     <div class="next-btn-container">
                         <button onclick="switchTopic('govdata')" class="prev-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -3532,8 +3320,8 @@ except:
                             </svg>
                             Prev: Pipelines
                         </button>
-                        <button onclick="switchTopic('roadmap')" class="next-btn">
-                            Next: Roadmap
+                        <button onclick="switchTopic('faq')" class="next-btn">
+                            Next: FAQ
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -3680,7 +3468,8 @@ except:
                     'topic1', 'topic2', 'topic3', 'topic4',
                     'topic5', 'topic6', 'merging',
                     'topic8', 'topic9', 'topic10',
-                    'viz', 'kendrick', 'grammy', 'govdata', 'roadmap'
+                    'viz', 'kendrick', 'grammy', 'govdata', 'learning',
+                    'faq', 'glossary', 'references'
                 ];
 
                 // Make switchTopic available, with smooth snapping behaviour
@@ -3720,18 +3509,30 @@ except:
                         void progressPill.offsetWidth;
                         progressPill.classList.add('visible');
 
-                        const currentStep = topicIndex + 1;
-                        const totalSteps = progressTopics.length;
-                        const percent = (currentStep / totalSteps) * 100;
+                        // Define main topics count (excluding resources)
+                        const mainTopicCount = 15; // topic1..topic10, viz, kendrick, grammy, govdata, learning
 
-                        progressText.textContent = `Topic ${currentStep} of ${totalSteps}`;
-                        progressFill.style.width = `${percent}%`;
+                        if (topicIndex < mainTopicCount) {
+                            const currentStep = topicIndex + 1;
+                            const percent = (currentStep / mainTopicCount) * 100;
+                            progressText.textContent = `Topic ${currentStep} of ${mainTopicCount}`;
+                            progressFill.style.width = `${percent}%`;
+                        } else {
+                            // It is a resource (FAQ, Glossary, References)
+                            const resourceTitles = {
+                                'faq': 'FAQ',
+                                'glossary': 'Glossary',
+                                'references': 'References'
+                            };
+                            progressText.textContent = resourceTitles[targetTopic] || 'Resources';
+                            progressFill.style.width = '100%';
+                        }
 
                         // Update buttons state
                         if (progPrev) progPrev.disabled = topicIndex === 0;
-                        if (progNext) progNext.disabled = topicIndex === totalSteps - 1;
+                        if (progNext) progNext.disabled = topicIndex === progressTopics.length - 1;
                     } else {
-                        // Hide if not a main topic (e.g. home, faq, glossary)
+                        // Hide if not a main topic (e.g. home)
                         progressPill.classList.remove('visible');
                         if (progressHideTimeout) clearTimeout(progressHideTimeout);
                         progressHideTimeout = setTimeout(() => {

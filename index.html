@@ -80,6 +80,7 @@
             /* Fallback */
             --bg-glass: rgba(255, 255, 255, 0.7);
             --bg-glass-panel: rgba(255, 255, 255, 0.6);
+            --bg-panel: rgba(255, 255, 255, 0.8);
             --border-glass: rgba(255, 255, 255, 0.4);
             --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
 
@@ -101,6 +102,7 @@
             /* Fallback */
             --bg-glass: rgba(10, 10, 10, 0.7);
             --bg-glass-panel: rgba(20, 20, 20, 0.6);
+            --bg-panel: rgba(30, 41, 59, 0.4);
             --border-glass: rgba(255, 255, 255, 0.1);
             --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 
@@ -402,7 +404,7 @@
             border-radius: 0.5rem;
             transition: all 0.2s;
             font-weight: 500;
-            color: var(--text-secondary);
+            color: var(--text-primary);
         }
 
         .nav-link:hover {
@@ -608,6 +610,10 @@
             content: "💡";
             font-size: 1.25rem;
             line-height: 1;
+        }
+
+        .dark .simple-english {
+            color: var(--text-primary);
         }
 
         /* Practice Challenge Box */
@@ -1374,24 +1380,6 @@ print(df_json)</code></pre>
                             Price). Use <code>json.loads()</code> to parse it and then convert it into a DataFrame.</p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('home')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Home
-                        </button>
-                        <button onclick="switchTopic('topic2')" class="next-btn">
-                            Next: Topic 2
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Topic 2 -->
@@ -1477,24 +1465,6 @@ print(f"High Income Segments: {high_earners}")</code></pre>
                             greater than 100 using boolean masking (<code>prices[prices > 100] *= 0.9</code>).</p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('topic1')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Topic 1
-                        </button>
-                        <button onclick="switchTopic('topic3')" class="next-btn">
-                            Next: Topic 3
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Topic 3 -->
@@ -1551,24 +1521,6 @@ print(f"Net Growth: {np.round(prices[-1] - prices[0], 0)}")</code></pre>
                             only the "Working Hours" (9 AM to 5 PM).</p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('topic2')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Topic 2
-                        </button>
-                        <button onclick="switchTopic('topic4')" class="next-btn">
-                            Next: Topic 4
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Topic 4 -->
@@ -1625,24 +1577,6 @@ print(f"Optimised Memory: {data_optimized.nbytes} bytes")</code></pre>
                         </p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('topic3')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Topic 3
-                        </button>
-                        <button onclick="switchTopic('topic5')" class="next-btn">
-                            Next: Topic 5
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Topic 5 -->
@@ -1717,24 +1651,6 @@ print(df[df['Valuation_B'] > 15.0])</code></pre>
                             which is 'Pass' if Marks > 40, else 'Fail'. (Hint: Use <code>np.where</code>).</p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('topic4')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Topic 4
-                        </button>
-                        <button onclick="switchTopic('topic6')" class="next-btn">
-                            Next: Topic 6
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Topic 6 -->
@@ -1796,24 +1712,6 @@ print(df.groupby('Crop')['Yield_Kg_Ha'].mean())</code></pre>
                             by BOTH 'Region' and 'Product' to find the total sales for each product in each region.</p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('topic5')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Topic 5
-                        </button>
-                        <button onclick="switchTopic('topic7')" class="next-btn">
-                            Next: Topic 7
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Topic 7 -->
@@ -1875,24 +1773,6 @@ print(df.groupby('District').agg(rules))</code></pre>
                             simultaneously.</p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('topic6')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Topic 6
-                        </button>
-                        <button onclick="switchTopic('merging')" class="next-btn">
-                            Next: Topic 7b
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Topic 7b: Merging -->
@@ -1953,24 +1833,6 @@ print(df_merged)</code></pre>
                             they are unassigned).</p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('topic7')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Topic 7
-                        </button>
-                        <button onclick="switchTopic('topic8')" class="next-btn">
-                            Next: Topic 8
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Topic 8 -->
@@ -2052,24 +1914,6 @@ print(df_messy)</code></pre>
                             to clean it, and verify the count before and after.</p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('merging')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Topic 7b
-                        </button>
-                        <button onclick="switchTopic('topic9')" class="next-btn">
-                            Next: Topic 9
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Topic 9 -->
@@ -2152,24 +1996,6 @@ print(df_gdp)</code></pre>
                         <canvas id="weoChart"></canvas>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('topic8')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Topic 8
-                        </button>
-                        <button onclick="switchTopic('topic10')" class="next-btn">
-                            Next: Topic 10
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Topic 10 -->
@@ -2234,24 +2060,6 @@ print(matrix)</code></pre>
                         <canvas id="tradeChart"></canvas>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('topic9')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Topic 9
-                        </button>
-                        <button onclick="switchTopic('viz')" class="next-btn">
-                            Next: Adv Viz
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Advanced Viz -->
@@ -2292,24 +2100,6 @@ plt.show()</code></pre>
                         <canvas id="timeSeriesChart"></canvas>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('topic10')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Topic 10
-                        </button>
-                        <button onclick="switchTopic('kendrick')" class="next-btn">
-                            Next: Decoding the Narrative: A Kendrick Lamar Study
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Kendrick Lamar Section -->
@@ -2469,24 +2259,6 @@ print(df_reverse[['Track', 'Narrative_Arc']].head())</code></pre>
                             that are both "Loud" (> -5dB) AND "Fast" (> 120 BPM) to find the high-energy bangers.</p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('viz')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Adv Viz
-                        </button>
-                        <button onclick="switchTopic('grammy')" class="next-btn">
-                            Next: Grammy Capstone
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- NEW: Grammy Analytics Capstone Section -->
@@ -2613,24 +2385,6 @@ print(df.sort_values('Legend_Index', ascending=False).head(3))</code></pre>
                         </p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('kendrick')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Decoding the Narrative: A Kendrick Lamar Study
-                        </button>
-                        <button onclick="switchTopic('govdata')" class="next-btn">
-                            Next: Pipelines
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Gov Data -->
@@ -2680,24 +2434,6 @@ except:
                             the GDP Series ID on the FRED website, it is usually just 'GDP').</p>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('grammy')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Grammy Capstone
-                        </button>
-                        <button onclick="switchTopic('learning')" class="next-btn">
-                            Next: Further Learning
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Resources: FAQ -->
@@ -3022,24 +2758,6 @@ except:
                         </details>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('learning')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Further Learning
-                        </button>
-                        <button onclick="switchTopic('glossary')" class="next-btn">
-                            Next: Glossary
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Resources: Glossary -->
@@ -3101,24 +2819,6 @@ except:
                         </div>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('faq')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: FAQ
-                        </button>
-                        <button onclick="switchTopic('references')" class="next-btn">
-                            Next: References
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Resources: References -->
@@ -3184,24 +2884,6 @@ except:
                                 class="text-blue-600 underline">https://docs.python.org/3/reference/</a>
                         </li>
                     </ul>
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('glossary')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Glossary
-                        </button>
-                        <button onclick="switchTopic('home')" class="next-btn">
-                            Next: Home
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Resources: Further Learning -->
@@ -3311,24 +2993,6 @@ except:
                         </div>
                     </div>
 
-                    <div class="next-btn-container">
-                        <button onclick="switchTopic('govdata')" class="prev-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M19 12H5M12 19l-7-7 7-7" />
-                            </svg>
-                            Prev: Pipelines
-                        </button>
-                        <button onclick="switchTopic('faq')" class="next-btn">
-                            Next: FAQ
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
             </div>
         </main>

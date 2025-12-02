@@ -965,6 +965,186 @@
                 display: block;
             }
         }
+
+        /* Glass UI Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        .dark .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Library Gradients - VIBRANT & CLASSY */
+        .grad-numpy {
+            background: linear-gradient(135deg, rgba(77, 171, 207, 0.2), rgba(77, 171, 207, 0.05));
+            border-left: 4px solid #4DABCF;
+        }
+
+        .grad-pandas {
+            background: linear-gradient(135deg, rgba(21, 4, 88, 0.15), rgba(21, 4, 88, 0.05));
+            border-left: 4px solid #150458;
+        }
+
+        .dark .grad-pandas {
+            border-left-color: #e70488;
+            background: linear-gradient(135deg, rgba(231, 4, 136, 0.2), rgba(231, 4, 136, 0.05));
+        }
+
+        .grad-matplotlib {
+            background: linear-gradient(135deg, rgba(17, 85, 124, 0.2), rgba(17, 85, 124, 0.05));
+            border-left: 4px solid #11557c;
+        }
+
+        .grad-scikit {
+            background: linear-gradient(135deg, rgba(248, 153, 61, 0.2), rgba(248, 153, 61, 0.05));
+            border-left: 4px solid #f8993d;
+        }
+
+        .grad-tensorflow {
+            background: linear-gradient(135deg, rgba(255, 111, 0, 0.2), rgba(255, 111, 0, 0.05));
+            border-left: 4px solid #ff6f00;
+        }
+
+        .grad-pytorch {
+            background: linear-gradient(135deg, rgba(238, 76, 44, 0.2), rgba(238, 76, 44, 0.05));
+            border-left: 4px solid #ee4c2c;
+        }
+
+        .grad-scrapy {
+            background: linear-gradient(135deg, rgba(96, 168, 57, 0.2), rgba(96, 168, 57, 0.05));
+            border-left: 4px solid #60a839;
+        }
+
+        .grad-bs4 {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+            border-left: 4px solid #333;
+        }
+
+        .grad-opencv {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.15), rgba(0, 0, 255, 0.1));
+            border-left: 4px solid #00ff00;
+        }
+
+        .grad-bokeh {
+            background: linear-gradient(135deg, rgba(221, 75, 57, 0.2), rgba(221, 75, 57, 0.05));
+            border-left: 4px solid #dd4b39;
+        }
+
+        .grad-seaborn {
+            background: linear-gradient(135deg, rgba(68, 114, 196, 0.2), rgba(68, 114, 196, 0.05));
+            border-left: 4px solid #4472c4;
+        }
+
+        /* Hero Overlay for Light Mode Contrast */
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+        }
+
+        .dark .hero-overlay {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.8));
+        }
+
+        /* --- Hero Redesign CSS --- */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes gradient-x {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animate-gradient-x {
+            background-size: 200% 200%;
+            animation: gradient-x 15s ease infinite;
+        }
+
+        .hero-mesh-bg {
+            background-color: #ffffff;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(34, 197, 94, 0.15) 0px, transparent 50%);
+        }
+
+        .dark .hero-mesh-bg {
+            background-color: #0f172a;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.2) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.2) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.2) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(34, 197, 94, 0.2) 0px, transparent 50%);
+        }
+
+        .glass-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: skewX(-25deg);
+            transition: 0.5s;
+        }
+
+        .glass-shine:hover::after {
+            left: 150%;
+            transition: 0.7s ease-in-out;
+        }
     </style>
 </head>
 
@@ -980,9 +1160,13 @@
                     </path>
                 </svg>
             </button>
-            <a href="#" onclick="switchTopic('home')"
-                class="font-bold text-blue-600 dark:text-blue-400 text-lg hover:text-blue-800 dark:hover:text-blue-300">Data
-                Analysis</a>
+            <a href="#" onclick="switchTopic('home')" class="flex items-center gap-2 group">
+                <img src="logo.png" alt="Logo"
+                    class="w-8 h-8 rounded-lg shadow-sm object-contain bg-white dark:bg-slate-800">
+                <span
+                    class="font-bold text-blue-600 dark:text-blue-400 text-lg group-hover:text-blue-800 dark:group-hover:text-blue-300 transition-colors">Data
+                    Analysis</span>
+            </a>
         </div>
         <div class="flex items-center gap-2">
             <div class="text-sm text-slate-600 dark:text-slate-400"><strong>Himanshu Gaur</strong></div>
@@ -1018,8 +1202,8 @@
 
         <!-- Sidebar Navigation -->
         <nav id="sidebar"
-            class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 w-64 md:w-1/5 h-full bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 px-6 pb-6 pt-16 flex flex-col overflow-y-auto z-50 shadow-lg transition-transform duration-300">
-            <div class="flex justify-between items-center mb-8">
+            class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 w-64 md:w-1/5 h-full glass-panel border-r border-slate-200 dark:border-slate-800 px-6 pb-6 pt-16 flex flex-col overflow-hidden z-50 shadow-lg transition-transform duration-300">
+            <div class="flex justify-between items-center mb-8 flex-none">
                 <a href="#" id="home-link" class="group flex items-center gap-3">
                     <img src="logo.png" alt="Logo"
                         class="w-10 h-10 rounded-xl shadow-lg shadow-blue-500/20 object-contain bg-white dark:bg-slate-800">
@@ -1057,7 +1241,7 @@
                 </div>
             </div>
 
-            <div class="space-y-6 flex-grow">
+            <div class="space-y-6 flex-grow overflow-y-auto pr-2 -mr-2 custom-scrollbar">
                 <!-- Module 0 -->
                 <div>
                     <h3 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3">
@@ -1132,9 +1316,6 @@
                         <li><a href="#" class="nav-link" data-topic="faq">❓ FAQ</a></li>
                         <li><a href="#" class="nav-link" data-topic="glossary">📚 Glossary</a></li>
                         <li><a href="#" class="nav-link" data-topic="references">📄 References</a></li>
-                        <li><a href="https://www.geeksforgeeks.org/python/libraries-in-python/" target="_blank"
-                                class="nav-link text-xs text-slate-500 hover:text-green-600">Source: GeeksforGeeks</a>
-                        </li>
 
                     </ul>
                 </div>
@@ -1171,7 +1352,7 @@
 
             <!-- Floating Header -->
             <header id="main-header"
-                class="hidden sticky top-0 z-30 bg-white dark:bg-slate-950 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-8 py-4 shadow-sm transition-all flex items-center justify-between">
+                class="hidden sticky top-0 z-30 glass-panel border-b border-slate-200 dark:border-slate-800 px-8 py-4 shadow-sm transition-all flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <button id="menu-btn"
                         class="md:hidden p-2 -ml-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
@@ -1181,17 +1362,17 @@
                                 d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
-                    <div class="cursor-pointer" id="header-home-link">
+                    <div id="header-home-link" class="flex items-center gap-3 cursor-pointer group">
                         <img src="logo.png" alt="Logo"
-                            class="w-10 h-10 rounded-xl shadow-lg shadow-blue-500/20 object-contain bg-white dark:bg-slate-800">
-                    </div>
-                    <div class="hidden md:flex flex-col">
-                        <h1
-                            class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-300 leading-tight">
-                            Data Analysis <span class="font-light">with Python</span>
-                        </h1>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-wide">by
-                            Himanshu Gaur</span>
+                            class="w-10 h-10 rounded-xl shadow-lg shadow-blue-500/20 object-contain bg-white dark:bg-slate-800 group-hover:scale-105 transition-transform">
+                        <div class="hidden md:flex flex-col">
+                            <h1
+                                class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-300 leading-tight group-hover:opacity-80 transition-opacity">
+                                Data Analysis <span class="font-light">with Python</span>
+                            </h1>
+                            <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-wide">by
+                                Himanshu Gaur</span>
+                        </div>
                     </div>
                 </div>
                 <div class="flex items-center gap-4">
@@ -1218,41 +1399,41 @@
 
             <div id="home" class="topic-panel">
                 <section id="hero"
-                    class="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-900">
-                    <!-- Background Image with Overlay -->
-                    <div class="absolute inset-0 z-0">
-                        <img src="https://images.unsplash.com/photo-1518932945647-7a1c969f8be2?auto=format&fit=crop&w=2000&q=80"
-                            alt="Background" class="w-full h-full object-cover opacity-40">
-                        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/0 via-slate-900/60 to-slate-900">
-                        </div>
-                        <div
-                            class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay">
-                        </div>
+                    class="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-white dark:bg-slate-900 hero-section z-0">
+                    <!-- Background Image with Gradient Overlay -->
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2850&q=80"
+                        alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
+                    <div class="absolute inset-0 -z-10 hero-overlay">
+                    </div>
+                    <div
+                        class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay">
                     </div>
 
                     <!-- Content -->
                     <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
                         <!-- Left: Text -->
+                        <!-- Left: Text -->
                         <div class="text-center md:text-left">
                             <div
-                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-6 backdrop-blur-sm">
-                                <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider mb-6 backdrop-blur-sm glass-card">
+                                <span class="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-pulse"></span>
                                 Interactive Course
                             </div>
                             <h1
-                                class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight">
+                                class="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight tracking-tight">
                                 Master <span
-                                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Data
+                                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400 animate-gradient-x">Data
                                     Analysis</span> <br> with Python
                             </h1>
-                            <p class="text-lg md:text-xl text-slate-300 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
+                            <p
+                                class="text-lg md:text-xl text-slate-700 dark:text-slate-300 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
                                 A comprehensive, interactive journey from basic syntax to advanced data visualization.
                                 Built
                                 for the modern web.
                             </p>
                             <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                                 <button onclick="switchTopic('topicA')"
-                                    class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg shadow-lg shadow-blue-600/20 transition-all hover:scale-105 hover:-translate-y-1 flex items-center justify-center gap-2">
+                                    class="px-8 py-4 bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500 text-white rounded-xl font-bold text-lg shadow-lg shadow-blue-600/20 transition-all hover:scale-105 hover:-translate-y-1 flex items-center justify-center gap-2 glass-shine">
                                     Start Learning
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1260,7 +1441,7 @@
                                     </svg>
                                 </button>
                                 <a href="https://github.com/oghimanshu/Data-Analysis-with-Python" target="_blank"
-                                    class="px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl font-bold text-lg backdrop-blur-md transition-all hover:scale-105 flex items-center justify-center gap-2">
+                                    class="px-8 py-4 bg-white/40 dark:bg-white/5 hover:bg-white/60 dark:hover:bg-white/10 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 rounded-xl font-bold text-lg backdrop-blur-md transition-all hover:scale-105 flex items-center justify-center gap-2 glass-card glass-shine">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                         <path
                                             d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
@@ -1270,22 +1451,26 @@
                             </div>
 
                             <!-- Stats Badges -->
-                            <div class="flex flex-wrap gap-4 mt-8 mb-8">
+                            <div class="flex flex-wrap gap-4 mt-8 mb-8 justify-center md:justify-start">
                                 <div
-                                    class="px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-xs text-slate-300 flex items-center gap-2">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span> 50+ Exercises
+                                    class="px-4 py-2 rounded-full bg-white/40 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2 backdrop-blur-sm glass-card glass-shine">
+                                    <span class="w-2 h-2 rounded-full bg-green-500"></span> 50+ Exercises
                                 </div>
                                 <div
-                                    class="px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-xs text-slate-300 flex items-center gap-2">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> 10h Content
+                                    class="px-4 py-2 rounded-full bg-white/40 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2 backdrop-blur-sm glass-card glass-shine">
+                                    <span class="w-2 h-2 rounded-full bg-purple-500"></span> Completely Free
+                                </div>
+                                <div
+                                    class="px-4 py-2 rounded-full bg-white/40 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2 backdrop-blur-sm glass-card glass-shine">
+                                    <span class="w-2 h-2 rounded-full bg-orange-500"></span> Open-Source
                                 </div>
                             </div>
 
                             <!-- Course Highlights Grid -->
                             <div class="grid grid-cols-2 gap-4 mt-8 text-left">
                                 <div
-                                    class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors">
-                                    <div class="text-blue-400 mt-1">
+                                    class="flex items-start gap-3 p-4 rounded-xl bg-white/40 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-md hover:bg-white/60 dark:hover:bg-white/10 transition-all hover:scale-105 glass-card shadow-sm">
+                                    <div class="text-blue-600 dark:text-blue-400 mt-1">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
@@ -1293,47 +1478,58 @@
                                         </svg>
                                     </div>
                                     <div>
-                                        <h3 class="text-white font-bold text-sm">Real-World Data</h3>
-                                        <p class="text-slate-400 text-xs mt-0.5">Analyze GDP, Inflation, & Trade</p>
+                                        <h3 class="text-slate-900 dark:text-white font-bold text-sm">Real-World Data
+                                        </h3>
+                                        <p class="text-slate-600 dark:text-slate-400 text-xs mt-0.5">Analyze GDP,
+                                            Inflation,
+                                            & Trade</p>
                                     </div>
                                 </div>
                                 <div
-                                    class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors">
-                                    <div class="text-purple-400 mt-1">
+                                    class="flex items-start gap-3 p-4 rounded-xl bg-white/40 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-md hover:bg-white/60 dark:hover:bg-white/10 transition-all hover:scale-105 glass-card shadow-sm">
+                                    <div class="text-purple-600 dark:text-purple-400 mt-1">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                         </svg>
                                     </div>
                                     <div>
-                                        <h3 class="text-white font-bold text-sm">Interactive Charts</h3>
-                                        <p class="text-slate-400 text-xs mt-0.5">Dynamic visualizations</p>
+                                        <h3 class="text-slate-900 dark:text-white font-bold text-sm">Interactive Charts
+                                        </h3>
+                                        <p class="text-slate-600 dark:text-slate-400 text-xs mt-0.5">Dynamic
+                                            visualizations
+                                        </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors">
-                                    <div class="text-pink-400 mt-1">
+                                    class="flex items-start gap-3 p-4 rounded-xl bg-white/40 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-md hover:bg-white/60 dark:hover:bg-white/10 transition-all hover:scale-105 glass-card shadow-sm">
+                                    <div class="text-pink-600 dark:text-pink-400 mt-1">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
                                     </div>
                                     <div>
-                                        <h3 class="text-white font-bold text-sm">Capstone Project</h3>
-                                        <p class="text-slate-400 text-xs mt-0.5">Grammy Awards Analytics</p>
+                                        <h3 class="text-slate-900 dark:text-white font-bold text-sm">Capstone Project
+                                        </h3>
+                                        <p class="text-slate-600 dark:text-slate-400 text-xs mt-0.5">Grammy Awards
+                                            Analytics
+                                        </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors">
-                                    <div class="text-emerald-400 mt-1">
+                                    class="flex items-start gap-3 p-4 rounded-xl bg-white/40 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-md hover:bg-white/60 dark:hover:bg-white/10 transition-all hover:scale-105 glass-card shadow-sm">
+                                    <div class="text-emerald-600 dark:text-emerald-400 mt-1">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M5 13l4 4L19 7"></path>
                                         </svg>
                                     </div>
                                     <div>
-                                        <h3 class="text-white font-bold text-sm">Zero Setup</h3>
-                                        <p class="text-slate-400 text-xs mt-0.5">Runs in-browser instantly</p>
+                                        <h3 class="text-slate-900 dark:text-white font-bold text-sm">Zero Setup</h3>
+                                        <p class="text-slate-600 dark:text-slate-400 text-xs mt-0.5">Works in your
+                                            browser
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -1374,7 +1570,7 @@
                         </div>
 
                         <!-- Right: Visual (VS Code Style) -->
-                        <div class="hidden md:block relative">
+                        <div class="hidden md:block relative animate-float">
                             <div
                                 class="relative z-10 bg-[#1e1e1e] rounded-xl shadow-2xl border border-slate-700/50 overflow-hidden transform rotate-1 hover:rotate-0 transition-all duration-500">
                                 <!-- Window Header -->
@@ -1397,7 +1593,8 @@
                                             class="text-[#c586c0]">import</span>&nbsp;<span
                                             class="text-[#9cdcfe]">matplotlib.pyplot</span>&nbsp;<span
                                             class="text-[#c586c0]">as</span>&nbsp;<span
-                                            class="text-[#9cdcfe]">plt</span></div>
+                                            class="text-[#9cdcfe]">plt</span>
+                                    </div>
                                     <div class="flex"><span class="text-slate-600 w-8 select-none">3</span></div>
                                     <div class="flex"><span class="text-slate-600 w-8 select-none">4</span><span
                                             class="text-[#6a9955]"># Load and analyze data</span></div>
@@ -1410,7 +1607,8 @@
                                             class="text-[#9cdcfe]">df</span>.<span
                                             class="text-[#dcdcaa]">groupby</span>(<span
                                             class="text-[#ce9178]">'Year'</span>).<span
-                                            class="text-[#dcdcaa]">mean</span>()</div>
+                                            class="text-[#dcdcaa]">mean</span>()
+                                    </div>
                                     <div class="flex"><span class="text-slate-600 w-8 select-none">7</span></div>
                                     <div class="flex"><span class="text-slate-600 w-8 select-none">8</span><span
                                             class="text-[#9cdcfe]">plt</span>.<span
@@ -1531,7 +1729,8 @@
                         <div
                             class="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold mb-4">
                             3</div>
-                        <h4 class="text-lg font-bold mb-2 mt-0" style="color: var(--text-heading);">Visualisation</h4>
+                        <h4 class="text-lg font-bold mb-2 mt-0" style="color: var(--text-heading);">Visualisation
+                        </h4>
                         <p class="text-sm" style="color: var(--text-secondary);">Create complex charts for GDP,
                             Inflation, and Global Trade.</p>
                     </div>
@@ -2001,8 +2200,9 @@ print(math.sqrt(25))</code></pre>
                     <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=1200&q=80"
                         alt="Library" class="w-full h-48 object-cover rounded-2xl shadow-sm">
                     <p class="text-xs text-slate-400 mt-2 text-right">Photo by <a href="https://unsplash.com/@chrisried"
-                            target="_blank" class="hover:text-blue-500">Chris Ried</a> on <a href="https://unsplash.com"
-                            target="_blank" class="hover:text-blue-500">Unsplash</a></p>
+                            target="_blank" class="hover:text-blue-500">Chris
+                            Ried</a> on <a href="https://unsplash.com" target="_blank"
+                            class="hover:text-blue-500">Unsplash</a></p>
                 </div>
 
                 <h2 class="text-slate-900 dark:text-slate-50">Topic I: Libraries in Python</h2>
@@ -2065,107 +2265,91 @@ print(math.sqrt(25))</code></pre>
                     </figcaption>
                 </figure>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                     <!-- NumPy -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl shadow-sm border-t-4 border-blue-500 hover:shadow-md hover:scale-[1.02] transition-all group">
+                    <div class="glass-card grad-numpy p-6 rounded-xl group">
                         <h5
                             class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 mt-0 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                             NumPy</h5>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Short for Numerical Python, it is the core
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Short for Numerical Python. Core
                             library
-                            for numerical and scientific computing. Provides tools for arrays, matrices, and
-                            multidimensional
-                            data.</p>
+                            for numerical computing, arrays, and matrices.</p>
                     </div>
                     <!-- Pandas -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl shadow-sm border-t-4 border-indigo-600 hover:shadow-md hover:scale-[1.02] transition-all group">
+                    <div class="glass-card grad-pandas p-6 rounded-xl group">
                         <h5
                             class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 mt-0 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                             Pandas</h5>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Data analysis and manipulation library
-                            built on
-                            NumPy. Introduces DataFrame and Series for efficient structured data handling.</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Data analysis and manipulation.
+                            Introduces
+                            DataFrame and Series for structured data.</p>
                     </div>
                     <!-- Matplotlib -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl shadow-sm border-t-4 border-teal-500 hover:shadow-md hover:scale-[1.02] transition-all group">
+                    <div class="glass-card grad-matplotlib p-6 rounded-xl group">
                         <h5
                             class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 mt-0 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
                             Matplotlib</h5>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Data visualization library for creating
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Comprehensive plotting library for
                             static,
-                            animated, and interactive plots like bar graphs, histograms, and scatter plots.</p>
+                            animated, and interactive visualizations.</p>
                     </div>
                     <!-- SciPy -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl shadow-sm border-t-4 border-blue-400 hover:shadow-md hover:scale-[1.02] transition-all group">
+                    <div class="glass-card grad-numpy p-6 rounded-xl group">
                         <h5
                             class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 mt-0 group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors">
                             SciPy</h5>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Scientific Python. Extends NumPy with
-                            tools for
-                            optimization, integration, signal processing, and linear algebra.</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Scientific Python. Optimization,
+                            integration, signal processing, and linear algebra.</p>
                     </div>
                     <!-- TensorFlow -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl shadow-sm border-t-4 border-orange-500 hover:shadow-md hover:scale-[1.02] transition-all group">
+                    <div class="glass-card grad-tensorflow p-6 rounded-xl group">
                         <h5
                             class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 mt-0 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                             TensorFlow</h5>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Open-source ML/DL framework by Google.
-                            Used for
-                            building and training neural networks for image recognition and NLP.</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">End-to-end open source platform for
+                            machine learning by Google.</p>
                     </div>
                     <!-- Scikit-learn -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl shadow-sm border-t-4 border-orange-400 hover:shadow-md hover:scale-[1.02] transition-all group">
+                    <div class="glass-card grad-scikit p-6 rounded-xl group">
                         <h5
                             class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 mt-0 group-hover:text-orange-500 dark:group-hover:text-orange-300 transition-colors">
                             Scikit-learn</h5>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">ML library built on NumPy/SciPy. Offers
-                            tools for
-                            classification, regression, clustering, and dimensionality reduction.</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Simple and efficient tools for
+                            predictive
+                            data analysis and machine learning.</p>
                     </div>
                     <!-- Scrapy -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl shadow-sm border-t-4 border-green-600 hover:shadow-md hover:scale-[1.02] transition-all group">
+                    <div class="glass-card grad-scrapy p-6 rounded-xl group">
                         <h5
                             class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 mt-0 group-hover:text-green-700 dark:group-hover:text-green-400 transition-colors">
                             Scrapy</h5>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Web scraping and data extraction library.
-                            Create
-                            spiders to automatically navigate web pages and collect structured data.</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Fast high-level web crawling and web
+                            scraping framework.</p>
                     </div>
                     <!-- PyTorch -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl shadow-sm border-t-4 border-red-500 hover:shadow-md hover:scale-[1.02] transition-all group">
+                    <div class="glass-card grad-pytorch p-6 rounded-xl group">
                         <h5
                             class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 mt-0 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
                             PyTorch</h5>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Deep learning framework by Facebook.
-                            Provides
-                            dynamic computation graphs, easy debugging, and GPU acceleration.</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Deep learning framework that puts
+                            Python
+                            first. Dynamic neural networks.</p>
                     </div>
                     <!-- PyGame -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl shadow-sm border-t-4 border-yellow-400 hover:shadow-md hover:scale-[1.02] transition-all group">
+                    <div class="glass-card grad-scikit p-6 rounded-xl group">
                         <h5
                             class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 mt-0 group-hover:text-yellow-600 dark:group-hover:text-yellow-300 transition-colors">
                             PyGame</h5>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Cross-platform library for 2D games and
-                            multimedia. Handles graphics, sound, and user input.</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Cross-platform set of Python modules
+                            designed for writing video games.</p>
                     </div>
                     <!-- PyBrain -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl shadow-sm border-t-4 border-purple-500 hover:shadow-md hover:scale-[1.02] transition-all group">
+                    <div class="glass-card grad-pandas p-6 rounded-xl group">
                         <h5
                             class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 mt-0 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                             PyBrain</h5>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Beginner-friendly ML library for
-                            reinforcement
-                            learning, AI, and neural networks.</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Modular Machine Learning Library for
+                            Python. (Legacy)</p>
                     </div>
                 </div>
 
@@ -3006,7 +3190,7 @@ print("Unique:\n", df_dup.drop_duplicates())</code></pre>
             <!-- Topic 9 -->
             <div id="topic9" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
                 <div class="relative mb-8">
-                    <img src="https://images.unsplash.com/photo-1611974765270-ca12586343bb?auto=format&fit=crop&w=1200&q=80"
+                    <img src="https://images.unsplash.com/photo-1611974765270-ca1258634369?auto=format&fit=crop&w=1200&q=80"
                         alt="Global Economy" class="w-full h-48 object-cover rounded-2xl shadow-sm">
                     <p class="text-xs text-slate-400 mt-2 text-right">Photo by <a
                             href="https://unsplash.com/@maximhopman" target="_blank" class="hover:text-blue-500">Maxim
@@ -4297,7 +4481,6 @@ except:
             const progressFill = document.getElementById('progress-fill');
             const progPrev = document.getElementById('prog-prev');
             const progNext = document.getElementById('prog-next');
-            let progressHideTimeout;
 
             // Ordered list of topics for progress tracking
             const progressTopics = [
@@ -4308,11 +4491,30 @@ except:
                 'viz', 'kendrick', 'grammy', 'govdata', 'learning',
                 'faq', 'glossary', 'references'
             ];
-
-            // Make switchTopic available, with smooth snapping behaviour
+            // Global switchTopic function for robustness
             window.switchTopic = function (targetTopic) {
-                if (!targetTopic || targetTopic === currentTopic) return;
+                // Re-query elements to ensure we have the latest DOM state
+                const topicPanels = document.querySelectorAll('.topic-panel');
+                const mainHeader = document.getElementById('main-header');
+                const mainContent = document.getElementById('main-content');
+                const sidebar = document.getElementById('sidebar');
+                // The following variables are already declared in the outer scope of DOMContentLoaded
+                // and are accessible here. Re-declaring them with `const` inside this function
+                // would create new local variables, shadowing the outer ones.
+                // Removing the re-declarations to use the outer scope variables.
+                // const progressPill = document.getElementById('progress-pill');
+                // const progressText = document.getElementById('progress-text');
+                // const progressFill = document.getElementById('progress-fill');
+                // const progPrev = document.getElementById('prog-prev');
+                // const progNext = document.getElementById('prog-next');
+
+                // Current topic tracking (simulated global)
+                window.currentTopic = window.currentTopic || 'home';
+
+                if (!targetTopic || targetTopic === window.currentTopic) return;
+
                 document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
                 if (targetTopic !== 'home') {
                     const activeLink = document.querySelector(`.nav-link[data-topic="${targetTopic}"]`);
                     if (activeLink) {
@@ -4324,6 +4526,7 @@ except:
                 } else {
                     if (mainHeader) mainHeader.classList.add('hidden');
                 }
+
                 topicPanels.forEach(panel => panel.classList.add('hidden'));
                 const el = document.getElementById(targetTopic);
                 if (el) {
@@ -4334,27 +4537,30 @@ except:
                         setTimeout(() => mainContent.scrollTo({ top: 0, behavior: 'smooth' }), 50);
                     }
                 }
-                currentTopic = targetTopic;
-                if (sidebar && sidebar.classList.contains('open')) toggleMenu();
+                window.currentTopic = targetTopic;
+
+                // Close sidebar on mobile if open
+                if (sidebar && sidebar.classList.contains('open') && typeof toggleMenu === 'function') {
+                    toggleMenu();
+                }
 
                 // Update Progress Bar
                 const topicIndex = progressTopics.indexOf(targetTopic);
-                if (topicIndex !== -1) {
-                    if (progressHideTimeout) clearTimeout(progressHideTimeout);
+                if (topicIndex !== -1 && progressPill) {
+                    if (window.progressHideTimeout) clearTimeout(window.progressHideTimeout);
                     progressPill.style.display = ''; // Reset to CSS flex
                     // Force reflow
                     void progressPill.offsetWidth;
                     progressPill.classList.add('visible');
 
                     // Define main topics count (excluding resources)
-                    // Define main topics count (excluding resources)
-                    const mainTopicCount = 23; // topicA..topicH + topic1..topic10, viz, kendrick, grammy, govdata, learning
+                    const mainTopicCount = 23;
 
                     if (topicIndex < mainTopicCount) {
                         const currentStep = topicIndex + 1;
                         const percent = (currentStep / mainTopicCount) * 100;
-                        progressText.textContent = `Topic ${currentStep} of ${mainTopicCount}`;
-                        progressFill.style.width = `${percent}%`;
+                        if (progressText) progressText.textContent = `Topic ${currentStep} of ${mainTopicCount}`;
+                        if (progressFill) progressFill.style.width = `${percent}%`;
                     } else {
                         // It is a resource (FAQ, Glossary, References)
                         const resourceTitles = {
@@ -4362,30 +4568,31 @@ except:
                             'glossary': 'Glossary',
                             'references': 'References'
                         };
-                        progressText.textContent = resourceTitles[targetTopic] || 'Resources';
-                        progressFill.style.width = '100%';
+                        if (progressText) progressText.textContent = resourceTitles[targetTopic] || 'Resources';
+                        if (progressFill) progressFill.style.width = '100%';
                     }
 
                     // Update buttons state
                     if (progPrev) progPrev.disabled = topicIndex === 0;
                     if (progNext) progNext.disabled = topicIndex === progressTopics.length - 1;
-                } else {
+                } else if (progressPill) {
                     // Hide if not a main topic (e.g. home)
                     progressPill.classList.remove('visible');
-                    if (progressHideTimeout) clearTimeout(progressHideTimeout);
-                    progressHideTimeout = setTimeout(() => {
+                    if (window.progressHideTimeout) clearTimeout(window.progressHideTimeout);
+                    window.progressHideTimeout = setTimeout(() => {
                         progressPill.style.display = 'none';
                     }, 400);
                 }
-            }
+            };
 
             // Progress Bar Button Listeners
             if (progPrev) {
                 progPrev.addEventListener('click', () => {
-                    const currentIndex = progressTopics.indexOf(currentTopic);
+                    const currentIndex = progressTopics.indexOf(window.currentTopic);
                     if (currentIndex > 0) {
                         window.switchTopic(progressTopics[currentIndex - 1]);
-                    } else if (currentIndex === 0) {
+                    } else {
+                        // If at start or unknown, go home
                         window.switchTopic('home');
                     }
                 });
@@ -4393,18 +4600,26 @@ except:
 
             if (progNext) {
                 progNext.addEventListener('click', () => {
-                    const currentIndex = progressTopics.indexOf(currentTopic);
-                    if (currentIndex !== -1 && currentIndex < progressTopics.length - 1) {
+                    const currentIndex = progressTopics.indexOf(window.currentTopic);
+                    if (currentIndex === -1) {
+                        // If on home or unknown, go to first topic
+                        window.switchTopic(progressTopics[0]);
+                    } else if (currentIndex < progressTopics.length - 1) {
                         window.switchTopic(progressTopics[currentIndex + 1]);
                     }
                 });
             }
 
-            // Safe event wiring for nav links and buttons
-            navLinks.forEach(link => {
-                if (!link) return;
-                link.addEventListener('click', (e) => { e.preventDefault(); const t = link.dataset.topic; if (t) window.switchTopic(t); });
+            // Safe event wiring for nav links and buttons using Event Delegation
+            document.addEventListener('click', (e) => {
+                const link = e.target.closest('.nav-link');
+                if (link) {
+                    e.preventDefault();
+                    const t = link.dataset.topic;
+                    if (t) window.switchTopic(t);
+                }
             });
+
             if (homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); window.switchTopic('home'); });
             const headerHomeLink = document.getElementById('header-home-link');
             if (headerHomeLink) headerHomeLink.addEventListener('click', (e) => { e.preventDefault(); window.switchTopic('home'); });

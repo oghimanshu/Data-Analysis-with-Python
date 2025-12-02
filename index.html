@@ -4573,7 +4573,8 @@ except:
                     }
 
                     // Update buttons state
-                    if (progPrev) progPrev.disabled = topicIndex === 0;
+                    // Enable prev button even on first topic (to go back to home)
+                    if (progPrev) progPrev.disabled = false;
                     if (progNext) progNext.disabled = topicIndex === progressTopics.length - 1;
                 } else if (progressPill) {
                     // Hide if not a main topic (e.g. home)
@@ -4589,10 +4590,13 @@ except:
             if (progPrev) {
                 progPrev.addEventListener('click', () => {
                     const currentIndex = progressTopics.indexOf(window.currentTopic);
-                    if (currentIndex > 0) {
+                    // If on the first topic (Topic A, index 0), go to home
+                    if (currentIndex === 0) {
+                        window.switchTopic('home');
+                    } else if (currentIndex > 0) {
                         window.switchTopic(progressTopics[currentIndex - 1]);
                     } else {
-                        // If at start or unknown, go home
+                        // If unknown, go home
                         window.switchTopic('home');
                     }
                 });

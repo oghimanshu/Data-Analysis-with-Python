@@ -93,7 +93,72 @@
             --accent-color: #2563eb;
             --accent-hover: #1d4ed8;
             --chart-text: #64748b;
+            --chart-text: #64748b;
             --chart-grid: rgba(226, 232, 240, 0.6);
+
+            /* Sidebar & Mobile */
+            --bg-sidebar: rgba(248, 250, 252, 0.98);
+            /* Almost solid for mobile sidebar */
+        }
+
+        /* Search Box */
+        .search-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        /* Back to Hero Footer */
+        .hero-footer {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(to top, var(--bg-panel), transparent);
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
         }
 
         /* AMOLED Dark Mode / Glass Dark */
@@ -115,7 +180,12 @@
             --accent-color: #3b82f6;
             --accent-hover: #60a5fa;
             --chart-text: #94a3b8;
+            --chart-text: #94a3b8;
             --chart-grid: rgba(51, 51, 51, 0.6);
+
+            /* Sidebar & Mobile Dark */
+            --bg-sidebar: rgba(2, 6, 23, 0.98);
+            /* Almost solid dark for mobile sidebar */
         }
 
         /* Global Background Mesh */
@@ -146,64 +216,64 @@
             /* Deep slate/black */
         }
 
-        /* Consolidated Text Color Overrides */
+        /* Consolidated Text Color Overrides for Dark Mode Compatibility */
+        /* In Light Mode: Use default Tailwind or slightly mapped vars */
+
         .text-slate-900,
         .text-gray-900,
+        .text-black {
+            color: var(--text-heading) !important;
+        }
+
         .text-slate-800,
         .text-gray-800,
         .text-slate-700,
         .text-gray-700 {
-            color: var(--text-heading) !important;
+            color: var(--text-primary) !important;
         }
 
         .text-slate-600,
         .text-gray-600,
         .text-slate-500,
-        .text-gray-500,
-        .text-slate-400,
-        .text-gray-400 {
+        .text-gray-500 {
             color: var(--text-secondary) !important;
         }
 
-        .text-slate-300,
-        .text-gray-300,
-        .text-slate-200,
-        .text-gray-200,
-        .text-slate-100,
-        .text-gray-100,
-        .text-slate-50,
-        .text-gray-50 {
-            color: var(--text-primary) !important;
-        }
-
+        /* In Dark Mode: FLIP the colors to ensure visibility */
+        /* Dark text (900/800) becomes Light text (Primary/Heading) */
         .dark .text-slate-900,
         .dark .text-gray-900,
         .dark .text-slate-800,
         .dark .text-gray-800,
+        .dark .text-black {
+            color: var(--text-heading) !important;
+        }
+
+        /* Medium text (700/600) becomes Primary/Secondary */
         .dark .text-slate-700,
         .dark .text-gray-700,
         .dark .text-slate-600,
-        .dark .text-gray-600,
+        .dark .text-gray-600 {
+            color: var(--text-primary) !important;
+        }
+
+        /* Light text (500/400) stays Secondary or Lightens */
         .dark .text-slate-500,
         .dark .text-gray-500,
         .dark .text-slate-400,
-        .dark .text-gray-400,
+        .dark .text-gray-400 {
+            color: var(--text-secondary) !important;
+        }
+
+        /* Already light text (300-50) stays light */
         .dark .text-slate-300,
         .dark .text-gray-300,
         .dark .text-slate-200,
         .dark .text-gray-200,
         .dark .text-slate-100,
         .dark .text-gray-100,
-        .dark .text-slate-50,
-        .dark .text-gray-50 {
-            color: var(--text-primary) !important;
-        }
-
-        .dark .text-slate-500,
-        .dark .text-gray-500,
-        .dark .text-slate-400,
-        .dark .text-gray-400 {
-            color: var(--text-secondary) !important;
+        .dark .text-white {
+            color: var(--text-heading) !important;
         }
 
         /* Custom Command Box to ensure visibility */
@@ -366,6 +436,29 @@
             visibility: visible !important;
             opacity: 1 !important;
         }
+
+        /* Specific fix for Sidebar Metadata to ensure contrast */
+        .dark #sidebar h1 {
+            opacity: 1 !important;
+            color: #60a5fa !important;
+        }
+
+        .dark #sidebar span {
+            opacity: 1 !important;
+            color: #94a3b8 !important;
+        }
+
+        .dark #sidebar .nav-link {
+            opacity: 1 !important;
+        }
+
+        /* Force Button Text Colors */
+        .dark button.group span.relative {
+            color: #0f172a !important;
+        }
+
+        /* Start Learning text black in dark mode */
+
 
         /* Force all Tailwind text colors to use CSS variables instead of hardcoded values */
         * {
@@ -954,7 +1047,9 @@
                 left: 0;
                 height: 100%;
                 z-index: 50;
-                background-color: var(--bg-sidebar);
+                background-color: var(--bg-sidebar) !important;
+                /* Force solid background */
+                box-shadow: 20px 0 25px -5px rgba(0, 0, 0, 0.1), 10px 0 10px -5px rgba(0, 0, 0, 0.04);
             }
 
             #sidebar.open {
@@ -967,18 +1062,129 @@
         }
 
         /* Glass UI Utilities */
+        /* Premium Glass Sidebar Styles */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            background: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.5) !important;
         }
 
         .dark .glass-panel {
-            background: rgba(17, 24, 39, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            background: rgba(15, 23, 42, 0.75) !important;
+            /* Slate 900 @ 75% */
+            border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+        }
+
+        /* Navigation Links - Pill Shape */
+        .nav-link {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 9999px;
+            /* Pill shape */
+            padding: 0.5rem 1rem;
+            margin-left: -0.5rem;
+            /* Offset padding */
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: block;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(241, 245, 249, 0.8);
+            /* Slate 100 */
+            color: var(--text-heading) !important;
+            transform: translateX(4px);
+        }
+
+        .dark .nav-link:hover {
+            background-color: rgba(30, 41, 59, 0.8);
+            /* Slate 800 */
+            color: white !important;
+        }
+
+        /* Active State */
+        .nav-link.active {
+            background-color: rgba(239, 246, 255, 0.9) !important;
+            /* Blue 50 */
+            color: #2563eb !important;
+            /* Blue 600 */
+            font-weight: 600;
+            border-color: rgba(191, 219, 254, 0.5);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .nav-link.active {
+            background-color: rgba(30, 58, 138, 0.4) !important;
+            /* Blue 900 */
+            color: #60a5fa !important;
+            /* Blue 400 */
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        /* Custom Scrollbar for Sidebar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(148, 163, 184, 0.3);
+            /* Slate 400 */
+            border-radius: 20px;
+        }
+
+        .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+            background-color: rgba(148, 163, 184, 0.5);
+        }
+
+        /* Search Input Styling */
+        .search-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(203, 213, 225, 0.5);
+            border-radius: 12px;
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            color: var(--text-heading);
+        }
+
+        .search-input:focus {
+            background: white;
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .dark .search-input {
+            background: rgba(30, 41, 59, 0.5);
+            border-color: rgba(71, 85, 105, 0.5);
+            color: white;
+        }
+
+        .dark .search-input:focus {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: #60a5fa;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1rem;
+            height: 1rem;
+            color: var(--text-secondary);
+            pointer-events: none;
         }
 
         .glass-card {
@@ -1071,11 +1277,25 @@
         }
 
         /* --- Hero Redesign CSS --- */
+        @keyframes spin-slow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 20s linear infinite;
+        }
+
         @keyframes float {
 
             0%,
             100% {
-                transform: translateY(0px);
+                transform: translateY(0);
             }
 
             50% {
@@ -1152,7 +1372,7 @@
 
     <!-- Mobile Header -->
     <div
-        class="md:hidden fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between">
+        class="md:hidden fixed top-0 left-0 right-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-white/20 dark:border-slate-800 px-4 py-3 flex items-center justify-between shadow-sm">
         <div class="flex items-center gap-3">
             <button id="menu-btn" class="text-slate-600 dark:text-slate-400 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1188,7 +1408,7 @@
 
     <!-- Desktop Sidebar Toggle Button (Floating) -->
     <button id="sidebar-toggle-btn"
-        class="hidden md:flex fixed top-4 left-4 z-[100] p-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-lg shadow-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all hover:scale-105"
+        class="hidden md:flex fixed top-4 left-4 z-[160] p-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-lg shadow-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all hover:scale-105"
         aria-label="Toggle Sidebar">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -1198,11 +1418,11 @@
     <div class="flex flex-col md:flex-row h-screen overflow-hidden">
 
         <!-- Overlay for mobile -->
-        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-[140] hidden md:hidden"></div>
 
         <!-- Sidebar Navigation -->
         <nav id="sidebar"
-            class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 w-64 md:w-1/5 h-full glass-panel border-r border-slate-200 dark:border-slate-800 px-6 pb-6 pt-16 flex flex-col overflow-hidden z-50 shadow-lg transition-transform duration-300">
+            class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 w-64 md:w-1/5 h-full glass-panel border-r border-slate-200 dark:border-slate-800 px-6 pb-6 pt-16 flex flex-col overflow-hidden z-[150] shadow-lg transition-transform duration-300">
             <div class="flex justify-between items-center mb-8 flex-none">
                 <a href="#" id="home-link" class="group flex items-center gap-3">
                     <img src="logo.png" alt="Logo"
@@ -1242,6 +1462,17 @@
             </div>
 
             <div class="space-y-6 flex-grow overflow-y-auto pr-2 -mr-2 custom-scrollbar">
+                <!-- Search Box -->
+                <div class="px-2 mb-0">
+                    <div class="search-container" onclick="document.getElementById('topic-search').focus()">
+                        <svg class="search-icon cursor-pointer transition-colors hover:text-blue-500" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input type="text" id="topic-search" class="search-input" placeholder="Search topics...">
+                    </div>
+                </div>
                 <!-- Module 0 -->
                 <div>
                     <h3 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3">
@@ -1270,6 +1501,7 @@
                         <li><a href="#" class="nav-link" data-topic="topic1">Topic 1: Data Ingestion</a></li>
                         <li><a href="#" class="nav-link" data-topic="topic2">Topic 2: NumPy Ops</a></li>
                         <li><a href="#" class="nav-link" data-topic="topic3">Topic 3: Advanced Slicing</a></li>
+                        <li><a href="#" class="nav-link" data-topic="topic3b">Topic 3B: Statistical Analysis</a></li>
                         <li><a href="#" class="nav-link" data-topic="topic4">Topic 4: Array Metadata</a></li>
                     </ul>
                 </div>
@@ -1397,344 +1629,251 @@
                 </div>
             </header>
 
-            <div id="home" class="topic-panel">
+            <div id="home" class="topic-panel h-full flex flex-col">
                 <section id="hero"
-                    class="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-white dark:bg-slate-900 hero-section z-0">
-                    <!-- Background Image with Gradient Overlay -->
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2850&q=80"
-                        alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
-                    <div class="absolute inset-0 -z-10 hero-overlay">
-                    </div>
+                    class="relative w-full flex-grow flex flex-col pt-32 pb-20 overflow-x-hidden bg-white dark:bg-slate-900 hero-section z-0 min-h-screen">
+                    <!-- Background with subtle animated gradient -->
                     <div
-                        class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay">
+                        class="absolute inset-0 -z-10 bg-gradient-to-b from-slate-50 via-white to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-900">
+                    </div>
+                    <!-- Animated Mesh Gradient Background -->
+                    <div
+                        class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_50%,rgba(76,29,149,0.1),transparent_50%)] animate-pulse">
+                    </div>
+                    <div class="absolute inset-0 -z-10 overflow-hidden">
+                        <div
+                            class="absolute -top-[50%] -left-[50%] w-[200%] h-[200%] bg-[conic-gradient(from_90deg_at_50%_50%,#E2E8F0_0%,#F8FAFC_50%,#E2E8F0_100%)] dark:bg-[conic-gradient(from_90deg_at_50%_50%,#0f172a_0%,#1e293b_50%,#0f172a_100%)] opacity-30 animate-spin-slow">
+                        </div>
                     </div>
 
-                    <!-- Content -->
-                    <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-                        <!-- Left: Text -->
-                        <!-- Left: Text -->
-                        <div class="text-center md:text-left">
+                    <!-- Hero Theme Toggle (Fixed Position) -->
+                    <div class="absolute top-6 right-6 z-50 flex items-center gap-4">
+                        <button id="home-theme-toggle"
+                            class="theme-toggle p-2 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-md border border-white/20 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all hover:scale-105 shadow-sm"
+                            aria-label="Toggle Dark Mode">
+                            <svg class="w-5 h-5 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                                </path>
+                            </svg>
+                            <svg class="w-5 h-5 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Floating Background Icons (New Visuals) -->
+                    <div class="absolute top-20 left-10 md:left-20 animate-float opacity-60 hidden md:block"
+                        style="animation-duration: 6s;">
+                        <div
+                            class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center border border-slate-100 dark:border-slate-700">
+                            <span class="text-2xl">🐍</span>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-40 right-10 md:right-20 animate-float opacity-60 hidden md:block"
+                        style="animation-delay: 2s; animation-duration: 7s;">
+                        <div
+                            class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center border border-slate-100 dark:border-slate-700">
+                            <span class="text-2xl">📊</span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex flex-col md:flex-row items-center justify-center gap-12 w-full max-w-6xl mx-auto mb-20 relative z-10">
+
+                        <!-- Hero Text -->
+                        <div class="flex-1 text-center md:text-left">
                             <div
-                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider mb-6 backdrop-blur-sm glass-card">
-                                <span class="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-pulse"></span>
-                                Interactive Course
+                                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold uppercase tracking-wider mb-6 backdrop-blur-md animate-fade-in-down">
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                                </span>
+                                Interactive Python Course
                             </div>
+
                             <h1
-                                class="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight tracking-tight">
+                                class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight tracking-tight drop-shadow-sm animate-fade-in-up">
                                 Master <span
-                                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 dark:from-blue-400 dark:via-purple-400 dark:to-blue-400 animate-gradient-x">Data
+                                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">Data
                                     Analysis</span> <br> with Python
                             </h1>
-                            <p
-                                class="text-lg md:text-xl text-slate-700 dark:text-slate-300 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
-                                A comprehensive, interactive journey from basic syntax to advanced data visualization.
-                                Built
-                                for the modern web.
+
+                            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-xl leading-relaxed font-light animate-fade-in-up"
+                                style="animation-delay: 0.1s;">
+                                A comprehensive, interactive journey from zero to <strong
+                                    class="text-slate-900 dark:text-slate-200 font-semibold">Real-World
+                                    Analytics</strong>. Built for the modern web.
                             </p>
-                            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+
+                            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start w-full animate-fade-in-up"
+                                style="animation-delay: 0.2s;">
                                 <button onclick="switchTopic('topicA')"
-                                    class="px-8 py-4 bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500 text-white rounded-xl font-bold text-lg shadow-lg shadow-blue-600/20 transition-all hover:scale-105 hover:-translate-y-1 flex items-center justify-center gap-2 glass-shine">
-                                    Start Learning
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="group relative px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 !text-white dark:!text-slate-900 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2 overflow-hidden">
+                                    <span class="relative z-10">Start Learning</span>
+                                    <svg class="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                                     </svg>
                                 </button>
                                 <a href="https://github.com/oghimanshu/Data-Analysis-with-Python" target="_blank"
-                                    class="px-8 py-4 bg-white/40 dark:bg-white/5 hover:bg-white/60 dark:hover:bg-white/10 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 rounded-xl font-bold text-lg backdrop-blur-md transition-all hover:scale-105 flex items-center justify-center gap-2 glass-card glass-shine">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    class="px-8 py-4 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-full font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-700/80 transition-all hover:-translate-y-1 flex items-center justify-center gap-2 group">
+                                    <svg class="w-5 h-5 text-yellow-500 group-hover:scale-110 transition-transform"
+                                        fill="currentColor" viewBox="0 0 24 24">
                                         <path
-                                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                            d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
                                     </svg>
-                                    GitHub
+                                    <span>Star on GitHub</span>
+                                    <svg class="w-5 h-5 ml-1 text-slate-400 group-hover:text-black dark:group-hover:text-white transition-colors"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                            clip-rule="evenodd" />
+                                    </svg>
                                 </a>
                             </div>
-
-                            <!-- Stats Badges -->
-                            <div class="flex flex-wrap gap-4 mt-8 mb-8 justify-center md:justify-start">
-                                <div
-                                    class="px-4 py-2 rounded-full bg-white/40 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2 backdrop-blur-sm glass-card glass-shine">
-                                    <span class="w-2 h-2 rounded-full bg-green-500"></span> 50+ Exercises
-                                </div>
-                                <div
-                                    class="px-4 py-2 rounded-full bg-white/40 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2 backdrop-blur-sm glass-card glass-shine">
-                                    <span class="w-2 h-2 rounded-full bg-purple-500"></span> Completely Free
-                                </div>
-                                <div
-                                    class="px-4 py-2 rounded-full bg-white/40 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2 backdrop-blur-sm glass-card glass-shine">
-                                    <span class="w-2 h-2 rounded-full bg-orange-500"></span> Open-Source
-                                </div>
-                            </div>
-
-                            <!-- Course Highlights Grid -->
-                            <div class="grid grid-cols-2 gap-4 mt-8 text-left">
-                                <div
-                                    class="flex items-start gap-3 p-4 rounded-xl bg-white/40 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-md hover:bg-white/60 dark:hover:bg-white/10 transition-all hover:scale-105 glass-card shadow-sm">
-                                    <div class="text-blue-600 dark:text-blue-400 mt-1">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 class="text-slate-900 dark:text-white font-bold text-sm">Real-World Data
-                                        </h3>
-                                        <p class="text-slate-600 dark:text-slate-400 text-xs mt-0.5">Analyze GDP,
-                                            Inflation,
-                                            & Trade</p>
-                                    </div>
-                                </div>
-                                <div
-                                    class="flex items-start gap-3 p-4 rounded-xl bg-white/40 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-md hover:bg-white/60 dark:hover:bg-white/10 transition-all hover:scale-105 glass-card shadow-sm">
-                                    <div class="text-purple-600 dark:text-purple-400 mt-1">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 class="text-slate-900 dark:text-white font-bold text-sm">Interactive Charts
-                                        </h3>
-                                        <p class="text-slate-600 dark:text-slate-400 text-xs mt-0.5">Dynamic
-                                            visualizations
-                                        </p>
-                                    </div>
-                                </div>
-                                <div
-                                    class="flex items-start gap-3 p-4 rounded-xl bg-white/40 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-md hover:bg-white/60 dark:hover:bg-white/10 transition-all hover:scale-105 glass-card shadow-sm">
-                                    <div class="text-pink-600 dark:text-pink-400 mt-1">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 class="text-slate-900 dark:text-white font-bold text-sm">Capstone Project
-                                        </h3>
-                                        <p class="text-slate-600 dark:text-slate-400 text-xs mt-0.5">Grammy Awards
-                                            Analytics
-                                        </p>
-                                    </div>
-                                </div>
-                                <div
-                                    class="flex items-start gap-3 p-4 rounded-xl bg-white/40 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-md hover:bg-white/60 dark:hover:bg-white/10 transition-all hover:scale-105 glass-card shadow-sm">
-                                    <div class="text-emerald-600 dark:text-emerald-400 mt-1">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 class="text-slate-900 dark:text-white font-bold text-sm">Zero Setup</h3>
-                                        <p class="text-slate-600 dark:text-slate-400 text-xs mt-0.5">Works in your
-                                            browser
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Tech Stack Strip -->
-                            <div class="mt-8 pt-8 border-t border-slate-800/50">
-                                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Powered By
-                                </p>
-                                <div
-                                    class="flex flex-wrap gap-6 items-center opacity-70 hover:opacity-100 transition-opacity">
-                                    <!-- Python -->
-                                    <div class="flex items-center gap-2 group cursor-default">
-                                        <div class="w-2 h-2 rounded-full bg-gradient-to-tr from-blue-500 to-yellow-400">
-                                        </div>
-                                        <span
-                                            class="text-slate-400 font-bold text-sm group-hover:text-white transition-colors">Python</span>
-                                    </div>
-                                    <!-- Pandas -->
-                                    <div class="flex items-center gap-2 group cursor-default">
-                                        <div class="w-2 h-2 rounded-full bg-blue-600"></div>
-                                        <span
-                                            class="text-slate-400 font-bold text-sm group-hover:text-white transition-colors">Pandas</span>
-                                    </div>
-                                    <!-- NumPy -->
-                                    <div class="flex items-center gap-2 group cursor-default">
-                                        <div class="w-2 h-2 rounded-full bg-blue-400"></div>
-                                        <span
-                                            class="text-slate-400 font-bold text-sm group-hover:text-white transition-colors">NumPy</span>
-                                    </div>
-                                    <!-- Matplotlib -->
-                                    <div class="flex items-center gap-2 group cursor-default">
-                                        <div class="w-2 h-2 rounded-full bg-orange-500"></div>
-                                        <span
-                                            class="text-slate-400 font-bold text-sm group-hover:text-white transition-colors">Matplotlib</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
-                        <!-- Right: Visual (VS Code Style) -->
-                        <div class="hidden md:block relative animate-float">
+                        <!-- Hero Visual (3D Tilt) -->
+                        <div class="flex-1 flex items-center justify-center relative perspective-1000 animate-fade-in-up mt-10 md:mt-0"
+                            style="animation-delay: 0.3s;">
                             <div
-                                class="relative z-10 bg-[#1e1e1e] rounded-xl shadow-2xl border border-slate-700/50 overflow-hidden transform rotate-1 hover:rotate-0 transition-all duration-500">
-                                <!-- Window Header -->
-                                <div class="flex items-center px-4 py-3 bg-[#252526] border-b border-slate-700/50">
-                                    <div class="flex gap-2">
-                                        <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                                        <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                                        <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-                                    </div>
-                                    <div class="ml-4 text-xs text-slate-400 font-mono">analysis.py — Python</div>
+                                class="relative w-72 h-72 lg:w-96 lg:h-96 transform hover:rotate-y-12 hover:rotate-x-12 transition-transform duration-700 ease-out preserve-3d cursor-pointer">
+                                <!-- Decorative Blobs -->
+                                <div
+                                    class="absolute -top-10 -left-10 w-40 h-40 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob">
                                 </div>
-                                <!-- Code Area -->
-                                <div class="p-6 font-mono text-sm leading-relaxed text-slate-300">
-                                    <div class="flex"><span class="text-slate-600 w-8 select-none">1</span><span
-                                            class="text-[#c586c0]">import</span>&nbsp;<span
-                                            class="text-[#9cdcfe]">pandas</span>&nbsp;<span
-                                            class="text-[#c586c0]">as</span>&nbsp;<span class="text-[#9cdcfe]">pd</span>
-                                    </div>
-                                    <div class="flex"><span class="text-slate-600 w-8 select-none">2</span><span
-                                            class="text-[#c586c0]">import</span>&nbsp;<span
-                                            class="text-[#9cdcfe]">matplotlib.pyplot</span>&nbsp;<span
-                                            class="text-[#c586c0]">as</span>&nbsp;<span
-                                            class="text-[#9cdcfe]">plt</span>
-                                    </div>
-                                    <div class="flex"><span class="text-slate-600 w-8 select-none">3</span></div>
-                                    <div class="flex"><span class="text-slate-600 w-8 select-none">4</span><span
-                                            class="text-[#6a9955]"># Load and analyze data</span></div>
-                                    <div class="flex"><span class="text-slate-600 w-8 select-none">5</span><span
-                                            class="text-[#9cdcfe]">df</span>&nbsp;=&nbsp;<span
-                                            class="text-[#dcdcaa]">read_csv</span>(<span
-                                            class="text-[#ce9178]">'economy.csv'</span>)</div>
-                                    <div class="flex"><span class="text-slate-600 w-8 select-none">6</span><span
-                                            class="text-[#9cdcfe]">trend</span>&nbsp;=&nbsp;<span
-                                            class="text-[#9cdcfe]">df</span>.<span
-                                            class="text-[#dcdcaa]">groupby</span>(<span
-                                            class="text-[#ce9178]">'Year'</span>).<span
-                                            class="text-[#dcdcaa]">mean</span>()
-                                    </div>
-                                    <div class="flex"><span class="text-slate-600 w-8 select-none">7</span></div>
-                                    <div class="flex"><span class="text-slate-600 w-8 select-none">8</span><span
-                                            class="text-[#9cdcfe]">plt</span>.<span
-                                            class="text-[#dcdcaa]">plot</span>(<span
-                                            class="text-[#9cdcfe]">trend</span>) <span class="animate-pulse">|</span>
-                                    </div>
+                                <div
+                                    class="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-500 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animation-delay-2000 animate-blob">
                                 </div>
-                            </div>
 
-                            <!-- Generated Chart Overlay -->
-                            <div class="absolute -bottom-12 -right-12 bg-white dark:bg-slate-800 p-4 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 w-64 animate-fade-in-up"
-                                style="animation-delay: 1s;">
-                                <div class="flex justify-between items-end h-24 gap-2">
-                                    <div class="w-1/5 bg-blue-500/20 rounded-t h-[40%] relative group">
-                                        <div
-                                            class="absolute bottom-0 w-full bg-blue-500 rounded-t h-0 group-hover:h-full transition-all duration-1000">
-                                        </div>
+                                <!-- Main Image -->
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80"
+                                    alt="Data Analytics"
+                                    class="w-full h-full object-cover rounded-3xl shadow-2xl border border-white/20 dark:border-slate-700 relative z-10 glass-card">
+
+
+                                <!-- Floating Code Card (New Visual) -->
+                                <div class="absolute -top-10 -right-10 bg-slate-900/90 backdrop-blur-xl p-4 rounded-xl shadow-2xl border border-slate-700 z-30 animate-float"
+                                    style="animation-delay: 1.5s;">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
                                     </div>
-                                    <div class="w-1/5 bg-blue-500/20 rounded-t h-[60%] relative group">
-                                        <div
-                                            class="absolute bottom-0 w-full bg-blue-500 rounded-t h-0 group-hover:h-full transition-all duration-1000 delay-100">
-                                        </div>
-                                    </div>
-                                    <div class="w-1/5 bg-blue-500/20 rounded-t h-[30%] relative group">
-                                        <div
-                                            class="absolute bottom-0 w-full bg-blue-500 rounded-t h-0 group-hover:h-full transition-all duration-1000 delay-200">
-                                        </div>
-                                    </div>
-                                    <div class="w-1/5 bg-blue-500/20 rounded-t h-[80%] relative group">
-                                        <div
-                                            class="absolute bottom-0 w-full bg-blue-500 rounded-t h-0 group-hover:h-full transition-all duration-1000 delay-300">
-                                        </div>
-                                    </div>
-                                    <div class="w-1/5 bg-blue-500/20 rounded-t h-[50%] relative group">
-                                        <div
-                                            class="absolute bottom-0 w-full bg-blue-500 rounded-t h-0 group-hover:h-full transition-all duration-1000 delay-400">
-                                        </div>
-                                    </div>
+                                    <pre class="font-mono text-[10px] text-green-400 leading-tight">
+import pandas as pd
+df = pd.read_csv('data.csv')
+df.plot(kind='bar')
+                                    </pre>
                                 </div>
-                                <div class="mt-2 flex justify-between text-[10px] text-slate-400 font-mono">
-                                    <span>2020</span>
-                                    <span>2024</span>
-                                </div>
+
+
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Feature Grid (Updated Text) -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto w-full text-left pb-12">
+                        <div
+                            class="p-8 rounded-3xl bg-white/40 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md hover:bg-white/60 dark:hover:bg-slate-800/60 transition-all hover:scale-105 hover:shadow-xl group cursor-default">
+                            <div
+                                class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3
+                                class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                Visual Learning</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">See data come to life
+                                with
+                                beautiful, interactive charts and visualizations.</p>
+                        </div>
+                        <div
+                            class="p-8 rounded-3xl bg-white/40 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md hover:bg-white/60 dark:hover:bg-slate-800/60 transition-all hover:scale-105 hover:shadow-xl group cursor-default">
+                            <div
+                                class="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6 group-hover:scale-110 transition-transform">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3
+                                class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                Real-World Data</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Analyze huge datasets,
+                                trendlines, and social metrics with powerful tools.</p>
+                        </div>
+                        <div
+                            class="p-8 rounded-3xl bg-white/40 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 backdrop-blur-md hover:bg-white/60 dark:hover:bg-slate-800/60 transition-all hover:scale-105 hover:shadow-xl group cursor-default">
+                            <div
+                                class="w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-2xl flex items-center justify-center text-green-600 dark:text-green-400 mb-6 group-hover:scale-110 transition-transform">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                    </path>
+                                </svg>
+                            </div>
+                            <!-- Renamed to avoid confusion -->
+                            <h3
+                                class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                                Advanced Analysis</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Build portfolio-ready
+                                projects analyzing social trends and complex narratives.</p>
+                        </div>
+                    </div>
+
+                    <!-- Simple Tech Stack (Centered) -->
+                    <div class="mb-10">
+                        <p
+                            class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 border-b border-slate-200 dark:border-slate-800 pb-2 inline-block px-4">
+                            Powered By Modern Stack</p>
+                        <div class="flex flex-wrap gap-8 justify-center items-center opacity-75 hover:opacity-100 transition-opacity duration-300 animate-fade-in-up"
+                            style="animation-delay: 0.4s;">
+                            <span
+                                class="text-lg font-bold text-slate-500 dark:text-slate-400 flex items-center gap-2 grayscale hover:grayscale-0 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.5)]">
+                                </div> Python
+                            </span>
+                            <span
+                                class="text-lg font-bold text-slate-500 dark:text-slate-400 flex items-center gap-2 grayscale hover:grayscale-0 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.5)]">
+                                </div> Pandas
+                            </span>
+                            <span
+                                class="text-lg font-bold text-slate-500 dark:text-slate-400 flex items-center gap-2 grayscale hover:grayscale-0 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.5)]">
+                                </div> Matplotlib
+                            </span>
+                            <span
+                                class="text-lg font-bold text-slate-500 dark:text-slate-400 flex items-center gap-2 grayscale hover:grayscale-0 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-teal-400 shadow-[0_0_10px_rgba(45,212,191,0.5)]">
+                                </div> Tailwind
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Scroll Indicator -->
+                    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce cursor-pointer z-10 opacity-70 hover:opacity-100 transition-opacity"
+                        onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'})">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Scroll</span>
+                        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </div>
+
                 </section>
-
-                <!-- Prerequisites Section -->
-                <div
-                    class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm p-8 mb-16">
-                    <h3 class="text-2xl font-bold mb-6 flex items-center mt-0 border-none pb-0"
-                        style="color: var(--text-heading);">
-                        <span
-                            class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 p-2 rounded-lg mr-3 text-xl">🛠️</span>
-                        Setup & Prerequisites
-                    </h3>
-                    <div class="grid md:grid-cols-2 gap-6 md:gap-8">
-                        <div
-                            class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
-                            <h4 class="font-bold text-lg mb-2 mt-0" style="color: var(--text-heading);">1. Anaconda
-                                Distribution</h4>
-                            <p class="text-sm mb-4" style="color: var(--text-secondary);">You need an environment
-                                that contains Python, pandas, and numpy pre-installed. Anaconda is the industry
-                                standard for Data Science.</p>
-                            <a href="https://www.anaconda.com/download" target="_blank"
-                                class="inline-block w-full text-center bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 dark:hover:bg-slate-600 text-white font-bold py-2 px-4 rounded-lg transition-colors mb-4 text-sm">Download
-                                Anaconda</a>
-                            <div
-                                class="bg-white dark:bg-slate-900 p-3 rounded border border-slate-200 dark:border-slate-700">
-                                <p class="text-xs font-mono mb-1" style="color: var(--text-secondary);">Recommended:
-                                    Update all packages</p>
-                                <code
-                                    class="text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-1 py-0.5 rounded block">conda update --all</code>
-                            </div>
-                        </div>
-                        <div
-                            class="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700">
-                            <h4 class="font-bold text-lg mb-2 mt-0" style="color: var(--text-heading);">2. Jupyter
-                                Notebook</h4>
-                            <p class="text-sm mb-4" style="color: var(--text-secondary);">This acts as our "Digital
-                                Lab Notebook". It allows us to mix code, output, charts, and text explanations in a
-                                single document.</p>
-                            <ul class="text-sm space-y-2" style="color: var(--text-secondary);">
-                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Launch via
-                                    Anaconda Navigator</li>
-                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Or run
-                                    <code
-                                        class="text-xs bg-slate-200 dark:bg-slate-700 px-1 rounded ml-1">jupyter notebook</code>
-                                    in CMD
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Course Overview -->
-                <div class="grid md:grid-cols-3 gap-6 md:gap-8 mb-12">
-                    <div
-                        class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
-                        <div
-                            class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold mb-4">
-                            1</div>
-                        <h4 class="text-lg font-bold mb-2 mt-0" style="color: var(--text-heading);">Ingestion</h4>
-                        <p class="text-sm" style="color: var(--text-secondary);">Import raw economic data from CSVs,
-                            Excel, JSON, and Web APIs.</p>
-                    </div>
-                    <div
-                        class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
-                        <div
-                            class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold mb-4">
-                            2</div>
-                        <h4 class="text-lg font-bold mb-2 mt-0" style="color: var(--text-heading);">Analysis</h4>
-                        <p class="text-sm" style="color: var(--text-secondary);">Apply Split-Apply-Combine to
-                            aggregate insights and detect outliers.</p>
-                    </div>
-                    <div
-                        class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
-                        <div
-                            class="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold mb-4">
-                            3</div>
-                        <h4 class="text-lg font-bold mb-2 mt-0" style="color: var(--text-heading);">Visualisation
-                        </h4>
-                        <p class="text-sm" style="color: var(--text-secondary);">Create complex charts for GDP,
-                            Inflation, and Global Trade.</p>
-                    </div>
-                </div>
             </div>
 
             <!-- Topic A -->
@@ -1873,7 +2012,8 @@ print(10 > 5)</code></pre>
                     <p class="text-xs text-slate-400 mt-2 text-right">Photo by <a
                             href="https://unsplash.com/@patrickian4" target="_blank" class="hover:text-blue-500">Patrick
                             Fore</a> on <a href="https://unsplash.com" target="_blank"
-                            class="hover:text-blue-500">Unsplash</a></p>
+                            class="hover:text-blue-500">Unsplash</a>
+                    </p>
                 </div>
                 <h2 class="text-slate-900 dark:text-slate-50">Topic C: Text Sequence Type (Strings)</h2>
 
@@ -2202,7 +2342,8 @@ print(math.sqrt(25))</code></pre>
                     <p class="text-xs text-slate-400 mt-2 text-right">Photo by <a href="https://unsplash.com/@chrisried"
                             target="_blank" class="hover:text-blue-500">Chris
                             Ried</a> on <a href="https://unsplash.com" target="_blank"
-                            class="hover:text-blue-500">Unsplash</a></p>
+                            class="hover:text-blue-500">Unsplash</a>
+                    </p>
                 </div>
 
                 <h2 class="text-slate-900 dark:text-slate-50">Topic I: Libraries in Python</h2>
@@ -2706,6 +2847,157 @@ print(f"Net Growth: {np.round(prices[-1] - prices[0], 0)}")</code></pre>
 
             </div>
 
+            <!-- Topic 3B: Statistical Analysis Extension -->
+            <div id="topic3b" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                <div class="relative mb-8">
+                    <!-- using a relevant Unsplash image for Statistics/Data -->
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
+                        alt="Statistical Analysis" class="w-full h-48 object-cover rounded-2xl shadow-sm">
+                    <p class="text-xs text-slate-400 mt-2 text-right">Photo by <a
+                            href="https://unsplash.com/@lukechesser" target="_blank" class="hover:text-blue-500">Luke
+                            Chesser</a> on <a href="https://unsplash.com" target="_blank"
+                            class="hover:text-blue-500">Unsplash</a></p>
+                </div>
+
+                <h2 class="text-slate-900 dark:text-slate-50 mb-6">Topic 3B: Statistical Analysis & Hypothesis Testing
+                </h2>
+
+                <p class="mb-6 text-lg text-slate-600 dark:text-slate-300">
+                    Beyond slicing and dicing data, Data Science is about <strong>inference</strong>.
+                    Can we prove that a trend is real, or is it just random noise? This module introduces the rigorous
+                    framework of Statistical Testing.
+                </p>
+
+                <h3>Part 1: The Inference Framework (Theory)</h3>
+                <div class="concept-card bg-blue-50 dark:bg-slate-900 border-l-4 border-blue-500 p-6 rounded-r-xl mb-8">
+                    <h4 class="text-blue-700 dark:text-blue-400 mt-0">The Core Concepts</h4>
+                    <ul class="list-disc ml-5 mt-2 space-y-2 text-slate-700 dark:text-slate-400 text-sm">
+                        <li><strong>Null Hypothesis ($H_0$):</strong> The default assumption (e.g., "There is NO
+                            difference between Group A and Group B").</li>
+                        <li><strong>Alternative Hypothesis ($H_1$):</strong> The theory we want to prove (e.g., "Group A
+                            spends more than Group B").</li>
+                        <li><strong>P-Value:</strong> The probability of seeing the data if $H_0$ were true. <br>
+                            <span class="text-xs bg-slate-200 dark:bg-slate-800 px-2 py-1 rounded mt-1 inline-block">If
+                                p < 0.05, we reject $H_0$ (The result is statistically significant).</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <h3>Part 2: The Toolbelt (SciPy)</h3>
+                <p class="mb-4 text-slate-600 dark:text-slate-400">Python's <code>scipy.stats</code> library is the
+                    industry standard for these tests.</p>
+
+                <div class="code-explanation">
+                    <div class="simple-english">
+                        <strong>T-Test:</strong> Compares the means of TWO groups.<br>
+                        <strong>ANOVA:</strong> Compares the means of THREE or more groups.
+                    </div>
+                    <h5>Syntax Reference</h5>
+                    <pre><code class="language-python">from scipy import stats
+
+# T-Test (Group A vs Group B)
+t_stat, p_val = stats.ttest_ind(group_a, group_b)
+
+# ANOVA (Group A vs Group B vs Group C)
+f_stat, p_val = stats.f_oneway(group_a, group_b, group_c)</code></pre>
+                </div>
+
+                <h3 class="mt-12">Part 3: Capstone - The "Black Friday" Analysis</h3>
+                <p class="mb-4 text-slate-600 dark:text-slate-400">
+                    We have a dataset of 10,000 transactions from a retail store. We want to answer critical business
+                    questions using Statistics.
+                </p>
+
+                <div
+                    class="bg-slate-100 dark:bg-slate-900 p-4 rounded-xl mb-6 font-mono text-xs overflow-x-auto border border-slate-200 dark:border-slate-800">
+                    <div
+                        class="flex gap-8 mb-2 border-b border-slate-300 dark:border-slate-700 pb-2 font-bold text-slate-700 dark:text-slate-300">
+                        <span class="w-20">User_ID</span>
+                        <span class="w-20">Gender</span>
+                        <span class="w-16">Age</span>
+                        <span class="w-24">City_Category</span>
+                        <span class="w-24 text-right">Purchase ($)</span>
+                    </div>
+                    <div class="flex gap-8 mb-1 text-slate-600 dark:text-slate-400">
+                        <span class="w-20">10001</span>
+                        <span class="w-20">F</span>
+                        <span class="w-16">0-17</span>
+                        <span class="w-24">A</span>
+                        <span class="w-24 text-right">8,370</span>
+                    </div>
+                    <div class="flex gap-8 mb-1 text-slate-600 dark:text-slate-400">
+                        <span class="w-20">10002</span>
+                        <span class="w-20">M</span>
+                        <span class="w-16">55+</span>
+                        <span class="w-24">C</span>
+                        <span class="w-24 text-right">15,200</span>
+                    </div>
+                    <div class="flex gap-8 mb-1 text-slate-600 dark:text-slate-400 italic">... (10,000 rows) ...</div>
+                </div>
+
+                <h4>Hypothesis 1: Gender Gap</h4>
+                <div class="practice-box mb-6">
+                    <p class="font-bold text-slate-800 dark:text-white">$H_0$: Men and Women spend the same amount on
+                        average.</p>
+                    <p class="font-bold text-blue-600 dark:text-blue-400">$H_1$: Men spend significantly more than
+                        Women.</p>
+                </div>
+
+                <div class="relative">
+                    <button class="copy-btn">Copy Code</button>
+                    <pre><code class="language-python">import pandas as pd
+from scipy import stats
+import numpy as np
+
+# 1. Load Data (Simulated for this demo)
+# In real life: df = pd.read_csv('black_friday.csv')
+np.random.seed(42)
+men_spend = np.random.normal(9500, 2500, 5000)  # Men mean: $9500
+women_spend = np.random.normal(8800, 2200, 5000) # Women mean: $8800
+
+# 2. Run T-Test
+t_stat, p_val = stats.ttest_ind(men_spend, women_spend)
+
+print(f"T-Statistic: {t_stat:.2f}")
+print(f"P-Value: {p_val:.10f}")
+
+if p_val < 0.05:
+    print("RESULT: Reject Null Hypothesis. The spending difference is REAL.")
+else:
+    print("RESULT: Fail to reject Null Hypothesis.")</code></pre>
+                </div>
+
+                <div class="output-block mt-4">
+                    <span class="output-label">Terminal Output</span>
+                    T-Statistic: 14.82<br>
+                    P-Value: 0.0000000000<br>
+                    RESULT: Reject Null Hypothesis. The spending difference is REAL.
+                </div>
+
+                <h4 class="mt-8">Hypothesis 2: Age demographics (ANOVA)</h4>
+                <p class="text-slate-600 dark:text-slate-400 mb-4">Do different age groups (18-25, 26-35, 36+) have
+                    different spending habits? Since we have >2 groups, we use <strong>ANOVA</strong>.</p>
+
+                <div class="relative">
+                    <button class="copy-btn">Copy Code</button>
+                    <pre><code class="language-python"># Simulated Data for 3 Age Groups
+age_18_25 = np.random.normal(9000, 2000, 1000)
+age_26_35 = np.random.normal(11000, 3000, 1000) # Big spenders?
+age_36_plus = np.random.normal(10500, 2500, 1000)
+
+# Run ANOVA (F-Test)
+f_stat, p_val = stats.f_oneway(age_18_25, age_26_35, age_36_plus)
+
+print(f"ANOVA P-Value: {p_val:.10f}")</code></pre>
+                </div>
+
+                <div class="practice-box mt-8">
+                    <h5>🚀 Challenge: Outlier Detection</h5>
+                    <p class="text-sm">Use the Z-Score method to find "Whales" (High spenders). Any transaction with a
+                        Z-Score > 3 is an outlier.</p>
+                </div>
+            </div>
+
             <!-- Topic 4 -->
             <div id="topic4" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
                 <div class="relative mb-8">
@@ -2776,7 +3068,8 @@ print(f"Optimised Memory: {data_optimized.nbytes} bytes")</code></pre>
                     <p class="text-xs text-slate-400 mt-2 text-right">Photo by <a
                             href="https://unsplash.com/@isaacmsmith" target="_blank" class="hover:text-blue-500">Isaac
                             Smith</a> on <a href="https://unsplash.com" target="_blank"
-                            class="hover:text-blue-500">Unsplash</a></p>
+                            class="hover:text-blue-500">Unsplash</a>
+                    </p>
                 </div>
                 <h2>Topic 5: DataFrames</h2>
 
@@ -2940,7 +3233,8 @@ print(df.groupby(['State', 'Crop'])['Yield_Kg_Ha'].mean())</code></pre>
                     <p class="text-xs text-slate-400 mt-2 text-right">Photo by <a
                             href="https://unsplash.com/@isaacmsmith" target="_blank" class="hover:text-blue-500">Isaac
                             Smith</a> on <a href="https://unsplash.com" target="_blank"
-                            class="hover:text-blue-500">Unsplash</a></p>
+                            class="hover:text-blue-500">Unsplash</a>
+                    </p>
                 </div>
                 <h2>Topic 7: Multi-Aggregation</h2>
 
@@ -3190,11 +3484,11 @@ print("Unique:\n", df_dup.drop_duplicates())</code></pre>
             <!-- Topic 9 -->
             <div id="topic9" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
                 <div class="relative mb-8">
-                    <img src="https://images.unsplash.com/photo-1611974765270-ca1258634369?auto=format&fit=crop&w=1200&q=80"
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
                         alt="Global Economy" class="w-full h-48 object-cover rounded-2xl shadow-sm">
                     <p class="text-xs text-slate-400 mt-2 text-right">Photo by <a
-                            href="https://unsplash.com/@maximhopman" target="_blank" class="hover:text-blue-500">Maxim
-                            Hopman</a> on <a href="https://unsplash.com" target="_blank"
+                            href="https://unsplash.com/@lukechesser" target="_blank" class="hover:text-blue-500">Luke
+                            Chesser</a> on <a href="https://unsplash.com" target="_blank"
                             class="hover:text-blue-500">Unsplash</a></p>
                 </div>
                 <h2>Topic 9: WEO Case Study</h2>
@@ -3442,27 +3736,47 @@ plt.show()</code></pre>
                     </div>
                 </div>
 
-                <h2>Decoding the Narrative: A Kendrick Lamar Study</h2>
+                <h2 class="text-slate-900 dark:text-slate-50 mb-6">Topic 10: Narrative Analytics (Kendrick Lamar Case
+                    Study)</h2>
 
-                <div
-                    class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-600 dark:border-blue-500 p-6 rounded-r-lg mb-8">
-                    <h4 class="text-blue-900 dark:text-blue-100 font-bold mb-2">The DAMN. Hypothesis</h4>
-                    <p class="text-blue-800 dark:text-blue-200 text-sm">Kendrick Lamar's Pulitzer-winning album
-                        <em>DAMN.</em> is
-                        famous for a unique structural property: it tells two completely different stories depending
-                        on the order you listen to the tracks.
-                    </p>
-                    <ul class="list-disc ml-5 mt-2 text-blue-800 dark:text-blue-200 text-sm">
-                        <li><strong>Forward Order (1-14):</strong> A story of wickedness leading to weakness and
-                            death.</li>
-                        <li><strong>Reverse Order (14-1):</strong> A story of weakness finding redemption and
-                            wickedness.</li>
-                    </ul>
-                    <p class="mt-4 text-blue-800 dark:text-blue-200 text-sm font-semibold">This is a perfect analogy
-                        for how data
-                        sorting and directionality (Topic 3 Slicing) can completely alter the insights derived from
-                        a dataset.</p>
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <a href="https://open.spotify.com/album/4eLPsYPBmXABThSJ821sqY?si=q84t5v6eR-y69y5e-6e8w"
+                        target="_blank"
+                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1DB954]/10 hover:bg-[#1DB954]/20 text-[#1DB954] text-xs font-bold transition-colors">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.4-1.02 15.6 1.44.6.24.84.9.6 1.5-.24.6-.9.84-1.5.6z" />
+                        </svg>
+                        DAMN.
+                    </a>
+                    <a href="https://open.spotify.com/album/79ONNoS4YNSkzdJ7uRpReW?si=q84t5v6eR-y69y5e-6e8w"
+                        target="_blank"
+                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1DB954]/10 hover:bg-[#1DB954]/20 text-[#1DB954] text-xs font-bold transition-colors">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.4-1.02 15.6 1.44.6.24.84.9.6 1.5-.24.6-.9.84-1.5.6z" />
+                        </svg>
+                        Mr. Morale & The Big Steppers
+                    </a>
                 </div>
+
+                <h3>Theoretical Framework</h3>
+                <p>In Kendrick Lamar's Pulitzer-winning album
+                    <em>DAMN.</em> is
+                    famous for a unique structural property: it tells two completely different stories depending
+                    on the order you listen to the tracks.
+                </p>
+                <ul class="list-disc ml-5 mt-2 text-blue-800 dark:text-blue-200 text-sm">
+                    <li><strong>Forward Order (1-14):</strong> A story of wickedness leading to weakness and
+                        death.</li>
+                    <li><strong>Reverse Order (14-1):</strong> A story of weakness finding redemption and
+                        wickedness.</li>
+                </ul>
+                <p class="mt-4 text-blue-800 dark:text-blue-200 text-sm font-semibold">This is a perfect analogy
+                    for how data
+                    sorting and directionality (Topic 3 Slicing) can completely alter the insights derived from
+                    a dataset.</p>
+
 
                 <h3>Part 1: Simple Reversal (Slicing)</h3>
                 <div class="code-explanation">
@@ -3665,12 +3979,12 @@ print(df.sort_values('Legend_Index', ascending=False).head(3))</code></pre>
                         by default. <strong>Optional:</strong> To fetch live data from Kaggle, run the Flask
                         backend:</p>
                     <div class="command-box p-3 rounded mb-3">
-                        <p class="text-xs font-mono">python grammy_server.py</p>
+                        <p class="text-xs font-mono text-green-400 dark:text-slate-400">python grammy_server.py</p>
                     </div>
                     <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">The server will fetch Kaggle data
                         using <code>mlcroissant</code> and serve it at <code>/api/grammy</code> endpoint.</p>
                     <div id="grammyUploadLog"
-                        class="text-xs text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-950 p-2 rounded border border-slate-200 dark:border-slate-800">
+                        class="text-xs text-slate-700 dark:text-slate-400 bg-slate-50 dark:bg-slate-950 p-2 rounded border border-slate-200 dark:border-slate-800 font-medium">
                         Checking for local server...</div>
                 </div>
 
@@ -3798,10 +4112,11 @@ except:
                     <details
                         class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
                         <summary class="font-bold cursor-pointer flex justify-between">
-                            Q: What does `inplace=True` do?
+                            <span>Q: Difference between <code>inplace=True</code> and False?</span>
                             <span class="text-blue-500 dark:text-blue-400">+</span>
                         </summary>
-                        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">By default, pandas returns a
+                        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                            <code>inplace=False</code> (default) returns a
                             <em>new</em> modified object and leaves the original untouched.
                             <code>inplace=True</code> modifies the original object directly to save memory. Example:
                             <code>df.drop('col', axis=1, inplace=True)</code>.
@@ -4325,6 +4640,10 @@ except:
 
 
     </div>
+
+    <!-- Footer Spacer to prevent Progress Pill overlap -->
+    <div class="w-full h-24 shrink-0"></div>
+
     </main>
 
     <div id="progress-pill" class="progress-pill-container" style="display: none;">
@@ -4485,7 +4804,7 @@ except:
             // Ordered list of topics for progress tracking
             const progressTopics = [
                 'topicA', 'topicB', 'topicC', 'topicD', 'topicE', 'topicF', 'topicG', 'topicH', 'topicI',
-                'topic1', 'topic2', 'topic3', 'topic4',
+                'topic1', 'topic2', 'topic3', 'topic3b', 'topic4',
                 'topic5', 'topic6', 'merging',
                 'topic8', 'topic9', 'topic10',
                 'viz', 'kendrick', 'grammy', 'govdata', 'learning',
@@ -4523,8 +4842,38 @@ except:
                         activeLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
                     if (mainHeader) mainHeader.classList.remove('hidden');
+
+                    // SHOW sidebar toggle and mobile header
+                    const sidebarBtn = document.getElementById('sidebar-toggle-btn');
+                    const mobileHeader = document.querySelector('.md\\:hidden.fixed.top-0'); // Select mobile header by class if no ID
+                    if (sidebarBtn) sidebarBtn.style.display = 'flex';
+                    if (mobileHeader) mobileHeader.style.display = 'flex';
+
+                    // SHOW sidebar (Desktop)
+                    if (sidebar) sidebar.style.display = '';
+                    // Restore main content layout
+                    if (mainContent) mainContent.classList.add('md:w-4/5');
+
+                    // Show Footer on other pages
+                    const heroFooter = document.querySelector('.hero-footer');
+                    if (heroFooter) heroFooter.style.display = 'block';
+
                 } else {
                     if (mainHeader) mainHeader.classList.add('hidden');
+                    // HIDE sidebar toggle and mobile header on Home
+                    const sidebarBtn = document.getElementById('sidebar-toggle-btn');
+                    const mobileHeader = document.querySelector('.md\\:hidden.fixed.top-0');
+                    if (sidebarBtn) sidebarBtn.style.display = 'none';
+                    if (mobileHeader) mobileHeader.style.display = 'none';
+
+                    // HIDE sidebar (Desktop/Mobile) - completely remove from layout
+                    if (sidebar) sidebar.style.display = 'none';
+                    // Make main content full width
+                    if (mainContent) mainContent.classList.remove('md:w-4/5');
+
+                    // Hide Footer on Home
+                    const heroFooter = document.querySelector('.hero-footer');
+                    if (heroFooter) heroFooter.style.display = 'none';
                 }
 
                 topicPanels.forEach(panel => panel.classList.add('hidden'));
@@ -4554,7 +4903,7 @@ except:
                     progressPill.classList.add('visible');
 
                     // Define main topics count (excluding resources)
-                    const mainTopicCount = 23;
+                    const mainTopicCount = 24;
 
                     if (topicIndex < mainTopicCount) {
                         const currentStep = topicIndex + 1;
@@ -4890,18 +5239,7 @@ except:
             }
 
             // Simple slideshow for Kendrick section (automated)
-            /*
-            (function setupKendrickSlideshow() {
-                const kendrickEl = document.getElementById('kendrick');
-                if (!kendrickEl) return;
-                const container = kendrickEl.querySelector('.mb-8.flex');
-                if (!container) return;
-                container.innerHTML = `\n      <div id="kendrick-slideshow" class="w-full relative">\n        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80" alt="Music Concert Stage" class="kendrick-slide w-full h-64 object-cover rounded-2xl mb-8 shadow-sm" />\n        <img src="https://images.unsplash.com/photo-1509099836639-18ba0c5b6d4c?auto=format&fit=crop&w=1200&q=80" alt="Crowd" class="kendrick-slide hidden w-full h-64 object-cover rounded-2xl mb-8 shadow-sm" />\n        <img src="https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=1200&q=80" alt="Stage Lights" class="kendrick-slide hidden w-full h-64 object-cover rounded-2xl mb-8 shadow-sm" />\n      </div>\n    `;
-                const slides = container.querySelectorAll('.kendrick-slide');
-                let idx = 0;
-                setInterval(() => { slides[idx].classList.add('hidden'); idx = (idx + 1) % slides.length; slides[idx].classList.remove('hidden'); }, 4000);
-            })();
-            */
+
 
             // Ensure initial theme applied to charts
             updateChartTheme();
@@ -4960,6 +5298,82 @@ except:
                     }
                 } catch (e) { console.error('applyGrammyPayload error', e); throw e; }
             }
+
+            // Search Functionality
+            const searchInput = document.getElementById('topic-search');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const term = e.target.value.toLowerCase().trim();
+                    const links = document.querySelectorAll('.nav-link');
+
+                    // 1. Filter individual Topic Links
+                    links.forEach(link => {
+                        const text = link.textContent.toLowerCase();
+                        const parentLi = link.parentElement;
+                        // Use setProperty for 'important' priority
+                        if (text.includes(term)) {
+                            parentLi.style.setProperty('display', 'block', 'important');
+                        } else {
+                            parentLi.style.setProperty('display', 'none', 'important');
+                        }
+                    });
+
+                    // 2. Hide Empty Modules (if all their children are hidden)
+                    // We target the divs inside the scrollable container
+                    const modules = document.querySelectorAll('#sidebar .space-y-6 > div');
+
+                    modules.forEach(module => {
+                        // Skip the search box container itself (it's the first div sometimes)
+                        if (module.querySelector('.search-container')) return;
+
+                        const lis = module.querySelectorAll('li');
+                        if (lis.length === 0) return; // Skip if no list items (e.g. resources header?)
+
+                        // Check visibility based on the styles we just set
+                        let visibleCount = 0;
+                        lis.forEach(li => {
+                            if (li.style.display !== 'none') visibleCount++;
+                        });
+
+                        // If performing a search and no results in this module, hide it
+                        if (term !== '' && visibleCount === 0) {
+                            module.style.setProperty('display', 'none', 'important');
+                        } else {
+                            // Verify it should be visible (e.g. term is empty OR matches found)
+                            module.style.setProperty('display', 'block', 'important');
+                        }
+                    });
+                });
+            }
+
+            // Initial navigation based on URL hash or default to 'home'
+            const initTopic = window.location.hash.replace('#', '') || 'home';
+
+            // AGGRESSIVE SIDEBAR FIX: Immediately hide sidebar if starting on 'home' 
+            // This prevents the "flash" or persistence issues
+            if (initTopic === 'home') {
+                const sb = document.getElementById('sidebar');
+                if (sb) sb.style.display = 'none';
+
+                // Also hide mobile header/toggle immediately
+                const mh = document.querySelector('.md\\:hidden.fixed.top-0');
+                if (mh) mh.style.display = 'none';
+                const st = document.getElementById('sidebar-toggle-btn');
+                if (st) st.style.display = 'none';
+
+                // Ensure main content is full width immediately
+                const mc = document.getElementById('main-content');
+                if (mc) mc.classList.remove('md:w-4/5');
+            }
+
+            // Short delay to ensure styles are ready
+            setTimeout(() => {
+                if (typeof window.switchTopic === 'function') {
+                    // Force update by resetting currentTopic, ensuring 'home' logic runs (hiding sidebar)
+                    window.currentTopic = null;
+                    window.switchTopic(initTopic);
+                }
+            }, 10);
 
         });
     </script>

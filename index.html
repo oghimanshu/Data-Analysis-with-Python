@@ -10,6 +10,11 @@
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <!-- Leaflet.js for Interactive Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -1537,6 +1542,7 @@
                                 Study</a></li>
                         <li><a href="#" class="nav-link" data-topic="grammy">Capstone: Grammy Analytics</a></li>
                         <li><a href="#" class="nav-link" data-topic="govdata">Real-World Pipelines</a></li>
+                        <li><a href="#" class="nav-link" data-topic="geopandas">Advanced Geospatial Analytics</a></li>
                         <li><a href="#" class="nav-link" data-topic="learning">Further Learning</a></li>
                     </ul>
                 </div>
@@ -1548,6 +1554,7 @@
                         <li><a href="#" class="nav-link" data-topic="faq">❓ FAQ</a></li>
                         <li><a href="#" class="nav-link" data-topic="glossary">📚 Glossary</a></li>
                         <li><a href="#" class="nav-link" data-topic="references">📄 References</a></li>
+                        <li><a href="#" class="nav-link" data-topic="connect">🤝 Connect</a></li>
 
                     </ul>
                 </div>
@@ -1556,7 +1563,7 @@
 
             <div
                 class="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 flex flex-col items-center gap-2">
-                <span>&copy; 2025 Himanshu Gaur</span>
+                <span>&copy; 2026 Himanshu Gaur</span>
                 <div class="flex items-center gap-3">
                     <a href="https://github.com/oghimanshu" target="_blank"
                         class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
@@ -4070,6 +4077,480 @@ except:
 
             </div>
 
+            <!-- Geopandas -->
+            <!-- Geopandas -->
+            <div id="geopandas" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80"
+                    alt="Geopandas" class="w-full h-56 object-cover rounded-2xl mb-8 shadow-sm">
+
+                <h2 class="text-3xl font-extrabold mb-6 text-slate-800 dark:text-white">Advanced Geospatial Analytics
+                </h2>
+                <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+                    From static shapefiles to interactive spinning globes. This unit covers the complete spectrum of
+                    spatial analysis in Python using <strong>GeoPandas</strong>, <strong>Leaflet</strong>,
+                    <strong>Basemap</strong>, and <strong>Bokeh</strong>.
+                </p>
+
+                <!-- Part 1: Core Concepts -->
+                <div class="mb-10">
+                    <h3
+                        class="text-xl font-bold mb-4 text-slate-700 dark:text-slate-200 border-l-4 border-blue-500 pl-4">
+                        1. The Geospatial Stack</h3>
+                    <div class="code-explanation mb-4">
+                        <div class="simple-english">
+                            Before jumping into maps, we need to assemble our toolkit. Geospatial analysis relies on a
+                            stack of connected libraries, each solving a specific problem (Geometry, File I/O,
+                            Plotting).
+                        </div>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>geopandas</code>: The high-level API. Extends pandas DataFrames to allow spatial
+                                operations.</li>
+                            <li><code>shapely</code>: The geometry engine. Defines Point, LineString, Polygon.</li>
+                            <li><code>fiona</code>: The input/output driver. Reads/writes Shapefiles, GeoJSON, KML.</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">Installation</h4>
+                    <div class="relative">
+                        <button class="copy-btn">Copy</button>
+                        <pre><code>pip install geopandas shapely fiona matplotlib bokeh basemap basemap-data-hires</code></pre>
+                    </div>
+                </div>
+
+                <!-- Part 2: Workflow 1 (World) -->
+                <div class="mb-12 border-t border-slate-200 dark:border-slate-800 pt-8">
+                    <h3 class="text-2xl font-bold mb-6 text-slate-800 dark:text-white">2. Workflow A: Global Macro
+                        Analysis</h3>
+
+                    <div class="code-explanation mb-4">
+                        <div class="simple-english">
+                            This workflow analyzes global economic disparity by creating a <strong>Choropleth</strong>
+                            map. A choropleth uses color intensity to represent data values (GDP per capita) across
+                            geographic regions.
+                        </div>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>gpd.read_file()</code>: Loads vector data from a file or URL.</li>
+                            <li><code>world.plot()</code>: The primary plotting command. <code>column=</code> maps data
+                                to color.</li>
+                            <li><code>classes=...</code>: (Optional) Used for classification schemes like 'quantiles' or
+                                'natural_breaks' (requires mapclassify).</li>
+                        </ul>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">The Python Code</h4>
+                            <div class="relative">
+                                <button class="copy-btn">Copy</button>
+                                <pre><code class="language-python">import geopandas as gpd
+import matplotlib.pyplot as plt
+
+# 1. Load dataset (Updated for GeoPandas 1.0+)
+url = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson"
+world = gpd.read_file(url)
+
+# 2. Clean data
+# Columns in new dataset are often uppercase (POP_EST, GDP_MD)
+world.columns = world.columns.str.lower()
+
+# Filter invalid data
+world = world[(world.pop_est > 0) & (world.name != "Antarctica")]
+
+# 3. Create metric (GDP per Capita)
+world['gdp_per_cap'] = world.gdp_md / world.pop_est
+
+# 4. Plot
+fig, ax = plt.subplots(1, 1, figsize=(15, 6))
+world.plot(column='gdp_per_cap', ax=ax, legend=True,
+           cmap='OrRd', legend_kwds={'label': "GDP Per Capita"})
+plt.title('Global Economic Disparity')
+plt.show()</code></pre>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">Expected Output (Interactive)
+                            </h4>
+                            <p class="text-xs text-slate-500 mb-2">Rendered below using Leaflet.js to demonstrate
+                                web-based interactivity.</p>
+                            <div id="map-world"
+                                class="w-full h-64 rounded-xl border border-slate-200 dark:border-slate-700 z-0 shadow-inner">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="practice-box mb-4">
+                        <h5>🚀 Pipeline Challenge: The Population Density</h5>
+                        <p class="text-sm">Instead of GDP per capita, calculate <strong>Population Density</strong>
+                            (Population / Est. Area) and plot it.
+                            <em>Hint:</em> <code>world.geometry.area</code> gives area in degree^2 (approximate). For
+                            accuracy, reproject to a projected CRS first!
+                        </p>
+                    </div>
+
+                    <div class="homework-box">
+                        <h5>🧠 Homework: Filter Continents</h5>
+                        <p class="text-sm">Create a new GeoDataFrame containing only countries in
+                            <strong>"Africa"</strong> and plot them with the 'Spectral' colormap.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Part 3: Workflow 2 (India) -->
+                <div class="mb-12 border-t border-slate-200 dark:border-slate-800 pt-8">
+                    <h3 class="text-2xl font-bold mb-6 text-slate-800 dark:text-white">3. Workflow B: India Regional
+                        Analysis & Spatial Joins</h3>
+
+                    <div class="code-explanation mb-4">
+                        <div class="simple-english">
+                            Here we analyze administrative boundaries. We will perform a <strong>Spatial Join</strong>
+                            (Point-in-Polygon), one of the most powerful geospatial operations. It answers: "Which state
+                            is this city in?" mathematically.
+                        </div>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>geometry.centroid</code>: Returns a Point object representing the arithmetic mean
+                                center of the polygon.</li>
+                            <li><code>contains(point)</code>: Boolean check. Returns True if the polygon fully encloses
+                                the point.</li>
+                            <li><code>crs</code>: Coordinate Reference System. Ensure both your points and polygons use
+                                the same CRS (e.g., EPSG:4326).</li>
+                        </ul>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">Introduction to Spatial Joins
+                            </h4>
+                            <p class="text-sm mb-2 text-slate-600 dark:text-slate-400">Finding the state for Mumbai:</p>
+                            <div class="relative">
+                                <button class="copy-btn">Copy</button>
+                                <pre><code class="language-python">from shapely.geometry import Point
+
+# Load India Map (from URL)
+url = "https://gist.githubusercontent.com/jbrobst/56c13bbbf9d97d187fea01ca62ea5112/raw/e388c4cae20aa53cb5090210a42ebb9b765c0a36/india_states.geojson"
+india = gpd.read_file(url)
+
+# Define Mumbai
+mumbai = Point(72.8777, 19.0760)
+
+# The Magic: Find the containing state
+state = india[india.contains(mumbai)]
+print(f"Mumbai is in: {state['ST_NM'].values[0]}")
+# Expected Output: Mumbai is in: Maharashtra</code></pre>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">Expected Output (Interactive)
+                            </h4>
+                            <p class="text-xs text-slate-500 mb-2">Interactive India Map focused on Administrative
+                                Boundaries.</p>
+                            <!-- Interactive Map Container -->
+                            <div id="map-india"
+                                class="w-full h-64 rounded-xl border border-slate-200 dark:border-slate-700 z-0 shadow-inner">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="practice-box mb-4">
+                        <h5>🚀 Pipeline Challenge: Centroid Plotting</h5>
+                        <p class="text-sm">Calculate the centroid of every state in India and plot them as red dots ON
+                            TOP of the white map boundaries.
+                            <code>ax = india.plot(); centroids.plot(ax=ax, color='red')</code>.
+                        </p>
+                    </div>
+
+                    <div class="homework-box">
+                        <h5>🧠 Homework: The Golden Quadrilateral</h5>
+                        <p class="text-sm">Create a <code>LineString</code> connecting Delhi, Mumbai, Chennai, and
+                            Kolkata. Check if this line <code>crosses</code> the state of "Madhya Pradesh".</p>
+                    </div>
+                </div>
+
+
+                <!-- Part 4: Workflow 3 (Live Data) -->
+                <div class="mb-12 border-t border-slate-200 dark:border-slate-800 pt-8">
+                    <h3 class="text-2xl font-bold mb-6 text-slate-800 dark:text-white">4. Workflow C: Real-Time
+                        Pipeline (Live Earthquakes)</h3>
+
+                    <div class="code-explanation mb-4">
+                        <div class="simple-english">
+                            Static maps are useful, but the real world moves. In this workflow, we connect directly to
+                            the
+                            <strong>USGS Live API</strong> to fetch earthquake data occurring <em>right now</em>. We
+                            don't
+                            download a file; we read the stream.
+                        </div>
+                        <h5>Detailed Syntax Breakdown</h5>
+                        <ul class="syntax-list">
+                            <li><code>gpd.read_file(url)</code>: GeoPandas is smart enough to read GeoJSON directly from
+                                a
+                                live web URL.</li>
+                            <li><code>markersize=...</code>: We scale the size of the dots based on the earthquake's
+                                <code>magnitude</code> column. Dynamic styling!
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">The Python Code</h4>
+                            <div class="relative">
+                                <button class="copy-btn">Copy</button>
+                                <pre><code class="language-python">import geopandas as gpd
+import matplotlib.pyplot as plt
+
+# 1. Fetch Live Data (USGS Feed: 2.5+ Mag, Past Day)
+live_url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson"
+quakes = gpd.read_file(live_url)
+
+# 2. Load Background Map (Stable URL)
+world_url = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson"
+world = gpd.read_file(world_url)
+
+# 3. Plot
+fig, ax = plt.subplots(figsize=(12, 8))
+world.plot(ax=ax, color='lightgrey', edgecolor='white')
+
+# Plot events (Size = Magnitude)
+if not quakes.empty:
+    quakes.plot(ax=ax,
+                markersize=quakes['mag'] * 20,
+                color='red',
+                alpha=0.6,
+                edgecolor='darkred')
+
+plt.title(f"Live Feed: {len(quakes)} Earthquakes > M2.5 (Past 24h)")
+plt.show()</code></pre>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">Expected Output</h4>
+                            <div
+                                class="bg-slate-100 dark:bg-slate-800 rounded-lg p-4 h-64 flex items-center justify-center border border-slate-200 dark:border-slate-700">
+                                <div class="text-center">
+                                    <p class="text-sm text-slate-500 mb-2 italic">Generating Live Map...</p>
+                                    <!-- Simple CSS Pulse for 'Live' effect -->
+                                    <div class="relative flex h-32 w-32 mx-auto">
+                                        <div
+                                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-20">
+                                        </div>
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg"
+                                            class="relative inline-flex rounded-full h-32 w-32 opacity-50">
+                                        <div class="absolute top-10 left-10 h-3 w-3 bg-red-500 rounded-full"></div>
+                                        <div class="absolute top-16 right-12 h-4 w-4 bg-red-500 rounded-full"></div>
+                                        <div class="absolute top-20 left-20 h-2 w-2 bg-red-500 rounded-full"></div>
+                                    </div>
+                                    <p class="text-xs text-slate-400 mt-2">Red circles appear where quakes happened
+                                        today.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="practice-box mb-4">
+                        <h5>🚀 Pipeline Challenge: The 'Big One' Filter</h5>
+                        <p class="text-sm">Modify the code to print the location (<code>place</code> column) of the
+                            single largest earthquake in the dataset.
+                            Hint: <code>quakes.sort_values('mag', ascending=False).iloc[0]</code>.</p>
+                    </div>
+
+                    <div class="homework-box">
+                        <h5>🧠 Homework: ISS Tracker</h5>
+                        <p class="text-sm">Use the OPEN-NOTIFY API
+                            (<code>http://api.open-notify.org/iss-now.json</code>) to
+                            get the current latitude/longitude of the ISS. Turn it into a <code>shapely.Point</code> and
+                            plot
+                            it!</p>
+                    </div>
+                </div>
+
+                <!-- Part 5: Advanced Viz (Bokeh & Basemap) -->
+                <div class="mb-12 border-t border-slate-200 dark:border-slate-800 pt-8">
+                    <h3 class="text-2xl font-bold mb-6 text-slate-800 dark:text-white">5. Interactive & Pro
+                        Visualization</h3>
+
+                    <!-- Bokeh -->
+                    <div class="mb-10">
+                        <h4 class="text-xl font-bold mb-4 text-indigo-600 dark:text-indigo-400">A. Interactive Web Plots
+                            with Bokeh</h4>
+                        <div class="code-explanation mb-4">
+                            <div class="simple-english">
+                                <strong>Bokeh</strong> is a Python library for creating interactive visualizations for
+                                modern web browsers. It allows users to zoom, pan, and hover over data points without
+                                needing a running Python server.
+                            </div>
+                            <h5>Detailed Syntax Breakdown</h5>
+                            <ul class="syntax-list">
+                                <li><code>GeoJSONDataSource</code>: Converts GeoPandas data into a format Bokeh
+                                    understands (JSON).</li>
+                                <li><code>figure()</code>: The canvas. Enable tools like <code>'pan, wheel_zoom'</code>
+                                    here.</li>
+                                <li><code>patches()</code>: The glyph method used to draw polygons (countries/states).
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="relative">
+                            <button class="copy-btn">Copy</button>
+                            <pre><code class="language-python">from bokeh.plotting import figure, show, output_file
+from bokeh.models import GeoJSONDataSource
+
+# 1. Convert Data
+geo_source = GeoJSONDataSource(geojson=world.to_json())
+
+# 2. Setup Plot
+p = figure(title="Interactive World Map", width=800, height=500)
+
+# 3. Add Polygons
+p.patches('xs', 'ys', source=geo_source,
+          fill_color='blue', line_color='white', fill_alpha=0.6)
+
+# 4. Save & Show
+output_file("world_map.html")
+show(p)</code></pre>
+                        </div>
+                        <p class="mt-2 text-sm text-slate-500"><strong>Expected Output:</strong> Opens a new browser tab
+                            with a zoomable world map.</p>
+
+                        <div class="homework-box mt-4">
+                            <h5>🧠 Homework: Hover Tool</h5>
+                            <p class="text-sm">Add a <code>HoverTool</code> to the Bokeh plot to display the
+                                <strong>Country Name</strong> and <strong>GDP</strong> when you mouse over a country.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Folium -->
+                    <div class="mb-10">
+                        <h4 class="text-xl font-bold mb-4 text-emerald-600 dark:text-emerald-400">B. Interactive Street
+                            Maps with Folium</h4>
+                        <div class="code-explanation mb-4">
+                            <div class="simple-english">
+                                <strong>Folium</strong> is the gold standard for putting data on "slippy" maps (like
+                                Google Maps or OpenStreetMap). It wraps the JavaScript library
+                                <strong>Leaflet.js</strong>
+                                but lets you writes 100% Python. Perfect for "Dashboards".
+                            </div>
+                            <h5>Detailed Syntax Breakdown</h5>
+                            <ul class="syntax-list">
+                                <li><code>folium.Map()</code>: Creates the base map.
+                                    <code>tiles='CartoDB dark_matter'</code>
+                                    gives a cool modern look.
+                                </li>
+                                <li><code>CircleMarker()</code>: Adds a circle at lat/lon. Unlike Scatter plots, these
+                                    stick
+                                    to the map location when you zoom.</li>
+                                <li><code>m.save()</code>: Exports the entire interactive app as a single HTML file.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="relative">
+                            <button class="copy-btn">Copy</button>
+                            <pre><code class="language-python"># !pip install folium
+import folium
+import requests
+import webbrowser
+import os
+
+# 1. Fetch Real-time Data (USGS)
+url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson"
+data = requests.get(url).json()
+
+# 2. Create Map (Dark Mode)
+m = folium.Map(location=[20, 0], zoom_start=2, tiles='CartoDB dark_matter')
+
+# 3. Add Loop
+for feature in data['features']:
+    coords = feature['geometry']['coordinates'] # [lon, lat]
+    mag = feature['properties']['mag']
+    place = feature['properties']['place']
+    
+    # Note: Folium uses [Lat, Lon], GeoJSON is [Lon, Lat]
+    folium.CircleMarker(
+        location=[coords[1], coords[0]],
+        radius=mag * 2,
+        color='#ff5555',
+        fill=True,
+        popup=f"&lt;b&gt;{place}&lt;/b&gt;&lt;br&gt;Mag: {mag}"
+    ).add_to(m)
+
+# 4. Save & Auto-Open
+filename = "crisis_dashboard.html"
+m.save(filename)
+
+# Print location and Open
+print(f"Map saved to: {os.path.abspath(filename)}")
+webbrowser.open('file://' + os.path.abspath(filename))</code></pre>
+                        </div>
+                        <p class="mt-2 text-sm text-slate-500"><strong>Expected Output:</strong> Prints the file path
+                            and automatically opens <code>crisis_dashboard.html</code> in your default web browser.</p>
+
+                        <div class="practice-box mt-4">
+                            <h5>🚀 Pipeline Challenge: Heatmaps</h5>
+                            <p class="text-sm">Import <code>from folium.plugins import HeatMap</code> and create a
+                                global Heatmap of earthquake intensity instead of individual circles.</p>
+                        </div>
+                    </div>
+
+                    <!-- Basemap -->
+                    <div class="mb-8">
+                        <h4 class="text-xl font-bold mb-4 text-cyan-600 dark:text-cyan-400">C. Pro Static Maps
+                            with Basemap</h4>
+                        <div class="code-explanation mb-4">
+                            <div class="simple-english">
+                                <strong>Basemap</strong> (part of Matplotlib toolkits) is legendary for creating
+                                publication-quality static maps with complex projections (like Orthographic or
+                                Robinson).
+                            </div>
+                            <h5>Detailed Syntax Breakdown</h5>
+                            <ul class="syntax-list">
+                                <li><code>projection='ortho'</code>: Creates a 3D-like globe view directly from above
+                                    the <code>lat_0, lon_0</code> point.</li>
+                                <li><code>drawcoastlines()</code>, <code>drawcountries()</code>: Helper methods to add
+                                    high-res vector layers.</li>
+                                <li><code>fillcontinents()</code>: Adds aesthetic coloring to land masses.</li>
+                            </ul>
+                        </div>
+
+                        <div class="relative">
+                            <button class="copy-btn">Copy</button>
+                            <pre><code class="language-python"># !pip install basemap basemap-data-hires
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 10))
+
+# 1. Define Projection (Orthographic = Globe)
+m = Basemap(projection='ortho', lat_0=20, lon_0=78)
+
+# 2. Draw Details
+m.drawcoastlines()
+m.drawcountries()
+m.fillcontinents(color='coral', lake_color='aqua')
+m.drawmapboundary(fill_color='aqua')
+
+plt.title("Orthographic View centered on India")
+plt.show()</code></pre>
+                        </div>
+                        <p class="mt-2 text-sm text-slate-500"><strong>Expected Output:</strong> A beautiful "marble"
+                            style globe image centered on the Indian subcontinent.</p>
+
+                        <div class="practice-box mt-4">
+                            <h5>🚀 Pipeline Challenge: The Robinson Projection</h5>
+                            <p class="text-sm">Change the projection to <code>'robin'</code> (Robinson), which is often
+                                used for world maps to minimize distortion at poles.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
             <!-- Resources: FAQ -->
             <div id="faq" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
                 <img src="https://images.unsplash.com/photo-1512314889357-e157c22f938d?auto=format&fit=crop&w=1200&q=80"
@@ -4636,7 +5117,210 @@ except:
                     </div>
                 </div>
 
+                <!-- Connect with Me Section (New Panel) -->
             </div>
+            <!-- Connect with Me Section (New Panel) -->
+            <div id="connect"
+                class="topic-panel hidden bg-white dark:bg-white rounded-2xl p-0 overflow-hidden shadow-sm relative min-h-screen font-sans text-black">
+                <!-- Manga Styles -->
+                <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Kalam:wght@700&display=swap"
+                    rel="stylesheet">
+                <style>
+                    /* Manga Fonts */
+                    .font-manga-title {
+                        font-family: 'Bangers', cursive;
+                        letter-spacing: 0.1em;
+                    }
+
+                    .font-manga-text {
+                        font-family: 'Kalam', cursive;
+                        font-weight: 700;
+                    }
+
+                    /* Manga Panel Borders */
+                    .manga-panel {
+                        border: 4px solid #000;
+                        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    /* Jagged Shadow Effect */
+                    .manga-shadow {
+                        box-shadow: 8px 8px 0 #000;
+                    }
+
+                    .manga-panel:hover {
+                        transform: translate(-3px, -3px) rotate(1deg);
+                        box-shadow: 12px 12px 0 #000;
+                    }
+
+
+
+                    /* Black Text with White Stroke (Visibility Fix) */
+                    .text-black-stroke {
+                        color: #000;
+                        -webkit-text-stroke: 0.8px #fff;
+                        paint-order: stroke fill;
+                        text-shadow: 1px 1px 0 #fff;
+                        /* Shadow for better legibility than glow */
+                    }
+
+                    /* Vivid Card Gradients */
+                    .bg-manga-blue {
+                        background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);
+                    }
+
+                    .bg-manga-purple {
+                        background: linear-gradient(135deg, #6e5494 0%, #a481d6 100%);
+                    }
+
+                    .bg-manga-teal {
+                        background: linear-gradient(135deg, #00ccbb 0%, #4ce6d9 100%);
+                    }
+
+                    .bg-manga-red {
+                        background: linear-gradient(135deg, #ff4d4d 0%, #ff8585 100%);
+                    }
+
+                    /* Speed Lines Overlay */
+                    .speed-lines {
+                        background: repeating-linear-gradient(45deg,
+                                transparent,
+                                transparent 10px,
+                                rgba(0, 0, 0, 0.03) 10px,
+                                rgba(0, 0, 0, 0.03) 12px);
+                    }
+                </style>
+
+                <!-- Speed Lines Background -->
+                <div class="absolute inset-0 speed-lines pointer-events-none"></div>
+
+                <div class="p-2 md:p-4 relative z-10 max-w-7xl mx-auto">
+
+                    <!-- Manga Header Spread -->
+                    <div class="border-b-4 border-black pb-4 mb-4 flex flex-col md:flex-row items-center gap-4">
+                        <!-- Left: Large Bat Logo Panel -->
+                        <div
+                            class="w-full md:w-1/3 p-3 flex justify-center items-center border-[4px] border-black bg-yellow-400 manga-shadow transform -rotate-2">
+                            <div class="hover:scale-110 transition-transform duration-300 drop-shadow-md">
+                                <!-- User SVG: Black on Yellow -->
+                                <svg fill="#000" width="90px" height="90px" viewBox="0 -3.5 39 39" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M19.5 4.25c-10.77 0-19.5 5.261-19.5 11.75s8.73 11.75 19.5 11.75 19.5-5.261 19.5-11.75-8.73-11.75-19.5-11.75zM30.555 23.53c0 0.062 1.951-2.357 0.39-3.981-1.874-2.124-5.116 1.056-5.116 1.056-2.562-5.059-6.424 3.145-6.424 3.145s-3.348-7.731-6.221-3.047c0.062 0-2.383-2.793-4.819-1.481-1.749 1.749 0 4.091 0 4.091-9.119-3.186-9.712-12.492 2.952-16.286-3.576 4.481 6.59 10.649 5.84-0.344l2.155 1.89c0 0 2.171-1.796 2.171-1.921-0.25 10.993 9.369 4.544 6.121 0.484 11.429 3.308 13.381 11.21 2.951 16.394z">
+                                    </path>
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Right: Massive Title Panel -->
+                        <div class="w-full md:w-2/3 text-center md:text-left">
+                            <h2 class="font-manga-title leading-none relative z-10 transform -rotate-2"
+                                style="color: #FFD700 !important; -webkit-text-stroke: 1.5px black; paint-order: stroke fill; font-size: clamp(2.5rem, 6vw, 4.5rem); text-shadow: 2px 2px 0px black;">
+                                THE BAT SIGNAL
+                            </h2>
+                        </div>
+                    </div>
+
+                    <!-- Manga Grid Layout (Colorful) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+
+                        <!-- Panel 1: LinkedIn -->
+                        <a href="https://linkedin.com/in/thisishimanshu" target="_blank"
+                            class="manga-panel manga-shadow group h-56 flex flex-col">
+                            <div
+                                class="h-2/3 border-b-4 border-black bg-manga-blue relative flex flex-col items-center justify-center">
+                                <svg class="w-12 h-12 text-white drop-shadow-[2px_2px_0px_#000]" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                </svg>
+                                <h3 class="font-manga-title text-2xl mt-2"
+                                    style="color: white !important; -webkit-text-stroke: 1px black; paint-order: stroke fill; text-shadow: 1px 1px 0 black;">
+                                    LINKEDIN</h3>
+                            </div>
+                            <div class="h-1/3 p-2 bg-white flex flex-col justify-center items-center text-center">
+                                <p class="font-manga-text text-black-stroke text-sm leading-tight">Professional Profile
+                                </p>
+                            </div>
+                        </a>
+
+                        <!-- Panel 2: GitHub -->
+                        <a href="https://github.com/oghimanshu" target="_blank"
+                            class="manga-panel manga-shadow group h-56 flex flex-col transform md:rotate-2">
+                            <div
+                                class="h-2/3 border-b-4 border-black bg-manga-purple relative flex flex-col items-center justify-center">
+                                <svg class="w-12 h-12 text-white drop-shadow-[2px_2px_0px_#000]" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                                <h3 class="font-manga-title text-2xl mt-2"
+                                    style="color: white !important; -webkit-text-stroke: 1px black; paint-order: stroke fill; text-shadow: 1px 1px 0 black;">
+                                    GITHUB</h3>
+                            </div>
+                            <div class="h-1/3 p-2 bg-white flex flex-col justify-center items-center text-center">
+                                <p class="font-manga-text text-black-stroke text-sm leading-tight">Technical Portfolio
+                                </p>
+                            </div>
+                        </a>
+
+                        <!-- Panel 3: ResearchGate -->
+                        <a href="https://www.researchgate.net/profile/Himanshu-Gaur-11" target="_blank"
+                            class="manga-panel manga-shadow group h-56 flex flex-col transform md:-rotate-1">
+                            <div
+                                class="h-2/3 border-b-4 border-black bg-manga-teal relative flex flex-col items-center justify-center">
+                                <svg class="w-12 h-12 text-white drop-shadow-[2px_2px_0px_#000]" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                                </svg>
+                                <h3 class="font-manga-title text-2xl mt-2"
+                                    style="color: white !important; -webkit-text-stroke: 1px black; paint-order: stroke fill; text-shadow: 1px 1px 0 black;">
+                                    ACADEMIA</h3>
+                            </div>
+                            <div class="h-1/3 p-2 bg-white flex flex-col justify-center items-center text-center">
+                                <p class="font-manga-text text-black-stroke text-sm leading-tight">Research Publications
+                                </p>
+                            </div>
+                        </a>
+
+                        <!-- Panel 4: Email -->
+                        <a href="mailto:cliquehimanshu@gmail.com"
+                            class="manga-panel manga-shadow group h-56 flex flex-col">
+                            <div
+                                class="h-2/3 border-b-4 border-black bg-manga-red relative flex flex-col items-center justify-center">
+                                <svg class="w-12 h-12 text-white drop-shadow-[2px_2px_0px_#000]" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <h3 class="font-manga-title text-2xl mt-2"
+                                    style="color: white !important; -webkit-text-stroke: 1px black; paint-order: stroke fill; text-shadow: 1px 1px 0 black;">
+                                    EMAIL ME</h3>
+                            </div>
+                            <div class="h-1/3 p-2 bg-white flex flex-col justify-center items-center text-center">
+                                <p class="font-manga-text text-black-stroke text-sm leading-tight">Get in Touch</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Manga Footer Strip -->
+                <div
+                    class="absolute bottom-0 left-0 right-0 h-6 border-t-4 border-black bg-yellow-400 flex items-center justify-end px-4 font-mono text-[10px] text-black-stroke font-bold">
+                    <span class="mr-4">&copy; 2026 HIMANSHU GAUR</span>
+                </div>
+
+                <!-- Panel Closure -->
+            </div>
+
+    </div>
 
 
     </div>
@@ -4787,6 +5471,8 @@ except:
             // Mobile menu safely
             function toggleMenu() {
                 if (!sidebar || !overlay) return;
+                // Force reset display property in case it was hidden by home logic
+                sidebar.style.removeProperty('display');
                 sidebar.classList.toggle('open');
                 overlay.classList.toggle('open');
                 overlay.classList.toggle('hidden');
@@ -4807,8 +5493,8 @@ except:
                 'topic1', 'topic2', 'topic3', 'topic3b', 'topic4',
                 'topic5', 'topic6', 'merging',
                 'topic8', 'topic9', 'topic10',
-                'viz', 'kendrick', 'grammy', 'govdata', 'learning',
-                'faq', 'glossary', 'references'
+                'viz', 'kendrick', 'grammy', 'govdata', 'geopandas', 'learning',
+                'faq', 'glossary', 'references', 'connect'
             ];
             // Global switchTopic function for robustness
             window.switchTopic = function (targetTopic) {
@@ -4893,6 +5579,11 @@ except:
                     toggleMenu();
                 }
 
+                // Initialize Maps if navigating to Geopandas
+                if (targetTopic === 'geopandas') {
+                    setTimeout(initMaps, 100);
+                }
+
                 // Update Progress Bar
                 const topicIndex = progressTopics.indexOf(targetTopic);
                 if (topicIndex !== -1 && progressPill) {
@@ -4903,7 +5594,7 @@ except:
                     progressPill.classList.add('visible');
 
                     // Define main topics count (excluding resources)
-                    const mainTopicCount = 24;
+                    const mainTopicCount = 26;
 
                     if (topicIndex < mainTopicCount) {
                         const currentStep = topicIndex + 1;
@@ -4915,7 +5606,8 @@ except:
                         const resourceTitles = {
                             'faq': 'FAQ',
                             'glossary': 'Glossary',
-                            'references': 'References'
+                            'references': 'References',
+                            'connect': 'Connect'
                         };
                         if (progressText) progressText.textContent = resourceTitles[targetTopic] || 'Resources';
                         if (progressFill) progressFill.style.width = '100%';
@@ -5344,6 +6036,49 @@ except:
                         }
                     });
                 });
+            }
+
+            // Map Initialization Logic for Geospatial Module
+            let worldMap = null;
+            let indiaMap = null;
+
+            function initMaps() {
+                // Initialize World Map if container exists and map doesn't
+                const worldContainer = document.getElementById('map-world');
+                if (worldContainer && !worldMap && typeof L !== 'undefined') {
+                    worldMap = L.map('map-world').setView([20, 0], 2);
+                    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                        subdomains: 'abcd',
+                        maxZoom: 19
+                    }).addTo(worldMap);
+
+                    // Add a simple marker for context
+                    L.marker([51.5, -0.09]).addTo(worldMap)
+                        .bindPopup('A sample point on the map.')
+                        .openPopup();
+
+                    // Fix map size on init
+                    setTimeout(() => { worldMap.invalidateSize(); }, 200);
+                }
+
+                // Initialize India Map
+                const indiaContainer = document.getElementById('map-india');
+                if (indiaContainer && !indiaMap && typeof L !== 'undefined') {
+                    indiaMap = L.map('map-india').setView([20.5937, 78.9629], 5);
+                    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                        subdomains: 'abcd',
+                        maxZoom: 19
+                    }).addTo(indiaMap);
+
+                    // Add marker for New Delhi
+                    L.marker([28.6139, 77.2090]).addTo(indiaMap)
+                        .bindPopup('New Delhi (Capital)')
+                        .openPopup();
+
+                    setTimeout(() => { indiaMap.invalidateSize(); }, 200);
+                }
             }
 
             // Initial navigation based on URL hash or default to 'home'

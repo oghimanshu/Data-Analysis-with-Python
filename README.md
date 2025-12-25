@@ -85,6 +85,27 @@ The theme engine dynamically adjusts the entire UI:
 
 ---
 
+## 🐣 Hidden Easter Eggs
+
+The platform currently hosts **10 Secret Modes** waiting to be discovered.
+
+| Secret Mode | Trigger Code | Effect |
+| :--- | :--- | :--- |
+| **Matrix Rain** | Type `matrix` | 🟢 Digital rain overlay |
+| **Cinema Mode** | Type `action` | 🎬 Focus mode (hides UI) |
+| **Disco Mode** | Toggle Theme 5x | 🕺 Funky colors & strobe |
+| **Snake Game** | Click "Python" in Title 10x | 🐍 Playable Canvas Snake |
+| **Gravity Failure** | Shift+Click "Get Started" | 🌌 Physics simulation |
+| **Retro Win95** | Click "2026" (Footer) 3x | 💾 Windows 95 Brutalist theme |
+| **Confetti** | Click Progress Pill 7x | 🎉 Celebration explosion |
+| **Hidden Terminal** | Press `~` 3x | 💻 Hacker console (try `help`) |
+| **Logo Fly** | Click Sidebar Logo 5x | 🚁 Logo animation |
+| **Dev Commentary** | Click Name (Sidebar) 5x | 🎙️ Developer tooltips |
+
+*Note: Triggers include overlap prevention logic.*
+
+---
+
 ## 📂 Project Structure
 
 ```text

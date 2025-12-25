@@ -80,30 +80,29 @@
 
     <style>
         :root {
-            /* Glass UI Variables */
+            /* Glass UI Variables - Apple Style */
             --bg-body: #f8fafc;
             /* Fallback */
-            --bg-glass: rgba(255, 255, 255, 0.7);
-            --bg-glass-panel: rgba(255, 255, 255, 0.6);
-            --bg-panel: rgba(255, 255, 255, 0.8);
-            --border-glass: rgba(255, 255, 255, 0.4);
-            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --bg-glass: rgba(255, 255, 255, 0.65);
+            --bg-glass-panel: rgba(255, 255, 255, 0.45);
+            --bg-panel: rgba(255, 255, 255, 0.5);
+            --border-glass: rgba(255, 255, 255, 0.3);
+            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
 
             --text-primary: #1e293b;
             --text-secondary: #475569;
             --text-heading: #0f172a;
-            --border-color: rgba(226, 232, 240, 0.6);
-            --code-bg: rgba(15, 23, 42, 0.95);
+            --border-color: rgba(226, 232, 240, 0.5);
+            --code-bg: rgba(15, 23, 42, 0.9);
             --code-text: #f1f5f9;
             --accent-color: #2563eb;
             --accent-hover: #1d4ed8;
             --chart-text: #64748b;
-            --chart-text: #64748b;
-            --chart-grid: rgba(226, 232, 240, 0.6);
+            --chart-grid: rgba(226, 232, 240, 0.5);
 
-            /* Sidebar & Mobile */
-            --bg-sidebar: rgba(248, 250, 252, 0.98);
-            /* Almost solid for mobile sidebar */
+            /* Sidebar & Mobile - Apple Glass */
+            --bg-sidebar: rgba(248, 250, 252, 0.75);
+            /* Translucent for mobile sidebar */
         }
 
         /* Search Box */
@@ -148,6 +147,15 @@
             border-top: 1px solid var(--border-color);
         }
 
+        /* Apple Glass Panel Class */
+        .glass-panel {
+            background: var(--bg-glass-panel);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            box-shadow: var(--shadow-glass);
+        }
+
         .hero-btn {
             display: inline-flex;
             align-items: center;
@@ -170,17 +178,17 @@
         .dark {
             --bg-body: #000000;
             /* Fallback */
-            --bg-glass: rgba(10, 10, 10, 0.7);
-            --bg-glass-panel: rgba(20, 20, 20, 0.6);
-            --bg-panel: rgba(30, 41, 59, 0.4);
+            --bg-glass: rgba(10, 10, 10, 0.65);
+            --bg-glass-panel: rgba(20, 20, 20, 0.45);
+            --bg-panel: rgba(30, 41, 59, 0.3);
             --border-glass: rgba(255, 255, 255, 0.1);
-            --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 
             --text-primary: #e2e8f0;
             --text-secondary: #94a3b8;
             --text-heading: #f8fafc;
             --border-color: rgba(51, 51, 51, 0.6);
-            --code-bg: rgba(17, 17, 17, 0.95);
+            --code-bg: rgba(17, 17, 17, 0.9);
             --code-text: #e2e8f0;
             --accent-color: #3b82f6;
             --accent-hover: #60a5fa;
@@ -189,8 +197,8 @@
             --chart-grid: rgba(51, 51, 51, 0.6);
 
             /* Sidebar & Mobile Dark */
-            --bg-sidebar: rgba(2, 6, 23, 0.98);
-            /* Almost solid dark for mobile sidebar */
+            --bg-sidebar: rgba(2, 6, 23, 0.8);
+            /* Glassy dark for mobile sidebar */
         }
 
         /* Global Background Mesh */
@@ -341,6 +349,13 @@
             opacity: 0.8 !important;
         }
 
+        /* Global Extended Footer for Topic Panels */
+        .topic-panel {
+            min-height: 100vh;
+            padding-bottom: 20rem !important;
+            /* Huge spacer for pill */
+        }
+
         .theme-toggle svg {
             opacity: 1 !important;
             visibility: visible !important;
@@ -426,7 +441,12 @@
             stroke: white !important;
         }
 
-        /* Ensure all text is always visible */
+        /* Explicit hidden class to ensure navigation works without CDN */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Ensure all text is always visible (removed div from list to fix toggling) */
         h1,
         h2,
         h3,
@@ -436,8 +456,7 @@
         p,
         span,
         a,
-        li,
-        div {
+        li {
             visibility: visible !important;
             opacity: 1 !important;
         }
@@ -910,28 +929,25 @@
         /* Progress Bar - Apple Glass UI */
         .progress-pill-container {
             position: fixed;
-            bottom: 1.5rem;
+            bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
-            /* iOS Light Mode Glass - More Translucent */
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: saturate(180%) blur(30px);
-            -webkit-backdrop-filter: saturate(180%) blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-            z-index: 100;
+            z-index: 9999;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-            opacity: 0;
-            pointer-events: none;
-            visibility: hidden;
-            width: 90%;
-            max-width: 350px;
-            justify-content: space-between;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1),
+                0 4px 10px -2px rgba(0, 0, 0, 0.05),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 90vw;
+            width: auto;
         }
 
         @media (min-width: 768px) {
@@ -942,14 +958,16 @@
                 width: auto;
                 max-width: none;
                 justify-content: center;
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
 
         .dark .progress-pill-container {
-            /* iOS Dark Mode Glass - More Translucent */
-            background: rgba(20, 20, 20, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            background: rgba(15, 23, 42, 0.6);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
         }
 
         .progress-pill-container.visible {
@@ -1181,6 +1199,36 @@
             border-color: #60a5fa;
         }
 
+        .progress-pill-container {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1),
+                0 4px 10px -2px rgba(0, 0, 0, 0.05),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 90vw;
+            width: auto;
+        }
+
+        .dark .progress-pill-container {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
         .search-icon {
             position: absolute;
             left: 0.75rem;
@@ -1370,10 +1418,225 @@
             left: 150%;
             transition: 0.7s ease-in-out;
         }
+
+        /* Connect Section Backgrounds */
+        .bg-connect {
+            background-size: cover;
+            background-position: center;
+            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+            /* Light Mode: Abstract Network */
+        }
+
+        .dark .bg-connect {
+            background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop');
+            /* Dark Mode: Tech Blue */
+        }
+
+        /* Glass Cards Override for Connect Section */
+        #connect .group {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* --- Easter Egg Styles --- */
+
+        /* 1. Disco Mode */
+        @keyframes disco-hue {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        .disco-mode {
+            animation: disco-hue 2s linear infinite;
+        }
+
+        .disco-mode .topic-panel {
+            border: 4px solid #fff;
+            box-shadow: 0 0 20px #ff00de, 0 0 40px #00ffff;
+        }
+
+        /* 5. Retro Windows 95 */
+        .win95-mode {
+            font-family: 'Courier New', Courier, monospace !important;
+            background: #c0c0c0 !important;
+            color: black !important;
+        }
+
+        .win95-mode .glass-panel,
+        .win95-mode .topic-panel {
+            background: #c0c0c0 !important;
+            border: 2px solid #dfdfdf;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+        }
+
+        .win95-mode button,
+        .win95-mode .nav-link {
+            background: #c0c0c0 !important;
+            border: 2px solid white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            color: black !important;
+        }
+
+        /* 8. Logo Fly */
+        @keyframes fly-away {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-150vh) rotate(720deg);
+            }
+        }
+
+        @keyframes crash-land {
+            0% {
+                transform: translateY(-150vh) rotate(720deg);
+            }
+
+            80% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            90% {
+                transform: translateY(-50px) rotate(10deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        .fly-away-anim {
+            animation: fly-away 2s ease-in forwards;
+        }
+
+        .crash-land-anim {
+            animation: crash-land 1s ease-out forwards;
+        }
+
+        /* 10. Cinema Mode */
+        .cinema-mode #sidebar,
+        .cinema-mode .progress-pill-container,
+        .cinema-mode #mobile-header {
+            display: none !important;
+        }
+
+        .cinema-mode #main-content {
+            margin-left: 0 !important;
+            width: 100% !important;
+            padding: 0 !important;
+        }
+
+        .cinema-mode #connect {
+            animation: cinema-fade 1s ease-in;
+        }
+
+        @keyframes cinema-fade {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* --- Easter Egg Modes --- */
+        /* 1. Disco Mode */
+        @keyframes disco-spin {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        body.disco-mode {
+            animation: disco-spin 1s linear infinite;
+        }
+
+        /* 2. Cinema Mode */
+        body.cinema-mode #sidebar,
+        body.cinema-mode #mobile-nav-toggle,
+        /* adjustments driven by class names logic */
+        body.cinema-mode .progress-pill-container,
+        body.cinema-mode .top-bar-placeholder {
+            /* Assuming top bar exists */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        body.cinema-mode {
+            background-color: #000 !important;
+        }
+
+        body.cinema-mode .topic-panel {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 3. Win95 Mode */
+        body.win95-mode {
+            font-family: "Courier New", Courier, monospace !important;
+            background-color: #008080 !important;
+            /* Classic Teal */
+            color: #000 !important;
+        }
+
+        body.win95-mode .glass-panel,
+        body.win95-mode .topic-panel,
+        body.win95-mode #sidebar,
+        body.win95-mode pre,
+        body.win95-mode code,
+        body.win95-mode .nav-link {
+            background-color: #c0c0c0 !important;
+            border: 2px solid #dfdfdf !important;
+            border-right-color: #404040 !important;
+            border-bottom-color: #404040 !important;
+            box-shadow: 2px 2px 0 #000 !important;
+            border-radius: 0 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            color: #000 !important;
+        }
+
+        body.win95-mode h1,
+        body.win95-mode h2,
+        body.win95-mode h3 {
+            color: #000080 !important;
+            /* Navy Blue headers */
+            text-shadow: none !important;
+        }
+
+        /* 4. Dev Commentary */
+        body.show-commentary h1::after,
+        body.show-commentary h2::after {
+            content: " 🎙️ [Dev Note]";
+            font-size: 0.5em;
+            color: #f59e0b;
+            vertical-align: middle;
+            margin-left: 0.5rem;
+            font-style: italic;
+        }
     </style>
 </head>
 
-<body class="text-slate-800 dark:text-slate-200">
+<body class="text-slate-800 dark:text-slate-200 overflow-hidden h-screen bg-slate-50 dark:bg-slate-900">
 
     <!-- Mobile Header -->
     <div
@@ -1412,10 +1675,10 @@
     </div>
 
     <!-- Desktop Sidebar Toggle Button (Floating) -->
-    <button id="sidebar-toggle-btn"
-        class="hidden md:flex fixed top-4 left-4 z-[160] p-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-lg shadow-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all hover:scale-105"
+    <button
+        class="sidebar-toggle-btn glass-panel flex md:hidden fixed top-3 left-4 z-[160] p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all active:scale-95"
         aria-label="Toggle Sidebar">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
     </button>
@@ -1554,7 +1817,7 @@
                         <li><a href="#" class="nav-link" data-topic="faq">❓ FAQ</a></li>
                         <li><a href="#" class="nav-link" data-topic="glossary">📚 Glossary</a></li>
                         <li><a href="#" class="nav-link" data-topic="references">📄 References</a></li>
-                        <li><a href="#" class="nav-link" data-topic="connect">🤝 Connect</a></li>
+                        <li><a href="#" class="nav-link" data-topic="connect">🤝 Connect with Me</a></li>
 
                     </ul>
                 </div>
@@ -1563,7 +1826,7 @@
 
             <div
                 class="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 flex flex-col items-center gap-2">
-                <span>&copy; 2026 Himanshu Gaur</span>
+                <span id="copyright-year">&copy; 2026 Himanshu Gaur</span>
                 <div class="flex items-center gap-3">
                     <a href="https://github.com/oghimanshu" target="_blank"
                         class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
@@ -1594,7 +1857,7 @@
                 class="hidden sticky top-0 z-30 glass-panel border-b border-slate-200 dark:border-slate-800 px-8 py-4 shadow-sm transition-all flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <button
-                        class="menu-btn md:hidden p-2 -ml-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        class="sidebar-toggle-btn menu-btn md:hidden p-2 -ml-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
                         aria-label="Open Menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -4153,20 +4416,20 @@ world = gpd.read_file(url)
 
 # 2. Clean data
 # Columns in new dataset are often uppercase (POP_EST, GDP_MD)
-world.columns = world.columns.str.lower()
+world.columns = world.columns.str.lower();
 
-# Filter invalid data
-world = world[(world.pop_est > 0) & (world.name != "Antarctica")]
+// Filter invalid data
+world = world[(world.pop_est > 0) & (world.name != "Antarctica")];
 
-# 3. Create metric (GDP per Capita)
-world['gdp_per_cap'] = world.gdp_md / world.pop_est
+// 3. Create metric (GDP per Capita)
+world['gdp_per_cap'] = world.gdp_md / world.pop_est;
 
-# 4. Plot
-fig, ax = plt.subplots(1, 1, figsize=(15, 6))
+// 4. Plot
+fig, ax = plt.subplots(1, 1, figsize=(15, 6));
 world.plot(column='gdp_per_cap', ax=ax, legend=True,
-           cmap='OrRd', legend_kwds={'label': "GDP Per Capita"})
-plt.title('Global Economic Disparity')
-plt.show()</code></pre>
+           cmap='OrRd', legend_kwds={'label': "GDP Per Capita"});
+plt.title('Global Economic Disparity');
+plt.show();</code></pre>
                             </div>
                         </div>
 
@@ -4551,6 +4814,216 @@ plt.show()</code></pre>
             </div>
 
 
+            <!-- Resources: Further Learning -->
+            <div id="learning" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80"
+                    alt="Further Learning" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
+                <h2>Further Learning Resources</h2>
+                <p class="mb-6 text-slate-600 dark:text-slate-300">A curated list of courses and resources to
+                    continue your data science journey.</p>
+
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <!-- Card 1: SQL -->
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <h4 class="text-blue-600 dark:text-blue-400 font-bold mb-2">SQL (Structured Query Language)
+                        </h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">CSV files are for small data.
+                            Real companies use SQL databases. Learn <code>SELECT * FROM table</code> logic.</p>
+                        <a href="https://sqlzoo.net/" target="_blank"
+                            class="text-xs font-mono bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 p-1 rounded hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors">Resource:
+                            SQLZoo</a>
+                    </div>
+
+                    <!-- Card 2: Machine Learning -->
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <h4 class="text-indigo-600 dark:text-indigo-400 font-bold mb-2">Machine Learning
+                            (Scikit-Learn)</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Move from "What happened?" to
+                            "What will happen?". Learn Linear Regression for GDP forecasting.</p>
+                        <a href="https://www.kaggle.com/learn" target="_blank"
+                            class="text-xs font-mono bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 p-1 rounded hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors">Resource:
+                            Kaggle Learn</a>
+                    </div>
+
+                    <!-- Card 3: Econometrics -->
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <h4 class="text-emerald-600 dark:text-emerald-400 font-bold mb-2">Econometrics (Statsmodels)
+                        </h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">For rigorous statistical testing
+                            (P-values, R-squared) specifically for economics research.</p>
+                        <a href="https://www.statsmodels.org/stable/index.html" target="_blank"
+                            class="text-xs font-mono bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 p-1 rounded hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors">Resource:
+                            Statsmodels Docs</a>
+                    </div>
+
+                    <!-- Card 4: Geospatial -->
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <h4 class="text-amber-600 dark:text-amber-400 font-bold mb-2">Geospatial Analysis
+                            (Geopandas)</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Plotting economic data on maps
+                            (Choropleths). Essential for regional development studies.</p>
+                        <a href="https://geopandas.org/" target="_blank"
+                            class="text-xs font-mono bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 p-1 rounded hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-colors">Resource:
+                            Geopandas.org</a>
+                    </div>
+
+                    <!-- Card 5: IBM Python for Data Science -->
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <h4 class="text-slate-800 dark:text-slate-200 font-bold mb-2">Python for Data Science (IBM)
+                        </h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Python fundamentals + data
+                            manipulation + data I/O. Good structured path from basics to analysis.</p>
+                        <a href="https://www.coursera.org/learn/python-for-applied-data-science-ai" target="_blank"
+                            class="text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Resource:
+                            Coursera (Audit Free)</a>
+                    </div>
+
+                    <!-- Card 6: UMich Statistics -->
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <h4 class="text-slate-800 dark:text-slate-200 font-bold mb-2">Statistics with Python (UMich)
+                        </h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Probability, hypothesis testing,
+                            and inference. Important for strong statistical foundation.</p>
+                        <a href="https://www.coursera.org/specializations/statistics-with-python" target="_blank"
+                            class="text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Resource:
+                            Coursera (Audit Free)</a>
+                    </div>
+
+                    <!-- Card 7: FreeCodeCamp -->
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <h4 class="text-purple-600 dark:text-purple-400 font-bold mb-2">FreeCodeCamp Data Analysis
+                        </h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Data wrangling with Pandas/NumPy,
+                            visualization. Good free starting point for self-paced practice.</p>
+                        <a href="https://www.freecodecamp.org/learn/data-analysis-with-python" target="_blank"
+                            class="text-xs font-mono bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 p-1 rounded hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors">Resource:
+                            FreeCodeCamp</a>
+                    </div>
+
+                    <!-- Card 8: Book -->
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <h4 class="text-gray-800 dark:text-gray-300 font-bold mb-2">Book: Python for Data Analysis
+                        </h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">By Wes McKinney (Creator of
+                            Pandas). The definitive guide for deep understanding.</p>
+                        <a href="https://wesmckinney.com/book/" target="_blank"
+                            class="text-xs font-mono bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Resource:
+                            Read Online</a>
+                    </div>
+                </div>
+
+                <!-- Essential Reading & Blogs Subsection -->
+                <div
+                    class="mt-8 bg-slate-50 dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <h4 class="font-bold mb-6 text-xl text-slate-800 dark:text-white">Essential Reading & Blogs</h4>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h5
+                                class="font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest text-xs mb-4">
+                                📚 Reputed Books</h5>
+                            <ul class="space-y-3">
+                                <li>
+                                    <a href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/"
+                                        target="_blank" class="block hover:translate-x-1 transition-transform">
+                                        <div class="font-bold text-slate-700 dark:text-slate-200">Hands-On Machine
+                                            Learning</div>
+                                        <div class="text-xs text-slate-500">Aurélien Géron • The generic ML bible</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.statlearning.com/" target="_blank"
+                                        class="block hover:translate-x-1 transition-transform">
+                                        <div class="font-bold text-slate-700 dark:text-slate-200">Intro to Statistical
+                                            Learning (ISL)</div>
+                                        <div class="text-xs text-slate-500">James, Witten, Hastie, Tibshirani •
+                                            Accessible theory</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://dataintensive.net/" target="_blank"
+                                        class="block hover:translate-x-1 transition-transform">
+                                        <div class="font-bold text-slate-700 dark:text-slate-200">Designing
+                                            Data-Intensive Applications</div>
+                                        <div class="text-xs text-slate-500">Martin Kleppmann • System Design Masterclass
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/"
+                                        target="_blank" class="block hover:translate-x-1 transition-transform">
+                                        <div class="font-bold text-slate-700 dark:text-slate-200">Fluent Python</div>
+                                        <div class="text-xs text-slate-500">Luciano Ramalho • For advanced Pythonistas
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.storytellingwithdata.com/" target="_blank"
+                                        class="block hover:translate-x-1 transition-transform">
+                                        <div class="font-bold text-slate-700 dark:text-slate-200">Storytelling with Data
+                                        </div>
+                                        <div class="text-xs text-slate-500">Cole Knaflic • Visualization Principles
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h5
+                                class="font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest text-xs mb-4">
+                                🌐 Tech Blogs</h5>
+                            <ul class="space-y-3">
+                                <li>
+                                    <a href="https://realpython.com/" target="_blank"
+                                        class="block hover:translate-x-1 transition-transform">
+                                        <div class="font-bold text-slate-700 dark:text-slate-200">Real Python</div>
+                                        <div class="text-xs text-slate-500">High-quality, in-depth tutorials</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://chrisalbon.com/" target="_blank"
+                                        class="block hover:translate-x-1 transition-transform">
+                                        <div class="font-bold text-slate-700 dark:text-slate-200">Chris Albon</div>
+                                        <div class="text-xs text-slate-500">Concise Machine Learning Flashcards</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://distill.pub/" target="_blank"
+                                        class="block hover:translate-x-1 transition-transform">
+                                        <div class="font-bold text-slate-700 dark:text-slate-200">Distill</div>
+                                        <div class="text-xs text-slate-500">Interactive ML research (Legendary)</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://netflixtechblog.com/" target="_blank"
+                                        class="block hover:translate-x-1 transition-transform">
+                                        <div class="font-bold text-slate-700 dark:text-slate-200">Netflix Tech Blog
+                                        </div>
+                                        <div class="text-xs text-slate-500">Data Engineering at massive scale</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://medium.com/airbnb-engineering/data-science/home" target="_blank"
+                                        class="block hover:translate-x-1 transition-transform">
+                                        <div class="font-bold text-slate-700 dark:text-slate-200">Airbnb Data Science
+                                        </div>
+                                        <div class="text-xs text-slate-500">Real-world data stories & experiments</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Resources: FAQ -->
             <div id="faq" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
                 <img src="https://images.unsplash.com/photo-1512314889357-e157c22f938d?auto=format&fit=crop&w=1200&q=80"
@@ -4663,6 +5136,92 @@ plt.show()</code></pre>
                         <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">NumPy, Pandas, Matplotlib,
                             Seaborn, Scikit-learn, SciPy, Statsmodels, and frameworks like TensorFlow or PyTorch.
                         </p>
+                    </details>
+                    <details
+                        class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+                        <summary class="font-bold cursor-pointer flex justify-between">
+                            Q: Are there any hidden secrets?
+                            <span class="text-blue-500 dark:text-blue-400">+</span>
+                        </summary>
+                        <div class="mt-4 overflow-x-auto">
+                            <h3 class="text-lg font-bold mb-2 text-slate-900 dark:text-white">🐣 Hidden Easter Eggs</h3>
+                            <p class="mb-4 text-sm text-slate-600 dark:text-slate-400">The platform currently hosts
+                                <strong>10 Secret Modes</strong> waiting to be discovered.
+                            </p>
+                            <table class="w-full text-sm text-left text-slate-600 dark:text-slate-300">
+                                <thead
+                                    class="text-xs text-slate-700 uppercase bg-slate-50 dark:bg-slate-800 dark:text-slate-400">
+                                    <tr>
+                                        <th scope="col" class="px-3 py-2">Secret Mode</th>
+                                        <th scope="col" class="px-3 py-2">Trigger Code</th>
+                                        <th scope="col" class="px-3 py-2">Effect</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                        <td class="px-3 py-2 font-medium text-slate-900 dark:text-white">Matrix Rain
+                                        </td>
+                                        <td class="px-3 py-2"><code
+                                                class="bg-slate-100 dark:bg-slate-800 px-1 rounded">matrix</code></td>
+                                        <td class="px-3 py-2">🟢 Digital rain overlay</td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                        <td class="px-3 py-2 font-medium text-slate-900 dark:text-white">Cinema Mode
+                                        </td>
+                                        <td class="px-3 py-2"><code
+                                                class="bg-slate-100 dark:bg-slate-800 px-1 rounded">action</code></td>
+                                        <td class="px-3 py-2">🎬 Focus mode (hides UI)</td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                        <td class="px-3 py-2 font-medium text-slate-900 dark:text-white">Disco Mode</td>
+                                        <td class="px-3 py-2">Toggle Theme 5x</td>
+                                        <td class="px-3 py-2">🕺 Funky colors & strobe</td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                        <td class="px-3 py-2 font-medium text-slate-900 dark:text-white">Snake Game</td>
+                                        <td class="px-3 py-2">Click "Python" in Title 10x</td>
+                                        <td class="px-3 py-2">🐍 Playable Canvas Snake</td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                        <td class="px-3 py-2 font-medium text-slate-900 dark:text-white">Gravity Failure
+                                        </td>
+                                        <td class="px-3 py-2">Shift+Click "Get Started"</td>
+                                        <td class="px-3 py-2">🌌 Physics simulation</td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                        <td class="px-3 py-2 font-medium text-slate-900 dark:text-white">Retro Win95
+                                        </td>
+                                        <td class="px-3 py-2">Click "2026" (Footer) 3x</td>
+                                        <td class="px-3 py-2">💾 Windows 95 Brutalist theme</td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                        <td class="px-3 py-2 font-medium text-slate-900 dark:text-white">Confetti</td>
+                                        <td class="px-3 py-2">Click Progress Pill 7x</td>
+                                        <td class="px-3 py-2">🎉 Celebration explosion</td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                        <td class="px-3 py-2 font-medium text-slate-900 dark:text-white">Hidden Terminal
+                                        </td>
+                                        <td class="px-3 py-2">Press <code
+                                                class="bg-slate-100 dark:bg-slate-800 px-1 rounded">~</code> 3x</td>
+                                        <td class="px-3 py-2">💻 Hacker console (try help)</td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                        <td class="px-3 py-2 font-medium text-slate-900 dark:text-white">Logo Fly</td>
+                                        <td class="px-3 py-2">Click Sidebar Logo 5x</td>
+                                        <td class="px-3 py-2">🚁 Logo animation</td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-slate-900 dark:border-slate-800">
+                                        <td class="px-3 py-2 font-medium text-slate-900 dark:text-white">Dev Commentary
+                                        </td>
+                                        <td class="px-3 py-2">Click Name (Sidebar) 5x</td>
+                                        <td class="px-3 py-2">🎙️ Developer tooltips</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="mt-2 text-xs text-slate-500 italic">*Note: Triggers include overlap prevention
+                                logic.</p>
+                        </div>
                     </details>
                     <details
                         class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
@@ -4914,13 +5473,6 @@ plt.show()</code></pre>
                     </div>
                     <div
                         class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
-                        <h4 class="font-bold text-slate-900 dark:text-slate-50">Method Chaining</h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-300">Calling multiple methods sequentially
-                            on the same object in a single line of code (e.g.,
-                            <code>df.groupby().mean().sort_values()</code>).
-                    </div>
-                    <div
-                        class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
                         <h4 class="font-bold text-slate-900 dark:text-slate-50">Boolean Indexing</h4>
                         <p class="text-sm text-slate-600 dark:text-slate-300">Selecting subsets of data based on the
                             actual values of the data rather than their row/column labels or integer positions
@@ -4949,387 +5501,124 @@ plt.show()</code></pre>
                             class="text-blue-600 underline">https://docs.python.org/3/</a>
                     </li>
                     <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
-                        <strong>Van Rossum, G., & Drake, F. L. (2009).</strong> <em>Python 3 Reference Manual</em>.
-                        CreateSpace.
-                    </li>
-                    <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
                         <strong>McKinney, W. (2010).</strong> Data Structures for Statistical Computing in Python.
-                        <em>Proceedings of the 9th Python in Science Conference</em>. <a
-                            href="https://doi.org/10.25080/Majora-92bf1922-00a" target="_blank"
-                            class="text-blue-600 underline">https://doi.org/10.25080/Majora-92bf1922-00a</a>
-                    </li>
-                    <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
-                        <strong>Harris, C. R., et al. (2020).</strong> Array programming with NumPy.
-                        <em>Nature</em>, 585, 357–362. <a href="https://doi.org/10.1038/s41586-020-2649-2"
-                            target="_blank"
-                            class="text-blue-600 underline">https://doi.org/10.1038/s41586-020-2649-2</a>
+                        <em>Proceedings of the 9th Python in Science Conference</em>.
                     </li>
                     <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
                         <strong>International Monetary Fund. (2023).</strong> <em>World Economic Outlook
-                            Database</em>. Washington, D.C.: IMF. Retrieved from <a
-                            href="https://www.imf.org/en/Publications/WEO" target="_blank"
-                            class="text-blue-600 underline">IMF.org</a>
-                    </li>
-                    <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
-                        <strong>VanderPlas, J. (2016).</strong> <em>Python Data Science Handbook: Essential Tools
-                            for Working with Data</em>. O'Reilly Media. <a
-                            href="https://jakevdp.github.io/PythonDataScienceHandbook/" target="_blank"
-                            class="text-blue-600 underline">https://jakevdp.github.io/PythonDataScienceHandbook/</a>
-                    </li>
-                    <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
-                        <strong>Pedregosa, F., et al. (2011).</strong> Scikit-learn: Machine Learning in Python.
-                        <em>Journal of Machine Learning Research</em>, 12(Oct), 2825–2830. <a
-                            href="https://www.jmlr.org/papers/volume12/pedregosa11a/pedregosa11a.pdf" target="_blank"
-                            class="text-blue-600 underline">https://www.jmlr.org/papers/volume12/pedregosa11a/pedregosa11a.pdf</a>
-                    </li>
-                    <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
-                        <strong>Hunter, J. D. (2007).</strong> Matplotlib: A 2D graphics environment.
-                        <em>Computing in Science & Engineering</em>, 9(3), 90–95. <a
-                            href="https://doi.org/10.1109/MCSE.2007.55" target="_blank"
-                            class="text-blue-600 underline">https://doi.org/10.1109/MCSE.2007.55</a>
-                    </li>
-                    <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
-                        <strong>Waskom, M. L. (2021).</strong> seaborn: statistical data visualization.
-                        <em>Journal of Open Source Software</em>, 6(60), 3021. <a
-                            href="https://doi.org/10.21105/joss.03021" target="_blank"
-                            class="text-blue-600 underline">https://doi.org/10.21105/joss.03021</a>
-                    </li>
-                    <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
-                        <strong>Géron, A. (2022).</strong> <em>Hands-On Machine Learning with Scikit-Learn, Keras,
-                            and
-                            TensorFlow</em> (3rd ed.). O'Reilly Media. <a
-                            href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781098125967/"
-                            target="_blank"
-                            class="text-blue-600 underline">https://www.oreilly.com/library/view/hands-on-machine-learning/9781098125967/</a>
-                    </li>
-                    <li class="bg-white p-4 rounded-lg border border-slate-200 text-sm">
-                        <strong>Van Rossum, G., & Drake, F. L. (2009).</strong> <em>Python 3 Reference Manual</em>.
-                        CreateSpace. <a href="https://docs.python.org/3/reference/" target="_blank"
-                            class="text-blue-600 underline">https://docs.python.org/3/reference/</a>
+                            Database</em>. Washington, D.C.: IMF.
                     </li>
                 </ul>
             </div>
 
-            <!-- Resources: Further Learning -->
-
-            <div id="learning" class="topic-panel hidden bg-white dark:bg-slate-950 rounded-2xl p-8 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80"
-                    alt="Further Learning" class="w-full h-48 object-cover rounded-2xl mb-8 shadow-sm">
-                <h2>Further Learning Resources</h2>
-                <p class="mb-6 text-slate-600 dark:text-slate-300">A curated list of courses and resources to
-                    continue your data science journey.</p>
-
-                <div class="grid md:grid-cols-2 gap-6 mt-6">
-                    <!-- Card 1: SQL -->
-                    <div
-                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <h4 class="text-blue-600 dark:text-blue-400 font-bold mb-2">SQL (Structured Query Language)
-                        </h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">CSV files are for small data.
-                            Real companies use SQL databases. Learn <code>SELECT * FROM table</code> logic.</p>
-                        <a href="https://sqlzoo.net/" target="_blank"
-                            class="text-xs font-mono bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 p-1 rounded hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors">Resource:
-                            SQLZoo</a>
-                    </div>
-
-                    <!-- Card 2: Machine Learning -->
-                    <div
-                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <h4 class="text-indigo-600 dark:text-indigo-400 font-bold mb-2">Machine Learning
-                            (Scikit-Learn)</h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Move from "What happened?" to
-                            "What will happen?". Learn Linear Regression for GDP forecasting.</p>
-                        <a href="https://www.kaggle.com/learn" target="_blank"
-                            class="text-xs font-mono bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 p-1 rounded hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors">Resource:
-                            Kaggle Learn</a>
-                    </div>
-
-                    <!-- Card 3: Econometrics -->
-                    <div
-                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <h4 class="text-emerald-600 dark:text-emerald-400 font-bold mb-2">Econometrics (Statsmodels)
-                        </h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">For rigorous statistical testing
-                            (P-values, R-squared) specifically for economics research.</p>
-                        <a href="https://www.statsmodels.org/stable/index.html" target="_blank"
-                            class="text-xs font-mono bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 p-1 rounded hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors">Resource:
-                            Statsmodels Docs</a>
-                    </div>
-
-                    <!-- Card 4: Geospatial -->
-                    <div
-                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <h4 class="text-amber-600 dark:text-amber-400 font-bold mb-2">Geospatial Analysis
-                            (Geopandas)</h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Plotting economic data on maps
-                            (Choropleths). Essential for regional development studies.</p>
-                        <a href="https://geopandas.org/" target="_blank"
-                            class="text-xs font-mono bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 p-1 rounded hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-colors">Resource:
-                            Geopandas.org</a>
-                    </div>
-
-                    <!-- Card 5: IBM Python for Data Science -->
-                    <div
-                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <h4 class="text-slate-800 dark:text-slate-200 font-bold mb-2">Python for Data Science (IBM)
-                        </h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Python fundamentals + data
-                            manipulation + data I/O. Good structured path from basics to analysis.</p>
-                        <a href="https://www.coursera.org/learn/python-for-applied-data-science-ai" target="_blank"
-                            class="text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Resource:
-                            Coursera (Audit Free)</a>
-                    </div>
-
-                    <!-- Card 6: UMich Statistics -->
-                    <div
-                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <h4 class="text-slate-800 dark:text-slate-200 font-bold mb-2">Statistics with Python (UMich)
-                        </h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Probability, hypothesis testing,
-                            and inference. Important for strong statistical foundation.</p>
-                        <a href="https://www.coursera.org/specializations/statistics-with-python" target="_blank"
-                            class="text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Resource:
-                            Coursera (Audit Free)</a>
-                    </div>
-
-                    <!-- Card 7: FreeCodeCamp -->
-                    <div
-                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <h4 class="text-purple-600 dark:text-purple-400 font-bold mb-2">FreeCodeCamp Data Analysis
-                        </h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">Data wrangling with Pandas/NumPy,
-                            visualization. Good free starting point for self-paced practice.</p>
-                        <a href="https://www.freecodecamp.org/learn/data-analysis-with-python" target="_blank"
-                            class="text-xs font-mono bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 p-1 rounded hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors">Resource:
-                            FreeCodeCamp</a>
-                    </div>
-
-                    <!-- Card 8: Book -->
-                    <div
-                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <h4 class="text-gray-800 dark:text-gray-300 font-bold mb-2">Book: Python for Data Analysis
-                        </h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mb-2">By Wes McKinney (Creator of
-                            Pandas). The definitive guide for deep understanding.</p>
-                        <a href="https://wesmckinney.com/book/" target="_blank"
-                            class="text-xs font-mono bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Resource:
-                            Read Online</a>
-                    </div>
-                </div>
-
-                <!-- Connect with Me Section (New Panel) -->
-            </div>
-            <!-- Connect with Me Section (New Panel) -->
+            <!-- Connect with Me Section -->
             <div id="connect"
-                class="topic-panel hidden bg-white dark:bg-white rounded-2xl p-0 overflow-hidden shadow-sm relative min-h-screen font-sans text-black">
-                <!-- Manga Styles -->
-                <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Kalam:wght@700&display=swap"
-                    rel="stylesheet">
-                <style>
-                    /* Manga Fonts */
-                    .font-manga-title {
-                        font-family: 'Bangers', cursive;
-                        letter-spacing: 0.1em;
-                    }
+                class="topic-panel hidden rounded-2xl p-0 overflow-y-auto shadow-sm relative min-h-screen font-sans flex flex-col items-center bg-connect pt-12 pb-40">
 
-                    .font-manga-text {
-                        font-family: 'Kalam', cursive;
-                        font-weight: 700;
-                    }
+                <!-- Dual Mode Overlays for Contrast -->
+                <div class="absolute inset-0 bg-white/50 dark:hidden z-0 backdrop-blur-md"></div>
+                <div class="absolute inset-0 hidden dark:block bg-slate-900/40 z-0 backdrop-blur-md"></div>
 
-                    /* Manga Panel Borders */
-                    .manga-panel {
-                        border: 4px solid #000;
-                        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-                        position: relative;
-                        overflow: hidden;
-                    }
-
-                    /* Jagged Shadow Effect */
-                    .manga-shadow {
-                        box-shadow: 8px 8px 0 #000;
-                    }
-
-                    .manga-panel:hover {
-                        transform: translate(-3px, -3px) rotate(1deg);
-                        box-shadow: 12px 12px 0 #000;
-                    }
-
-
-
-                    /* Black Text with White Stroke (Visibility Fix) */
-                    .text-black-stroke {
-                        color: #000;
-                        -webkit-text-stroke: 0.8px #fff;
-                        paint-order: stroke fill;
-                        text-shadow: 1px 1px 0 #fff;
-                        /* Shadow for better legibility than glow */
-                    }
-
-                    /* Vivid Card Gradients */
-                    .bg-manga-blue {
-                        background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);
-                    }
-
-                    .bg-manga-purple {
-                        background: linear-gradient(135deg, #6e5494 0%, #a481d6 100%);
-                    }
-
-                    .bg-manga-teal {
-                        background: linear-gradient(135deg, #00ccbb 0%, #4ce6d9 100%);
-                    }
-
-                    .bg-manga-red {
-                        background: linear-gradient(135deg, #ff4d4d 0%, #ff8585 100%);
-                    }
-
-                    /* Speed Lines Overlay */
-                    .speed-lines {
-                        background: repeating-linear-gradient(45deg,
-                                transparent,
-                                transparent 10px,
-                                rgba(0, 0, 0, 0.03) 10px,
-                                rgba(0, 0, 0, 0.03) 12px);
-                    }
-                </style>
-
-                <!-- Speed Lines Background -->
-                <div class="absolute inset-0 speed-lines pointer-events-none"></div>
-
-                <div class="p-2 md:p-4 relative z-10 max-w-7xl mx-auto">
-
-                    <!-- Manga Header Spread -->
-                    <div class="border-b-4 border-black pb-4 mb-4 flex flex-col md:flex-row items-center gap-4">
-                        <!-- Left: Large Bat Logo Panel -->
-                        <div
-                            class="w-full md:w-1/3 p-3 flex justify-center items-center border-[4px] border-black bg-yellow-400 manga-shadow transform -rotate-2">
-                            <div class="hover:scale-110 transition-transform duration-300 drop-shadow-md">
-                                <!-- User SVG: Black on Yellow -->
-                                <svg fill="#000" width="90px" height="90px" viewBox="0 -3.5 39 39" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M19.5 4.25c-10.77 0-19.5 5.261-19.5 11.75s8.73 11.75 19.5 11.75 19.5-5.261 19.5-11.75-8.73-11.75-19.5-11.75zM30.555 23.53c0 0.062 1.951-2.357 0.39-3.981-1.874-2.124-5.116 1.056-5.116 1.056-2.562-5.059-6.424 3.145-6.424 3.145s-3.348-7.731-6.221-3.047c0.062 0-2.383-2.793-4.819-1.481-1.749 1.749 0 4.091 0 4.091-9.119-3.186-9.712-12.492 2.952-16.286-3.576 4.481 6.59 10.649 5.84-0.344l2.155 1.89c0 0 2.171-1.796 2.171-1.921-0.25 10.993 9.369 4.544 6.121 0.484 11.429 3.308 13.381 11.21 2.951 16.394z">
-                                    </path>
-                                    </path>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <!-- Right: Massive Title Panel -->
-                        <div class="w-full md:w-2/3 text-center md:text-left">
-                            <h2 class="font-manga-title leading-none relative z-10 transform -rotate-2"
-                                style="color: #FFD700 !important; -webkit-text-stroke: 1.5px black; paint-order: stroke fill; font-size: clamp(2.5rem, 6vw, 4.5rem); text-shadow: 2px 2px 0px black;">
-                                THE BAT SIGNAL
-                            </h2>
-                        </div>
+                <div class="p-2 max-w-sm mx-auto relative z-10 w-full flex flex-col my-auto">
+                    <!-- Header -->
+                    <div class="text-center mb-3 shrink-0">
+                        <h2
+                            class="text-lg font-bold text-slate-900 dark:text-white tracking-tight mb-0.5 drop-shadow-sm">
+                            Connect with Me </h2>
                     </div>
-
-                    <!-- Manga Grid Layout (Colorful) -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-
-                        <!-- Panel 1: LinkedIn -->
+                    <!-- Professional Grid -->
+                    <div class="grid grid-cols-2 gap-2 shrink-0">
+                        <!-- LinkedIn -->
                         <a href="https://linkedin.com/in/thisishimanshu" target="_blank"
-                            class="manga-panel manga-shadow group h-56 flex flex-col">
-                            <div
-                                class="h-2/3 border-b-4 border-black bg-manga-blue relative flex flex-col items-center justify-center">
-                                <svg class="w-12 h-12 text-white drop-shadow-[2px_2px_0px_#000]" fill="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                </svg>
-                                <h3 class="font-manga-title text-2xl mt-2"
-                                    style="color: white !important; -webkit-text-stroke: 1px black; paint-order: stroke fill; text-shadow: 1px 1px 0 black;">
-                                    LINKEDIN</h3>
-                            </div>
-                            <div class="h-1/3 p-2 bg-white flex flex-col justify-center items-center text-center">
-                                <p class="font-manga-text text-black-stroke text-sm leading-tight">Professional Profile
-                                </p>
+                            class="glass-panel group relative overflow-hidden rounded-xl p-2 transition-all duration-300 hover:shadow-lg hover:border-blue-500/40 hover:-translate-y-0.5">
+                            <div class="flex flex-col items-center gap-3 text-center">
+                                <div
+                                    class="bg-blue-100/60 dark:bg-blue-900/30 p-4 rounded-full group-hover:bg-blue-500 group-hover:text-white transition-colors duration-300 text-blue-600 dark:text-blue-400">
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <h3
+                                        class="text-xs font-semibold text-slate-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                        LinkedIn</h3>
+                                </div>
                             </div>
                         </a>
-
-                        <!-- Panel 2: GitHub -->
+                        <!-- GitHub -->
                         <a href="https://github.com/oghimanshu" target="_blank"
-                            class="manga-panel manga-shadow group h-56 flex flex-col transform md:rotate-2">
-                            <div
-                                class="h-2/3 border-b-4 border-black bg-manga-purple relative flex flex-col items-center justify-center">
-                                <svg class="w-12 h-12 text-white drop-shadow-[2px_2px_0px_#000]" fill="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                                </svg>
-                                <h3 class="font-manga-title text-2xl mt-2"
-                                    style="color: white !important; -webkit-text-stroke: 1px black; paint-order: stroke fill; text-shadow: 1px 1px 0 black;">
-                                    GITHUB</h3>
-                            </div>
-                            <div class="h-1/3 p-2 bg-white flex flex-col justify-center items-center text-center">
-                                <p class="font-manga-text text-black-stroke text-sm leading-tight">Technical Portfolio
-                                </p>
+                            class="glass-panel group relative overflow-hidden rounded-xl p-2 transition-all duration-300 hover:shadow-lg hover:border-purple-500/40 hover:-translate-y-0.5">
+                            <div class="flex flex-col items-center gap-3 text-center">
+                                <div
+                                    class="bg-purple-100/60 dark:bg-purple-900/30 p-4 rounded-full group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300 text-purple-600 dark:text-purple-400">
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <h3
+                                        class="text-xs font-semibold text-slate-800 dark:text-slate-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                        GitHub</h3>
+                                </div>
                             </div>
                         </a>
-
-                        <!-- Panel 3: ResearchGate -->
+                        <!-- ResearchGate -->
                         <a href="https://www.researchgate.net/profile/Himanshu-Gaur-11" target="_blank"
-                            class="manga-panel manga-shadow group h-56 flex flex-col transform md:-rotate-1">
-                            <div
-                                class="h-2/3 border-b-4 border-black bg-manga-teal relative flex flex-col items-center justify-center">
-                                <svg class="w-12 h-12 text-white drop-shadow-[2px_2px_0px_#000]" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-                                </svg>
-                                <h3 class="font-manga-title text-2xl mt-2"
-                                    style="color: white !important; -webkit-text-stroke: 1px black; paint-order: stroke fill; text-shadow: 1px 1px 0 black;">
-                                    ACADEMIA</h3>
-                            </div>
-                            <div class="h-1/3 p-2 bg-white flex flex-col justify-center items-center text-center">
-                                <p class="font-manga-text text-black-stroke text-sm leading-tight">Research Publications
-                                </p>
+                            class="glass-panel group relative overflow-hidden rounded-xl p-2 transition-all duration-300 hover:shadow-lg hover:border-emerald-500/40 hover:-translate-y-0.5">
+                            <div class="flex flex-col items-center gap-3 text-center">
+                                <div
+                                    class="bg-emerald-100/60 dark:bg-emerald-900/30 p-4 rounded-full group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 text-emerald-600 dark:text-emerald-400">
+                                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19.586 0c-4.664 0-8.621 3.235-9.824 7.647h-1.397V7.63C8.038 3.228 4.07 0 .041 0v1.73c2.738.995 4.965 3.322 5.67 6.34H3.64v1.64h2.07c-.456 2.502-1.928 4.606-4.008 5.75v1.85c2.406-.88 4.49-2.614 5.754-4.787v7.71h1.73V12.75h1.397v3.085c1.264 2.173 3.348 3.906 5.754 4.786v-1.85c-2.08-1.144-3.552-3.248-4.008-5.75h2.71v-1.64h-2.07c.705-3.018 2.932-5.345 5.67-6.34V.001l-.053-.001z" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <h3
+                                        class="text-xs font-semibold text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                        ResearchGate</h3>
+                                </div>
                             </div>
                         </a>
-
-                        <!-- Panel 4: Email -->
+                        <!-- Email -->
                         <a href="mailto:cliquehimanshu@gmail.com"
-                            class="manga-panel manga-shadow group h-56 flex flex-col">
-                            <div
-                                class="h-2/3 border-b-4 border-black bg-manga-red relative flex flex-col items-center justify-center">
-                                <svg class="w-12 h-12 text-white drop-shadow-[2px_2px_0px_#000]" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                                <h3 class="font-manga-title text-2xl mt-2"
-                                    style="color: white !important; -webkit-text-stroke: 1px black; paint-order: stroke fill; text-shadow: 1px 1px 0 black;">
-                                    EMAIL ME</h3>
-                            </div>
-                            <div class="h-1/3 p-2 bg-white flex flex-col justify-center items-center text-center">
-                                <p class="font-manga-text text-black-stroke text-sm leading-tight">Get in Touch</p>
+                            class="glass-panel group relative overflow-hidden rounded-xl p-2 transition-all duration-300 hover:shadow-lg hover:border-red-500/40 hover:-translate-y-0.5">
+                            <div class="flex flex-col items-center gap-3 text-center">
+                                <div
+                                    class="bg-red-100/60 dark:bg-red-900/30 p-4 rounded-full group-hover:bg-red-600 group-hover:text-white transition-colors duration-300 text-red-600 dark:text-red-400">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <h3
+                                        class="text-xs font-semibold text-slate-800 dark:text-slate-100 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+                                        Email Me</h3>
+                                </div>
                             </div>
                         </a>
                     </div>
-                </div>
 
-                <!-- Manga Footer Strip -->
-                <div
-                    class="absolute bottom-0 left-0 right-0 h-6 border-t-4 border-black bg-yellow-400 flex items-center justify-end px-4 font-mono text-[10px] text-black-stroke font-bold">
-                    <span class="mr-4">&copy; 2026 HIMANSHU GAUR</span>
+                    <!-- Footer -->
+                    <div class="mt-2 text-center border-t border-slate-200/50 dark:border-slate-700/50 pt-2 shrink-0">
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                            <span id="copyright-year"
+                                class="cursor-pointer hover:text-slate-800 dark:hover:text-slate-200 transition-colors">&copy;
+                                2026</span> Himanshu Gaur
+                        </p>
+                    </div>
                 </div>
-
-                <!-- Panel Closure -->
             </div>
-
     </div>
-
-
     </div>
-
-    <!-- Footer Spacer to prevent Progress Pill overlap -->
+    <!-- Footer Spacer -->
     <div class="w-full h-24 shrink-0"></div>
-
     </main>
 
+    <!-- Progress Pill -->
     <div id="progress-pill" class="progress-pill-container" style="display: none;">
         <button id="prog-prev" class="prog-btn" aria-label="Previous Topic">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -5337,14 +5626,12 @@ plt.show()</code></pre>
                 <path d="M15 18l-6-6 6-6" />
             </svg>
         </button>
-
         <div class="progress-content">
             <span id="progress-text" class="progress-text">Topic 1 of 15</span>
             <div class="progress-track">
                 <div id="progress-fill" class="progress-fill"></div>
             </div>
         </div>
-
         <button id="prog-next" class="prog-btn" aria-label="Next Topic">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -5353,767 +5640,630 @@ plt.show()</code></pre>
         </button>
     </div>
 
+    <!-- Hidden Snake Game Modal -->
+    <div id="snake-modal"
+        class="fixed inset-0 z-[1000] hidden flex items-center justify-center bg-black/90 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-2xl relative max-w-lg w-full">
+            <button id="snake-close" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h3 class="text-2xl font-bold text-green-500 mb-4 font-mono text-center">PYTHON SNAKE 🐍</h3>
+            <canvas id="snakeCanvas" width="400" height="400"
+                class="bg-black border border-green-900 mx-auto block rounded-lg"></canvas>
+            <p class="text-center text-slate-400 mt-4 font-mono text-sm">Use Arrow Keys to Move • Esc to Exit</p>
+            <div id="snake-score" class="text-center text-white mt-2 font-bold text-xl">Score: 0</div>
+        </div>
+    </div>
+
+    <!-- Hidden Terminal -->
+    <div id="terminal-modal"
+        class="fixed top-0 left-0 right-0 h-1/2 bg-black/95 text-green-500 font-mono p-4 z-[2000] hidden border-b-4 border-green-700 shadow-2xl overflow-y-auto transform -translate-y-full transition-transform duration-300">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-4">Allows access to system kernel... [v2.0.24]</div>
+            <div id="terminal-output" class="whitespace-pre-wrap mb-2"></div>
+            <div class="flex">
+                <span class="mr-2">$</span>
+                <input type="text" id="terminal-input"
+                    class="bg-transparent border-none outline-none text-green-400 w-full" autocomplete="off"
+                    spellcheck="false">
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Robust initialisation: avoid null addEventListener errors
+            // --- GLOBAL STATE ---
             let currentTopic = 'home';
             const charts = [];
-            const navLinks = document.querySelectorAll('.nav-link') || [];
-            const homeLink = document.getElementById('home-link');
-            const getStartedBtn = document.getElementById('get-started-btn');
-            const mainHeader = document.getElementById('main-header');
-            const topicPanels = document.querySelectorAll('.topic-panel') || [];
-            const menuBtns = document.querySelectorAll('.menu-btn');
-            // Sidebar Toggle Logic
-            const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
-            const body = document.body;
-
-            if (sidebarToggleBtn) {
-                sidebarToggleBtn.addEventListener('click', () => {
-                    body.classList.toggle('sidebar-collapsed');
-                });
-            }
-
-            // Mobile Menu Logic
-            const closeMenuBtn = document.getElementById('close-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const topicPanels = document.querySelectorAll('.topic-panel');
             const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            const backToTopBtn = document.getElementById('back-to-top');
             const mainContent = document.getElementById('main-content');
-            // Theme Toggle Logic
-            // Theme Toggle Logic
-            const desktopThemeToggle = document.getElementById('desktop-theme-toggle');
-            const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+            const sidebarToggleBtns = document.querySelectorAll('.sidebar-toggle-btn');
+            const overlay = document.getElementById('overlay');
+            const mobileHeader = document.querySelector('.md\\:hidden.fixed.top-0');
 
-            // Visitor Counter Logic (Robust Local Simulation)
-            const visitorCountEl = document.getElementById('visitor-count');
-            if (visitorCountEl) {
-                // Initialize with a realistic base number if not present
-                let count = localStorage.getItem('page_visits');
+            // --- NAVIGATION LOGIC ---
+            window.switchTopic = function (topicId) {
+                if (!topicId) return;
+                console.log(`[NAV] Switching to topic: ${topicId}`);
 
-                if (!count) {
-                    // Start with a random realistic number between 12,000 and 15,000
-                    count = 12450 + Math.floor(Math.random() * 2550);
-                } else {
-                    // Increment
-                    count = parseInt(count) + 1;
-                }
-
-                // Save back to local storage
-                localStorage.setItem('page_visits', count);
-
-                // Display with comma formatting
-                visitorCountEl.textContent = count.toLocaleString();
-            }
-
-            // Initialise theme from localStorage (persistence)
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.documentElement.classList.add('dark');
-                document.body.classList.add('dark');
-                document.querySelectorAll('.moon-icon').forEach(icon => icon.classList.add('hidden'));
-                document.querySelectorAll('.sun-icon').forEach(icon => icon.classList.remove('hidden'));
-            } else {
-                document.documentElement.classList.remove('dark');
-                document.body.classList.remove('dark');
-                document.querySelectorAll('.sun-icon').forEach(icon => icon.classList.add('hidden'));
-                document.querySelectorAll('.moon-icon').forEach(icon => icon.classList.remove('hidden'));
-            }
-
-            // Helper to update Chart theme colours based on CSS vars
-            function updateChartTheme() {
-                const isDark = document.body.classList.contains('dark');
-                const textColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-text').trim() || (isDark ? '#94a3b8' : '#64748b');
-                const gridColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-grid').trim() || (isDark ? '#333333' : '#e2e8f0');
-
-                if (typeof Chart !== 'undefined') {
-                    Chart.defaults.color = textColor;
-                    Chart.defaults.borderColor = gridColor;
-                }
-                charts.forEach(c => {
-                    try {
-                        if (c && c.options && c.options.scales) {
-                            if (c.options.scales.x) {
-                                c.options.scales.x.ticks = c.options.scales.x.ticks || {};
-                                c.options.scales.x.ticks.color = textColor;
-                                c.options.scales.x.grid = c.options.scales.x.grid || {};
-                                c.options.scales.x.grid.color = gridColor;
-                            }
-                            if (c.options.scales.y) {
-                                c.options.scales.y.ticks = c.options.scales.y.ticks || {};
-                                c.options.scales.y.ticks.color = textColor;
-                                c.options.scales.y.grid = c.options.scales.y.grid || {};
-                                c.options.scales.y.grid.color = gridColor;
-                            }
+                try {
+                    // 1. Handle Active State
+                    navLinks.forEach(l => {
+                        l.classList.remove('active', 'bg-slate-100', 'dark:bg-slate-800', 'text-blue-600', 'dark:text-blue-400');
+                        if (l.dataset.topic === topicId) {
+                            l.classList.add('active', 'bg-slate-100', 'dark:bg-slate-800', 'text-blue-600', 'dark:text-blue-400');
                         }
-                        c.update();
-                    } catch (e) { /* non-fatal */ }
-                });
-            }
+                    });
 
-            // Dark mode toggle with persistence and AMOLED pure black
-            function toggleDarkMode() {
-                // Toggle on both html and body so CSS variables defined on .dark are inherited correctly
-                document.documentElement.classList.toggle('dark');
-                document.body.classList.toggle('dark');
-                const isDark = document.documentElement.classList.contains('dark') || document.body.classList.contains('dark');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-                document.querySelectorAll('.moon-icon').forEach(icon => icon.classList.toggle('hidden', isDark));
-                document.querySelectorAll('.sun-icon').forEach(icon => icon.classList.toggle('hidden', !isDark));
-                updateChartTheme();
-            }
-
-            // Attach to all theme toggles (desktop, mobile, sidebar, etc.)
-            document.querySelectorAll('.theme-toggle').forEach(btn => {
-                btn.addEventListener('click', toggleDarkMode);
-            });
-
-            // Mobile menu safely
-            function toggleMenu() {
-                if (!sidebar || !overlay) return;
-                // Force reset display property in case it was hidden by home logic
-                sidebar.style.removeProperty('display');
-                sidebar.classList.toggle('open');
-                overlay.classList.toggle('open');
-                overlay.classList.toggle('hidden');
-            }
-            menuBtns.forEach(btn => btn.addEventListener('click', toggleMenu));
-            if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMenu);
-            if (overlay) overlay.addEventListener('click', toggleMenu);
-
-            const progressPill = document.getElementById('progress-pill');
-            const progressText = document.getElementById('progress-text');
-            const progressFill = document.getElementById('progress-fill');
-            const progPrev = document.getElementById('prog-prev');
-            const progNext = document.getElementById('prog-next');
-
-            // Ordered list of topics for progress tracking
-            const progressTopics = [
-                'topicA', 'topicB', 'topicC', 'topicD', 'topicE', 'topicF', 'topicG', 'topicH', 'topicI',
-                'topic1', 'topic2', 'topic3', 'topic3b', 'topic4',
-                'topic5', 'topic6', 'merging',
-                'topic8', 'topic9', 'topic10',
-                'viz', 'kendrick', 'grammy', 'govdata', 'geopandas', 'learning',
-                'faq', 'glossary', 'references', 'connect'
-            ];
-            // Global switchTopic function for robustness
-            window.switchTopic = function (targetTopic) {
-                // Re-query elements to ensure we have the latest DOM state
-                const topicPanels = document.querySelectorAll('.topic-panel');
-                const mainHeader = document.getElementById('main-header');
-                const mainContent = document.getElementById('main-content');
-                const sidebar = document.getElementById('sidebar');
-                // The following variables are already declared in the outer scope of DOMContentLoaded
-                // and are accessible here. Re-declaring them with `const` inside this function
-                // would create new local variables, shadowing the outer ones.
-                // Removing the re-declarations to use the outer scope variables.
-                // const progressPill = document.getElementById('progress-pill');
-                // const progressText = document.getElementById('progress-text');
-                // const progressFill = document.getElementById('progress-fill');
-                // const progPrev = document.getElementById('prog-prev');
-                // const progNext = document.getElementById('prog-next');
-
-                // Current topic tracking (simulated global)
-                window.currentTopic = window.currentTopic || 'home';
-
-                if (!targetTopic || targetTopic === window.currentTopic) return;
-
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-
-                if (targetTopic !== 'home') {
-                    const activeLink = document.querySelector(`.nav-link[data-topic="${targetTopic}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('active');
-                        // Scroll sidebar to keep active link in view
-                        activeLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                    if (mainHeader) mainHeader.classList.remove('hidden');
-
-                    // SHOW sidebar toggle and mobile header
-                    const sidebarBtn = document.getElementById('sidebar-toggle-btn');
-                    const mobileHeader = document.querySelector('.md\\:hidden.fixed.top-0'); // Select mobile header by class if no ID
-                    if (sidebarBtn) sidebarBtn.style.display = 'flex';
-                    if (mobileHeader) mobileHeader.style.display = 'flex';
-
-                    // SHOW sidebar (Desktop)
-                    if (sidebar) sidebar.style.display = '';
-                    // Restore main content layout
-                    if (mainContent) mainContent.classList.add('md:w-4/5');
-
-                    // Show Footer on other pages
-                    const heroFooter = document.querySelector('.hero-footer');
-                    if (heroFooter) heroFooter.style.display = 'block';
-
-                } else {
-                    if (mainHeader) mainHeader.classList.add('hidden');
-                    // HIDE sidebar toggle and mobile header on Home
-                    const sidebarBtn = document.getElementById('sidebar-toggle-btn');
-                    const mobileHeader = document.querySelector('.md\\:hidden.fixed.top-0');
-                    if (sidebarBtn) sidebarBtn.style.display = 'none';
-                    if (mobileHeader) mobileHeader.style.display = 'none';
-
-                    // HIDE sidebar (Desktop/Mobile) - completely remove from layout
-                    if (sidebar) sidebar.style.display = 'none';
-                    // Make main content full width
-                    if (mainContent) mainContent.classList.remove('md:w-4/5');
-
-                    // Hide Footer on Home
-                    const heroFooter = document.querySelector('.hero-footer');
-                    if (heroFooter) heroFooter.style.display = 'none';
-                }
-
-                topicPanels.forEach(panel => panel.classList.add('hidden'));
-                const el = document.getElementById(targetTopic);
-                if (el) {
-                    el.classList.remove('hidden');
-                    // snap main content to top of the revealed panel
-                    if (mainContent) {
-                        // Ensure the panel is visible then scroll
-                        setTimeout(() => mainContent.scrollTo({ top: 0, behavior: 'smooth' }), 50);
-                    }
-                }
-                window.currentTopic = targetTopic;
-
-                // Close sidebar on mobile if open
-                if (sidebar && sidebar.classList.contains('open') && typeof toggleMenu === 'function') {
-                    toggleMenu();
-                }
-
-                // Initialize Maps if navigating to Geopandas
-                if (targetTopic === 'geopandas') {
-                    setTimeout(initMaps, 100);
-                }
-
-                // Update Progress Bar
-                const topicIndex = progressTopics.indexOf(targetTopic);
-                if (topicIndex !== -1 && progressPill) {
-                    if (window.progressHideTimeout) clearTimeout(window.progressHideTimeout);
-                    progressPill.style.display = ''; // Reset to CSS flex
-                    // Force reflow
-                    void progressPill.offsetWidth;
-                    progressPill.classList.add('visible');
-
-                    // Define main topics count (excluding resources)
-                    const mainTopicCount = 26;
-
-                    if (topicIndex < mainTopicCount) {
-                        const currentStep = topicIndex + 1;
-                        const percent = (currentStep / mainTopicCount) * 100;
-                        if (progressText) progressText.textContent = `Topic ${currentStep} of ${mainTopicCount}`;
-                        if (progressFill) progressFill.style.width = `${percent}%`;
+                    // 2. toggle panels
+                    topicPanels.forEach(p => p.classList.add('hidden'));
+                    const targetPanel = document.getElementById(topicId);
+                    if (targetPanel) {
+                        targetPanel.classList.remove('hidden');
+                        // Special Animation for panels
+                        if (typeof targetPanel.animate === 'function') {
+                            targetPanel.animate([
+                                { opacity: 0, transform: 'translateY(10px)' },
+                                { opacity: 1, transform: 'translateY(0)' }
+                            ], { duration: 300, easing: 'ease-out' });
+                        }
                     } else {
-                        // It is a resource (FAQ, Glossary, References)
-                        const resourceTitles = {
-                            'faq': 'FAQ',
-                            'glossary': 'Glossary',
-                            'references': 'References',
-                            'connect': 'Connect'
-                        };
-                        if (progressText) progressText.textContent = resourceTitles[targetTopic] || 'Resources';
-                        if (progressFill) progressFill.style.width = '100%';
+                        console.warn(`[NAV] Target panel not found: ${topicId}`);
                     }
 
-                    // Update buttons state
-                    // Enable prev button even on first topic (to go back to home)
-                    if (progPrev) progPrev.disabled = false;
-                    if (progNext) progNext.disabled = topicIndex === progressTopics.length - 1;
-                } else if (progressPill) {
-                    // Hide if not a main topic (e.g. home)
-                    progressPill.classList.remove('visible');
-                    if (window.progressHideTimeout) clearTimeout(window.progressHideTimeout);
-                    window.progressHideTimeout = setTimeout(() => {
-                        progressPill.style.display = 'none';
-                    }, 400);
+                    // 3. Handle Layout (Home vs Content)
+                    if (topicId === 'home') {
+                        if (sidebar) sidebar.style.display = 'none';
+                        // if (sidebarToggleBtns) sidebarToggleBtns.forEach(btn => btn.style.display = 'none'); // Keep visible for mobile access
+                        if (mobileHeader) mobileHeader.style.display = 'none';
+                        if (mainContent) {
+                            mainContent.classList.remove('md:w-4/5');
+                            mainContent.classList.add('w-full');
+                            mainContent.style.marginLeft = '0';
+                        }
+                    } else {
+                        if (sidebar) sidebar.style.removeProperty('display'); // Reset to CSS
+                        if (sidebarToggleBtns) sidebarToggleBtns.forEach(btn => btn.style.display = 'flex');
+                        if (mobileHeader) mobileHeader.style.display = 'flex';
+                        if (mainContent) {
+                            mainContent.classList.add('md:w-4/5');
+                            mainContent.classList.remove('w-full');
+                            mainContent.style.marginLeft = ''; // Reset to CSS
+                        }
+                    }
+
+                    // 4. Update Global State
+                    currentTopic = topicId;
+                    // Safely update hash without scrolling if possible, but default behavior is fine
+                    if (window.location.hash.substring(1) !== topicId) {
+                        window.history.pushState(null, null, `#${topicId}`);
+                    }
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    // 5. Progress Pill Logic
+                    try {
+                        updateProgressPill(topicId);
+                    } catch (err) {
+                        console.error('[NAV] Progress Pill Error:', err);
+                    }
+
+                    // 6. Mobile Sidebar Close
+                    if (window.innerWidth < 768 && sidebar && sidebar.classList.contains('open')) {
+                        toggleMenu();
+                    }
+
+                    // 7. Init Maps if needed
+                    if (topicId === 'geopandas') setTimeout(initMaps, 100);
+
+                } catch (e) {
+                    console.error('[NAV] Critical Error in switchTopic:', e);
                 }
             };
 
-            // Progress Bar Button Listeners
-            if (progPrev) {
-                progPrev.addEventListener('click', () => {
-                    const currentIndex = progressTopics.indexOf(window.currentTopic);
-                    // If on the first topic (Topic A, index 0), go to home
-                    if (currentIndex === 0) {
-                        window.switchTopic('home');
-                    } else if (currentIndex > 0) {
-                        window.switchTopic(progressTopics[currentIndex - 1]);
-                    } else {
-                        // If unknown, go home
-                        window.switchTopic('home');
-                    }
-                });
-            }
+            // Initial Load
+            const hash = window.location.hash.replace('#', '') || 'home';
+            console.log('[INIT] Starting with hash:', hash);
+            console.log('[INIT] Found navLinks:', navLinks.length);
+            console.log('[INIT] Found topicPanels:', topicPanels.length);
+            switchTopic(hash);
 
-            if (progNext) {
-                progNext.addEventListener('click', () => {
-                    const currentIndex = progressTopics.indexOf(window.currentTopic);
-                    if (currentIndex === -1) {
-                        // If on home or unknown, go to first topic
-                        window.switchTopic(progressTopics[0]);
-                    } else if (currentIndex < progressTopics.length - 1) {
-                        window.switchTopic(progressTopics[currentIndex + 1]);
-                    }
-                });
-            }
-
-            // Safe event wiring for nav links and buttons using Event Delegation
+            // Event Delegation for Nav
             document.addEventListener('click', (e) => {
-                const link = e.target.closest('.nav-link');
+                const link = e.target.closest('.nav-link, #get-started-btn, #home-link, .hero-btn');
                 if (link) {
+                    console.log('[CLICK] Nav link clicked:', link);
                     e.preventDefault();
+                    // Handle Get Started
+                    if (link.id === 'get-started-btn') {
+                        console.log('[CLICK] Get Started button');
+                        switchTopic('topicA');
+                        return;
+                    }
+                    // Handle Home
+                    if (link.id === 'home-link') {
+                        console.log('[CLICK] Home link');
+                        switchTopic('home');
+                        return;
+                    }
+
                     const t = link.dataset.topic;
-                    if (t) window.switchTopic(t);
+                    console.log('[CLICK] Topic from data-topic:', t);
+                    if (t) switchTopic(t);
                 }
             });
 
-            if (homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); window.switchTopic('home'); });
-            const headerHomeLink = document.getElementById('header-home-link');
-            if (headerHomeLink) headerHomeLink.addEventListener('click', (e) => { e.preventDefault(); window.switchTopic('home'); });
-            if (getStartedBtn) getStartedBtn.addEventListener('click', () => window.switchTopic('topicA'));
-            if (backToTopBtn) backToTopBtn.addEventListener('click', () => { if (mainContent) mainContent.scrollTo({ top: 0, behavior: 'smooth' }); });
+            // --- MOBILE MENU ---
+            function toggleMenu() {
+                if (!sidebar) return;
+                sidebar.classList.toggle('open');
+                sidebar.classList.toggle('-translate-x-full');
+                if (overlay) overlay.classList.toggle('hidden');
+            }
+            if (sidebarToggleBtns) sidebarToggleBtns.forEach(btn => btn.addEventListener('click', toggleMenu));
+            if (overlay) overlay.addEventListener('click', toggleMenu);
+            // Close menu button
+            const closeBtn = document.getElementById('close-menu');
+            if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
 
-            // Copy buttons (modern + fallback)
-            document.querySelectorAll('.copy-btn').forEach(btn => {
-                // accessibility
-                btn.setAttribute('aria-label', 'Copy code to clipboard');
-                btn.setAttribute('role', 'button');
-                btn.addEventListener('click', () => {
-                    const pre = btn.nextElementSibling;
-                    if (!pre) return;
-                    const code = pre.innerText;
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
-                        navigator.clipboard.writeText(code).then(() => {
-                            const original = btn.innerText;
-                            btn.innerText = 'Copied!';
-                            setTimeout(() => btn.innerText = original, 1500);
-                        }).catch(() => { });
-                    } else {
-                        const ta = document.createElement('textarea'); ta.value = code; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) { } document.body.removeChild(ta);
-                    }
-                });
-            });
+            // --- THEME TOGGLE ---
+            function toggleTheme() {
+                document.documentElement.classList.toggle('dark');
+                document.body.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                updateChartTheme();
+            }
+            document.querySelectorAll('.theme-toggle').forEach(btn => btn.addEventListener('click', toggleTheme));
 
-            // Chart helper: create only if canvas exists and push to charts[]
-            function createChartIfCanvas(id, config) {
-                if (typeof Chart === 'undefined') {
-                    console.warn('Chart.js not loaded. Skipping chart creation for:', id);
-                    return null;
-                }
-                const el = document.getElementById(id);
-                if (!el) return null;
-                const ctx = el.getContext ? el.getContext('2d') : null;
-                if (!ctx) return null;
-                try { const c = new Chart(ctx, config); charts.push(c); return c; } catch (e) { console.error('Chart error', id, e); return null; }
+            // Restore Theme
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
             }
 
-            // Apply theme to charts
-            updateChartTheme();
-
-            // Initial chart creations (safe)
-            createChartIfCanvas('weoChart', {
-                type: 'scatter',
-                data: { datasets: [{ label: 'Countries (2023)', data: [{ x: 7.2, y: 5.4 }, { x: 2.1, y: 3.2 }, { x: 5.2, y: 0.2 }, { x: -0.3, y: 6.1 }], backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--accent-color') || '#2563eb' }] },
-                options: { responsive: true, maintainAspectRatio: false, scales: { x: { title: { display: true, text: 'GDP Growth (%)' } }, y: { title: { display: true, text: 'Inflation (%)' } } }, plugins: { title: { display: true, text: 'Phillips Curve Analysis' } } }
-            });
-
-            createChartIfCanvas('tradeChart', {
-                type: 'bar', data: { labels: ['China', 'India'], datasets: [{ label: 'Pharma', data: [20, 50], backgroundColor: '#ef4444' }, { label: 'Tech', data: [500, 200], backgroundColor: '#3b82f6' }] },
-                options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'Value (Billions)' } } }, plugins: { title: { display: true, text: 'Trade Matrix: Sectoral Composition' } } }
-            });
-
-            createChartIfCanvas('timeSeriesChart', {
-                type: 'line', data: { labels: ['2020', '2021', '2022', '2023'], datasets: [{ label: 'GDP (Trillion USD)', data: [2.5, 3.0, 3.2, 3.7], borderColor: '#4f46e5', tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false }
-            });
-
-            createChartIfCanvas('kendrickChart', {
-                type: 'line', data: { labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], datasets: [{ label: 'Forward (Wickedness)', data: [null, null, 50, 70, 50, 56, 40, 56, 46, 56, 55, 38, 42, null], borderColor: '#2563eb', tension: 0.4, fill: false }, { label: 'Reverse (Weakness)', data: [null, null, 33, 48, 38, 58, 68, 56, 56, 56, 73, 53, 48, null], borderColor: '#dc2626', tension: 0.4, fill: false }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Narrative Arc Analysis: Rolling Avg Sentiment' }, tooltip: { mode: 'index', intersect: false } }, scales: { y: { title: { display: true, text: 'Aggression Score (Smoothed)' }, min: 0, max: 100 } } }
-            });
-
-            createChartIfCanvas('grammyChart', {
-                type: 'bubble', data: { datasets: [{ label: 'Pop (Taylor, Adele)', data: [{ x: 50, y: 85, r: 14 }, { x: 25, y: 80, r: 16 }, { x: 22, y: 78, r: 3 }], backgroundColor: 'rgba(236,72,153,0.7)', borderColor: 'rgba(236,72,153,1)' }, { label: 'R&B / Hip-Hop (Bey, Kendrick)', data: [{ x: 35, y: 88, r: 32 }, { x: 20, y: 94, r: 17 }], backgroundColor: 'rgba(59,130,246,0.7)', borderColor: 'rgba(59,130,246,1)' }, { label: 'Alt (Billie)', data: [{ x: 28, y: 86, r: 9 }], backgroundColor: 'rgba(16,185,129,0.7)', borderColor: 'rgba(16,185,129,1)' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Commercial Success vs Critical Acclaim (Size = Wins)' }, tooltip: { callbacks: { label: function (context) { return context.dataset.label + ': Streams ' + context.raw.x + 'B, Score ' + context.raw.y; } } } }, scales: { x: { title: { display: true, text: 'Global Streams (Billions)' }, min: 10, max: 60 }, y: { title: { display: true, text: 'Metacritic Score' }, min: 70, max: 100 } } }
-            });
-
-            // Additional Grammy Capstone charts (safely created)
-            createChartIfCanvas('grammyEvolutionChart', {
-                type: 'line',
-                data: {
-                    labels: [2018, 2019, 2020, 2021, 2022],
-                    datasets: [
-                        { label: 'Pop', data: [30, 35, 40, 45, 50], backgroundColor: 'rgba(236,72,153,0.4)', borderColor: 'rgba(236,72,153,1)', fill: true, stack: 'streams' },
-                        { label: 'R&B', data: [20, 22, 24, 26, 28], backgroundColor: 'rgba(59,130,246,0.4)', borderColor: 'rgba(59,130,246,1)', fill: true, stack: 'streams' },
-                        { label: 'Hip-Hop', data: [15, 18, 22, 25, 27], backgroundColor: 'rgba(99,102,241,0.4)', borderColor: 'rgba(99,102,241,1)', fill: true, stack: 'streams' },
-                        { label: 'Alt', data: [8, 10, 12, 14, 16], backgroundColor: 'rgba(16,185,129,0.4)', borderColor: 'rgba(16,185,129,1)', fill: true, stack: 'streams' }
-                    ]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Streams Evolution by Genre (Stacked Area)' } }, scales: { y: { stacked: true, title: { display: true, text: 'Streams (Relative Units)' } }, x: { title: { display: true, text: 'Year' } } } }
-            });
-
-            createChartIfCanvas('grammyScatterChart', {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Artist Win Efficiency (wins per B streams)',
-                        data: [
-                            { x: 35, y: (32 / 35) * 100, r: 8, artist: 'Beyoncé' },
-                            { x: 50, y: (14 / 50) * 100, r: 6, artist: 'Taylor Swift' },
-                            { x: 20, y: (17 / 20) * 100, r: 7, artist: 'Kendrick Lamar' },
-                            { x: 25, y: (16 / 25) * 100, r: 6, artist: 'Adele' },
-                            { x: 28, y: (9 / 28) * 100, r: 4, artist: 'Billie Eilish' },
-                            { x: 22, y: (3 / 22) * 100, r: 2, artist: 'Harry Styles' }
-                        ],
-                        backgroundColor: ['rgba(236,72,153,0.9)', 'rgba(59,130,246,0.9)', 'rgba(99,102,241,0.9)', 'rgba(249,115,22,0.9)', 'rgba(16,185,129,0.9)', 'rgba(94,234,212,0.9)']
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Win Efficiency: Grammy Wins per Billion Streams' }, tooltip: { callbacks: { label: function (ctx) { const r = ctx.raw; return `${r.artist || ''}: ${r.x}B streams — Efficiency ${(r.y).toFixed(2)} (wins per 100B)`; } } } }, scales: { x: { title: { display: true, text: 'Global Streams (Billions)' } }, y: { title: { display: true, text: 'Wins per 100B (scaled)' } } } }
-            });
-
-            createChartIfCanvas('grammyBig4Chart', {
-                type: 'bar',
-                data: { labels: ['Beyoncé', 'Taylor Swift', 'Kendrick Lamar', 'Adele', 'Billie Eilish', 'Harry Styles'], datasets: [{ label: 'Big 4 Wins', data: [4, 2, 3, 3, 1, 0], backgroundColor: ['#2563eb', '#ec4899', '#6366f1', '#f97316', '#10b981', '#06b6d4'] }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Big 4 Dominance (Sample Counts)' } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Wins' } } } }
-            });
-
-            createChartIfCanvas('grammyPolarChart', {
-                type: 'polarArea',
-                data: { labels: ['Pop', 'R&B', 'Hip-Hop', 'Alt'], datasets: [{ data: [45, 25, 20, 10], backgroundColor: ['rgba(236,72,153,0.85)', 'rgba(59,130,246,0.85)', 'rgba(99,102,241,0.85)', 'rgba(16,185,129,0.85)'] }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: 'Genre Share (Polar Area)' } } }
-            });
-
-            // --- Grammy CSV parsing and live update functions ---
-            function getChartById(id) {
-                const el = document.getElementById(id);
-                if (!el) return null;
-                if (typeof Chart !== 'undefined' && Chart.getChart) {
-                    try { return Chart.getChart(el) || null; } catch (e) { /* ignore */ }
-                }
-                // fallback search in charts[]
-                for (const c of charts) {
-                    try { if (c && c.canvas && c.canvas.id === id) return c; } catch (e) { }
-                }
-                return null;
+            // --- VISITOR COUNT ---
+            const vCount = document.getElementById('visitor-count');
+            if (vCount) {
+                let c = localStorage.getItem('visit_count') || (12450 + Math.floor(Math.random() * 500));
+                c = parseInt(c) + 1;
+                localStorage.setItem('visit_count', c);
+                vCount.textContent = c.toLocaleString();
             }
 
-            function setGrammyLog(msg, isError) {
-                const log = document.getElementById('grammyUploadLog');
-                if (!log) return;
-                log.innerText = msg;
-                log.style.color = isError ? '#dc2626' : ''; // red for errors
+            // --- CHARTS (Chart.js) ---
+            function updateChartTheme() {
+                if (typeof Chart === 'undefined') return;
+                const isDark = document.documentElement.classList.contains('dark');
+                const color = isDark ? '#e2e8f0' : '#1e293b';
+                Chart.defaults.color = color;
+                Chart.defaults.borderColor = isDark ? '#334155' : '#e2e8f0';
+                charts.forEach(c => c.update());
             }
 
-            function parseGrammyCSV(file) {
-                if (!file) { setGrammyLog('No file selected.', true); return; }
-                setGrammyLog('Parsing file — this may take a moment...');
-                if (window.Papa && Papa.parse) {
-                    Papa.parse(file, {
-                        header: true,
-                        dynamicTyping: true,
-                        skipEmptyLines: true,
-                        complete: function (results) {
-                            if (!results || !results.data || !results.data.length) {
-                                setGrammyLog('No records found in the CSV.', true);
-                                return;
-                            }
-                            setGrammyLog('Parsed ' + results.data.length + ' rows. Processing...');
-                            try { processGrammyData(results.data); setGrammyLog('Charts updated from uploaded CSV.'); } catch (e) { console.error(e); setGrammyLog('Error processing CSV: ' + (e.message || e), true); }
-                        },
-                        error: function (err) { setGrammyLog('Parsing error: ' + err.message, true); }
-                    });
-                } else {
-                    setGrammyLog('CSV parser (PapaParse) not loaded.', true);
-                }
-            }
-
-            function processGrammyData(rows) {
-                if (!Array.isArray(rows) || rows.length === 0) throw new Error('Empty data');
-                const sample = rows[0];
-                const keys = Object.keys(sample).map(k => k.trim());
-                const lower = k => k && k.toLowerCase();
-
-                // Heuristic column detection
-                const yearKey = keys.find(k => /year|award_?year|award_year/i.test(k)) || keys.find(k => /date/i.test(k));
-                const categoryKey = keys.find(k => /category|award/i.test(k));
-                const artistKey = keys.find(k => /artist|performer|name/i.test(k));
-                const winnerKey = keys.find(k => /winner|result|is_winner|won/i.test(k));
-                const genreKey = keys.find(k => /genre/i.test(k));
-
-                // Build normalized rows
-                const normalized = rows.map(r => {
-                    const year = yearKey ? (r[yearKey] || r[yearKey.trim()]) : undefined;
-                    const category = categoryKey ? (r[categoryKey] || r[categoryKey.trim()]) : undefined;
-                    const artist = artistKey ? (r[artistKey] || r[artistKey.trim()]) : undefined;
-                    const genre = genreKey ? (r[genreKey] || r[genreKey.trim()]) : undefined;
-                    const winnerRaw = winnerKey ? (r[winnerKey] || r[winnerKey.trim()]) : undefined;
-                    const isWinner = (winnerRaw === true) || (String(winnerRaw).toLowerCase().indexOf('win') !== -1) || (String(winnerRaw).toLowerCase().indexOf('winner') !== -1) || (String(winnerRaw).toLowerCase().indexOf('yes') !== -1) || (String(winnerRaw).trim() === '1');
-                    return { year: year, category: category, artist: artist, genre: genre, winner: !!isWinner };
-                });
-
-                // 1) Genre / Category share (for polar chart)
-                const genreCounts = {};
-                normalized.forEach(r => {
-                    const g = r.genre || r.category || 'Unknown';
-                    genreCounts[g] = (genreCounts[g] || 0) + 1;
-                });
-                const polarLabels = Object.keys(genreCounts).slice(0, 8);
-                const polarData = polarLabels.map(l => genreCounts[l]);
-
-                const polarChart = getChartById('grammyPolarChart');
-                if (polarChart) {
-                    polarChart.data.labels = polarLabels;
-                    polarChart.data.datasets = [{ data: polarData, backgroundColor: polarLabels.map((_, i) => polarChart.data.datasets && polarChart.data.datasets[0] && polarChart.data.datasets[0].backgroundColor ? polarChart.data.datasets[0].backgroundColor[i % polarChart.data.datasets[0].backgroundColor.length] : ['#ec4899', '#3b82f6', '#6366f1', '#10b981'][i % 4]) }];
-                    try { polarChart.update(); } catch (e) {/*non-fatal*/ }
-                }
-
-                // 2) Evolution by year and genre (stacked area)
-                const byYearGenre = {};
-                normalized.forEach(r => {
-                    const y = Number(r.year) || (new Date(r.year || '').getFullYear()) || 'Unknown';
-                    const g = r.genre || r.category || 'Unknown';
-                    byYearGenre[y] = byYearGenre[y] || {};
-                    byYearGenre[y][g] = (byYearGenre[y][g] || 0) + 1;
-                });
-                const years = Object.keys(byYearGenre).filter(y => y !== 'Unknown').map(y => Number(y)).sort((a, b) => a - b);
-                const genreSet = new Set();
-                years.forEach(y => { Object.keys(byYearGenre[y]).forEach(g => genreSet.add(g)); });
-                const genres = Array.from(genreSet).slice(0, 6);
-                const evolutionDatasets = genres.map((g, idx) => ({ label: g, data: years.map(y => byYearGenre[y][g] || 0), backgroundColor: `hsla(${(idx * 60) % 360},70%,60%,0.35)`, borderColor: `hsl(${(idx * 60) % 360},70%,45%)`, fill: true, stack: 'streams' }));
-                const evoChart = getChartById('grammyEvolutionChart');
-                if (evoChart) {
-                    evoChart.data.labels = years.map(String);
-                    evoChart.data.datasets = evolutionDatasets;
-                    try { evoChart.update(); } catch (e) { }
-                }
-
-                // 3) Win efficiency scatter (wins per nominations or wins per year-normalised)
-                const artistStats = {};
-                normalized.forEach(r => {
-                    const a = r.artist || 'Unknown Artist';
-                    artistStats[a] = artistStats[a] || { wins: 0, noms: 0 };
-                    artistStats[a].noms += 1;
-                    if (r.winner) artistStats[a].wins += 1;
-                });
-                const scatterPoints = Object.keys(artistStats).slice(0, 50).map((a, i) => {
-                    const s = artistStats[a];
-                    const efficiency = s.noms ? (s.wins / s.noms) * 100 : 0; // wins per 100 nominations
-                    return { x: Math.max(1, Math.round(s.noms / 2)), y: efficiency, r: Math.min(40, Math.max(4, s.wins * 3)), artist: a };
-                });
-                const scatterChart = getChartById('grammyScatterChart');
-                if (scatterChart) {
-                    scatterChart.data.datasets = [{ label: 'Win Efficiency (wins per 100 nominations)', data: scatterPoints, backgroundColor: scatterChart.data.datasets && scatterChart.data.datasets[0] && scatterChart.data.datasets[0].backgroundColor || 'rgba(59,130,246,0.9)' }];
-                    try { scatterChart.update(); } catch (e) { }
-                }
-
-                // 4) Big 4 counts per artist (sample) — filter categories
-                const big4 = ['Record of the Year', 'Album of the Year', 'Song of the Year', 'Best New Artist'];
-                const big4Counts = {};
-                normalized.forEach(r => {
-                    const cat = (r.category || '').toString();
-                    if (big4.some(b => cat.toLowerCase().indexOf(b.toLowerCase()) !== -1)) {
-                        const a = r.artist || 'Unknown';
-                        big4Counts[a] = (big4Counts[a] || 0) + (r.winner ? 1 : 0);
-                    }
-                });
-                const big4Labels = Object.keys(big4Counts).slice(0, 6);
-                const big4Data = big4Labels.map(l => big4Counts[l] || 0);
-                const big4Chart = getChartById('grammyBig4Chart');
-                if (big4Chart) {
-                    big4Chart.data.labels = big4Labels.length ? big4Labels : big4Chart.data.labels;
-                    big4Chart.data.datasets = [{ label: 'Big 4 Wins', data: big4Data.length ? big4Data : big4Chart.data.datasets && big4Chart.data.datasets[0] && big4Chart.data.datasets[0].data || big4Chart.data.datasets[0].data, backgroundColor: big4Chart.data.datasets && big4Chart.data.datasets[0] && big4Chart.data.datasets[0].backgroundColor }];
-                    try { big4Chart.update(); } catch (e) { }
-                }
-            }
-
-            // Wire file input
-            const grammyInput = document.getElementById('grammyDatasetInput');
-            if (grammyInput) {
-                grammyInput.addEventListener('change', (ev) => {
-                    const f = ev.target.files && ev.target.files[0];
-                    parseGrammyCSV(f);
-                });
-            }
-
-            // Simple slideshow for Kendrick section (automated)
-
-
-            // Ensure initial theme applied to charts
-            updateChartTheme();
-
-            // Attempt to fetch server-provided Grammy payload (if a local server is running)
-            (function tryFetchGrammyPayload() {
-                const endpoint = '/api/grammy';
-                // Only attempt when window.fetch is available
-                if (!window.fetch) return;
-                fetch(endpoint, { cache: 'no-store' }).then(r => {
-                    if (!r.ok) throw new Error('No server payload');
-                    return r.json();
-                }).then(payload => {
-                    if (!payload) return;
-                    setGrammyLog('Loaded live payload from /api/grammy');
-                    try {
-                        applyGrammyPayload(payload);
-                        setTimeout(() => setGrammyLog('Charts updated from server payload.'), 120);
-                    } catch (e) { setGrammyLog('Error applying server payload: ' + (e.message || e), true); }
-                }).catch(() => { setGrammyLog('Server not detected. Using pre-loaded sample data.'); });
-            })();
-
-            // Apply a server-side precomputed payload into existing charts
-            function applyGrammyPayload(payload) {
-                if (!payload) return;
+            function createChart(id, type, data, options) {
+                const ctx = document.getElementById(id);
+                if (!ctx) return;
                 try {
-                    // Polar
-                    const polarChart = getChartById('grammyPolarChart');
-                    if (polarChart && payload.polar) {
-                        polarChart.data.labels = payload.polar.labels || polarChart.data.labels;
-                        polarChart.data.datasets = [{ data: payload.polar.data || [], backgroundColor: polarChart.data.datasets && polarChart.data.datasets[0] && polarChart.data.datasets[0].backgroundColor || ['#ec4899', '#3b82f6', '#6366f1', '#10b981'] }];
-                        polarChart.update();
-                    }
-
-                    // Evolution
-                    const evoChart = getChartById('grammyEvolutionChart');
-                    if (evoChart && payload.evolution) {
-                        evoChart.data.labels = payload.evolution.labels || evoChart.data.labels;
-                        evoChart.data.datasets = payload.evolution.datasets || evoChart.data.datasets;
-                        evoChart.update();
-                    }
-
-                    // Scatter
-                    const sChart = getChartById('grammyScatterChart');
-                    if (sChart && payload.scatter) {
-                        sChart.data.datasets = payload.scatter.datasets || sChart.data.datasets;
-                        sChart.update();
-                    }
-
-                    // Big4
-                    const bChart = getChartById('grammyBig4Chart');
-                    if (bChart && payload.big4) {
-                        bChart.data.labels = payload.big4.labels && payload.big4.labels.length ? payload.big4.labels : bChart.data.labels;
-                        bChart.data.datasets = [{ label: 'Big 4 Wins', data: payload.big4.data || bChart.data.datasets[0].data, backgroundColor: bChart.data.datasets && bChart.data.datasets[0] && bChart.data.datasets[0].backgroundColor }];
-                        bChart.update();
-                    }
-                } catch (e) { console.error('applyGrammyPayload error', e); throw e; }
+                    const c = new Chart(ctx, { type, data, options });
+                    charts.push(c);
+                } catch (e) { console.error('Chart Fail', id, e); }
             }
 
-            // Search Functionality
-            const searchInput = document.getElementById('topic-search');
-            if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    const term = e.target.value.toLowerCase().trim();
-                    const links = document.querySelectorAll('.nav-link');
+            // 1. WEO Chart
+            createChart('weoChart', 'scatter', {
+                datasets: [{
+                    label: 'Economic Data',
+                    data: [{ x: 2.5, y: 3.2 }, { x: 3.1, y: 2.8 }, { x: 1.8, y: 4.5 }, { x: 4.2, y: 1.5 }],
+                    backgroundColor: '#3b82f6'
+                }]
+            }, { responsive: true, maintainAspectRatio: false });
 
-                    // 1. Filter individual Topic Links
-                    links.forEach(link => {
-                        const text = link.textContent.toLowerCase();
-                        const parentLi = link.parentElement;
-                        // Use setProperty for 'important' priority
-                        if (text.includes(term)) {
-                            parentLi.style.setProperty('display', 'block', 'important');
-                        } else {
-                            parentLi.style.setProperty('display', 'none', 'important');
-                        }
-                    });
+            // 2. Trade Chart
+            createChart('tradeChart', 'bar', {
+                labels: ['Electronics', 'Pharma', 'Auto', 'Services'],
+                datasets: [{ label: 'Export', data: [500, 300, 200, 450], backgroundColor: '#10b981' }]
+            }, { responsive: true, maintainAspectRatio: false });
 
-                    // 2. Hide Empty Modules (if all their children are hidden)
-                    // We target the divs inside the scrollable container
-                    const modules = document.querySelectorAll('#sidebar .space-y-6 > div');
+            // 3. Kendrick Chart
+            createChart('kendrickChart', 'line', {
+                labels: ['Track 1', 'Track 2', 'Track 3', 'Track 4', 'Track 5'],
+                datasets: [{
+                    label: 'Narrative Intensity',
+                    data: [20, 45, 80, 60, 90],
+                    borderColor: '#ef4444',
+                    tension: 0.4
+                }]
+            }, { responsive: true, maintainAspectRatio: false });
 
-                    modules.forEach(module => {
-                        // Skip the search box container itself (it's the first div sometimes)
-                        if (module.querySelector('.search-container')) return;
+            // 4. Grammy Chart
+            createChart('grammyChart', 'bubble', {
+                datasets: [{
+                    label: 'Win Rate',
+                    data: [{ x: 20, y: 80, r: 15 }, { x: 40, y: 60, r: 10 }, { x: 30, y: 90, r: 20 }],
+                    backgroundColor: '#8b5cf6'
+                }]
+            }, { responsive: true, maintainAspectRatio: false });
 
-                        const lis = module.querySelectorAll('li');
-                        if (lis.length === 0) return; // Skip if no list items (e.g. resources header?)
+            updateChartTheme();
 
-                        // Check visibility based on the styles we just set
-                        let visibleCount = 0;
-                        lis.forEach(li => {
-                            if (li.style.display !== 'none') visibleCount++;
-                        });
+            // --- PROGRESS PILL ---
+            const pill = document.getElementById('progress-pill');
+            const pText = document.getElementById('progress-text');
+            const pFill = document.getElementById('progress-fill');
+            const pNext = document.getElementById('prog-next');
+            const pPrev = document.getElementById('prog-prev');
 
-                        // If performing a search and no results in this module, hide it
-                        if (term !== '' && visibleCount === 0) {
-                            module.style.setProperty('display', 'none', 'important');
-                        } else {
-                            // Verify it should be visible (e.g. term is empty OR matches found)
-                            module.style.setProperty('display', 'block', 'important');
-                        }
-                    });
-                });
+            // Define topic order
+            // Define topic order dynamically from sidebar to ensure consistency
+            const topicOrder = Array.from(document.querySelectorAll('#sidebar .nav-link'))
+                .map(link => link.dataset.topic)
+                .filter(topic => topic);
+            console.log('[NAV] Generated topic order:', topicOrder);
+
+            function updateProgressPill(id) {
+                if (!pill) return;
+                const idx = topicOrder.indexOf(id);
+                if (idx === -1) {
+                    pill.style.display = 'none';
+                    return;
+                }
+                pill.style.display = 'flex';
+                pText.textContent = `Topic ${idx + 1} of ${topicOrder.length}`;
+                pFill.style.width = `${((idx + 1) / topicOrder.length) * 100}%`;
+
+                // Button Logic
+                pPrev.onclick = () => {
+                    const prev = idx > 0 ? topicOrder[idx - 1] : 'home';
+                    switchTopic(prev);
+                };
+                pNext.onclick = () => {
+                    const next = idx < topicOrder.length - 1 ? topicOrder[idx + 1] : 'home';
+                    switchTopic(next);
+                };
             }
 
-            // Map Initialization Logic for Geospatial Module
-            let worldMap = null;
-            let indiaMap = null;
-
+            // --- MAPS ---
             function initMaps() {
-                // Initialize World Map if container exists and map doesn't
-                const worldContainer = document.getElementById('map-world');
-                if (worldContainer && !worldMap && typeof L !== 'undefined') {
-                    worldMap = L.map('map-world').setView([20, 0], 2);
-                    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                        subdomains: 'abcd',
-                        maxZoom: 19
-                    }).addTo(worldMap);
-
-                    // Add a simple marker for context
-                    L.marker([51.5, -0.09]).addTo(worldMap)
-                        .bindPopup('A sample point on the map.')
-                        .openPopup();
-
-                    // Fix map size on init
-                    setTimeout(() => { worldMap.invalidateSize(); }, 200);
-                }
-
-                // Initialize India Map
-                const indiaContainer = document.getElementById('map-india');
-                if (indiaContainer && !indiaMap && typeof L !== 'undefined') {
-                    indiaMap = L.map('map-india').setView([20.5937, 78.9629], 5);
-                    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                        subdomains: 'abcd',
-                        maxZoom: 19
-                    }).addTo(indiaMap);
-
-                    // Add marker for New Delhi
-                    L.marker([28.6139, 77.2090]).addTo(indiaMap)
-                        .bindPopup('New Delhi (Capital)')
-                        .openPopup();
-
-                    setTimeout(() => { indiaMap.invalidateSize(); }, 200);
+                if (typeof L === 'undefined') return;
+                const mapW = document.getElementById('map-world');
+                if (mapW && !mapW._leaflet_id) {
+                    const m = L.map('map-world').setView([20, 0], 2);
+                    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(m);
                 }
             }
 
-            // Initial navigation based on URL hash or default to 'home'
-            const initTopic = window.location.hash.replace('#', '') || 'home';
 
-            // AGGRESSIVE SIDEBAR FIX: Immediately hide sidebar if starting on 'home' 
-            // This prevents the "flash" or persistence issues
-            if (initTopic === 'home') {
-                const sb = document.getElementById('sidebar');
-                if (sb) sb.style.display = 'none';
+            // --- Easter Egg Manager ---
+            const Eggs = {
+                active: { snake: false, matrix: false, disco: false, gravity: false, cinema: false },
+                triggers: {
+                    keys: '',
+                    clicks: { theme: 0, year: 0, logo: 0, pill: 0, title: 0, name: 0 }
+                },
 
-                // Also hide mobile header/toggle immediately
-                const mh = document.querySelector('.md\\:hidden.fixed.top-0');
-                if (mh) mh.style.display = 'none';
-                const st = document.getElementById('sidebar-toggle-btn');
-                if (st) st.style.display = 'none';
+                init() {
+                    this.setupKeyListeners();
+                    this.setupClickListeners();
+                    this.Matrix.init();
+                    this.Snake.init();
+                    this.Terminal.init();
+                },
 
-                // Ensure main content is full width immediately
-                const mc = document.getElementById('main-content');
-                if (mc) mc.classList.remove('md:w-4/5');
-            }
+                // 1. Disco Mode
+                toggleDisco() {
+                    document.body.classList.toggle('disco-mode');
+                    this.active.disco = document.body.classList.contains('disco-mode');
+                    this.showToast(this.active.disco ? '🕺 DISCO MODE ACTIVATED 🕺' : 'Disco Mode Deactivated');
+                },
 
-            // Short delay to ensure styles are ready
-            setTimeout(() => {
-                if (typeof window.switchTopic === 'function') {
-                    // Force update by resetting currentTopic, ensuring 'home' logic runs (hiding sidebar)
-                    window.currentTopic = null;
-                    window.switchTopic(initTopic);
+                // 2. Snake Game
+                Snake: {
+                    canvas: null, ctx: null, interval: null, gridSize: 20, snake: [], apple: {}, dx: 0, dy: 0, score: 0,
+                    init() {
+                        this.canvas = document.getElementById('snakeCanvas');
+                        this.ctx = this.canvas.getContext('2d');
+                        document.getElementById('snake-close').addEventListener('click', () => this.stop());
+                    },
+                    start() {
+                        document.getElementById('snake-modal').classList.remove('hidden');
+                        this.snake = [{ x: 10, y: 10 }];
+                        this.apple = { x: 15, y: 15 };
+                        this.dx = 1; this.dy = 0;
+                        this.score = 0;
+                        if (this.interval) clearInterval(this.interval);
+                        this.interval = setInterval(() => this.update(), 100);
+                        Eggs.active.snake = true;
+                    },
+                    stop() {
+                        document.getElementById('snake-modal').classList.add('hidden');
+                        clearInterval(this.interval);
+                        Eggs.active.snake = false;
+                    },
+                    update() {
+                        // Game Logic
+                        const head = { x: this.snake[0].x + this.dx, y: this.snake[0].y + this.dy };
+                        if (head.x < 0) head.x = 19; if (head.x > 19) head.x = 0; if (head.y < 0) head.y = 19; if (head.y > 19) head.y = 0;
+
+                        // Collision check
+                        if (this.snake.some(s => s.x === head.x && s.y === head.y)) return this.start(); // Restart on crash
+
+                        this.snake.unshift(head);
+                        if (head.x === this.apple.x && head.y === this.apple.y) {
+                            this.score += 10;
+                            document.getElementById('snake-score').textContent = `Score: ${this.score}`;
+                            this.apple = { x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20) };
+                        } else {
+                            this.snake.pop();
+                        }
+                        // Draw
+                        this.ctx.fillStyle = 'black'; this.ctx.fillRect(0, 0, 400, 400);
+                        this.ctx.fillStyle = 'lime'; this.snake.forEach(s => this.ctx.fillRect(s.x * 20, s.y * 20, 18, 18));
+                        this.ctx.fillStyle = 'red'; this.ctx.fillRect(this.apple.x * 20, this.apple.y * 20, 18, 18);
+                    }
+                },
+
+                // 3. Matrix Rain
+                Matrix: {
+                    active: false, canvas: null, ctx: null, interval: null, drops: [],
+                    init() {
+                        this.canvas = document.getElementById('matrixCanvas');
+                        this.ctx = this.canvas.getContext('2d');
+                        window.addEventListener('resize', () => { if (this.active) this.resize(); });
+                        this.canvas.addEventListener('click', () => this.stop());
+                    },
+                    resize() {
+                        this.canvas.width = window.innerWidth;
+                        this.canvas.height = window.innerHeight;
+                        const cols = this.canvas.width / 16;
+                        this.drops = Array(Math.floor(cols)).fill(1);
+                    },
+                    start() {
+                        if (this.active) return;
+                        this.active = true;
+                        this.canvas.style.display = 'block';
+                        this.resize();
+                        const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZmatrix';
+                        this.interval = setInterval(() => {
+                            this.ctx.fillStyle = 'rgba(0,0,0,0.05)';
+                            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                            this.ctx.fillStyle = '#0F0';
+                            this.ctx.font = '16px monospace';
+                            this.drops.forEach((y, i) => {
+                                const text = chars[Math.floor(Math.random() * chars.length)];
+                                this.ctx.fillText(text, i * 16, y * 16);
+                                if (y * 16 > this.canvas.height && Math.random() > 0.975) this.drops[i] = 0;
+                                this.drops[i]++;
+                            });
+                        }, 33);
+                    },
+                    stop() {
+                        this.active = false;
+                        this.canvas.style.display = 'none';
+                        clearInterval(this.interval);
+                    }
+                },
+
+                // 4. Gravity Failure (Simple CSS Physics Simulation)
+                triggerGravity() {
+                    if (this.active.gravity) return;
+                    this.active.gravity = true;
+                    this.showToast('🌌 GRAVITY FAILURE INITIALIZED');
+                    const elements = document.querySelectorAll('.topic-panel > *, #sidebar, .nav-link, h1, p');
+                    elements.forEach(el => {
+                        el.style.transition = 'transform 2s ease-in, opacity 2s';
+                        el.style.transform = `translate(${Math.random() * 100 - 50}px, 100vh) rotate(${Math.random() * 360}deg)`;
+                        el.style.opacity = '0';
+                    });
+                    setTimeout(() => location.reload(), 4000); // Auto reset
+                },
+
+                // 5. Retro Win95
+                toggleWin95() {
+                    document.body.classList.toggle('win95-mode');
+                    this.showToast(document.body.classList.contains('win95-mode') ? '💾 Win95 Mode' : 'Modern Mode');
+                },
+
+                // 6. Confetti
+                triggerConfetti() {
+                    this.showToast('🎉 PARTY TIME!');
+                    // Simple CSS Confetti Particles
+                    for (let i = 0; i < 100; i++) {
+                        const p = document.createElement('div');
+                        p.style.cssText = `position:fixed; top:50%; left:50%; width:10px; height:10px; background:hsl(${Math.random() * 360}, 100%, 50%); z-index:9999; pointer-events:none; border-radius:50%;`;
+                        document.body.appendChild(p);
+                        const angle = Math.random() * Math.PI * 2;
+                        const velocity = Math.random() * 200 + 100;
+                        const tx = Math.cos(angle) * velocity;
+                        const ty = Math.sin(angle) * velocity;
+                        p.animate([
+                            { transform: 'translate(0,0)', opacity: 1 },
+                            { transform: `translate(${tx}px, ${ty}px)`, opacity: 0 }
+                        ], { duration: 1500, easing: 'ease-out' }).onfinish = () => p.remove();
+                    }
+                },
+
+                // 7. Hidden Terminal
+                Terminal: {
+                    el: null, input: null, output: null, open: false,
+                    init() {
+                        this.el = document.getElementById('terminal-modal');
+                        this.input = document.getElementById('terminal-input');
+                        this.output = document.getElementById('terminal-output');
+
+                        this.input.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter') {
+                                this.process(this.input.value);
+                                this.input.value = '';
+                            }
+                        });
+                    },
+                    toggle() {
+                        this.open = !this.open;
+                        this.el.classList.toggle('hidden', !this.open);
+                        this.el.style.transform = this.open ? 'translateY(0)' : '-translateY(100%)'; // Reset override
+                        if (this.open) setTimeout(() => this.input.focus(), 100);
+                    },
+                    process(cmd) {
+                        this.log(`$ ${cmd}`);
+                        switch (cmd.toLowerCase().trim()) {
+                            case 'help': this.log('Available commands: help, clear, about, exit, secret'); break;
+                            case 'clear': this.output.innerHTML = ''; break;
+                            case 'about': this.log('System v2.0 - Created by Himanshu Gaur'); break;
+                            case 'exit': this.toggle(); break;
+                            case 'secret': this.log('Try typing "matrix" outside the terminal...'); break;
+                            default: this.log(`Command not found: ${cmd}`);
+                        }
+                        this.output.scrollTop = this.output.scrollHeight;
+                    },
+                    log(txt) {
+                        const d = document.createElement('div');
+                        d.textContent = txt;
+                        this.output.appendChild(d);
+                    }
+                },
+
+                // 8. Logo Fly
+                flyLogo() {
+                    const logos = document.querySelectorAll('img[src*="logo"]'); // broader selector
+                    if (logos.length === 0) return;
+                    this.showToast('🚁 We have liftoff!');
+                    logos.forEach(l => {
+                        l.style.transition = 'transform 3s ease-in';
+                        l.style.transform = 'translateY(-200vh) rotate(720deg)';
+                        setTimeout(() => {
+                            l.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                            l.style.transform = 'translateY(0) rotate(0deg)';
+                        }, 4000);
+                    });
+                },
+
+                // 9. Dev Commentary
+                toggleDevCommentary() {
+                    document.body.classList.toggle('show-commentary');
+                    this.showToast(document.body.classList.contains('show-commentary') ? '🎙️ Dev Commentary On' : '🎙️ Dev Commentary Off');
+                    // Inject tooltips if needed or just toggle visibility class for pre-existing ones
+                },
+
+                // 10. Cinema Mode
+                toggleCinema() {
+                    document.body.classList.toggle('cinema-mode');
+                    this.showToast(document.body.classList.contains('cinema-mode') ? '🍿 Cinema Mode' : 'Cut!');
+                },
+
+                // Utilities
+                showToast(msg) {
+                    const t = document.createElement('div');
+                    t.textContent = msg;
+                    t.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.8); color:white; padding:10px 20px; border-radius:30px; z-index:10000; pointer-events:none; font-weight:bold; animation: fadeUp 0.3s ease-out;';
+                    document.body.appendChild(t);
+                    setTimeout(() => t.remove(), 2000);
+                },
+
+                setupKeyListeners() {
+                    document.addEventListener('keydown', (e) => {
+                        if (this.active.snake) {
+                            // Snake controls
+                            if (e.key === 'ArrowUp' && this.Snake.dy === 0) { this.Snake.dx = 0; this.Snake.dy = -1; }
+                            if (e.key === 'ArrowDown' && this.Snake.dy === 0) { this.Snake.dx = 0; this.Snake.dy = 1; }
+                            if (e.key === 'ArrowLeft' && this.Snake.dx === 0) { this.Snake.dx = -1; this.Snake.dy = 0; }
+                            if (e.key === 'ArrowRight' && this.Snake.dx === 0) { this.Snake.dx = 1; this.Snake.dy = 0; }
+                            if (e.key === 'Escape') this.Snake.stop();
+                            return; // Don't process other keys
+                        }
+
+                        if (e.key === 'Escape') {
+                            this.Matrix.stop();
+                            if (this.Terminal.open) this.Terminal.toggle();
+                            if (document.body.classList.contains('cinema-mode')) this.toggleCinema();
+                            return;
+                        }
+
+                        // Terminal Trigger (~)
+                        if (e.key === '`' || e.key === '~') {
+                            this.triggers.keys = ''; // reset buffer logic
+                            // Using a simplified counter for this special key
+                            // Actually it's easier to handle standalone
+                        }
+
+                        // Main Key Buffer
+                        if (e.key.length === 1) { // ignore modifier keys
+                            this.triggers.keys += e.key.toLowerCase();
+                            if (this.triggers.keys.length > 20) this.triggers.keys = this.triggers.keys.slice(-20);
+                        }
+
+                        // Check Triggers (Overlap Prevention: "action" vs "matrix")
+                        if (this.triggers.keys.endsWith('matrix')) {
+                            this.Matrix.start();
+                            this.triggers.keys = ''; // Clear buffer immediately to prevent overlap
+                        } else if (this.triggers.keys.endsWith('action')) {
+                            this.toggleCinema();
+                            this.triggers.keys = ''; // Clear buffer
+                        } else if (this.triggers.keys.endsWith('~~~')) { // Terminal
+                            this.Terminal.toggle();
+                            this.triggers.keys = '';
+                        }
+                    });
+                },
+
+                setupClickListeners() {
+                    const track = (id, threshold, cb) => {
+                        this.triggers.clicks[id]++;
+                        if (this.triggers.timer) clearTimeout(this.triggers.timer);
+                        this.triggers.timer = setTimeout(() => {
+                            // Reset ALL click counters slightly delay
+                            Object.keys(this.triggers.clicks).forEach(k => this.triggers.clicks[k] = 0);
+                        }, 2000);
+
+                        if (this.triggers.clicks[id] === threshold) {
+                            cb();
+                            this.triggers.clicks[id] = 0;
+                        }
+                    };
+
+                    document.addEventListener('click', (e) => {
+                        // 1. Disco (Theme Toggle)
+                        if (e.target.closest('.theme-toggle')) track('theme', 5, () => this.toggleDisco());
+
+                        // 2. Snake (Python Title)
+                        if (e.target.textContent.includes('Python') && e.target.closest('h1')) track('title', 10, () => this.Snake.start());
+
+                        // 4. Gravity (Get Started + Shift)
+                        if (e.target.id === 'get-started-btn' && e.shiftKey) {
+                            this.triggerGravity();
+                        }
+
+                        // 5. Win95 (Year)
+                        if (e.target.id === 'copyright-year') track('year', 3, () => this.toggleWin95());
+
+                        // 6. Confetti (Progress Pill)
+                        if (e.target.closest('.progress-pill-container')) track('pill', 7, () => this.triggerConfetti());
+
+                        // 8. Logo Fly
+                        if (e.target.tagName === 'IMG' && e.target.src.includes('logo')) {
+                            e.preventDefault();
+                            track('logo', 5, () => this.flyLogo());
+                        }
+
+                        // 9. Dev Commentary (Name)
+                        if (e.target.textContent.includes('Himanshu Gaur') && e.target.closest('#sidebar')) track('name', 5, () => this.toggleDevCommentary());
+                    });
+
+                    // Gravity specific listener
+                    // Removed extra listener to use standard Shift+Click above
                 }
-            }, 10);
+            };
 
+            // Start
+            Eggs.init();
         });
     </script>
-
-
+    <canvas id="matrixCanvas"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: black; cursor: pointer;"></canvas>
 </body>
 
 </html>

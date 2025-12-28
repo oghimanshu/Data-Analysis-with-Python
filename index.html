@@ -1768,14 +1768,44 @@
         }
 
         /* 4. Dev Commentary */
-        body.show-commentary h1::after,
-        body.show-commentary h2::after {
-            content: " 🎙️ [Dev Note]";
-            font-size: 0.5em;
-            color: #f59e0b;
-            vertical-align: middle;
-            margin-left: 0.5rem;
-            font-style: italic;
+        /* 4. Dev Commentary - Gina Linetti Style */
+        body.show-commentary [data-commentary] {
+            position: relative;
+        }
+
+        body.show-commentary [data-commentary]::after {
+            content: attr(data-commentary);
+            position: absolute;
+            top: -1.5rem;
+            right: 0;
+            background: #f59e0b;
+            /* Amber 500 */
+            color: #fff;
+            padding: 0.25rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            white-space: nowrap;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            animation: bounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         /* --- NUCLEAR MENU BUTTON --- */
@@ -5867,7 +5897,7 @@ plt.show()</code></pre>
                             <img src="assets/professor.svg" alt="Professor Pixel"
                                 class="relative w-full h-full object-contain drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500 z-10 filter hover:brightness-110">
                         </div>
-                        <h2
+                        <h2 data-commentary="The main character energy here is blinding. ✨"
                             class="text-4xl md:text-5xl font-black text-slate-800 dark:text-white tracking-tight text-center mb-2">
                             Himanshu<br><span class="text-blue-600 dark:text-blue-400">Gaur</span>
                         </h2>
@@ -5912,6 +5942,7 @@ plt.show()</code></pre>
                         </a>
 
                         <a href="https://www.researchgate.net/profile/Himanshu-Gaur-11" target="_blank"
+                            data-commentary="Science, but make it fashion. 🔬"
                             class="glass-chip flex items-center gap-4 p-4 rounded-xl hover:bg-white/40 dark:hover:bg-slate-700/40 border border-white/50 dark:border-white/10 group">
                             <div
                                 class="w-12 h-12 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
@@ -6598,128 +6629,126 @@ plt.show()</code></pre>
                         setTimeout(() => {
                             l.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                             l.style.transform = 'translateY(0) rotate(0deg)';
-                        }, 4000);
-                    });
+                        },
+
+                            // 9. Dev Commentary
+                            toggleCommentary() {
+                            document.body.classList.toggle('show-commentary');
+                            const active = document.body.classList.contains('show-commentary');
+                            this.showToast(active ? '🎙️ Dev Commentary: GINA LINETTI MODE 💅' : 'Commentary Off. Boring.');
+                        },
+
+                            // 10. Cinema Mode
+                            toggleCinema() {
+                            document.body.classList.toggle('cinema-mode');
+                            this.showToast(document.body.classList.contains('cinema-mode') ? '🍿 Cinema Mode' : 'Cut!');
+                        },
+
+                            // Utilities
+                            showToast(msg) {
+                                const t = document.createElement('div');
+                                t.textContent = msg;
+                                t.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.8); color:white; padding:10px 20px; border-radius:30px; z-index:10000; pointer-events:none; font-weight:bold; animation: fadeUp 0.3s ease-out;';
+                                document.body.appendChild(t);
+                                setTimeout(() => t.remove(), 2000);
                 },
 
-                // 9. Dev Commentary
-                toggleDevCommentary() {
-                    document.body.classList.toggle('show-commentary');
-                    this.showToast(document.body.classList.contains('show-commentary') ? '🎙️ Dev Commentary On' : '🎙️ Dev Commentary Off');
-                    // Inject tooltips if needed or just toggle visibility class for pre-existing ones
-                },
+        setupKeyListeners() {
+            document.addEventListener('keydown', (e) => {
+                if (this.active.snake) {
+                    // Snake controls
+                    if (e.key === 'ArrowUp' && this.Snake.dy === 0) { this.Snake.dx = 0; this.Snake.dy = -1; }
+                    if (e.key === 'ArrowDown' && this.Snake.dy === 0) { this.Snake.dx = 0; this.Snake.dy = 1; }
+                    if (e.key === 'ArrowLeft' && this.Snake.dx === 0) { this.Snake.dx = -1; this.Snake.dy = 0; }
+                    if (e.key === 'ArrowRight' && this.Snake.dx === 0) { this.Snake.dx = 1; this.Snake.dy = 0; }
+                    if (e.key === 'Escape') this.Snake.stop();
+                    return; // Don't process other keys
+                }
 
-                // 10. Cinema Mode
-                toggleCinema() {
-                    document.body.classList.toggle('cinema-mode');
-                    this.showToast(document.body.classList.contains('cinema-mode') ? '🍿 Cinema Mode' : 'Cut!');
-                },
+                if (e.key === 'Escape') {
+                    this.Matrix.stop();
+                    if (this.Terminal.open) this.Terminal.toggle();
+                    if (document.body.classList.contains('cinema-mode')) this.toggleCinema();
+                    return;
+                }
 
-                // Utilities
-                showToast(msg) {
-                    const t = document.createElement('div');
-                    t.textContent = msg;
-                    t.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.8); color:white; padding:10px 20px; border-radius:30px; z-index:10000; pointer-events:none; font-weight:bold; animation: fadeUp 0.3s ease-out;';
-                    document.body.appendChild(t);
-                    setTimeout(() => t.remove(), 2000);
-                },
+                // Terminal Trigger (~)
+                if (e.key === '`' || e.key === '~') {
+                    this.triggers.keys = ''; // reset buffer logic
+                    // Using a simplified counter for this special key
+                    // Actually it's easier to handle standalone
+                }
 
-                setupKeyListeners() {
-                    document.addEventListener('keydown', (e) => {
-                        if (this.active.snake) {
-                            // Snake controls
-                            if (e.key === 'ArrowUp' && this.Snake.dy === 0) { this.Snake.dx = 0; this.Snake.dy = -1; }
-                            if (e.key === 'ArrowDown' && this.Snake.dy === 0) { this.Snake.dx = 0; this.Snake.dy = 1; }
-                            if (e.key === 'ArrowLeft' && this.Snake.dx === 0) { this.Snake.dx = -1; this.Snake.dy = 0; }
-                            if (e.key === 'ArrowRight' && this.Snake.dx === 0) { this.Snake.dx = 1; this.Snake.dy = 0; }
-                            if (e.key === 'Escape') this.Snake.stop();
-                            return; // Don't process other keys
-                        }
+                // Main Key Buffer
+                if (e.key.length === 1) { // ignore modifier keys
+                    this.triggers.keys += e.key.toLowerCase();
+                    if (this.triggers.keys.length > 20) this.triggers.keys = this.triggers.keys.slice(-20);
+                }
 
-                        if (e.key === 'Escape') {
-                            this.Matrix.stop();
-                            if (this.Terminal.open) this.Terminal.toggle();
-                            if (document.body.classList.contains('cinema-mode')) this.toggleCinema();
-                            return;
-                        }
+                // Check Triggers (Overlap Prevention: "action" vs "matrix")
+                if (this.triggers.keys.endsWith('matrix')) {
+                    this.Matrix.start();
+                    this.triggers.keys = ''; // Clear buffer immediately to prevent overlap
+                } else if (this.triggers.keys.endsWith('action')) {
+                    this.toggleCinema();
+                    this.triggers.keys = ''; // Clear buffer
+                } else if (this.triggers.keys.endsWith('~~~')) { // Terminal
+                    this.Terminal.toggle();
+                    this.triggers.keys = '';
+                }
+            });
+        },
 
-                        // Terminal Trigger (~)
-                        if (e.key === '`' || e.key === '~') {
-                            this.triggers.keys = ''; // reset buffer logic
-                            // Using a simplified counter for this special key
-                            // Actually it's easier to handle standalone
-                        }
+        setupClickListeners() {
+            const track = (id, threshold, cb) => {
+                this.triggers.clicks[id]++;
+                if (this.triggers.timer) clearTimeout(this.triggers.timer);
+                this.triggers.timer = setTimeout(() => {
+                    // Reset ALL click counters slightly delay
+                    Object.keys(this.triggers.clicks).forEach(k => this.triggers.clicks[k] = 0);
+                }, 2000);
 
-                        // Main Key Buffer
-                        if (e.key.length === 1) { // ignore modifier keys
-                            this.triggers.keys += e.key.toLowerCase();
-                            if (this.triggers.keys.length > 20) this.triggers.keys = this.triggers.keys.slice(-20);
-                        }
-
-                        // Check Triggers (Overlap Prevention: "action" vs "matrix")
-                        if (this.triggers.keys.endsWith('matrix')) {
-                            this.Matrix.start();
-                            this.triggers.keys = ''; // Clear buffer immediately to prevent overlap
-                        } else if (this.triggers.keys.endsWith('action')) {
-                            this.toggleCinema();
-                            this.triggers.keys = ''; // Clear buffer
-                        } else if (this.triggers.keys.endsWith('~~~')) { // Terminal
-                            this.Terminal.toggle();
-                            this.triggers.keys = '';
-                        }
-                    });
-                },
-
-                setupClickListeners() {
-                    const track = (id, threshold, cb) => {
-                        this.triggers.clicks[id]++;
-                        if (this.triggers.timer) clearTimeout(this.triggers.timer);
-                        this.triggers.timer = setTimeout(() => {
-                            // Reset ALL click counters slightly delay
-                            Object.keys(this.triggers.clicks).forEach(k => this.triggers.clicks[k] = 0);
-                        }, 2000);
-
-                        if (this.triggers.clicks[id] === threshold) {
-                            cb();
-                            this.triggers.clicks[id] = 0;
-                        }
-                    };
-
-                    document.addEventListener('click', (e) => {
-                        // 1. Disco (Theme Toggle)
-                        if (e.target.closest('.theme-toggle')) track('theme', 5, () => this.toggleDisco());
-
-                        // 2. Snake (Python Title)
-                        if (e.target.textContent.includes('Python') && e.target.closest('h1')) track('title', 10, () => this.Snake.start());
-
-                        // 4. Gravity (Get Started + Shift)
-                        if (e.target.id === 'get-started-btn' && e.shiftKey) {
-                            this.triggerGravity();
-                        }
-
-                        // 5. Win95 (Year)
-                        if (e.target.id === 'copyright-year') track('year', 3, () => this.toggleWin95());
-
-                        // 6. Confetti (Progress Pill)
-                        if (e.target.closest('.progress-pill-container')) track('pill', 7, () => this.triggerConfetti());
-
-                        // 8. Logo Fly
-                        if (e.target.tagName === 'IMG' && e.target.src.includes('logo')) {
-                            e.preventDefault();
-                            track('logo', 5, () => this.flyLogo());
-                        }
-
-                        // 9. Dev Commentary (Name)
-                        if (e.target.textContent.includes('Himanshu Gaur') && e.target.closest('#sidebar')) track('name', 5, () => this.toggleDevCommentary());
-                    });
-
-                    // Gravity specific listener
-                    // Removed extra listener to use standard Shift+Click above
+                if (this.triggers.clicks[id] === threshold) {
+                    cb();
+                    this.triggers.clicks[id] = 0;
                 }
             };
 
-            // Start
-            Eggs.init();
+            document.addEventListener('click', (e) => {
+                // 1. Disco (Theme Toggle)
+                if (e.target.closest('.theme-toggle')) track('theme', 5, () => this.toggleDisco());
+
+                // 2. Snake (Python Title)
+                if (e.target.textContent.includes('Python') && e.target.closest('h1')) track('title', 10, () => this.Snake.start());
+
+                // 4. Gravity (Get Started + Shift)
+                if (e.target.id === 'get-started-btn' && e.shiftKey) {
+                    this.triggerGravity();
+                }
+
+                // 5. Win95 (Year)
+                if (e.target.id === 'copyright-year') track('year', 3, () => this.toggleWin95());
+
+                // 6. Confetti (Progress Pill)
+                if (e.target.closest('.progress-pill-container')) track('pill', 7, () => this.triggerConfetti());
+
+                // 8. Logo Fly
+                if (e.target.tagName === 'IMG' && e.target.src.includes('logo')) {
+                    e.preventDefault();
+                    track('logo', 5, () => this.flyLogo());
+                }
+
+                // 9. Dev Commentary (Name)
+                if (e.target.textContent.includes('Himanshu Gaur') && e.target.closest('#sidebar')) track('name', 5, () => this.toggleDevCommentary());
+            });
+
+            // Gravity specific listener
+            // Removed extra listener to use standard Shift+Click above
+        }
+            };
+
+        // Start
+        Eggs.init();
         });
     </script>
     <canvas id="matrixCanvas"

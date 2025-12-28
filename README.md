@@ -94,6 +94,16 @@ The platform currently hosts **10 Secret Modes** waiting to be discovered.
 
 *Note: Triggers include overlap prevention logic.*
 
+## 🆕 Latest Updates (v2.0 "Liquid Glass")
+
+Recent design overhauls and technical improvements include:
+
+*   **Liquid Glass Connect Section**: Completely redesigned the "Connect" card with custom SVG distortion filters, a new vector profile image, and glass-chip links.
+*   **Site-wide Glass Expansion**: Replaced solid backgrounds with a unified `backdrop-filter` glass effect and added a subtle parallax mesh gradient to the body.
+*   **High-Fidelity Navigation**: The active sidebar link is now a "funky" glass pill with light-simulating gradients and glowing borders.
+*   **Mobile Core Fixes**: Resolved critical touch interaction issues in the sidebar for a smoother mobile experience.
+*   **Refined Aesthetics**: Scaled down UI elements for balance and removed legacy text for a cleaner look.
+
 ## 📂 Project Structure
 
 ```text

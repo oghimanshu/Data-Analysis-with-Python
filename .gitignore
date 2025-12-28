@@ -1,0 +1,12 @@
+# System Files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Node/Dependencies (if any future addition)
+node_modules/
+npm-debug.log
+
+# Local Config
+*.local

@@ -1647,26 +1647,23 @@
             animation: disco-hue 2s linear infinite;
         }
 
-                /* --- PRE & COPY BUTTON (REDESIGNED) --- */
+                                /* --- PRE & COPY BUTTON (PREMIUM FIXED) --- */
         pre {
             position: relative;
-            background-color: #020617 !important; /* Slate 950 - Almost Black */
+            background-color: #0f172a !important; /* Slate 900 */
             color: #f8fafc !important;
-            padding-top: 2.8rem; /* More header space */
-            border: 1px solid #334155;
-            border-radius: 0.5rem;
-            overflow: hidden; /* Keep rounded corners */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            padding-top: 2.8rem;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 0.75rem; /* Softer corners */
+            overflow: visible !important;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5); /* Deep shadow */
             margin-bottom: 2rem;
-            z-index: 20; /* High enough to sit above text, low enough below modals */
-            transition: border-color 0.2s;
-        }
-        
-        pre:hover {
-            border-color: #64748b;
+            margin-top: 1rem;
+            z-index: 500; /* Nuclear Safety */
+            isolation: isolate;
         }
 
-        /* Explicit Header Bar */
+        /* Glass Header Bar */
         pre::before {
             content: "PYTHON";
             position: absolute;
@@ -1674,39 +1671,44 @@
             left: 0;
             width: 100%;
             height: 2.8rem;
-            background-color: #1e293b; /* Slate 800 */
-            border-bottom: 1px solid #334155;
+            background: rgba(30, 41, 59, 0.8); /* Slate 800 + Opacity */
+            backdrop-filter: blur(8px); /* Frosted header */
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem 0.75rem 0 0;
             
             display: flex;
             align-items: center;
             padding-left: 1.25rem;
             
             font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 0.05em;
-            color: #94a3b8;
+            letter-spacing: 0.1em;
+            color: #64748b; /* Slate 500 */
             pointer-events: none;
-            z-index: 21;
+            z-index: 501;
         }
 
-        /* THE COPY BUTTON - Absolute Positioning */
+        /* PREMIUM GLASS PILL BUTTON */
         .copy-btn {
             position: absolute;
-            top: 0.5rem;
+            top: 0.6rem;
             right: 1.0rem;
             
-            /* Solid Styling */
-            background-color: #334155; /* Slate 700 */
-            color: #ffffff !important;
-            border: 1px solid #475569;
-            border-radius: 4px;
+            /* Glassy Look */
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
             
-            padding: 0.3rem 0.8rem;
+            color: #94a3b8 !important; /* Slate 400 text */
+            border-radius: 9999px; /* Full Pill */
+            
+            padding: 0.35rem 0.85rem;
             font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
-            z-index: 100 !important; /* Always on top of header */
+            z-index: 2000 !important; /* Nuclear Priority */
             
             display: flex;
             align-items: center;
@@ -1714,54 +1716,36 @@
             
             opacity: 1 !important;
             transform: none !important;
-            transition: all 0.1s ease-in-out;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .copy-btn:hover {
-            background-color: #475569; /* Slate 600 */
-            transform: translateY(-1px) !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.1); /* Brighter glass */
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #ffffff !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Glowish shadow */
         }
-
+        
         .copy-btn:active {
-            transform: translateY(0) !important;
+             transform: translateY(0);
         }
 
-        /* Copied State */
+        /* Copied State - Neon Green */
         .copy-btn.copied {
-            background-color: #16a34a !important; /* Green */
-            border-color: #16a34a !important;
+            background: rgba(34, 197, 94, 0.2) !important;
+            border-color: #22c55e !important;
+            color: #4ade80 !important;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
         }
 
         .dark pre {
-            background-color: #020617 !important;
+            background-color: #0f172a !important;
         }
 
-        /* --- TOAST NOTIFICATION --- */
-        .copy-toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: #1e293b;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            border: 1px solid #334155;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-            font-weight: 600;
-            font-size: 0.9rem;
-            z-index: 99999; /* Top of the world */
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            pointer-events: none;
-        }
-        .copy-toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
+        .simple-english {
+            z-index: 0 !important;
+            position: relative;
         }
 
         .disco-mode .topic-panel {

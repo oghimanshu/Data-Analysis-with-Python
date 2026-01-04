@@ -81,31 +81,40 @@
     <style>
         :root {
             /* Glass UI Variables - Site-wide Refined */
+            /* MORE TRANSPARENCY, MORE VIBRANCY */
             --bg-body: #f1f5f9;
-            --bg-glass: rgba(255, 255, 255, 0.5);
+            --bg-glass: rgba(255, 255, 255, 0.1);
+            /* Super transparent */
             /* Readable Glass */
-            --bg-glass-panel: rgba(255, 255, 255, 0.6);
+            --bg-glass-panel: rgba(255, 255, 255, 0.25);
+            /* Much more see-through */
             /* Main content opacity */
-            --bg-panel: rgba(255, 255, 255, 0.6);
-            --border-glass: rgba(255, 255, 255, 0.5);
-            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+            --bg-panel: rgba(255, 255, 255, 0.25);
+            --border-glass: rgba(255, 255, 255, 0.3);
+            --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 
-            --text-primary: #1e293b;
+            --text-primary: #0f172a;
+            /* Darker for contrast */
             /* Darker slate for contrast against blur */
-            --text-secondary: #475569;
-            --text-heading: #0f172a;
+            --text-secondary: #334155;
+            --text-heading: #020617;
 
-            --border-color: rgba(203, 213, 225, 0.7);
-            --code-bg: #1e293b;
+            --border-color: rgba(255, 255, 255, 0.4);
+            --code-bg: rgba(15, 23, 42, 0.8);
+            /* Semi-transparent code block */
             --code-text: #f8fafc;
             --accent-color: #3b82f6;
             --accent-hover: #2563eb;
 
-            --chart-text: #475569;
-            --chart-grid: rgba(203, 213, 225, 0.6);
+            --chart-text: #334155;
+            --chart-grid: rgba(203, 213, 225, 0.4);
+
+            /* Copy Button */
+            --copy-btn-bg: rgba(255, 255, 255, 0.2);
+            --copy-btn-hover: rgba(255, 255, 255, 0.4);
 
             /* Sidebar & Mobile - Ultra Glass */
-            --bg-sidebar: rgba(255, 255, 255, 0.45);
+            --bg-sidebar: rgba(255, 255, 255, 0.15);
             --sidebar-width: 280px;
         }
 
@@ -243,19 +252,20 @@
         /* AMOLED Dark Mode / Glass Dark (Refined) */
         .dark {
             --bg-body: #020617;
-            --bg-glass: rgba(15, 23, 42, 0.5);
-            --bg-glass-panel: rgba(15, 23, 42, 0.6);
+            --bg-glass: rgba(0, 0, 0, 0.2);
+            --bg-glass-panel: rgba(0, 0, 0, 0.3);
+            /* Dark but transparent */
             /* Readable Dark Glass */
-            --bg-panel: rgba(15, 23, 42, 0.6);
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --shadow-glass: 0 10px 40px 0 rgba(0, 0, 0, 0.6);
+            --bg-panel: rgba(0, 0, 0, 0.3);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --shadow-glass: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
 
-            --text-primary: #cbd5e1;
-            --text-secondary: #94a3b8;
-            --text-heading: #f8fafc;
+            --text-primary: #e2e8f0;
+            --text-secondary: #cbd5e1;
+            --text-heading: #ffffff;
 
-            --border-color: rgba(94, 114, 146, 0.4);
-            --code-bg: #0f172a;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --code-bg: rgba(0, 0, 0, 0.6);
             --code-text: #e2e8f0;
             --accent-color: #60a5fa;
             --accent-hover: #3b82f6;
@@ -264,7 +274,7 @@
             --chart-grid: rgba(94, 114, 146, 0.3);
 
             /* Sidebar & Mobile Dark */
-            --bg-sidebar: rgba(2, 6, 23, 0.5);
+            --bg-sidebar: rgba(0, 0, 0, 0.25);
         }
 
         /* Apple Glass Panel Class (Ultra) */
@@ -345,7 +355,21 @@
             color: #ffffff;
         }
 
-        /* Global Background Mesh */
+        /* Global Background Mesh - PSYCHEDELIC UPGRADE */
+        @keyframes meshFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         body::before {
             content: "";
             position: fixed;
@@ -354,23 +378,27 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+            /* Vibrant gradients */
             background:
-                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.1) 0, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.1) 0, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.1) 0, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(34, 197, 94, 0.1) 0, transparent 50%);
-            background-color: #f8fafc;
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.4) 0, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.4) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.4) 0, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(34, 197, 94, 0.4) 0, transparent 50%),
+                linear-gradient(120deg, #e0f2fe, #fce7f3, #e8e8ff);
+            background-size: 200% 200%;
+            animation: meshFlow 15s ease infinite;
             transition: background-color 0.4s ease;
         }
 
         .dark body::before {
+            /* Neons for dark mode */
             background:
-                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.15) 0, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.15) 0, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.15) 0, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(34, 197, 94, 0.15) 0, transparent 50%);
-            background-color: #020617;
-            /* Deep slate/black */
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.3) 0, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.3) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.3) 0, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(34, 197, 94, 0.3) 0, transparent 50%),
+                linear-gradient(120deg, #0f172a, #1e1b4b, #022c22);
+            background-size: 200% 200%;
         }
 
         /* Consolidated Text Color Overrides for Dark Mode Compatibility */
@@ -570,6 +598,18 @@
             main {
                 transition: margin-left 0.3s ease, max-width 0.3s ease;
             }
+        }
+
+        /* Start Learning Button Fix */
+        #get-started-btn {
+            background-color: #2563eb !important;
+            opacity: 1 !important;
+            filter: none !important;
+        }
+
+        .dark #get-started-btn {
+            background-color: #3b82f6 !important;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
 
         #mobile-theme-toggle svg {
@@ -857,24 +897,32 @@
             line-height: 1.5;
         }
 
-        /* Simple English Section Highlight */
+        /* Simple English Section Highlight - Compact */
         .simple-english {
             background-color: var(--bg-panel);
-            padding: 0.75rem;
-            border-radius: 0.5rem;
+            padding: 0.35rem 0.6rem;
+            /* Much smaller styling */
+            border-radius: 0.375rem;
             border: 1px solid var(--border-color);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            /* Closer to code */
             color: var(--accent-color);
+            font-size: 0.85rem;
+            /* Smaller text */
             font-weight: 500;
             display: flex;
             align-items: flex-start;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            line-height: 1.4;
         }
 
         .simple-english::before {
             content: "💡";
-            font-size: 1.25rem;
-            line-height: 1;
+            font-size: 0.9rem;
+            /* Smaller icon */
+            line-height: 1.4;
+            /* Align with text */
+            opacity: 0.8;
         }
 
         .dark .simple-english {
@@ -1597,6 +1645,123 @@
 
         .disco-mode {
             animation: disco-hue 2s linear infinite;
+        }
+
+                /* --- PRE & COPY BUTTON (REDESIGNED) --- */
+        pre {
+            position: relative;
+            background-color: #020617 !important; /* Slate 950 - Almost Black */
+            color: #f8fafc !important;
+            padding-top: 2.8rem; /* More header space */
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            overflow: hidden; /* Keep rounded corners */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            z-index: 20; /* High enough to sit above text, low enough below modals */
+            transition: border-color 0.2s;
+        }
+        
+        pre:hover {
+            border-color: #64748b;
+        }
+
+        /* Explicit Header Bar */
+        pre::before {
+            content: "PYTHON";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2.8rem;
+            background-color: #1e293b; /* Slate 800 */
+            border-bottom: 1px solid #334155;
+            
+            display: flex;
+            align-items: center;
+            padding-left: 1.25rem;
+            
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            pointer-events: none;
+            z-index: 21;
+        }
+
+        /* THE COPY BUTTON - Absolute Positioning */
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 1.0rem;
+            
+            /* Solid Styling */
+            background-color: #334155; /* Slate 700 */
+            color: #ffffff !important;
+            border: 1px solid #475569;
+            border-radius: 4px;
+            
+            padding: 0.3rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 100 !important; /* Always on top of header */
+            
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            
+            opacity: 1 !important;
+            transform: none !important;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .copy-btn:hover {
+            background-color: #475569; /* Slate 600 */
+            transform: translateY(-1px) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0) !important;
+        }
+
+        /* Copied State */
+        .copy-btn.copied {
+            background-color: #16a34a !important; /* Green */
+            border-color: #16a34a !important;
+        }
+
+        .dark pre {
+            background-color: #020617 !important;
+        }
+
+        /* --- TOAST NOTIFICATION --- */
+        .copy-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #1e293b;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 99999; /* Top of the world */
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+        .copy-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         .disco-mode .topic-panel {
@@ -2535,7 +2700,7 @@ df.plot(kind='bar')
                     <div class="simple-english">Compare Python to other languages. It's clean and concise.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code># Python: Simple and Readable
 users = ["Alice", "Bob"]
 for user in users:
@@ -2550,7 +2715,7 @@ for user in users:
                         line.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import math
 print(math.pi)</code></pre>
                 </div>
@@ -2597,7 +2762,7 @@ print(math.pi)</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>x = 10        # int
 y = 3.14      # float
 z = 2 + 3j    # complex
@@ -2616,7 +2781,7 @@ print(f"Real part of z: {z.real}")</code></pre>
                         logic.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>is_active = True
 is_admin = False
 print(10 > 5)</code></pre>
@@ -2661,7 +2826,7 @@ print(10 > 5)</code></pre>
                         indices count from the end.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>text = "Data Science"
 print(text[0])      # First char
 print(text[-1])     # Last char
@@ -2676,7 +2841,7 @@ print(text[0:4])    # First 4 chars</code></pre>
                     <div class="simple-english">Strings have built-in methods for transformation.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>s = "  python  "
 print(s.strip().upper())
 print(s.replace("python", "pandas"))</code></pre>
@@ -2721,9 +2886,15 @@ print(s.replace("python", "pandas"))</code></pre>
                 <h4>Part A: Lists (Mutable)</h4>
                 <div class="code-explanation">
                     <div class="simple-english">You can add, remove, or change items in a list.</div>
+                    <h5>Detailed Syntax Breakdown</h5>
+                    <ul class="syntax-list">
+                        <li><code>[ ]</code>: Square brackets define a list.</li>
+                        <li><code>nums[0] = ...</code>: Mutating an element by index.</li>
+                        <li><code>.append()</code>: A method to add a single item to the end.</li>
+                    </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>nums = [1, 2, 3]
 nums[0] = 100    # Change
 nums.append(4)   # Add
@@ -2737,7 +2908,7 @@ print(nums)</code></pre>
                         for constant data.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>coords = (10, 20)
 # coords[0] = 5  # This would cause an error!
 print(coords[0])</code></pre>
@@ -2781,7 +2952,7 @@ print(coords[0])</code></pre>
                         after creation.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code># Set (Mutable)
 unique_ids = {101, 102, 101}
 print(unique_ids)  # Duplicates removed
@@ -2797,7 +2968,7 @@ const_set = frozenset([1, 2, 3])
                     <div class="simple-english">Dictionaries map a unique key to a value.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>user = {"name": "Eve", "role": "Admin"}
 print(user["name"])
 user["role"] = "User"  # Update
@@ -2843,7 +3014,7 @@ print(user)</code></pre>
                         They store integers 0-255.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code># Bytes (Immutable)
 b_data = b"Hello"
 print(b_data[0])  # ASCII for 'H' is 72
@@ -2885,8 +3056,17 @@ print(ba)</code></pre>
                 <h3>Code Implementation</h3>
 
                 <h4>Part A: Making Decisions</h4>
+                <div class="code-explanation">
+                    <div class="simple-english">Checks conditions in order. The first one that is True runs.</div>
+                    <h5>Detailed Syntax Breakdown</h5>
+                    <ul class="syntax-list">
+                        <li><code>if condition:</code>: Starts the logic chain. Must end with a colon.</li>
+                        <li><code>elif:</code>: "Else If". Checked only if previous conditions failed.</li>
+                        <li><code>Indentation</code>: Critical in Python. Defines the code block.</li>
+                    </ul>
+                </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>score = 85
 if score >= 90:
     print("A")
@@ -2898,8 +3078,17 @@ else:
                 <div class="output-block"><span class="output-label">Terminal Output</span>B</div>
 
                 <h4>Part B: Loops</h4>
+                <div class="code-explanation">
+                    <div class="simple-english">Repeats a block of code a specific number of times.</div>
+                    <h5>Detailed Syntax Breakdown</h5>
+                    <ul class="syntax-list">
+                        <li><code>range(3)</code>: Generates a sequence of numbers [0, 1, 2].</li>
+                        <li><code>for i in ...</code>: Takes items one by one from the sequence and assigns to `i`.</li>
+                        <li><code>f"..."</code>: f-string for inserting variables directly into text.</li>
+                    </ul>
+                </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>for i in range(3):
     print(f"Count {i}")</code></pre>
                 </div>
@@ -2938,7 +3127,7 @@ else:
 
                 <h4>Part A: Functions</h4>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>def greet(name):
     return f"Hello, {name}!"
 
@@ -2948,7 +3137,7 @@ print(greet("Coder"))</code></pre>
 
                 <h4>Part B: Libraries</h4>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import math
 print(math.sqrt(25))</code></pre>
                 </div>
@@ -3144,7 +3333,7 @@ print(math.sqrt(25))</code></pre>
                 <h4>Example 1</h4>
                 <p>This program imports the entire math library and uses one of its functions.</p>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import math
 
 A = 16
@@ -3165,7 +3354,7 @@ print(math.sqrt(A))</code></pre>
                 <h4>Example 2</h4>
                 <p>This program imports only selected functions from an external library to simplify usage.</p>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>from numpy import array, mean
 
 a = array([10, 20, 30, 40, 50])
@@ -3225,7 +3414,7 @@ print(mean(a))</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import pandas as pd
 from io import StringIO
 import json
@@ -3264,7 +3453,7 @@ print(df_census)</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code># Simulating a JSON response from an API
 json_str = '{"Country": {"0": "India", "1": "USA"}, "GDP_Trillion": {"0": 3.7, "1": 23.0}}'
 
@@ -3288,7 +3477,7 @@ print(df_json)</code></pre>
                     </div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import sqlite3
 
 # Create a dummy database in memory
@@ -3359,7 +3548,7 @@ print(df_sql)</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import numpy as np
 
 # Nominal GDP for 3 States (in Lakh Crores)
@@ -3390,7 +3579,7 @@ print(f"Real GDP:    {np.round(real_gdp, 2)}")</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>incomes = np.array([50000, 120000, 45000, 80000])
 
 # Who earns more than 60k?
@@ -3450,7 +3639,7 @@ print(f"High Income Segments: {high_earners}")</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import numpy as np
 
 # Simulated NIFTY 50 prices (20 days)
@@ -3576,7 +3765,7 @@ f_stat, p_val = stats.f_oneway(group_a, group_b, group_c)</code></pre>
                 </div>
 
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code class="language-python">import pandas as pd
 from scipy import stats
 import numpy as np
@@ -3611,7 +3800,7 @@ else:
                     different spending habits? Since we have >2 groups, we use <strong>ANOVA</strong>.</p>
 
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code class="language-python"># Simulated Data for 3 Age Groups
 age_18_25 = np.random.normal(9000, 2000, 1000)
 age_26_35 = np.random.normal(11000, 3000, 1000) # Big spenders?
@@ -3662,7 +3851,7 @@ print(f"ANOVA P-Value: {p_val:.10f}")</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import numpy as np
 
 # A matrix of 3 Sectors across 4 Quarters (Standard Float64)
@@ -3724,7 +3913,7 @@ print(f"Optimised Memory: {data_optimized.nbytes} bytes")</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import pandas as pd
 
 data = [
@@ -3806,7 +3995,7 @@ print(df[df['Valuation_B'] > 15.0])</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import pandas as pd
 
 agri_data = {
@@ -3832,7 +4021,7 @@ print(df.groupby('Crop')['Yield_Kg_Ha'].mean())</code></pre>
                         granular insights.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code># Grouping by State and Crop
 print(df.groupby(['State', 'Crop'])['Yield_Kg_Ha'].mean())</code></pre>
                 </div>
@@ -3888,7 +4077,7 @@ print(df.groupby(['State', 'Crop'])['Yield_Kg_Ha'].mean())</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import pandas as pd
 
 data = {
@@ -3955,7 +4144,7 @@ print(df.groupby('District').agg(rules))</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code># Table 1: GDP
 df_gdp = pd.DataFrame({
     'Country': ['India', 'USA', 'China'],
@@ -4021,7 +4210,7 @@ print(df_merged)</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import pandas as pd
 import numpy as np
 
@@ -4050,7 +4239,7 @@ print(df)</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>df_messy = pd.DataFrame({'Country': [' India ', 'usa', 'UK']})
 
 # Clean the strings
@@ -4069,7 +4258,7 @@ print(df_messy)</code></pre>
                         value (0) or drop the bad rows entirely.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>df_messy = pd.DataFrame({'A': [1, 2, None], 'B': [5, None, 7]})
 # Fill missing values with 0
 print("Filled:\n", df_messy.fillna(0))
@@ -4090,7 +4279,7 @@ print("Dropped:\n", df_messy.dropna())</code></pre>
                     <div class="simple-english">Duplicate rows can skew your analysis. Remove them easily.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>df_dup = pd.DataFrame({'ID': [1, 1, 2], 'Name': ['A', 'A', 'B']})
 print("Unique:\n", df_dup.drop_duplicates())</code></pre>
                 </div>
@@ -4141,7 +4330,7 @@ print("Unique:\n", df_dup.drop_duplicates())</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import pandas as pd
 
 df = pd.DataFrame({
@@ -4173,7 +4362,7 @@ print(df)</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>df_gdp = pd.DataFrame({'GDP': [100, 105, 110, 108]})
 df_gdp['Growth_Rate'] = df_gdp['GDP'].pct_change() * 100
 print(df_gdp)</code></pre>
@@ -4233,7 +4422,7 @@ print(df_gdp)</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import pandas as pd
 
 df = pd.DataFrame({
@@ -4291,7 +4480,7 @@ print(matrix)</code></pre>
                         visualize the relationship between GDP and Life Expectancy.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -4314,7 +4503,7 @@ plt.show()</code></pre>
                         Perfect for web dashboards.</div>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import plotly.express as px
 
 fig = px.bar(data, x='Region', y='GDP', color='Region', title='Regional GDP')
@@ -4323,7 +4512,7 @@ fig.show()</code></pre>
 
                 <h4>Part C: Matplotlib Basics</h4>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import matplotlib.pyplot as plt
 
 years = [2020, 2021, 2022, 2023]
@@ -4421,7 +4610,7 @@ plt.show()</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code># The DAMN. Hypothesis: Order changes Meaning
 tracks = ["BLOOD.", "DNA.", "YAH.", "ELEMENT.", "FEEL.", "LOYALTY.", "PRIDE.", "HUMBLE.", "LUST.", "LOVE.", "XXX.", "FEAR.", "GOD.", "DUCKWORTH."]
 
@@ -4460,7 +4649,7 @@ print(tracks[::-1])</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -4562,7 +4751,7 @@ print(df_reverse[['Track', 'Narrative_Arc']].head())</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import pandas as pd
 import numpy as np
 
@@ -4670,7 +4859,7 @@ print(df.sort_values('Legend_Index', ascending=False).head(3))</code></pre>
                     </ul>
                 </div>
                 <div class="relative">
-                    <button class="copy-btn">Copy Code</button>
+
                     <pre><code>import pandas as pd
 
 # Federal Reserve Economic Data (FRED) URL
@@ -5997,7 +6186,7 @@ plt.show()</code></pre>
                     <!-- Footer -->
                     <div class="absolute bottom-4 text-center w-full z-10">
                         <p class="text-xs text-slate-500/60 dark:text-slate-400/60">
-                            &copy; 2026 Himanshu Gaur. Liquid Glass UI.
+                            &copy; 2026 Himanshu Gaur.
                         </p>
                     </div>
                 </div>
@@ -6074,6 +6263,98 @@ plt.show()</code></pre>
             const sidebarToggleBtns = document.querySelectorAll('.sidebar-toggle-btn');
             const overlay = document.getElementById('overlay');
             const mobileHeader = document.querySelector('.md\\:hidden.fixed.top-0');
+
+            // --- COPY CODE FUNCTIONALITY ---
+            function initCopyButtons() {
+                console.log('[COPY] Initializing buttons...');
+                const blocks = document.querySelectorAll('pre');
+
+                if (blocks.length === 0) {
+                    // Retry once if blocks aren't ready (e.g. dynamic content)
+                    console.warn('[COPY] No pre blocks found, retrying in 500ms');
+                    setTimeout(initCopyButtons, 500);
+                    return;
+                }
+
+                blocks.forEach(pre => {
+                    // Check if button already exists
+                    if (pre.querySelector('.copy-btn')) return;
+
+                    const btn = document.createElement('button');
+                    btn.className = 'copy-btn';
+                    btn.innerHTML = `
+                        <span class="flex items-center gap-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            Copy Code
+                        </span>`; // Icon + Text
+                    btn.ariaLabel = 'Copy code to clipboard';
+
+                    btn.addEventListener('click', async (e) => {
+                        e.stopPropagation(); // Prevent modal closers etc
+                        const code = pre.querySelector('code');
+                        const text = code ? code.innerText : pre.innerText;
+
+                        try {
+                                                        await navigator.clipboard.writeText(text);
+
+                            // 1. Button Feedback
+                            const originalHTML = btn.innerHTML;
+                            btn.innerHTML = `
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Copied!</span>
+                            `;
+                            btn.classList.add('copied');
+
+                            // 2. Global Toast Notification
+                            showGlobalToast("Code copied to clipboard! 📋");
+
+                            setTimeout(() => {
+                                btn.innerHTML = originalHTML;
+                                btn.classList.remove('copied');
+                            }, 2000);
+
+                        } catch (err) {
+                            console.error('Copy failed:', err);
+                            btn.textContent = 'Error';
+                        }
+                    });
+
+                    // Prepend to be at top
+                    if (pre.firstChild) {
+                        pre.insertBefore(btn, pre.firstChild);
+                    } else {
+                        pre.appendChild(btn);
+                    }
+                });
+                console.log(`[COPY] Added buttons to ${blocks.length} blocks.`);
+            }
+            
+            // Global Toast Helper
+            function showGlobalToast(msg) {
+                // Remove existing
+                const existing = document.querySelector('.copy-toast');
+                if (existing) existing.remove();
+                
+                const toast = document.createElement('div');
+                toast.className = 'copy-toast';
+                toast.innerHTML = `<svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> ${msg}`;
+                document.body.appendChild(toast);
+                
+                // Trigger animation
+                requestAnimationFrame(() => {
+                    toast.classList.add('show');
+                });
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => toast.remove(), 300);
+                }, 2000);
+            }
+
+            // Run immediately
+            initCopyButtons();
+            window.addEventListener('load', initCopyButtons);
+
 
             // --- NAVIGATION LOGIC ---
             window.switchTopic = function (topicId) {
@@ -6199,52 +6480,61 @@ plt.show()</code></pre>
                 }
             });
 
-            // --- MOBILE MENU (Legacy Support / Overlay) ---
+            // --- MOBILE MENU ROBUST TOGGLE ---
             function toggleMenu() {
-                if (typeof window.toggleSidebarV2 === 'function') {
-                    window.toggleSidebarV2();
-                }
-            }
-            if (sidebarToggleBtns) sidebarToggleBtns.forEach(btn => btn.addEventListener('click', toggleMenu));
-            if (overlay) overlay.addEventListener('click', toggleMenu);
-
-            // Explicit global export for robust toggle (Called by onclick in HTML)
-            // --- NUCLEAR TOGGLE LOGIC V3 (Direct Style) ---
-            window.toggleSidebarV2 = function () {
                 const sb = document.getElementById('sidebar');
                 const ov = document.getElementById('overlay');
+                if (!sb || !ov) return;
 
-                if (sb) {
-                    // Check if strictly open by checking style or class
-                    // We will use a data attribute to track state reliably
-                    const isOpen = sb.getAttribute('data-mobile-open') === 'true';
+                // Check current state via computed style or attribute
+                const isHidden = window.getComputedStyle(sb).transform === 'matrix(1, 0, 0, 1, -280, 0)' // approx -100% translation
+                    || sb.style.transform === 'translateX(-100%)'
+                    || sb.classList.contains('-translate-x-full'); // Tailwind class
 
-                    if (isOpen) {
-                        // CLOSE IT
-                        sb.style.transform = 'translateX(-100%)';
-                        sb.setAttribute('data-mobile-open', 'false');
-                        if (ov) ov.classList.add('hidden');
-                        console.log('[NUCLEAR] Sidebar CLOSED');
-                    } else {
-                        // OPEN IT
-                        sb.style.transform = 'translateX(0)';
-                        sb.setAttribute('data-mobile-open', 'true');
-                        if (ov) ov.classList.remove('hidden');
-                        console.log('[NUCLEAR] Sidebar OPENED');
-                    }
+                // We'll use a data attribute as the single source of truth for our JS logic
+                const currentlyOpen = sb.getAttribute('data-mobile-open') === 'true';
 
-                    // Keep the class toggle for any CSS side-effects (visuals)
-                    sb.classList.toggle('open');
+                if (currentlyOpen) {
+                    // CLOSE
+                    sb.style.transform = 'translateX(-100%)';
+                    sb.setAttribute('data-mobile-open', 'false');
+                    ov.classList.add('hidden');
+                    document.body.style.overflow = ''; // Restore scrolling
+                } else {
+                    // OPEN
+                    sb.style.transform = 'translateX(0)';
+                    sb.setAttribute('data-mobile-open', 'true');
+                    ov.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden'; // Lock scrolling
                 }
-            };
+            }
 
-            // Ensure close button uses V3
+            // Bind Events
+            if (sidebarToggleBtns) sidebarToggleBtns.forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    console.log('[SIDEBAR] Toggle clicked');
+                    toggleMenu();
+                };
+            });
+
+            if (overlay) {
+                overlay.onclick = (e) => {
+                    e.stopPropagation();
+                    console.log('[SIDEBAR] Overlay clicked');
+                    toggleMenu();
+                };
+            }
+
+            // Expose globally for inline onclicks if any
+            window.toggleSidebarV2 = toggleMenu;
+
+            // Ensure close button works
             const closeBtn = document.getElementById('close-menu');
             if (closeBtn) {
-                closeBtn.onclick = function (e) {
-                    e.preventDefault();
+                closeBtn.onclick = (e) => {
                     e.stopPropagation();
-                    window.toggleSidebarV2();
+                    toggleMenu();
                 };
             }
 
@@ -6772,5 +7062,3 @@ plt.show()</code></pre>
     <canvas id="matrixCanvas"
         style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: black; cursor: pointer;"></canvas>
 </body>
-
-```
